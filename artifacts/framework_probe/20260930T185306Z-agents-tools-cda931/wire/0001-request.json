@@ -1,0 +1,35 @@
+{
+  "model": "housing-qwen-s104729",
+  "stream": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "PROBE_ROLE=price. Price specialist: for each assigned task call scan_price exactly once and return its JSON receipt. Never invent numbers."
+    },
+    {
+      "role": "user",
+      "content": "Scan indexed price data for synthetic index-omission probe with immutable query."
+    }
+  ],
+  "max_tokens": 1024,
+  "parallel_tool_calls": true,
+  "stream_options": {
+    "include_usage": true
+  },
+  "temperature": 0.2,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "scan_price",
+        "description": "Run the current controller-bound exact price scan once and return its receipt.",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        }
+      }
+    }
+  ],
+  "reasoning_effort": "none"
+}

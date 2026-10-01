@@ -1,0 +1,13 @@
+default_model: generic.housing-qwen-s104729
+llm_retries: 1
+generic:
+  api_key: ollama
+  base_url: http://127.0.0.1:11434/v1
+logger:
+  type: none
+  progress_display: false
+  show_chat: false
+  show_tools: false
+  streaming: none
+otel:
+  enabled: false

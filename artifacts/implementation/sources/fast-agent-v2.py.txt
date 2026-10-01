@@ -1,0 +1,282 @@
+"""Pinned Fast Agent parent/child adapter. Only the parent is called by the service."""
+
+import asyncio
+import json
+import os
+from importlib.metadata import version
+from pathlib import Path
+from typing import cast
+
+from fast_agent import FastAgent
+from fast_agent.agents.agent_types import FunctionToolConfig
+from fast_agent.agents.llm_agent import LlmAgent
+from fast_agent.agents.tool_runner import ToolRunner, ToolRunnerHooks
+from fast_agent.constants import FAST_AGENT_ERROR_CHANNEL
+from fast_agent.llm.provider.openai.llm_openai import OpenAILLM
+from fast_agent.types import PromptMessageExtended, RequestParams
+from openai import AsyncOpenAI
+
+from housing.contracts.common import FrozenModel
+from housing.contracts.decisions import (
+    PlanDecision,
+    PriceDecision,
+    RegionDecision,
+    ReportDecision,
+    ReviewDecision,
+    SupplyDecision,
+)
+from housing.contracts.errors import HousingError
+from housing.identity import ROOT, canonical_json, semantic_hash, sha256_bytes, write_json
+from housing.workflow.controller import Controller, Role
+
+ROLES: tuple[Role, ...] = ("orchestrator", "price", "supply", "region", "reviewer", "composer")
+SCHEMAS: dict[str, type[FrozenModel]] = {
+    "orchestrator": PlanDecision,
+    "price": PriceDecision,
+    "supply": SupplyDecision,
+    "region": RegionDecision,
+    "reviewer": ReviewDecision,
+    "composer": ReportDecision,
+}
+CONFIG = ROOT / "configs/production-fast-agent.yaml"
+
+
+def prompt_bundle() -> dict[str, str]:
+    return {
+        role: (ROOT / "prompts/v2" / f"{role}.md").read_text()
+        + "\nDecision schema:\n"
+        + canonical_json(SCHEMAS[role].model_json_schema())
+        for role in ROLES
+    }
+
+
+def disable_sdk_retries(llm: OpenAILLM) -> None:
+    """0.10.45's client factory omits max_retries. Scope the SDK override to this LLM instance.
+
+    The framework remains the only retry layer, with one retry per provider request. This
+    also applies to detached child LLMs through their inherited before-call hook.
+    """
+    original = llm._openai_client
+
+    def zero_retry_client() -> AsyncOpenAI:
+        client = original()
+        client.max_retries = 0
+        return client
+
+    llm._openai_client = zero_retry_client  # type: ignore[method-assign]
+    llm.retry_count = 1
+    llm.retry_backoff_seconds = 0.1
+
+
+class LiveOrchestrator:
+    def __init__(self, controller: Controller, config: Path = CONFIG):
+        if version("fast-agent-mcp") != "0.10.45":
+            raise HousingError(
+                "TOOL_ERROR", "Fast Agent compatibility adapter requires locked 0.10.45", "startup"
+            )
+        self.controller, self.config = controller, config
+        self.instructions = prompt_bundle()
+        self.sequence = 0
+        self.pending: dict[int, int] = {}
+        self.configured_llms: list[OpenAILLM] = []
+
+    def tools(self, role: Role) -> list[FunctionToolConfig]:
+        controller = self.controller
+
+        def inspect_context() -> dict[str, object]:
+            """Read the immutable query, current plan, role receipts, coverage signals and grounded facts."""
+            if controller.fatal:
+                raise controller.fatal
+            return controller.context()
+
+        def submit_decision(decision_json: str) -> dict[str, object]:
+            """Submit one strict role-specific JSON decision. Trusted selection arguments are bound by Python."""
+            return controller.submit(role, decision_json)
+
+        def plan_scan(decision_json: str) -> dict[str, object]:
+            """Apply the Orchestrator's strict PlanDecision; preserve the query and implement real review feedback."""
+            return controller.submit("orchestrator", decision_json)
+
+        def finalize_analysis() -> dict[str, object]:
+            """Finalize only after review acceptance and grounded composition. Return this exact JSON acknowledgement."""
+            return controller.finalize()
+
+        return (
+            [inspect_context, plan_scan, finalize_analysis]
+            if role == "orchestrator"
+            else [inspect_context, submit_decision]
+        )
+
+    async def before(self, runner: ToolRunner, messages: list[PromptMessageExtended]) -> None:
+        if self.controller.fatal:
+            raise self.controller.fatal
+        agent = runner.agent
+        if not isinstance(agent, LlmAgent):
+            raise HousingError("TOOL_ERROR", "Unexpected Fast Agent runner type", "model_capture")
+        llm = agent._llm
+        if isinstance(llm, OpenAILLM) and llm not in self.configured_llms:
+            disable_sdk_retries(llm)
+            self.configured_llms.append(llm)
+        seq = self.sequence
+        self.sequence += 1
+        if self.sequence > 90:
+            self.controller.abort("Analysis exceeded 90 model decisions", "BUDGET_EXCEEDED")
+        self.pending[id(runner)] = seq
+        tools = await agent.list_tools()
+        request = {
+            "agent": agent.name,
+            "messages": [m.model_dump(mode="json", exclude_none=True) for m in messages],
+            "tools": tools.model_dump(mode="json", exclude_none=True),
+            "instruction": agent.instruction,
+            "context": self.controller.context(),
+            "model_profile": f"housing-s{self.controller.request.seed}",
+            "prompt_bundle_sha256": semantic_hash(self.instructions),
+            "dependency_lock_sha256": sha256_bytes((ROOT / "uv.lock").read_bytes()),
+            "framework_config_sha256": sha256_bytes(self.config.read_bytes()),
+            "retry_policy": {"framework_retries": 1, "sdk_retries": 0},
+        }
+        write_json(self.controller.directory / "model" / f"{seq:03d}.input.json", request)
+
+    async def after(self, runner: ToolRunner, message: PromptMessageExtended) -> None:
+        seq = self.pending.pop(id(runner))
+        write_json(
+            self.controller.directory / "model" / f"{seq:03d}.response.json",
+            message.model_dump(mode="json", exclude_none=True),
+        )
+        if message.channels and FAST_AGENT_ERROR_CHANNEL in message.channels:
+            error = HousingError(
+                "MODEL_UNAVAILABLE", "Provider request failed after the declared transport retry", "inference"
+            )
+            self.controller.fatal = error
+            raise error
+
+    async def before_tool(self, runner: ToolRunner, message: PromptMessageExtended) -> None:
+        """Check child capabilities before invocation, including detached clones."""
+        agent = runner.agent
+        if not isinstance(agent, LlmAgent):
+            self.controller.abort("Unexpected tool runner")
+            return
+        role_name = agent.name.split("[", 1)[0]
+        if role_name not in ROLES:
+            self.controller.abort("Unknown role attempted a tool")
+        role = cast(Role, role_name)
+        for call in (message.tool_calls or {}).values():
+            tool = call.params.name
+            arguments = call.params.arguments or {}
+            if tool in ("inspect_context", "finalize_analysis") and arguments:
+                self.controller.abort("This tool accepts no arguments", "AGENT_OUTPUT_INVALID")
+            if tool in ("plan_scan", "submit_decision") and (
+                set(arguments) != {"decision_json"} or not isinstance(arguments.get("decision_json"), str)
+            ):
+                self.controller.abort(
+                    "Decision tools require exactly one JSON string argument", "AGENT_OUTPUT_INVALID"
+                )
+            if tool == "inspect_context":
+                continue
+            if role == "orchestrator" and tool.startswith("agent__"):
+                child = tool.removeprefix("agent__")
+                if child not in ROLES[1:]:
+                    self.controller.abort("Unknown internal agent")
+                self.controller.guard(cast(Role, child))
+            elif role == "orchestrator" and tool == "plan_scan":
+                self.controller.guard(role)
+            elif role == "orchestrator" and tool == "finalize_analysis":
+                if self.controller.stage != "COMPOSED":
+                    self.controller.abort("Finalization requires accepted composition")
+            elif role != "orchestrator" and tool == "submit_decision":
+                self.controller.guard(role)
+            else:
+                self.controller.abort("Tool is outside this role's capability")
+
+    async def run(self) -> None:
+        os.environ["FAST_AGENT_HOME"] = str(ROOT / "configs/fast-agent-home")
+        fast = FastAgent(
+            "housing-analysis",
+            config_path=str(self.config),
+            parse_cli_args=False,
+            quiet=True,
+            isolated=True,
+            home=str(ROOT / "configs/fast-agent-home"),
+        )
+
+        async def definition() -> None:
+            pass
+
+        for role in ROLES[1:]:
+            fast.agent(
+                name=role,
+                instruction=self.instructions[role],
+                model=f"housing-s{self.controller.request.seed}",
+                use_history=False,
+                skills=[],
+                function_tools=self.tools(role),
+                request_params=RequestParams(
+                    max_tokens=1024,
+                    use_history=False,
+                    max_iterations=6,
+                    parallel_tool_calls=False,
+                    streaming_timeout=60,
+                ),
+            )(definition)
+        fast.agent(
+            name="orchestrator",
+            instruction=self.instructions["orchestrator"],
+            agents=list(ROLES[1:]),
+            model=f"housing-s{self.controller.request.seed}",
+            use_history=False,
+            skills=[],
+            function_tools=self.tools("orchestrator"),
+            history_source="none",
+            history_merge_target="none",
+            max_parallel=1,
+            child_timeout_sec=120,
+            request_params=RequestParams(
+                max_tokens=1024,
+                use_history=False,
+                max_iterations=30,
+                parallel_tool_calls=False,
+                streaming_timeout=60,
+            ),
+        )(definition)
+        async with fast.run() as agents:
+            for role in ROLES:
+                agent = agents[role]
+                if not isinstance(agent, LlmAgent):
+                    raise HousingError("TOOL_ERROR", "Unexpected registered agent type", "startup")
+                agent.tool_runner_hooks = ToolRunnerHooks(
+                    before_llm_call=self.before, after_llm_call=self.after, before_tool_call=self.before_tool
+                )
+            response = await asyncio.wait_for(
+                agents.orchestrator.send(
+                    "Analyze the controller-bound immutable housing request. "
+                    "First call inspect_context with no arguments. Then submit the initial plan through plan_scan. "
+                    "Delegate the active specialists, then reviewer. Follow actual feedback until accepted, "
+                    "then delegate composer, call finalize_analysis and return its exact JSON acknowledgement."
+                ),
+                timeout=900,
+            )
+        write_json(self.controller.directory / "parent-response.json", {"response": response})
+        if self.controller.fatal:
+            raise self.controller.fatal
+        output = self.controller.output
+        if output is None:
+            raise HousingError(
+                "AGENT_OUTPUT_INVALID", "Orchestrator stopped before finalization", "parent_return"
+            )
+        try:
+            actual = json.loads(response)
+        except ValueError as error:
+            raise HousingError(
+                "AGENT_OUTPUT_INVALID", "Parent must return the exact JSON acknowledgement", "parent_return"
+            ) from error
+        expected = {
+            "status": "completed",
+            "canonical_sha256": semantic_hash(output.canonical),
+            "total_observations": output.canonical.summary.total_observations,
+        }
+        if actual != expected:
+            raise HousingError(
+                "AGENT_OUTPUT_INVALID",
+                "Parent acknowledgement differs from finalized result",
+                "parent_return",
+            )

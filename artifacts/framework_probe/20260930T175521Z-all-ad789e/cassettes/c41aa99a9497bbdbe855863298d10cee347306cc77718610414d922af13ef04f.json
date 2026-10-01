@@ -1,0 +1,23 @@
+{
+  "origin": "live_captured",
+  "key_basis": {
+    "purpose": "framework_probe_not_campaign",
+    "role": "price",
+    "iteration": 0,
+    "semantic_prompt": "{\"allowed_orders\":[\"month_asc\",\"zip_asc\"],\"context_marker\":\"source-only-155921\",\"request\":\"request price_stats for the controller-bound selection\"}",
+    "instruction": "PROBE_ROLE=price. Return only one JSON object matching this schema: {\"additionalProperties\":false,\"properties\":{\"decision_type\":{\"const\":\"tool_intent\",\"title\":\"Decision Type\",\"type\":\"string\"},\"partition_order\":{\"enum\":[\"month_asc\",\"zip_asc\"],\"title\":\"Partition Order\",\"type\":\"string\"},\"purpose\":{\"const\":\"statistics\",\"title\":\"Purpose\",\"type\":\"string\"},\"role\":{\"const\":\"price\",\"title\":\"Role\",\"type\":\"string\"},\"tool\":{\"const\":\"price_stats\",\"title\":\"Tool\",\"type\":\"string\"}},\"required\":[\"role\",\"decision_type\",\"tool\",\"partition_order\",\"purpose\"],\"title\":\"PriceIntent\",\"type\":\"object\"}",
+    "schema_sha256": "30a048d49afedde9d939eec11ef8ff755994ebde8ba79bd51c5ee01a297c2699",
+    "tool_bundle_sha256": "83aa41a698b3ffd79ce173d1b590d13925f9865099f33099828a80b86804a153",
+    "fixture_sha256": "4ab6ed032e2a98513696acb334267e0fb7567c5743bdf14310c0fa1a76accd67",
+    "model": {
+      "seed": 155921,
+      "wire_model": "housing-qwen-s155921",
+      "digest": "908239f77e52bcae014619d978d0ce8d4eb1f05fe974719dbecf055d5607bbe8"
+    },
+    "fast_agent": "0.10.45"
+  },
+  "raw_response_text": "{\n  \"role\": \"price\",\n  \"decision_type\": \"tool_intent\",\n  \"tool\": \"price_stats\",\n  \"partition_order\": \"month_asc\",\n  \"purpose\": \"statistics\"\n}",
+  "raw_response_sha256": "dd515d437178c0f8c96acd67cc52ce13309c84e90ec213b1e2c6a3ff7c488b34",
+  "capture_attempt": "20260930T175521Z-all-ad789e",
+  "captured_at_utc": "2026-09-30T17:58:51.360543+00:00"
+}

@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AnalysisRequest v1.0; cross-field ordering and dataset coverage checked in application",
+  "type": "object",
+  "properties": {
+    "dataset_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$"
+    },
+    "window_end": {
+      "type": "string",
+      "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+    },
+    "criteria": {
+      "type": "object",
+      "properties": {
+        "zips": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "75001",
+              "75006",
+              "75019",
+              "75024",
+              "75034",
+              "75038",
+              "75063",
+              "75080",
+              "75093",
+              "75201",
+              "75204",
+              "75214"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "property_types": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "single_family",
+              "condo",
+              "townhouse"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "bedrooms_min": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "bedrooms_max": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "price_min_cents": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "price_max_cents": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sqft_min": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sqft_max": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "zips",
+        "property_types",
+        "bedrooms_min",
+        "bedrooms_max",
+        "price_min_cents",
+        "price_max_cents",
+        "sqft_min",
+        "sqft_max"
+      ],
+      "additionalProperties": false
+    },
+    "display": {
+      "type": "object",
+      "properties": {
+        "money": {
+          "enum": [
+            "USD",
+            "USD_THOUSANDS"
+          ]
+        },
+        "area": {
+          "enum": [
+            "SQFT",
+            "SQM"
+          ]
+        }
+      },
+      "required": [
+        "money",
+        "area"
+      ],
+      "additionalProperties": false
+    },
+    "compare_regions": {
+      "type": "boolean"
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2147483647
+    }
+  },
+  "required": [
+    "dataset_id",
+    "window_end",
+    "criteria",
+    "display",
+    "compare_regions",
+    "seed"
+  ],
+  "additionalProperties": false
+}

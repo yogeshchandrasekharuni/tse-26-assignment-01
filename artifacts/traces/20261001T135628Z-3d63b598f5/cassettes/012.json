@@ -1,0 +1,202 @@
+{
+  "boundary_sha256": "31b9455dc744523b6e99687fd6cb0869152b9c8587f6d18af0b5a7bd14b286ae",
+  "input": {
+    "agent": "reviewer[1]",
+    "boundary_sha256": "31b9455dc744523b6e99687fd6cb0869152b9c8587f6d18af0b5a7bd14b286ae",
+    "context": {
+      "contract_version": "1.0",
+      "facts": {},
+      "iteration": 1,
+      "monthly_counts": {
+        "2025-10": 1,
+        "2025-11": 1,
+        "2025-12": 0,
+        "2026-01": 0,
+        "2026-02": 1,
+        "2026-03": 0,
+        "2026-04": 0,
+        "2026-05": 0,
+        "2026-06": 0,
+        "2026-07": 0,
+        "2026-08": 0,
+        "2026-09": 0
+      },
+      "plan": {
+        "active_specialists": [
+          "price",
+          "supply",
+          "region"
+        ],
+        "canonical_query_sha256": "11534c753c0f13a58e886a498fa932bf8d9976c07bb82c6b0c8d486d5d3b8f26",
+        "dataset_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+        "planner_decision_sha256": "cda39d6e7dc3633767be4c2255aa80a19b71bf2539f0edaa13e94dee951c7e43",
+        "region_purpose": "coverage_diagnostic",
+        "required_months": [
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01",
+          "2025-02",
+          "2025-03",
+          "2025-04",
+          "2025-05",
+          "2025-06",
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09"
+        ],
+        "scan_strategy": "full_csv",
+        "version": 1,
+        "visible_months": [
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09"
+        ]
+      },
+      "planning_constraints": null,
+      "previous_review": {
+        "decision": "REFINE",
+        "decision_type": "review",
+        "requested_action": "EXACT_RESCAN_WITH_REGION",
+        "role": "reviewer",
+        "signals": [
+          "INDEX_COVERAGE_MISMATCH",
+          "SPARSE_SLICE"
+        ]
+      },
+      "previous_signals": [
+        "INDEX_COVERAGE_MISMATCH",
+        "SPARSE_SLICE"
+      ],
+      "query": {
+        "compare_regions": false,
+        "criteria": {
+          "bedrooms_max": 2,
+          "bedrooms_min": 2,
+          "price_max_cents": null,
+          "price_min_cents": null,
+          "property_types": [
+            "condo"
+          ],
+          "sqft_max": 1420,
+          "sqft_min": 1400,
+          "zips": [
+            "75001"
+          ]
+        },
+        "dataset_id": "dallas-synth-v1",
+        "dataset_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+        "window_end": "2026-09"
+      },
+      "query_sha256": "11534c753c0f13a58e886a498fa932bf8d9976c07bb82c6b0c8d486d5d3b8f26",
+      "receipt_hashes": {
+        "price": "0aed27242954aeaab9456b2c3bf57ca3087853170273f88e281140722ff74a90",
+        "region": "c236c0ce717f5b4b55d07c02452ef8fa332f2b6a9ccfb3a1298559b9d17941da",
+        "supply": "a024242446c2e74b7fe08001c5ea8fb2e2a854bf6bdd5f32c125a179134e6d07"
+      },
+      "required_caveats": [],
+      "scan_complete": true,
+      "schema_repair": null,
+      "signals": [
+        "CONFIRMED_SPARSE"
+      ],
+      "stage": "REVIEW_REQUIRED"
+    },
+    "effective_seed": 104729,
+    "instruction": "You are the internal Coverage Reviewer. Return only one strict ReviewDecision JSON object, without Markdown. role reviewer; decision_type review; signals exactly the trusted evidence signals; requested_action null except for REFINE. Do not calculate or invent evidence.\n\nFor indexed INDEX_COVERAGE_MISMATCH, SPARSE_SLICE or RECEIPT_MISMATCH choose REFINE with EXACT_RESCAN_WITH_REGION. Complete authoritative CONFIRMED_SPARSE requires ACCEPT_LIMITED and null. COMPLETE_SUPPORT requires ACCEPT and null. A NEW RECEIPT_MISMATCH at iteration1, absent from previous_signals, permits REFINE with REBUILD_INDEX_AND_RESCAN. Persistent mismatch or iteration2 mismatch requires FAIL and null. Do not repeat a sparse scan pointlessly or change user criteria. If schema_repair names your role, correct that prior response using its errors.\n\nDecision schema:\n{\"$defs\":{\"Signal\":{\"enum\":[\"INDEX_COVERAGE_MISMATCH\",\"SPARSE_SLICE\",\"RECEIPT_MISMATCH\",\"COMPLETE_SUPPORT\",\"CONFIRMED_SPARSE\",\"UNRECOVERABLE_INTEGRITY\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"decision\":{\"enum\":[\"ACCEPT\",\"REFINE\",\"ACCEPT_LIMITED\",\"FAIL\"],\"title\":\"Decision\",\"type\":\"string\"},\"decision_type\":{\"const\":\"review\",\"title\":\"Decision Type\",\"type\":\"string\"},\"requested_action\":{\"anyOf\":[{\"enum\":[\"EXACT_RESCAN_WITH_REGION\",\"REBUILD_INDEX_AND_RESCAN\"],\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Requested Action\"},\"role\":{\"const\":\"reviewer\",\"title\":\"Role\",\"type\":\"string\"},\"signals\":{\"items\":{\"$ref\":\"#/$defs/Signal\"},\"minItems\":1,\"title\":\"Signals\",\"type\":\"array\"}},\"required\":[\"role\",\"decision_type\",\"decision\",\"signals\",\"requested_action\"],\"title\":\"ReviewDecision\",\"type\":\"object\"}",
+    "message_tool_call_order": [
+      [],
+      []
+    ],
+    "messages": [
+      {
+        "content": [
+          {
+            "text": "Delegate reviewer with signals: CONFIRMED_SPARSE. Request action: ACCEPT_LIMITED with null requested_action.",
+            "type": "text"
+          }
+        ],
+        "is_template": false,
+        "role": "user"
+      },
+      {
+        "content": [
+          {
+            "text": "{\"state\":{\"contract_version\":\"1.0\",\"facts\":{},\"iteration\":1,\"monthly_counts\":{\"2025-10\":1,\"2025-11\":1,\"2025-12\":0,\"2026-01\":0,\"2026-02\":1,\"2026-03\":0,\"2026-04\":0,\"2026-05\":0,\"2026-06\":0,\"2026-07\":0,\"2026-08\":0,\"2026-09\":0},\"plan\":{\"active_specialists\":[\"price\",\"supply\",\"region\"],\"canonical_query_sha256\":\"11534c753c0f13a58e886a498fa932bf8d9976c07bb82c6b0c8d486d5d3b8f26\",\"dataset_view_sha256\":\"bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b\",\"planner_decision_sha256\":\"cda39d6e7dc3633767be4c2255aa80a19b71bf2539f0edaa13e94dee951c7e43\",\"region_purpose\":\"coverage_diagnostic\",\"required_months\":[\"2024-10\",\"2024-11\",\"2024-12\",\"2025-01\",\"2025-02\",\"2025-03\",\"2025-04\",\"2025-05\",\"2025-06\",\"2025-07\",\"2025-08\",\"2025-09\",\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\",\"2026-07\",\"2026-08\",\"2026-09\"],\"scan_strategy\":\"full_csv\",\"version\":1,\"visible_months\":[\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\",\"2026-07\",\"2026-08\",\"2026-09\"]},\"planning_constraints\":null,\"previous_review\":{\"decision\":\"REFINE\",\"decision_type\":\"review\",\"requested_action\":\"EXACT_RESCAN_WITH_REGION\",\"role\":\"reviewer\",\"signals\":[\"INDEX_COVERAGE_MISMATCH\",\"SPARSE_SLICE\"]},\"previous_signals\":[\"INDEX_COVERAGE_MISMATCH\",\"SPARSE_SLICE\"],\"query\":{\"compare_regions\":false,\"criteria\":{\"bedrooms_max\":2,\"bedrooms_min\":2,\"price_max_cents\":null,\"price_min_cents\":null,\"property_types\":[\"condo\"],\"sqft_max\":1420,\"sqft_min\":1400,\"zips\":[\"75001\"]},\"dataset_id\":\"dallas-synth-v1\",\"dataset_view_sha256\":\"bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b\",\"window_end\":\"2026-09\"},\"query_sha256\":\"11534c753c0f13a58e886a498fa932bf8d9976c07bb82c6b0c8d486d5d3b8f26\",\"receipt_hashes\":{\"price\":\"0aed27242954aeaab9456b2c3bf57ca3087853170273f88e281140722ff74a90\",\"region\":\"c236c0ce717f5b4b55d07c02452ef8fa332f2b6a9ccfb3a1298559b9d17941da\",\"supply\":\"a024242446c2e74b7fe08001c5ea8fb2e2a854bf6bdd5f32c125a179134e6d07\"},\"required_caveats\":[],\"scan_complete\":true,\"schema_repair\":null,\"signals\":[\"CONFIRMED_SPARSE\"],\"stage\":\"REVIEW_REQUIRED\"},\"trusted_role\":\"reviewer\"}",
+            "type": "text"
+          }
+        ],
+        "is_template": false,
+        "role": "user"
+      }
+    ],
+    "model_profile": "housing-v4-s104729",
+    "normalization_version": "production-semantic-2",
+    "prompt_bundle_sha256": "47c9578424b4c58836d002685bf6173c4687fe4fe48bcda41ddeeb9cecdbc4f6",
+    "requested_seed": 104729,
+    "retry_policy": {
+      "framework_retries": 1,
+      "sdk_retries": 0
+    },
+    "role_schema_sha256": "bf1e1171610faef09f471e9309ba5896f46dd9b41c324bc0eeb8803b15a57e00",
+    "tools": {
+      "cache_scope": "private",
+      "result_type": "complete",
+      "tools": [],
+      "ttl_ms": 0
+    }
+  },
+  "origin": "live_captured",
+  "raw_input_sha256": "43460c648b724f28b759cb4e6c872618b7087012f2d8ac99c151b78b078ac754",
+  "response": {
+    "channels": {
+      "fast-agent-timing": [
+        {
+          "text": "{\"start_time\": 85461.283933875, \"end_time\": 85466.578034333, \"duration_ms\": 59754.183163, \"ttft_ms\": 3818.04, \"time_to_response_ms\": 3818.04}",
+          "type": "text"
+        }
+      ],
+      "fast-agent-usage": [
+        {
+          "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 1574, \"uncached\": null, \"cache_read\": 0, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 31, \"reasoning\": null}, \"tool_calls\": 0, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1790864131.9847484, \"timing\": {\"duration_ms\": 59754.183163, \"ttft_ms\": 3818.04, \"time_to_response_ms\": 3818.04}, \"raw_usage\": {\"completion_tokens\": 31, \"prompt_tokens\": 1574, \"total_tokens\": 1605, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 0, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 1605}]}",
+          "type": "text"
+        }
+      ]
+    },
+    "content": [
+      {
+        "text": "{\"role\":\"reviewer\",\"decision_type\":\"review\",\"decision\":\"ACCEPT_LIMITED\",\"signals\":[\"CONFIRMED_SPARSE\"],\"requested_action\":null}",
+        "type": "text"
+      }
+    ],
+    "is_template": false,
+    "role": "assistant",
+    "stop_reason": "endTurn"
+  },
+  "response_sha256": "aa95b381c1a6cb2f95e6ffb0b22f66d3d15e3fe19cd0834cd4a75a0c12dcf124",
+  "response_tool_call_order": [],
+  "schema_version": "production-capture-2",
+  "semantic_input_sha256": "43460c648b724f28b759cb4e6c872618b7087012f2d8ac99c151b78b078ac754",
+  "sequence": 12
+}

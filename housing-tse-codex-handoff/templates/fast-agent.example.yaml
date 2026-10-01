@@ -1,0 +1,7 @@
+# Minimal documented configuration shape. Validate against pinned Fast Agent.
+# This points to one of three derived local seeded Ollama model profiles.
+default_model: generic.housing-qwen-s104729
+generic:
+  api_key: ollama
+  base_url: http://localhost:11434/v1
+# Register named agents in Python; project owns workflow and tool-intent dispatch.

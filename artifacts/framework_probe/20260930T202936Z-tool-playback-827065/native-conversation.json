@@ -1,0 +1,68 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "Execute the real price scan for the controller-bound synthetic probe fixture."
+        }
+      ],
+      "is_template": false
+    },
+    {
+      "role": "assistant",
+      "content": [],
+      "tool_calls": {
+        "call_j0tcv8oj": {
+          "method": "tools/call",
+          "params": {
+            "name": "scan_price",
+            "arguments": {}
+          }
+        }
+      },
+      "channels": {
+        "fast-agent-timing": [
+          {
+            "type": "text",
+            "text": "{\"start_time\": 79801.162707875, \"end_time\": 79802.087832083, \"duration_ms\": 10441.772903, \"ttft_ms\": 921.71, \"time_to_response_ms\": 921.71}"
+          }
+        ],
+        "fast-agent-usage": [
+          {
+            "type": "text",
+            "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-s104729\", \"prompt\": {\"total\": 295, \"uncached\": null, \"cache_read\": 291, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 15, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1790800196.955375, \"timing\": {\"duration_ms\": 10441.772903, \"ttft_ms\": 921.71, \"time_to_response_ms\": 921.71}, \"raw_usage\": {\"completion_tokens\": 15, \"prompt_tokens\": 295, \"total_tokens\": 310, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 291, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 310}]}"
+          }
+        ]
+      },
+      "stop_reason": "toolUse",
+      "is_template": false
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "```json\n{\n  \"role\": \"price\",\n  \"strategy\": \"indexed\",\n  \"query_sha256\": \"25f16ca91607f33ea413b4e1d73d9ec78e03b7d4d83aac1651ff17911812f8a5\",\n  \"selection_sha256\": \"e2fb924b2285554b97c212009e503c38905a723bd153a28ef73608e85f55189d\",\n  \"selected_observations\": 22,\n  \"result\": {\n    \"pooled_median_usd_rational\": \"300000\"\n  },\n  \"receipt_sha256\": \"727bd8092fdc7d49341cbf7c24b8dc9f36722965f721fe2e1746a533caffed6a\"\n}\n```"
+        }
+      ],
+      "channels": {
+        "fast-agent-timing": [
+          {
+            "type": "text",
+            "text": "{\"start_time\": 79802.092303125, \"end_time\": 79815.44456475, \"duration_ms\": 150706.142626, \"ttft_ms\": 13321.16, \"time_to_response_ms\": 13321.16}"
+          }
+        ],
+        "fast-agent-usage": [
+          {
+            "type": "text",
+            "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-s104729\", \"prompt\": {\"total\": 550, \"uncached\": null, \"cache_read\": 291, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 270, \"reasoning\": null}, \"tool_calls\": 0, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1790800347.712907, \"timing\": {\"duration_ms\": 150706.142626, \"ttft_ms\": 13321.16, \"time_to_response_ms\": 13321.16}, \"raw_usage\": {\"completion_tokens\": 270, \"prompt_tokens\": 550, \"total_tokens\": 820, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 291, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 820}]}"
+          }
+        ]
+      },
+      "stop_reason": "endTurn",
+      "is_template": false
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "model": "housing-qwen-s104729",
+  "stream": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "PROBE_ROLE=reviewer. First inspect_coverage, then submit_review. Indexed INDEX_COVERAGE_MISMATCH requires REFINE and EXACT_RESCAN_WITH_REGION. Full_csv confirmed sparsity requires ACCEPT_LIMITED and null requested_action. Return submit_review JSON."
+    },
+    {
+      "role": "user",
+      "content": "Inspect coverage for synthetic index-omission probe with immutable query."
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_z8690dsj",
+          "type": "function",
+          "function": {
+            "name": "inspect_coverage",
+            "arguments": "{}"
+          }
+        }
+      ],
+      "content": ""
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_z8690dsj",
+      "content": "{\"strategy\":\"indexed\",\"refinements\":0,\"scan_complete\":false,\"source_snapshot_complete\":true,\"signals\":[\"INDEX_COVERAGE_MISMATCH\",\"SPARSE_SLICE\"],\"total_observations\":22,\"receipt_sha256\":{\"price\":\"727bd8092fdc7d49341cbf7c24b8dc9f36722965f721fe2e1746a533caffed6a\",\"supply\":\"2866c04c03eabe107757fbd319d68e36b0678893f109d13004301a9a2b37db96\"}}"
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_ssfzpi1e",
+          "type": "function",
+          "function": {
+            "name": "submit_review",
+            "arguments": "{\"decision\": \"REFINE\", \"requested_action\": \"EXACT_RESCAN_WITH_REGION\"}"
+          }
+        }
+      ],
+      "content": ""
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_ssfzpi1e",
+      "content": "{\"review\":{\"role\":\"reviewer\",\"decision\":\"REFINE\",\"requested_action\":\"EXACT_RESCAN_WITH_REGION\"},\"next_strategy\":\"full_csv\",\"active_specialists\":[\"price\",\"supply\",\"region\"],\"query_sha256\":\"25f16ca91607f33ea413b4e1d73d9ec78e03b7d4d83aac1651ff17911812f8a5\"}"
+    }
+  ],
+  "max_tokens": 1024,
+  "parallel_tool_calls": true,
+  "stream_options": {
+    "include_usage": true
+  },
+  "temperature": 0.2,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "inspect_coverage",
+        "description": "Read actual specialist receipts before submitting a review decision.",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "submit_review",
+        "description": "Submit REFINE with EXACT_RESCAN_WITH_REGION for indexed mismatch;\nsubmit ACCEPT_LIMITED with null for authoritative confirmed sparse support.",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {
+            "decision": {
+              "enum": [
+                "REFINE",
+                "ACCEPT_LIMITED"
+              ],
+              "type": "string"
+            },
+            "requested_action": {
+              "anyOf": [
+                {
+                  "const": "EXACT_RESCAN_WITH_REGION",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "required": [
+            "decision"
+          ],
+          "type": "object"
+        }
+      }
+    }
+  ],
+  "reasoning_effort": "none"
+}

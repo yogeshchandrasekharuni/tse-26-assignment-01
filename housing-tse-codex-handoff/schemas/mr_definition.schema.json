@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MRDefinitions v1.0",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "pattern": "^MR(0[1-9]|10)$"
+      },
+      "version": {
+        "enum": [
+          "1.0"
+        ]
+      },
+      "name": {
+        "type": "string",
+        "minLength": 1
+      },
+      "family": {
+        "enum": [
+          "invariance",
+          "monotonic",
+          "directional"
+        ]
+      },
+      "transform": {
+        "type": "string",
+        "minLength": 1
+      },
+      "parameters": {
+        "type": "object"
+      },
+      "relation": {
+        "type": "string",
+        "minLength": 1
+      },
+      "valid_subdomain": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minItems": 1
+      },
+      "witness": {
+        "type": "string",
+        "minLength": 1
+      },
+      "compared_fields": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minItems": 1
+      },
+      "tolerances": {
+        "type": "object",
+        "properties": {
+          "counts": {
+            "enum": [
+              "exact"
+            ]
+          },
+          "invariance_strings": {
+            "enum": [
+              "exact"
+            ]
+          },
+          "scaled_levels_abs": {
+            "type": "string"
+          },
+          "percent_pp_abs": {
+            "type": "string"
+          },
+          "additive_price_usd_abs": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "counts",
+          "invariance_strings",
+          "scaled_levels_abs",
+          "percent_pp_abs",
+          "additive_price_usd_abs"
+        ],
+        "additionalProperties": false
+      },
+      "fault_types": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minItems": 1
+      },
+      "minimum_distinct_bases": {
+        "type": "integer",
+        "minimum": 30
+      },
+      "seed_manifest": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "required": [
+      "id",
+      "version",
+      "name",
+      "family",
+      "transform",
+      "parameters",
+      "relation",
+      "valid_subdomain",
+      "witness",
+      "compared_fields",
+      "tolerances",
+      "fault_types",
+      "minimum_distinct_bases",
+      "seed_manifest"
+    ],
+    "additionalProperties": false
+  },
+  "minItems": 10,
+  "maxItems": 10
+}

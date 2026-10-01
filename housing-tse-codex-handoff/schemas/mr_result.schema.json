@@ -1,0 +1,296 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MRCaseResult v1.0; status consistency checked by harness",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "enum": [
+        "1.0"
+      ]
+    },
+    "campaign_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$"
+    },
+    "live_campaign_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "mode": {
+      "enum": [
+        "live",
+        "replay",
+        "policy_simulation"
+      ]
+    },
+    "mr_id": {
+      "type": "string",
+      "pattern": "^MR(0[1-9]|10)$"
+    },
+    "mr_version": {
+      "enum": [
+        "1.0"
+      ]
+    },
+    "base_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$"
+    },
+    "base_semantic_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "transform_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "seed_pair_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$"
+    },
+    "source_seed_requested": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "followup_seed_requested": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "source_seed_effective": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "followup_seed_effective": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "source_run_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "followup_run_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.:-]+$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "source_view_sha256": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "followup_view_sha256": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "status": {
+      "enum": [
+        "pass",
+        "violation",
+        "invalid",
+        "execution_error"
+      ]
+    },
+    "violation_kind": {
+      "anyOf": [
+        {
+          "enum": [
+            "relation",
+            "output_contract"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "reason_code": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "eligibility_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "witness_path": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "compared_numeric_fields": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "max_absolute_error": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "mismatches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source": {
+            "type": [
+              "string",
+              "integer",
+              "null"
+            ]
+          },
+          "followup": {
+            "type": [
+              "string",
+              "integer",
+              "null"
+            ]
+          },
+          "expected_relation": {
+            "type": "string",
+            "minLength": 1
+          },
+          "absolute_error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tolerance": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "path",
+          "source",
+          "followup",
+          "expected_relation",
+          "absolute_error",
+          "tolerance"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "evidence_paths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "campaign_id",
+    "live_campaign_id",
+    "mode",
+    "mr_id",
+    "mr_version",
+    "base_id",
+    "base_semantic_sha256",
+    "transform_sha256",
+    "seed_pair_id",
+    "source_seed_requested",
+    "followup_seed_requested",
+    "source_seed_effective",
+    "followup_seed_effective",
+    "source_run_id",
+    "followup_run_id",
+    "source_view_sha256",
+    "followup_view_sha256",
+    "status",
+    "violation_kind",
+    "reason_code",
+    "eligibility_path",
+    "witness_path",
+    "compared_numeric_fields",
+    "max_absolute_error",
+    "mismatches",
+    "evidence_paths"
+  ],
+  "additionalProperties": false
+}

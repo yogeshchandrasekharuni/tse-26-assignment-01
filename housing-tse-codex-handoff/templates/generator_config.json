@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "dallas-synth-v1",
+  "source_kind": "synthetic",
+  "month_start": "2024-10",
+  "month_end": "2026-09",
+  "zips": [
+    "75001",
+    "75006",
+    "75019",
+    "75024",
+    "75034",
+    "75038",
+    "75063",
+    "75080",
+    "75093",
+    "75201",
+    "75204",
+    "75214"
+  ],
+  "property_types": [
+    "single_family",
+    "condo",
+    "townhouse"
+  ],
+  "observations_per_zip_month": 120,
+  "expected_rows": 34560,
+  "generator_seed": 20261016,
+  "prng": "random.Random under locked Python 3.12",
+  "seasonal_bp": [
+    -80,
+    -60,
+    0,
+    60,
+    120,
+    160,
+    130,
+    100,
+    30,
+    -20,
+    -60,
+    -100
+  ],
+  "monthly_trend_bp": 28,
+  "price_rounding": "exact half-even to nearest 100 cents",
+  "csv_columns": [
+    "record_id",
+    "listing_id",
+    "month",
+    "zip",
+    "property_type",
+    "bedrooms",
+    "sqft",
+    "price_cents"
+  ],
+  "recipe_document": "DATA_CONTRACT.md",
+  "claim": "Synthetic scenario, not measured or calibrated Dallas housing data"
+}

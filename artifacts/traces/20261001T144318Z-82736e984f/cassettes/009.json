@@ -1,0 +1,185 @@
+{
+  "boundary_sha256": "3bafcb3d273d49c6948f496cb8186ab9211eb7d85e71a7dd65c51e985fad09b3",
+  "input": {
+    "agent": "supply[2]",
+    "boundary_sha256": "3bafcb3d273d49c6948f496cb8186ab9211eb7d85e71a7dd65c51e985fad09b3",
+    "context": {
+      "contract_version": "1.0",
+      "facts": {},
+      "iteration": 1,
+      "monthly_counts": {},
+      "plan": {
+        "active_specialists": [
+          "price",
+          "supply",
+          "region"
+        ],
+        "canonical_query_sha256": "11534c753c0f13a58e886a498fa932bf8d9976c07bb82c6b0c8d486d5d3b8f26",
+        "dataset_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+        "planner_decision_sha256": "cda39d6e7dc3633767be4c2255aa80a19b71bf2539f0edaa13e94dee951c7e43",
+        "region_purpose": "coverage_diagnostic",
+        "required_months": [
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01",
+          "2025-02",
+          "2025-03",
+          "2025-04",
+          "2025-05",
+          "2025-06",
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09"
+        ],
+        "scan_strategy": "full_csv",
+        "version": 1,
+        "visible_months": [
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09"
+        ]
+      },
+      "planning_constraints": null,
+      "previous_review": {
+        "decision": "REFINE",
+        "decision_type": "review",
+        "requested_action": "EXACT_RESCAN_WITH_REGION",
+        "role": "reviewer",
+        "signals": [
+          "INDEX_COVERAGE_MISMATCH",
+          "SPARSE_SLICE"
+        ]
+      },
+      "previous_signals": [
+        "INDEX_COVERAGE_MISMATCH",
+        "SPARSE_SLICE"
+      ],
+      "query": {
+        "compare_regions": false,
+        "criteria": {
+          "bedrooms_max": 2,
+          "bedrooms_min": 2,
+          "price_max_cents": null,
+          "price_min_cents": null,
+          "property_types": [
+            "condo"
+          ],
+          "sqft_max": 1420,
+          "sqft_min": 1400,
+          "zips": [
+            "75001"
+          ]
+        },
+        "dataset_id": "dallas-synth-v1",
+        "dataset_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+        "window_end": "2026-09"
+      },
+      "query_sha256": "11534c753c0f13a58e886a498fa932bf8d9976c07bb82c6b0c8d486d5d3b8f26",
+      "receipt_hashes": {
+        "price": "0aed27242954aeaab9456b2c3bf57ca3087853170273f88e281140722ff74a90"
+      },
+      "required_caveats": [],
+      "scan_complete": true,
+      "schema_repair": null,
+      "signals": [],
+      "stage": "SCANNING"
+    },
+    "effective_seed": 104729,
+    "instruction": "You are the internal Supply specialist. Return only one JSON object matching SupplyDecision, with no Markdown or prose: role supply, decision_type tool_intent, tool supply_stats, partition_order month_asc or zip_asc, purpose statistics. Python binds the immutable selection, counts observations and verifies coverage. Never return counts, filters or invented evidence. If schema_repair names your role, correct that prior response using the recorded errors. Do not call tools yourself.\n\nDecision schema:\n{\"$defs\":{\"PartitionOrder\":{\"enum\":[\"month_asc\",\"zip_asc\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"decision_type\":{\"const\":\"tool_intent\",\"title\":\"Decision Type\",\"type\":\"string\"},\"partition_order\":{\"$ref\":\"#/$defs/PartitionOrder\"},\"purpose\":{\"const\":\"statistics\",\"title\":\"Purpose\",\"type\":\"string\"},\"role\":{\"const\":\"supply\",\"title\":\"Role\",\"type\":\"string\"},\"tool\":{\"const\":\"supply_stats\",\"title\":\"Tool\",\"type\":\"string\"}},\"required\":[\"role\",\"decision_type\",\"tool\",\"partition_order\",\"purpose\"],\"title\":\"SupplyDecision\",\"type\":\"object\"}",
+    "message_tool_call_order": [
+      [],
+      []
+    ],
+    "messages": [
+      {
+        "content": [
+          {
+            "text": "Delegate supply specialist for full_csv scan with region activation. Query: bedrooms 2, condo, sqft 1400-1420, zip 75001. Partition month_asc for statistics.",
+            "type": "text"
+          }
+        ],
+        "is_template": false,
+        "role": "user"
+      },
+      {
+        "content": [
+          {
+            "text": "{\"state\":{\"contract_version\":\"1.0\",\"facts\":{},\"iteration\":1,\"monthly_counts\":{},\"plan\":{\"active_specialists\":[\"price\",\"supply\",\"region\"],\"canonical_query_sha256\":\"11534c753c0f13a58e886a498fa932bf8d9976c07bb82c6b0c8d486d5d3b8f26\",\"dataset_view_sha256\":\"bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b\",\"planner_decision_sha256\":\"cda39d6e7dc3633767be4c2255aa80a19b71bf2539f0edaa13e94dee951c7e43\",\"region_purpose\":\"coverage_diagnostic\",\"required_months\":[\"2024-10\",\"2024-11\",\"2024-12\",\"2025-01\",\"2025-02\",\"2025-03\",\"2025-04\",\"2025-05\",\"2025-06\",\"2025-07\",\"2025-08\",\"2025-09\",\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\",\"2026-07\",\"2026-08\",\"2026-09\"],\"scan_strategy\":\"full_csv\",\"version\":1,\"visible_months\":[\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\",\"2026-07\",\"2026-08\",\"2026-09\"]},\"planning_constraints\":null,\"previous_review\":{\"decision\":\"REFINE\",\"decision_type\":\"review\",\"requested_action\":\"EXACT_RESCAN_WITH_REGION\",\"role\":\"reviewer\",\"signals\":[\"INDEX_COVERAGE_MISMATCH\",\"SPARSE_SLICE\"]},\"previous_signals\":[\"INDEX_COVERAGE_MISMATCH\",\"SPARSE_SLICE\"],\"query\":{\"compare_regions\":false,\"criteria\":{\"bedrooms_max\":2,\"bedrooms_min\":2,\"price_max_cents\":null,\"price_min_cents\":null,\"property_types\":[\"condo\"],\"sqft_max\":1420,\"sqft_min\":1400,\"zips\":[\"75001\"]},\"dataset_id\":\"dallas-synth-v1\",\"dataset_view_sha256\":\"bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b\",\"window_end\":\"2026-09\"},\"query_sha256\":\"11534c753c0f13a58e886a498fa932bf8d9976c07bb82c6b0c8d486d5d3b8f26\",\"receipt_hashes\":{\"price\":\"0aed27242954aeaab9456b2c3bf57ca3087853170273f88e281140722ff74a90\"},\"required_caveats\":[],\"scan_complete\":true,\"schema_repair\":null,\"signals\":[],\"stage\":\"SCANNING\"},\"trusted_role\":\"supply\"}",
+            "type": "text"
+          }
+        ],
+        "is_template": false,
+        "role": "user"
+      }
+    ],
+    "model_profile": "housing-v4-s104729",
+    "normalization_version": "production-semantic-2",
+    "prompt_bundle_sha256": "47c9578424b4c58836d002685bf6173c4687fe4fe48bcda41ddeeb9cecdbc4f6",
+    "requested_seed": 104729,
+    "retry_policy": {
+      "framework_retries": 1,
+      "sdk_retries": 0
+    },
+    "role_schema_sha256": "45178168589a8355ccf9eda92f73d7a2d59bba0377d460fffe5f2113df122b7b",
+    "tools": {
+      "cache_scope": "private",
+      "result_type": "complete",
+      "tools": [],
+      "ttl_ms": 0
+    }
+  },
+  "origin": "live_captured",
+  "raw_input_sha256": "4efb065258866ffed21cd966584bfaca2b3f4789054937992167a5faffee63c7",
+  "response": {
+    "channels": {
+      "fast-agent-timing": [
+        {
+          "text": "{\"start_time\": 85663.118303791, \"end_time\": 85666.142660083, \"duration_ms\": 34135.766493, \"ttft_ms\": 819.66, \"time_to_response_ms\": 819.66}",
+          "type": "text"
+        }
+      ],
+      "fast-agent-usage": [
+        {
+          "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 1206, \"uncached\": null, \"cache_read\": 1202, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 49, \"reasoning\": null}, \"tool_calls\": 0, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1790866384.4673418, \"timing\": {\"duration_ms\": 34135.766493, \"ttft_ms\": 819.66, \"time_to_response_ms\": 819.66}, \"raw_usage\": {\"completion_tokens\": 49, \"prompt_tokens\": 1206, \"total_tokens\": 1255, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 1202, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 1255}]}",
+          "type": "text"
+        }
+      ]
+    },
+    "content": [
+      {
+        "text": "{\n  \"role\": \"supply\",\n  \"decision_type\": \"tool_intent\",\n  \"tool\": \"supply_stats\",\n  \"partition_order\": \"month_asc\",\n  \"purpose\": \"statistics\"\n}",
+        "type": "text"
+      }
+    ],
+    "is_template": false,
+    "role": "assistant",
+    "stop_reason": "endTurn"
+  },
+  "response_sha256": "c0fd0e2a8c916d5c029027b93417795e1ab271f26b51d9d591360bfae733b8c2",
+  "response_tool_call_order": [],
+  "schema_version": "production-capture-2",
+  "semantic_input_sha256": "4efb065258866ffed21cd966584bfaca2b3f4789054937992167a5faffee63c7",
+  "sequence": 9
+}

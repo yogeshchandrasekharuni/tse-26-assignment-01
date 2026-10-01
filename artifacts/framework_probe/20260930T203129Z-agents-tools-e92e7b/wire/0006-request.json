@@ -1,0 +1,70 @@
+{
+  "model": "housing-qwen-s104729",
+  "stream": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "PROBE_ROLE=reviewer. First inspect_coverage, then submit_review. Indexed INDEX_COVERAGE_MISMATCH requires REFINE and EXACT_RESCAN_WITH_REGION. Full_csv confirmed sparsity requires ACCEPT_LIMITED and null requested_action. Return submit_review JSON."
+    },
+    {
+      "role": "user",
+      "content": "Inspect coverage for synthetic index-omission probe with immutable query."
+    }
+  ],
+  "max_tokens": 1024,
+  "parallel_tool_calls": true,
+  "stream_options": {
+    "include_usage": true
+  },
+  "temperature": 0.2,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "inspect_coverage",
+        "description": "Read actual specialist receipts before submitting a review decision.",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "submit_review",
+        "description": "Submit REFINE with EXACT_RESCAN_WITH_REGION for indexed mismatch;\nsubmit ACCEPT_LIMITED with null for authoritative confirmed sparse support.",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {
+            "decision": {
+              "enum": [
+                "REFINE",
+                "ACCEPT_LIMITED"
+              ],
+              "type": "string"
+            },
+            "requested_action": {
+              "anyOf": [
+                {
+                  "const": "EXACT_RESCAN_WITH_REGION",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "required": [
+            "decision"
+          ],
+          "type": "object"
+        }
+      }
+    }
+  ],
+  "reasoning_effort": "none"
+}

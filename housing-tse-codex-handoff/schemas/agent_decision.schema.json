@@ -1,0 +1,300 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RoleDecision v1.0; controller enforces state-dependent action legality",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "role": {
+          "enum": [
+            "orchestrator"
+          ]
+        },
+        "decision_type": {
+          "enum": [
+            "plan"
+          ]
+        },
+        "action": {
+          "enum": [
+            "INITIAL",
+            "EXACT_RESCAN_WITH_REGION",
+            "REBUILD_INDEX_AND_RESCAN"
+          ]
+        },
+        "scan_strategy": {
+          "enum": [
+            "indexed",
+            "full_csv",
+            "rebuilt_index"
+          ]
+        },
+        "specialists": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "price",
+              "supply",
+              "region"
+            ]
+          },
+          "minItems": 2,
+          "maxItems": 3,
+          "uniqueItems": true
+        },
+        "region_purpose": {
+          "enum": [
+            "none",
+            "public_comparison",
+            "coverage_diagnostic"
+          ]
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "INDEX_COVERAGE_MISMATCH",
+              "SPARSE_SLICE",
+              "RECEIPT_MISMATCH",
+              "COMPLETE_SUPPORT",
+              "CONFIRMED_SPARSE",
+              "UNRECOVERABLE_INTEGRITY"
+            ]
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "role",
+        "decision_type",
+        "action",
+        "scan_strategy",
+        "specialists",
+        "region_purpose",
+        "reason_codes"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "role": {
+          "enum": [
+            "price"
+          ]
+        },
+        "decision_type": {
+          "enum": [
+            "tool_intent"
+          ]
+        },
+        "tool": {
+          "enum": [
+            "price_stats"
+          ]
+        },
+        "partition_order": {
+          "enum": [
+            "month_asc",
+            "zip_asc"
+          ]
+        },
+        "purpose": {
+          "enum": [
+            "statistics"
+          ]
+        }
+      },
+      "required": [
+        "role",
+        "decision_type",
+        "tool",
+        "partition_order",
+        "purpose"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "role": {
+          "enum": [
+            "supply"
+          ]
+        },
+        "decision_type": {
+          "enum": [
+            "tool_intent"
+          ]
+        },
+        "tool": {
+          "enum": [
+            "supply_stats"
+          ]
+        },
+        "partition_order": {
+          "enum": [
+            "month_asc",
+            "zip_asc"
+          ]
+        },
+        "purpose": {
+          "enum": [
+            "statistics"
+          ]
+        }
+      },
+      "required": [
+        "role",
+        "decision_type",
+        "tool",
+        "partition_order",
+        "purpose"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "role": {
+          "enum": [
+            "region"
+          ]
+        },
+        "decision_type": {
+          "enum": [
+            "tool_intent"
+          ]
+        },
+        "tool": {
+          "enum": [
+            "region_stats"
+          ]
+        },
+        "partition_order": {
+          "enum": [
+            "month_asc",
+            "zip_asc"
+          ]
+        },
+        "purpose": {
+          "enum": [
+            "public_comparison",
+            "coverage_diagnostic"
+          ]
+        }
+      },
+      "required": [
+        "role",
+        "decision_type",
+        "tool",
+        "partition_order",
+        "purpose"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "role": {
+          "enum": [
+            "reviewer"
+          ]
+        },
+        "decision_type": {
+          "enum": [
+            "review"
+          ]
+        },
+        "decision": {
+          "enum": [
+            "ACCEPT",
+            "REFINE",
+            "ACCEPT_LIMITED",
+            "FAIL"
+          ]
+        },
+        "signals": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "INDEX_COVERAGE_MISMATCH",
+              "SPARSE_SLICE",
+              "RECEIPT_MISMATCH",
+              "COMPLETE_SUPPORT",
+              "CONFIRMED_SPARSE",
+              "UNRECOVERABLE_INTEGRITY"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "requested_action": {
+          "anyOf": [
+            {
+              "enum": [
+                "EXACT_RESCAN_WITH_REGION",
+                "REBUILD_INDEX_AND_RESCAN"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "role",
+        "decision_type",
+        "decision",
+        "signals",
+        "requested_action"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "role": {
+          "enum": [
+            "composer"
+          ]
+        },
+        "decision_type": {
+          "enum": [
+            "report"
+          ]
+        },
+        "fact_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "maxItems": 8,
+          "uniqueItems": true
+        },
+        "caveat_codes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "SYNTHETIC_DATA",
+              "SPARSE_SUPPORT",
+              "NO_MATCHES",
+              "UNAVAILABLE_LOOKBACK"
+            ]
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "role",
+        "decision_type",
+        "fact_ids",
+        "caveat_codes"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

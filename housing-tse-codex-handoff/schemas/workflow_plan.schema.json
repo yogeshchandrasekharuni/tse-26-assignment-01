@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WorkflowPlan v1.0; controller binds immutable query and month union",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2
+    },
+    "canonical_query_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "dataset_view_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "visible_months": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+      },
+      "minItems": 12,
+      "maxItems": 12
+    },
+    "required_months": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+      },
+      "minItems": 12,
+      "maxItems": 24,
+      "uniqueItems": true
+    },
+    "scan_strategy": {
+      "enum": [
+        "indexed",
+        "full_csv",
+        "rebuilt_index"
+      ]
+    },
+    "active_specialists": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "price",
+          "supply",
+          "region"
+        ]
+      },
+      "minItems": 2,
+      "maxItems": 3,
+      "uniqueItems": true
+    },
+    "region_purpose": {
+      "enum": [
+        "none",
+        "public_comparison",
+        "coverage_diagnostic"
+      ]
+    },
+    "trigger_review_event_sequence": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "planner_decision_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "required": [
+    "version",
+    "canonical_query_sha256",
+    "dataset_view_sha256",
+    "visible_months",
+    "required_months",
+    "scan_strategy",
+    "active_specialists",
+    "region_purpose",
+    "trigger_review_event_sequence",
+    "planner_decision_sha256"
+  ],
+  "additionalProperties": false
+}

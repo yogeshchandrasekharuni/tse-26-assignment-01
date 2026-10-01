@@ -1,0 +1,344 @@
+[
+  {
+    "id": "MR01",
+    "version": "1.0",
+    "name": "Row permutation",
+    "family": "invariance",
+    "transform": "permute_rows",
+    "parameters": {},
+    "relation": "ALL_CANONICAL exact equality",
+    "valid_subdomain": [
+      "valid complete feed",
+      "at least two selected rows",
+      "nonnull visible median"
+    ],
+    "witness": "Changed byte order/hash; equal logical multiset",
+    "compared_fields": [
+      "canonical.*"
+    ],
+    "tolerances": {
+      "counts": "exact",
+      "invariance_strings": "exact",
+      "scaled_levels_abs": "0.000003",
+      "percent_pp_abs": "0.000001",
+      "additive_price_usd_abs": "0.000001"
+    },
+    "fault_types": [
+      "order-dependent aggregation",
+      "first-N truncation"
+    ],
+    "minimum_distinct_bases": 30,
+    "seed_manifest": "templates/seed_manifest.json"
+  },
+  {
+    "id": "MR02",
+    "version": "1.0",
+    "name": "Nominal ID relabeling",
+    "family": "invariance",
+    "transform": "bijective_id_map",
+    "parameters": {},
+    "relation": "ALL_CANONICAL exact equality",
+    "valid_subdomain": [
+      "bijections on both nominal ID domains",
+      "ZIPs and semantic fields unchanged",
+      "nonnull visible median"
+    ],
+    "witness": "At least one selected ID changes; equality partition preserved",
+    "compared_fields": [
+      "canonical.*"
+    ],
+    "tolerances": {
+      "counts": "exact",
+      "invariance_strings": "exact",
+      "scaled_levels_abs": "0.000003",
+      "percent_pp_abs": "0.000001",
+      "additive_price_usd_abs": "0.000001"
+    },
+    "fault_types": [
+      "ID-dependent inference",
+      "incorrect deduplication"
+    ],
+    "minimum_distinct_bases": 30,
+    "seed_manifest": "templates/seed_manifest.json"
+  },
+  {
+    "id": "MR03",
+    "version": "1.0",
+    "name": "Twofold observation replication",
+    "family": "invariance",
+    "transform": "replicate_observations",
+    "parameters": {
+      "factor": 2
+    },
+    "relation": "Counts and total double; medians/deltas/rankings unchanged",
+    "valid_subdomain": [
+      "fresh unique clone record IDs",
+      "observation-count contract",
+      "at least one selected row"
+    ],
+    "witness": "Every raw observation has multiplicity exactly doubled across all months",
+    "compared_fields": [
+      "canonical.monthly.*",
+      "canonical.summary.*"
+    ],
+    "tolerances": {
+      "counts": "exact",
+      "invariance_strings": "exact",
+      "scaled_levels_abs": "0.000003",
+      "percent_pp_abs": "0.000001",
+      "additive_price_usd_abs": "0.000001"
+    },
+    "fault_types": [
+      "business-ID deduplication",
+      "unweighted median merge"
+    ],
+    "minimum_distinct_bases": 30,
+    "seed_manifest": "templates/seed_manifest.json"
+  },
+  {
+    "id": "MR04",
+    "version": "1.0",
+    "name": "Display scale and area units",
+    "family": "invariance",
+    "transform": "display_units",
+    "parameters": {
+      "money": "USD_THOUSANDS",
+      "area": "SQM",
+      "sqft_to_sqm": "0.09290304"
+    },
+    "relation": "Canonical equal; presentation price /1000 and ppsf /0.09290304 /1000",
+    "valid_subdomain": [
+      "fixed USD currency identity",
+      "nonnull visible price and ppsf"
+    ],
+    "witness": "Controls change; nonnull presentation values actually compared",
+    "compared_fields": [
+      "canonical.*",
+      "presentation.*"
+    ],
+    "tolerances": {
+      "counts": "exact",
+      "invariance_strings": "exact",
+      "scaled_levels_abs": "0.000003",
+      "percent_pp_abs": "0.000001",
+      "additive_price_usd_abs": "0.000001"
+    },
+    "fault_types": [
+      "double conversion",
+      "filtering in display units"
+    ],
+    "minimum_distinct_bases": 30,
+    "seed_manifest": "templates/seed_manifest.json"
+  },
+  {
+    "id": "MR05",
+    "version": "1.0",
+    "name": "Broaden price band",
+    "family": "monotonic",
+    "transform": "broaden_price_band",
+    "parameters": {
+      "lower_delta_cents": -10000000,
+      "upper_delta_cents": 30000000
+    },
+    "relation": "Each monthly count and total nondecreasing; one strict increase",
+    "valid_subdomain": [
+      "finite inclusive source band",
+      "superset membership in all months",
+      "source has selected records"
+    ],
+    "witness": "At least one added selected visible observation",
+    "compared_fields": [
+      "canonical.monthly.*.listing_count",
+      "canonical.summary.total_observations"
+    ],
+    "tolerances": {
+      "counts": "exact",
+      "invariance_strings": "exact",
+      "scaled_levels_abs": "0.000003",
+      "percent_pp_abs": "0.000001",
+      "additive_price_usd_abs": "0.000001"
+    },
+    "fault_types": [
+      "bound inversion",
+      "stale criteria cache"
+    ],
+    "minimum_distinct_bases": 30,
+    "seed_manifest": "templates/seed_manifest.json"
+  },
+  {
+    "id": "MR06",
+    "version": "1.0",
+    "name": "Restrict ZIPs",
+    "family": "monotonic",
+    "transform": "restrict_zip_subset",
+    "parameters": {
+      "subset_recipe": "first max(1,len(zips)//2) sorted ZIPs"
+    },
+    "relation": "Each monthly count and total nonincreasing; one strict decrease",
+    "valid_subdomain": [
+      "at least two requested ZIPs",
+      "retained and removed selected visible rows"
+    ],
+    "witness": "Strict removed selected observation and retained observation",
+    "compared_fields": [
+      "canonical.monthly.*.listing_count",
+      "canonical.summary.total_observations"
+    ],
+    "tolerances": {
+      "counts": "exact",
+      "invariance_strings": "exact",
+      "scaled_levels_abs": "0.000003",
+      "percent_pp_abs": "0.000001",
+      "additive_price_usd_abs": "0.000001"
+    },
+    "fault_types": [
+      "wrong set operation",
+      "all-region count leakage"
+    ],
+    "minimum_distinct_bases": 30,
+    "seed_manifest": "templates/seed_manifest.json"
+  },
+  {
+    "id": "MR07",
+    "version": "1.0",
+    "name": "Advance window",
+    "family": "directional",
+    "transform": "shift_window",
+    "parameters": {
+      "months": 1
+    },
+    "relation": "All shared monthly fields equal; total rolls out first and in incoming month",
+    "valid_subdomain": [
+      "incoming visible month available",
+      "exactly eleven overlapping labels",
+      "nonnull overlap"
+    ],
+    "witness": "Window end increases; overlap labeled and nonempty",
+    "compared_fields": [
+      "canonical.monthly overlap.*",
+      "canonical.summary.total_observations"
+    ],
+    "tolerances": {
+      "counts": "exact",
+      "invariance_strings": "exact",
+      "scaled_levels_abs": "0.000003",
+      "percent_pp_abs": "0.000001",
+      "additive_price_usd_abs": "0.000001"
+    },
+    "fault_types": [
+      "date off-by-one",
+      "missing lookback for first MoM"
+    ],
+    "minimum_distinct_bases": 30,
+    "seed_manifest": "templates/seed_manifest.json"
+  },
+  {
+    "id": "MR08",
+    "version": "1.0",
+    "name": "Positive price scaling",
+    "family": "directional",
+    "transform": "scale_prices",
+    "parameters": {
+      "factor_numerator": 5,
+      "factor_denominator": 4,
+      "scale_filter_bounds": true,
+      "all_snapshot_months": true
+    },
+    "relation": "Levels scale by k; counts, percentage shape and ranks invariant",
+    "valid_subdomain": [
+      "k in (1,2] rational",
+      "all products integer cents",
+      "slice membership equal",
+      "nonnull levels and defined percentage"
+    ],
+    "witness": "Selected prices change with exact multiplicative correspondence",
+    "compared_fields": [
+      "canonical.*"
+    ],
+    "tolerances": {
+      "counts": "exact",
+      "invariance_strings": "exact",
+      "scaled_levels_abs": "0.000003",
+      "percent_pp_abs": "0.000001",
+      "additive_price_usd_abs": "0.000001"
+    },
+    "fault_types": [
+      "untransformed price band",
+      "mixed scaled lookbacks"
+    ],
+    "minimum_distinct_bases": 30,
+    "seed_manifest": "templates/seed_manifest.json"
+  },
+  {
+    "id": "MR09",
+    "version": "1.0",
+    "name": "Single-month additive price shift",
+    "family": "monotonic",
+    "transform": "add_month_price",
+    "parameters": {
+      "delta_cents": 100000,
+      "target_month": "first nonempty visible month"
+    },
+    "relation": "Target price median +1000 USD; ppsf increases at least1000/max_sqft; other level medians equal",
+    "valid_subdomain": [
+      "source price bounds both null",
+      "positive sqft and delta",
+      "target has selected observations",
+      "membership unchanged"
+    ],
+    "witness": "Selected target price changes; same record multiset",
+    "compared_fields": [
+      "canonical.monthly.*.listing_count",
+      "canonical.monthly.*.median_price_usd",
+      "canonical.monthly.*.median_ppsf_usd",
+      "canonical.summary.total_observations"
+    ],
+    "tolerances": {
+      "counts": "exact",
+      "invariance_strings": "exact",
+      "scaled_levels_abs": "0.000003",
+      "percent_pp_abs": "0.000001",
+      "additive_price_usd_abs": "0.000001"
+    },
+    "fault_types": [
+      "incorrect ppsf algebra",
+      "wrong month",
+      "price-band precondition omitted"
+    ],
+    "minimum_distinct_bases": 30,
+    "seed_manifest": "templates/seed_manifest.json"
+  },
+  {
+    "id": "MR10",
+    "version": "1.0",
+    "name": "Excluded-ZIP observation injection",
+    "family": "invariance",
+    "transform": "append_excluded_zip",
+    "parameters": {
+      "rows_per_snapshot_month": 1
+    },
+    "relation": "ALL_CANONICAL exact equality",
+    "valid_subdomain": [
+      "requested ZIPs proper subset of allowlist",
+      "injected rows valid",
+      "source nonempty"
+    ],
+    "witness": "Raw feed gains at least24rows; selected multiset unchanged; visible excluded witness",
+    "compared_fields": [
+      "canonical.*"
+    ],
+    "tolerances": {
+      "counts": "exact",
+      "invariance_strings": "exact",
+      "scaled_levels_abs": "0.000003",
+      "percent_pp_abs": "0.000001",
+      "additive_price_usd_abs": "0.000001"
+    },
+    "fault_types": [
+      "aggregation before filtering",
+      "lookback filter leakage"
+    ],
+    "minimum_distinct_bases": 30,
+    "seed_manifest": "templates/seed_manifest.json"
+  }
+]

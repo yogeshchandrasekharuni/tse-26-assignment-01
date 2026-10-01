@@ -1,0 +1,58 @@
+{
+  "status": "authored_schema_examples_not_live_cassettes",
+  "decisions": [
+    {
+      "role": "orchestrator",
+      "decision_type": "plan",
+      "action": "INITIAL",
+      "scan_strategy": "indexed",
+      "specialists": [
+        "price",
+        "supply"
+      ],
+      "region_purpose": "none",
+      "reason_codes": []
+    },
+    {
+      "role": "price",
+      "decision_type": "tool_intent",
+      "tool": "price_stats",
+      "partition_order": "month_asc",
+      "purpose": "statistics"
+    },
+    {
+      "role": "supply",
+      "decision_type": "tool_intent",
+      "tool": "supply_stats",
+      "partition_order": "zip_asc",
+      "purpose": "statistics"
+    },
+    {
+      "role": "region",
+      "decision_type": "tool_intent",
+      "tool": "region_stats",
+      "partition_order": "month_asc",
+      "purpose": "coverage_diagnostic"
+    },
+    {
+      "role": "reviewer",
+      "decision_type": "review",
+      "decision": "REFINE",
+      "signals": [
+        "SPARSE_SLICE"
+      ],
+      "requested_action": "EXACT_RESCAN_WITH_REGION"
+    },
+    {
+      "role": "composer",
+      "decision_type": "report",
+      "fact_ids": [
+        "summary.window_price_change_pct"
+      ],
+      "caveat_codes": [
+        "SYNTHETIC_DATA",
+        "SPARSE_SUPPORT"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2447 @@
+{
+  "$defs": {
+    "AnalysisOutput": {
+      "additionalProperties": false,
+      "properties": {
+        "canonical": {
+          "$ref": "#/$defs/Canonical"
+        },
+        "metadata": {
+          "$ref": "#/$defs/Metadata"
+        },
+        "narrative": {
+          "$ref": "#/$defs/Narrative"
+        },
+        "presentation": {
+          "$ref": "#/$defs/Presentation"
+        },
+        "quality": {
+          "$ref": "#/$defs/Quality"
+        },
+        "status": {
+          "const": "completed",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "canonical",
+        "presentation",
+        "quality",
+        "narrative",
+        "metadata"
+      ],
+      "title": "AnalysisOutput",
+      "type": "object"
+    },
+    "AnalysisRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "compare_regions": {
+          "title": "Compare Regions",
+          "type": "boolean"
+        },
+        "criteria": {
+          "$ref": "#/$defs/Criteria"
+        },
+        "dataset_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "display": {
+          "$ref": "#/$defs/Display"
+        },
+        "seed": {
+          "$ref": "#/$defs/Seed"
+        },
+        "window_end": {
+          "$ref": "#/$defs/Month"
+        }
+      },
+      "required": [
+        "dataset_id",
+        "window_end",
+        "criteria",
+        "display",
+        "compare_regions",
+        "seed"
+      ],
+      "title": "AnalysisRequest",
+      "type": "object"
+    },
+    "AnalysisView": {
+      "additionalProperties": false,
+      "properties": {
+        "area_unit": {
+          "title": "Area Unit",
+          "type": "string"
+        },
+        "count_ticks": {
+          "items": {
+            "$ref": "#/$defs/AxisTick"
+          },
+          "title": "Count Ticks",
+          "type": "array"
+        },
+        "csv_url": {
+          "title": "Csv Url",
+          "type": "string"
+        },
+        "json_url": {
+          "title": "Json Url",
+          "type": "string"
+        },
+        "last_yoy_label": {
+          "title": "Last Yoy Label",
+          "type": "string"
+        },
+        "money_unit": {
+          "title": "Money Unit",
+          "type": "string"
+        },
+        "months": {
+          "items": {
+            "$ref": "#/$defs/MonthView"
+          },
+          "title": "Months",
+          "type": "array"
+        },
+        "origin": {
+          "enum": [
+            "live_capture",
+            "live",
+            "replay"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "output": {
+          "$ref": "#/$defs/AnalysisOutput"
+        },
+        "ppsf_ticks": {
+          "items": {
+            "$ref": "#/$defs/AxisTick"
+          },
+          "title": "Ppsf Ticks",
+          "type": "array"
+        },
+        "price_ticks": {
+          "items": {
+            "$ref": "#/$defs/AxisTick"
+          },
+          "title": "Price Ticks",
+          "type": "array"
+        },
+        "purpose": {
+          "enum": [
+            "analysis",
+            "development_smoke",
+            "auxiliary_index_omission"
+          ],
+          "title": "Purpose",
+          "type": "string"
+        },
+        "request": {
+          "$ref": "#/$defs/AnalysisRequest"
+        },
+        "total_label": {
+          "title": "Total Label",
+          "type": "string"
+        },
+        "trace_url": {
+          "title": "Trace Url",
+          "type": "string"
+        },
+        "window_change_label": {
+          "title": "Window Change Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "output",
+        "request",
+        "origin",
+        "purpose",
+        "months",
+        "price_ticks",
+        "ppsf_ticks",
+        "count_ticks",
+        "money_unit",
+        "area_unit",
+        "total_label",
+        "window_change_label",
+        "last_yoy_label",
+        "csv_url",
+        "json_url",
+        "trace_url"
+      ],
+      "title": "AnalysisView",
+      "type": "object"
+    },
+    "AxisTick": {
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "y": {
+          "title": "Y",
+          "type": "string"
+        }
+      },
+      "required": [
+        "y",
+        "label"
+      ],
+      "title": "AxisTick",
+      "type": "object"
+    },
+    "Bootstrap": {
+      "additionalProperties": false,
+      "properties": {
+        "captures": {
+          "items": {
+            "$ref": "#/$defs/CaptureSummary"
+          },
+          "title": "Captures",
+          "type": "array"
+        },
+        "contract_version": {
+          "const": "1.0",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "dataset": {
+          "$ref": "#/$defs/DatasetManifest"
+        },
+        "default_request": {
+          "$ref": "#/$defs/AnalysisRequest"
+        },
+        "fast_agent_version": {
+          "title": "Fast Agent Version",
+          "type": "string"
+        },
+        "live_model_profile": {
+          "title": "Live Model Profile",
+          "type": "string"
+        },
+        "live_model_requirements": {
+          "title": "Live Model Requirements",
+          "type": "string"
+        },
+        "mr_catalog": {
+          "items": {
+            "$ref": "#/$defs/CatalogEntry"
+          },
+          "title": "Mr Catalog",
+          "type": "array"
+        },
+        "python_version": {
+          "title": "Python Version",
+          "type": "string"
+        },
+        "seed_values": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Seed Values",
+          "type": "array"
+        }
+      },
+      "required": [
+        "default_request",
+        "captures",
+        "dataset",
+        "seed_values",
+        "contract_version",
+        "python_version",
+        "fast_agent_version",
+        "live_model_profile",
+        "live_model_requirements",
+        "mr_catalog"
+      ],
+      "title": "Bootstrap",
+      "type": "object"
+    },
+    "CampaignOverview": {
+      "additionalProperties": false,
+      "properties": {
+        "cohort_path": {
+          "title": "Cohort Path",
+          "type": "string"
+        },
+        "completed_comparisons": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "expected_comparisons": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "headlines": {
+          "items": {
+            "$ref": "#/$defs/HeadlineDisplay"
+          },
+          "title": "Headlines",
+          "type": "array"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "last_case": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Last Case"
+        },
+        "last_status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Last Status"
+        },
+        "mode": {
+          "enum": [
+            "live",
+            "replay"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "scope": {
+          "enum": [
+            "pilot",
+            "headline",
+            "auxiliary"
+          ],
+          "title": "Scope",
+          "type": "string"
+        },
+        "seeds": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Seeds",
+          "type": "array"
+        },
+        "state": {
+          "enum": [
+            "running",
+            "complete",
+            "incomplete"
+          ],
+          "title": "State",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "mode",
+        "scope",
+        "expected_comparisons",
+        "completed_comparisons",
+        "state",
+        "headlines",
+        "last_case",
+        "last_status",
+        "seeds",
+        "cohort_path"
+      ],
+      "title": "CampaignOverview",
+      "type": "object"
+    },
+    "Canonical": {
+      "additionalProperties": false,
+      "properties": {
+        "monthly": {
+          "items": {
+            "$ref": "#/$defs/Monthly"
+          },
+          "maxItems": 12,
+          "minItems": 12,
+          "title": "Monthly",
+          "type": "array"
+        },
+        "summary": {
+          "$ref": "#/$defs/Summary"
+        },
+        "window_end": {
+          "$ref": "#/$defs/Month"
+        },
+        "window_start": {
+          "$ref": "#/$defs/Month"
+        }
+      },
+      "required": [
+        "window_start",
+        "window_end",
+        "monthly",
+        "summary"
+      ],
+      "title": "Canonical",
+      "type": "object"
+    },
+    "CaptureId": {
+      "enum": [
+        "normal",
+        "feedback"
+      ],
+      "type": "string"
+    },
+    "CaptureSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "id": {
+          "$ref": "#/$defs/CaptureId"
+        },
+        "model_decisions": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "purpose": {
+          "enum": [
+            "development_smoke",
+            "auxiliary_index_omission"
+          ],
+          "title": "Purpose",
+          "type": "string"
+        },
+        "request": {
+          "$ref": "#/$defs/AnalysisRequest"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "purpose",
+        "request",
+        "model_decisions",
+        "description"
+      ],
+      "title": "CaptureSummary",
+      "type": "object"
+    },
+    "CaseDetail": {
+      "additionalProperties": false,
+      "properties": {
+        "followup": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AnalysisView"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recipe": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Recipe",
+          "type": "object"
+        },
+        "result": {
+          "$ref": "#/$defs/CaseResult"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AnalysisView"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "witness": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Witness",
+          "type": "object"
+        }
+      },
+      "required": [
+        "result",
+        "source",
+        "followup",
+        "witness",
+        "recipe"
+      ],
+      "title": "CaseDetail",
+      "type": "object"
+    },
+    "CaseIndexItem": {
+      "additionalProperties": false,
+      "properties": {
+        "base_id": {
+          "title": "Base Id",
+          "type": "string"
+        },
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "mr_id": {
+          "title": "Mr Id",
+          "type": "string"
+        },
+        "seed": {
+          "title": "Seed",
+          "type": "integer"
+        },
+        "source_reused": {
+          "title": "Source Reused",
+          "type": "boolean"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "violation_kind": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Violation Kind"
+        }
+      },
+      "required": [
+        "key",
+        "mr_id",
+        "base_id",
+        "seed",
+        "status",
+        "violation_kind",
+        "source_reused"
+      ],
+      "title": "CaseIndexItem",
+      "type": "object"
+    },
+    "CaseResult": {
+      "additionalProperties": false,
+      "properties": {
+        "base_id": {
+          "title": "Base Id",
+          "type": "string"
+        },
+        "base_semantic_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "campaign_id": {
+          "title": "Campaign Id",
+          "type": "string"
+        },
+        "cohort_case_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "comparison": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Comparison"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "eligibility_path": {
+          "title": "Eligibility Path",
+          "type": "string"
+        },
+        "followup": {
+          "$ref": "#/$defs/LegOutcome"
+        },
+        "live_campaign_id": {
+          "title": "Live Campaign Id",
+          "type": "string"
+        },
+        "mode": {
+          "enum": [
+            "live",
+            "replay"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "mr_id": {
+          "$ref": "#/$defs/MRId"
+        },
+        "mr_version": {
+          "const": "1.0",
+          "title": "Mr Version",
+          "type": "string"
+        },
+        "reason_codes": {
+          "items": {
+            "$ref": "#/$defs/ErrorCode"
+          },
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": "case-2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "seed": {
+          "title": "Seed",
+          "type": "integer"
+        },
+        "slice_group": {
+          "title": "Slice Group",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/LegOutcome"
+        },
+        "source_reused_from": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Reused From"
+        },
+        "status": {
+          "enum": [
+            "pass",
+            "violation",
+            "execution_error"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "transform_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "violation_kind": {
+          "anyOf": [
+            {
+              "enum": [
+                "relation",
+                "output_contract"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Violation Kind"
+        }
+      },
+      "required": [
+        "schema_version",
+        "campaign_id",
+        "live_campaign_id",
+        "mode",
+        "mr_id",
+        "mr_version",
+        "base_id",
+        "slice_group",
+        "base_semantic_sha256",
+        "cohort_case_sha256",
+        "transform_sha256",
+        "seed",
+        "eligibility_path",
+        "source",
+        "followup",
+        "source_reused_from",
+        "status",
+        "violation_kind",
+        "reason_codes",
+        "comparison"
+      ],
+      "title": "CaseResult",
+      "type": "object"
+    },
+    "CatalogEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "compared_fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Compared Fields",
+          "type": "array"
+        },
+        "family": {
+          "title": "Family",
+          "type": "string"
+        },
+        "id": {
+          "$ref": "#/$defs/MRId"
+        },
+        "preconditions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Preconditions",
+          "type": "array"
+        },
+        "relation": {
+          "title": "Relation",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "tolerances": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Tolerances",
+          "type": "object"
+        },
+        "witness": {
+          "title": "Witness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "family",
+        "relation",
+        "preconditions",
+        "compared_fields",
+        "tolerances",
+        "witness"
+      ],
+      "title": "CatalogEntry",
+      "type": "object"
+    },
+    "Comparison": {
+      "additionalProperties": false,
+      "properties": {
+        "compared_numeric_count": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "differences": {
+          "items": {
+            "$ref": "#/$defs/Difference"
+          },
+          "title": "Differences",
+          "type": "array"
+        },
+        "max_absolute_error": {
+          "title": "Max Absolute Error",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "pass",
+            "violation"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "compared_numeric_count",
+        "max_absolute_error",
+        "differences"
+      ],
+      "title": "Comparison",
+      "type": "object"
+    },
+    "Criteria": {
+      "additionalProperties": false,
+      "properties": {
+        "bedrooms_max": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Bedrooms Max",
+          "type": "integer"
+        },
+        "bedrooms_min": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Bedrooms Min",
+          "type": "integer"
+        },
+        "price_max_cents": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NonnegativeInt"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "price_min_cents": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NonnegativeInt"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "property_types": {
+          "items": {
+            "$ref": "#/$defs/PropertyType"
+          },
+          "minItems": 1,
+          "title": "Property Types",
+          "type": "array"
+        },
+        "sqft_max": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PositiveInt"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "sqft_min": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PositiveInt"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "zips": {
+          "items": {
+            "$ref": "#/$defs/Zip"
+          },
+          "minItems": 1,
+          "title": "Zips",
+          "type": "array"
+        }
+      },
+      "required": [
+        "zips",
+        "property_types",
+        "bedrooms_min",
+        "bedrooms_max",
+        "price_min_cents",
+        "price_max_cents",
+        "sqft_min",
+        "sqft_max"
+      ],
+      "title": "Criteria",
+      "type": "object"
+    },
+    "DatasetManifest": {
+      "additionalProperties": false,
+      "properties": {
+        "actual_rows": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "data_license": {
+          "title": "Data License",
+          "type": "string"
+        },
+        "dataset_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "expected_rows": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "generated_at_utc": {
+          "title": "Generated At Utc",
+          "type": "string"
+        },
+        "generator": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GeneratorProvenance"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        },
+        "logical_multiset_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "month_completeness": {
+          "additionalProperties": {
+            "enum": [
+              "complete",
+              "incomplete"
+            ],
+            "type": "string"
+          },
+          "title": "Month Completeness",
+          "type": "object"
+        },
+        "month_end": {
+          "$ref": "#/$defs/Month"
+        },
+        "month_start": {
+          "$ref": "#/$defs/Month"
+        },
+        "partition_row_counts": {
+          "additionalProperties": {
+            "$ref": "#/$defs/NonnegativeInt"
+          },
+          "title": "Partition Row Counts",
+          "type": "object"
+        },
+        "property_types": {
+          "items": {
+            "$ref": "#/$defs/PropertyType"
+          },
+          "title": "Property Types",
+          "type": "array"
+        },
+        "quarantined_rows": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "row_schema_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "schema_version": {
+          "const": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "snapshot_path": {
+          "title": "Snapshot Path",
+          "type": "string"
+        },
+        "snapshot_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "source_kind": {
+          "enum": [
+            "synthetic",
+            "synthetic_fixture",
+            "transformed"
+          ],
+          "title": "Source Kind",
+          "type": "string"
+        },
+        "unbucketed_rows": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "valid_rows": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "zips": {
+          "items": {
+            "$ref": "#/$defs/Zip"
+          },
+          "title": "Zips",
+          "type": "array"
+        }
+      },
+      "required": [
+        "schema_version",
+        "dataset_id",
+        "source_kind",
+        "snapshot_path",
+        "snapshot_sha256",
+        "logical_multiset_sha256",
+        "expected_rows",
+        "actual_rows",
+        "valid_rows",
+        "quarantined_rows",
+        "month_start",
+        "month_end",
+        "month_completeness",
+        "partition_row_counts",
+        "unbucketed_rows",
+        "zips",
+        "property_types",
+        "row_schema_sha256",
+        "generator",
+        "generated_at_utc",
+        "data_license",
+        "limitations"
+      ],
+      "title": "DatasetManifest",
+      "type": "object"
+    },
+    "Decimal6": {
+      "pattern": "^(?!-0\\.000000$)-?(0|[1-9][0-9]*)\\.[0-9]{6}$",
+      "type": "string"
+    },
+    "Difference": {
+      "additionalProperties": false,
+      "properties": {
+        "absolute_error": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Absolute Error"
+        },
+        "expected": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "followup": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "rule": {
+          "title": "Rule",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "tolerance": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tolerance"
+        }
+      },
+      "required": [
+        "path",
+        "rule",
+        "source",
+        "followup",
+        "expected"
+      ],
+      "title": "Difference",
+      "type": "object"
+    },
+    "Display": {
+      "additionalProperties": false,
+      "properties": {
+        "area": {
+          "enum": [
+            "SQFT",
+            "SQM"
+          ],
+          "title": "Area",
+          "type": "string"
+        },
+        "money": {
+          "enum": [
+            "USD",
+            "USD_THOUSANDS"
+          ],
+          "title": "Money",
+          "type": "string"
+        }
+      },
+      "required": [
+        "money",
+        "area"
+      ],
+      "title": "Display",
+      "type": "object"
+    },
+    "ErrorCode": {
+      "enum": [
+        "DATA_INVALID",
+        "DATA_INCOMPLETE",
+        "AGENT_OUTPUT_INVALID",
+        "AGENT_POLICY_ERROR",
+        "BUDGET_EXCEEDED",
+        "REPLAY_MISS",
+        "TOOL_ERROR",
+        "MODEL_UNAVAILABLE"
+      ],
+      "type": "string"
+    },
+    "ErrorInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "stage": {
+          "title": "Stage",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "stage"
+      ],
+      "title": "ErrorInfo",
+      "type": "object"
+    },
+    "ExperimentView": {
+      "additionalProperties": false,
+      "properties": {
+        "campaigns": {
+          "items": {
+            "$ref": "#/$defs/CampaignOverview"
+          },
+          "title": "Campaigns",
+          "type": "array"
+        }
+      },
+      "required": [
+        "campaigns"
+      ],
+      "title": "ExperimentView",
+      "type": "object"
+    },
+    "GeneratorProvenance": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "title": "Algorithm",
+          "type": "string"
+        },
+        "config_path": {
+          "title": "Config Path",
+          "type": "string"
+        },
+        "config_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "dependency_sha256": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Sha256"
+          },
+          "title": "Dependency Sha256",
+          "type": "object"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "python_version": {
+          "title": "Python Version",
+          "type": "string"
+        },
+        "seed": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "sha256": {
+          "$ref": "#/$defs/Sha256"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "config_path",
+        "config_sha256",
+        "dependency_sha256",
+        "seed",
+        "python_version",
+        "algorithm"
+      ],
+      "title": "GeneratorProvenance",
+      "type": "object"
+    },
+    "HeadlineDisplay": {
+      "additionalProperties": false,
+      "properties": {
+        "base_rate": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Base Rate"
+        },
+        "base_rate_label": {
+          "title": "Base Rate Label",
+          "type": "string"
+        },
+        "campaign_id": {
+          "title": "Campaign Id",
+          "type": "string"
+        },
+        "ci95_high": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Ci95 High"
+        },
+        "ci95_label": {
+          "title": "Ci95 Label",
+          "type": "string"
+        },
+        "ci95_low": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Ci95 Low"
+        },
+        "ci_method": {
+          "const": "wilson_score",
+          "title": "Ci Method",
+          "type": "string"
+        },
+        "ci_unit": {
+          "const": "distinct_completed_eligible_base",
+          "title": "Ci Unit",
+          "type": "string"
+        },
+        "complete": {
+          "title": "Complete",
+          "type": "boolean"
+        },
+        "completed_bases": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "eligible_bases": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "execution_errors": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "family": {
+          "enum": [
+            "invariance",
+            "monotonic",
+            "directional"
+          ],
+          "title": "Family",
+          "type": "string"
+        },
+        "interpretation": {
+          "title": "Interpretation",
+          "type": "string"
+        },
+        "invalid_candidates": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "live_campaign_id": {
+          "title": "Live Campaign Id",
+          "type": "string"
+        },
+        "mode": {
+          "enum": [
+            "live",
+            "replay"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "mr_id": {
+          "$ref": "#/$defs/MRId"
+        },
+        "output_contract_violations": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "schema_version": {
+          "const": "headline-2",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "seed_pair_violations": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "seed_pairs_completed": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "seed_values": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Seed Values",
+          "type": "array"
+        },
+        "violating_bases": {
+          "$ref": "#/$defs/NonnegativeInt"
+        }
+      },
+      "required": [
+        "schema_version",
+        "mr_id",
+        "family",
+        "mode",
+        "campaign_id",
+        "live_campaign_id",
+        "eligible_bases",
+        "completed_bases",
+        "violating_bases",
+        "base_rate",
+        "ci_method",
+        "ci_unit",
+        "ci95_low",
+        "ci95_high",
+        "seed_values",
+        "seed_pair_violations",
+        "seed_pairs_completed",
+        "invalid_candidates",
+        "execution_errors",
+        "output_contract_violations",
+        "complete",
+        "interpretation",
+        "base_rate_label",
+        "ci95_label"
+      ],
+      "title": "HeadlineDisplay",
+      "type": "object"
+    },
+    "Identifier": {
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "type": "string"
+    },
+    "Job": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at_utc": {
+          "title": "Created At Utc",
+          "type": "string"
+        },
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ErrorInfo"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "output": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AnalysisOutput"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "state": {
+          "enum": [
+            "queued",
+            "running",
+            "completed",
+            "failed"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "submission": {
+          "$ref": "#/$defs/Submission"
+        },
+        "updated_at_utc": {
+          "title": "Updated At Utc",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "state",
+        "created_at_utc",
+        "updated_at_utc",
+        "submission",
+        "output",
+        "error"
+      ],
+      "title": "Job",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "LegOutcome": {
+      "additionalProperties": false,
+      "properties": {
+        "canonical_sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "capture_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Capture Path"
+        },
+        "duration_ns": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "effective_seed": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Effective Seed"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ErrorCode"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "error_stage": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Error Stage"
+        },
+        "execution_key": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "output_sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "request_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "requested_seed": {
+          "title": "Requested Seed",
+          "type": "integer"
+        },
+        "run_id": {
+          "title": "Run Id",
+          "type": "string"
+        },
+        "run_path": {
+          "title": "Run Path",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "completed",
+            "failed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "view_sha256": {
+          "$ref": "#/$defs/Sha256"
+        }
+      },
+      "required": [
+        "execution_key",
+        "status",
+        "run_id",
+        "run_path",
+        "capture_path",
+        "request_sha256",
+        "view_sha256",
+        "requested_seed",
+        "effective_seed",
+        "canonical_sha256",
+        "output_sha256",
+        "error_code",
+        "error_stage",
+        "duration_ns"
+      ],
+      "title": "LegOutcome",
+      "type": "object"
+    },
+    "MRId": {
+      "enum": [
+        "MR01",
+        "MR02",
+        "MR03",
+        "MR04",
+        "MR05",
+        "MR06",
+        "MR07",
+        "MR08",
+        "MR09",
+        "MR10"
+      ],
+      "type": "string"
+    },
+    "Metadata": {
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": {
+          "const": "1.0",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "dataset_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "dataset_view_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "effective_seed": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Seed"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "live_campaign_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Live Campaign Id"
+        },
+        "logical_multiset_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "mode": {
+          "$ref": "#/$defs/Mode"
+        },
+        "model_profile": {
+          "title": "Model Profile",
+          "type": "string"
+        },
+        "prompt_bundle_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "query_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "requested_seed": {
+          "$ref": "#/$defs/Seed"
+        },
+        "run_id": {
+          "$ref": "#/$defs/Identifier"
+        },
+        "seed_support": {
+          "enum": [
+            "verified_model_default",
+            "best_effort",
+            "unsupported",
+            "replay_recorded"
+          ],
+          "title": "Seed Support",
+          "type": "string"
+        },
+        "snapshot_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "trace_path": {
+          "title": "Trace Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "dataset_id",
+        "snapshot_sha256",
+        "dataset_view_sha256",
+        "logical_multiset_sha256",
+        "query_sha256",
+        "contract_version",
+        "mode",
+        "model_profile",
+        "requested_seed",
+        "effective_seed",
+        "seed_support",
+        "prompt_bundle_sha256",
+        "trace_path",
+        "live_campaign_id"
+      ],
+      "title": "Metadata",
+      "type": "object"
+    },
+    "Mode": {
+      "enum": [
+        "live",
+        "replay",
+        "policy_simulation"
+      ],
+      "type": "string"
+    },
+    "ModelTurn": {
+      "additionalProperties": false,
+      "properties": {
+        "budget": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Budget",
+          "type": "object"
+        },
+        "dispatched": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "$ref": "#/$defs/JsonValue"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Dispatched"
+        },
+        "input": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Input",
+          "type": "object"
+        },
+        "response": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "$ref": "#/$defs/JsonValue"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Response"
+        },
+        "sequence": {
+          "$ref": "#/$defs/NonnegativeInt"
+        }
+      },
+      "required": [
+        "sequence",
+        "input",
+        "response",
+        "dispatched",
+        "budget"
+      ],
+      "title": "ModelTurn",
+      "type": "object"
+    },
+    "Month": {
+      "pattern": "^(?!0000)\\d{4}-(0[1-9]|1[0-2])$",
+      "type": "string"
+    },
+    "MonthView": {
+      "additionalProperties": false,
+      "properties": {
+        "count_mom": {
+          "title": "Count Mom",
+          "type": "string"
+        },
+        "count_plot": {
+          "$ref": "#/$defs/PlotPoint"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "month": {
+          "title": "Month",
+          "type": "string"
+        },
+        "observations": {
+          "title": "Observations",
+          "type": "string"
+        },
+        "ppsf_mom": {
+          "title": "Ppsf Mom",
+          "type": "string"
+        },
+        "ppsf_plot": {
+          "$ref": "#/$defs/PlotPoint"
+        },
+        "price": {
+          "title": "Price",
+          "type": "string"
+        },
+        "price_mom": {
+          "title": "Price Mom",
+          "type": "string"
+        },
+        "price_per_area": {
+          "title": "Price Per Area",
+          "type": "string"
+        },
+        "price_plot": {
+          "$ref": "#/$defs/PlotPoint"
+        },
+        "price_yoy": {
+          "title": "Price Yoy",
+          "type": "string"
+        },
+        "short_label": {
+          "title": "Short Label",
+          "type": "string"
+        },
+        "support": {
+          "enum": [
+            "empty",
+            "sparse",
+            "supported"
+          ],
+          "title": "Support",
+          "type": "string"
+        }
+      },
+      "required": [
+        "month",
+        "label",
+        "short_label",
+        "observations",
+        "price",
+        "price_per_area",
+        "price_mom",
+        "price_yoy",
+        "ppsf_mom",
+        "count_mom",
+        "price_plot",
+        "ppsf_plot",
+        "count_plot",
+        "support"
+      ],
+      "title": "MonthView",
+      "type": "object"
+    },
+    "Monthly": {
+      "additionalProperties": false,
+      "properties": {
+        "count_mom_pct": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Decimal6"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "listing_count": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "median_ppsf_usd": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Unsigned6"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "median_price_usd": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Unsigned6"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "month": {
+          "$ref": "#/$defs/Month"
+        },
+        "ppsf_mom_pct": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Decimal6"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "ppsf_yoy_pct": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Decimal6"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "price_mom_pct": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Decimal6"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "price_yoy_pct": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Decimal6"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "month",
+        "listing_count",
+        "median_price_usd",
+        "median_ppsf_usd",
+        "price_mom_pct",
+        "ppsf_mom_pct",
+        "price_yoy_pct",
+        "ppsf_yoy_pct",
+        "count_mom_pct"
+      ],
+      "title": "Monthly",
+      "type": "object"
+    },
+    "Narrative": {
+      "additionalProperties": false,
+      "properties": {
+        "caveat_codes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Caveat Codes",
+          "type": "array"
+        },
+        "fact_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Fact Ids",
+          "type": "array"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "fact_ids",
+        "caveat_codes",
+        "text"
+      ],
+      "title": "Narrative",
+      "type": "object"
+    },
+    "NonnegativeInt": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "PlotPoint": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "title": "X",
+          "type": "string"
+        },
+        "y": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Y"
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "title": "PlotPoint",
+      "type": "object"
+    },
+    "PositiveInt": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "Presentation": {
+      "additionalProperties": false,
+      "properties": {
+        "area": {
+          "enum": [
+            "SQFT",
+            "SQM"
+          ],
+          "title": "Area",
+          "type": "string"
+        },
+        "money": {
+          "enum": [
+            "USD",
+            "USD_THOUSANDS"
+          ],
+          "title": "Money",
+          "type": "string"
+        },
+        "monthly": {
+          "items": {
+            "$ref": "#/$defs/PresentedMonth"
+          },
+          "maxItems": 12,
+          "minItems": 12,
+          "title": "Monthly",
+          "type": "array"
+        }
+      },
+      "required": [
+        "money",
+        "area",
+        "monthly"
+      ],
+      "title": "Presentation",
+      "type": "object"
+    },
+    "PresentedMonth": {
+      "additionalProperties": false,
+      "properties": {
+        "median_price": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Unsigned6"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "median_price_per_area": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Unsigned6"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "month": {
+          "$ref": "#/$defs/Month"
+        }
+      },
+      "required": [
+        "month",
+        "median_price",
+        "median_price_per_area"
+      ],
+      "title": "PresentedMonth",
+      "type": "object"
+    },
+    "PropertyType": {
+      "enum": [
+        "single_family",
+        "condo",
+        "townhouse"
+      ],
+      "type": "string"
+    },
+    "Quality": {
+      "additionalProperties": false,
+      "properties": {
+        "codes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Codes",
+          "type": "array"
+        },
+        "sparse_months": {
+          "items": {
+            "$ref": "#/$defs/Month"
+          },
+          "title": "Sparse Months",
+          "type": "array"
+        },
+        "status": {
+          "enum": [
+            "complete",
+            "limited"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "codes",
+        "sparse_months"
+      ],
+      "title": "Quality",
+      "type": "object"
+    },
+    "Seed": {
+      "maximum": 2147483647,
+      "minimum": 0,
+      "type": "integer"
+    },
+    "Sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "type": "string"
+    },
+    "Submission": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CaptureId"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "mode": {
+          "enum": [
+            "live",
+            "replay"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "request": {
+          "$ref": "#/$defs/AnalysisRequest"
+        }
+      },
+      "required": [
+        "request",
+        "mode"
+      ],
+      "title": "Submission",
+      "type": "object"
+    },
+    "Summary": {
+      "additionalProperties": false,
+      "properties": {
+        "last_month_ppsf_yoy_pct": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Decimal6"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "last_month_price_yoy_pct": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Decimal6"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "total_observations": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "window_ppsf_change_pct": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Decimal6"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "window_price_change_pct": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Decimal6"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "zip_rankings": {
+          "items": {
+            "$ref": "#/$defs/ZipRanking"
+          },
+          "maxItems": 12,
+          "title": "Zip Rankings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "window_price_change_pct",
+        "window_ppsf_change_pct",
+        "last_month_price_yoy_pct",
+        "last_month_ppsf_yoy_pct",
+        "total_observations",
+        "zip_rankings"
+      ],
+      "title": "Summary",
+      "type": "object"
+    },
+    "TraceEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "actor": {
+          "title": "Actor",
+          "type": "string"
+        },
+        "dataset_view_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "event": {
+          "title": "Event",
+          "type": "string"
+        },
+        "illustrative_fixture": {
+          "title": "Illustrative Fixture",
+          "type": "boolean"
+        },
+        "iteration": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "mode": {
+          "$ref": "#/$defs/Mode"
+        },
+        "parent_event_sequence": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Parent Event Sequence"
+        },
+        "payload": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Payload",
+          "type": "object"
+        },
+        "payload_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "plan_sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "query_sha256": {
+          "$ref": "#/$defs/Sha256"
+        },
+        "run_id": {
+          "title": "Run Id",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "sequence": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "timestamp_utc": {
+          "title": "Timestamp Utc",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "run_id",
+        "sequence",
+        "timestamp_utc",
+        "mode",
+        "iteration",
+        "event",
+        "actor",
+        "parent_event_sequence",
+        "query_sha256",
+        "dataset_view_sha256",
+        "plan_sha256",
+        "payload",
+        "payload_sha256",
+        "illustrative_fixture"
+      ],
+      "title": "TraceEvent",
+      "type": "object"
+    },
+    "Unsigned6": {
+      "pattern": "^(0|[1-9][0-9]*)\\.[0-9]{6}$",
+      "type": "string"
+    },
+    "WorkflowView": {
+      "additionalProperties": false,
+      "properties": {
+        "events": {
+          "items": {
+            "$ref": "#/$defs/TraceEvent"
+          },
+          "title": "Events",
+          "type": "array"
+        },
+        "failure": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ErrorInfo"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mode": {
+          "$ref": "#/$defs/Mode"
+        },
+        "model_decisions": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "query_unchanged": {
+          "title": "Query Unchanged",
+          "type": "boolean"
+        },
+        "refinements": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "run_id": {
+          "title": "Run Id",
+          "type": "string"
+        },
+        "schema_repairs": {
+          "$ref": "#/$defs/NonnegativeInt"
+        },
+        "status": {
+          "enum": [
+            "completed",
+            "failed",
+            "running"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "trace_url": {
+          "title": "Trace Url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "mode",
+        "events",
+        "model_decisions",
+        "refinements",
+        "schema_repairs",
+        "query_unchanged",
+        "trace_url",
+        "status",
+        "failure"
+      ],
+      "title": "WorkflowView",
+      "type": "object"
+    },
+    "Zip": {
+      "enum": [
+        "75001",
+        "75006",
+        "75019",
+        "75024",
+        "75034",
+        "75038",
+        "75063",
+        "75080",
+        "75093",
+        "75201",
+        "75204",
+        "75214"
+      ],
+      "type": "string"
+    },
+    "ZipRanking": {
+      "additionalProperties": false,
+      "properties": {
+        "median_ppsf_usd": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Unsigned6"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "rank": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rank"
+        },
+        "zip": {
+          "$ref": "#/$defs/Zip"
+        }
+      },
+      "required": [
+        "zip",
+        "median_ppsf_usd",
+        "rank"
+      ],
+      "title": "ZipRanking",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Schema-generation envelope; endpoints return these members directly.",
+  "properties": {
+    "analysis": {
+      "$ref": "#/$defs/AnalysisView"
+    },
+    "bootstrap": {
+      "$ref": "#/$defs/Bootstrap"
+    },
+    "case_detail": {
+      "$ref": "#/$defs/CaseDetail"
+    },
+    "case_index": {
+      "items": {
+        "$ref": "#/$defs/CaseIndexItem"
+      },
+      "title": "Case Index",
+      "type": "array"
+    },
+    "error": {
+      "$ref": "#/$defs/ErrorInfo"
+    },
+    "experiments": {
+      "$ref": "#/$defs/ExperimentView"
+    },
+    "job": {
+      "$ref": "#/$defs/Job"
+    },
+    "model_turn": {
+      "$ref": "#/$defs/ModelTurn"
+    },
+    "submission": {
+      "$ref": "#/$defs/Submission"
+    },
+    "workflow": {
+      "$ref": "#/$defs/WorkflowView"
+    }
+  },
+  "required": [
+    "bootstrap",
+    "submission",
+    "job",
+    "analysis",
+    "workflow",
+    "model_turn",
+    "experiments",
+    "case_index",
+    "case_detail",
+    "error"
+  ],
+  "title": "ClientContracts",
+  "type": "object"
+}

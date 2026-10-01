@@ -1,0 +1,300 @@
+{
+  "agent": "composer[1]",
+  "context": {
+    "contract_version": "1.0",
+    "facts": {
+      "first_to_last_price": "First-to-last median price change: 3.506898% across eleven monthly intervals.",
+      "last_month_yoy": "Final-month median price year-over-year change: 3.734688%.",
+      "observations": "17280 qualifying monthly observations from 2025-10 through 2026-09.",
+      "source": "Synthetic Dallas-themed test feed; these are generated observations.",
+      "support": "All twelve visible months have at least five qualifying observations."
+    },
+    "iteration": 0,
+    "monthly_counts": {
+      "2025-10": 1440,
+      "2025-11": 1440,
+      "2025-12": 1440,
+      "2026-01": 1440,
+      "2026-02": 1440,
+      "2026-03": 1440,
+      "2026-04": 1440,
+      "2026-05": 1440,
+      "2026-06": 1440,
+      "2026-07": 1440,
+      "2026-08": 1440,
+      "2026-09": 1440
+    },
+    "plan": {
+      "active_specialists": [
+        "price",
+        "supply"
+      ],
+      "canonical_query_sha256": "9afcc493e5d5ffb92e224522d0dc9b982ce09c69a98135f83f89649e02828a1a",
+      "dataset_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+      "planner_decision_sha256": "b3b2d589ee3aaaf8e747bff904181fc1606cce34a5d9cfa0f0f2a90412226a9d",
+      "region_purpose": "none",
+      "required_months": [
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01",
+        "2025-02",
+        "2025-03",
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09"
+      ],
+      "scan_strategy": "indexed",
+      "version": 0,
+      "visible_months": [
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09"
+      ]
+    },
+    "previous_review": {
+      "decision": "ACCEPT",
+      "decision_type": "review",
+      "requested_action": null,
+      "role": "reviewer",
+      "signals": [
+        "COMPLETE_SUPPORT"
+      ]
+    },
+    "query": {
+      "compare_regions": false,
+      "criteria": {
+        "bedrooms_max": 5,
+        "bedrooms_min": 1,
+        "price_max_cents": null,
+        "price_min_cents": null,
+        "property_types": [
+          "condo",
+          "single_family",
+          "townhouse"
+        ],
+        "sqft_max": null,
+        "sqft_min": null,
+        "zips": [
+          "75001",
+          "75006",
+          "75019",
+          "75024",
+          "75034",
+          "75038",
+          "75063",
+          "75080",
+          "75093",
+          "75201",
+          "75204",
+          "75214"
+        ]
+      },
+      "dataset_id": "dallas-synth-v1",
+      "dataset_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+      "window_end": "2026-09"
+    },
+    "query_sha256": "9afcc493e5d5ffb92e224522d0dc9b982ce09c69a98135f83f89649e02828a1a",
+    "receipt_hashes": {
+      "price": "acf18a25bdb8cd45c7946053ac8cd7335a34e46cc3682fca2fe3a856b253b284",
+      "supply": "92ac640c746c5758412866fcb95067f797684a21517e99ac4f7063a9497c5714"
+    },
+    "required_caveats": [
+      "SYNTHETIC_DATA"
+    ],
+    "scan_complete": true,
+    "signals": [
+      "COMPLETE_SUPPORT"
+    ],
+    "stage": "COMPOSED"
+  },
+  "dependency_lock_sha256": "c3a30f7a8c105aa379300b5ff82ebba9bf827cdf856a905aef0c601099b0ccfb",
+  "framework_config_sha256": "f31533b15d5fafe8b4e3f439c21d849af3ec609b09a5a6557e1b542648185dba",
+  "instruction": "You are the internal Report Composer. First call inspect_context after review acceptance. Call submit_decision with decision_json containing a strict ReportDecision: role composer, decision_type report, fact_ids an ordered unique selection from the supplied fact registry, caveat_codes exactly the required_caveats. Always include source, observations and support. You may also select first_to_last_price and last_month_yoy when available. Python renders the chosen facts using verified values. Never write unsupported numerical or market claims. If repair_required, submit the one requested correction. After decision_applied return the tool result as JSON and stop.\n\nDecision schema:\n{\"additionalProperties\":false,\"properties\":{\"caveat_codes\":{\"items\":{\"enum\":[\"SYNTHETIC_DATA\",\"SPARSE_SUPPORT\",\"NO_MATCHES\",\"UNAVAILABLE_LOOKBACK\"],\"type\":\"string\"},\"title\":\"Caveat Codes\",\"type\":\"array\"},\"decision_type\":{\"const\":\"report\",\"title\":\"Decision Type\",\"type\":\"string\"},\"fact_ids\":{\"items\":{\"type\":\"string\"},\"maxItems\":8,\"minItems\":1,\"title\":\"Fact Ids\",\"type\":\"array\"},\"role\":{\"const\":\"composer\",\"title\":\"Role\",\"type\":\"string\"}},\"required\":[\"role\",\"decision_type\",\"fact_ids\",\"caveat_codes\"],\"title\":\"ReportDecision\",\"type\":\"object\"}",
+  "messages": [
+    {
+      "content": [
+        {
+          "text": "Inspect context and submit composer decision after review acceptance",
+          "type": "text"
+        }
+      ],
+      "is_template": false,
+      "role": "user"
+    },
+    {
+      "channels": {
+        "fast-agent-timing": [
+          {
+            "text": "{\"start_time\": 82878.94836125, \"end_time\": 82880.979707166, \"duration_ms\": 22927.723309, \"ttft_ms\": 1983.02, \"time_to_response_ms\": 1983.02}",
+            "type": "text"
+          }
+        ],
+        "fast-agent-usage": [
+          {
+            "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-s104729\", \"prompt\": {\"total\": 603, \"uncached\": null, \"cache_read\": 0, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 15, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1790834948.353852, \"timing\": {\"duration_ms\": 22927.723309, \"ttft_ms\": 1983.02, \"time_to_response_ms\": 1983.02}, \"raw_usage\": {\"completion_tokens\": 15, \"prompt_tokens\": 603, \"total_tokens\": 618, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 0, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 618}]}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "assistant",
+      "stop_reason": "toolUse",
+      "tool_calls": {
+        "call_vdafprvr": {
+          "method": "tools/call",
+          "params": {
+            "arguments": {},
+            "name": "inspect_context"
+          }
+        }
+      }
+    },
+    {
+      "channels": {
+        "fast-agent-tool-timing": [
+          {
+            "text": "{\"call_vdafprvr\": {\"timing_ms\": 3.74, \"transport_channel\": null}}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "user",
+      "timestamp": "2026-10-01T06:09:08.482535Z",
+      "tool_results": {
+        "call_vdafprvr": {
+          "content": [
+            {
+              "text": "{\"contract_version\":\"1.0\",\"stage\":\"ACCEPTED\",\"query\":{\"dataset_id\":\"dallas-synth-v1\",\"dataset_view_sha256\":\"bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b\",\"window_end\":\"2026-09\",\"criteria\":{\"zips\":[\"75001\",\"75006\",\"75019\",\"75024\",\"75034\",\"75038\",\"75063\",\"75080\",\"75093\",\"75201\",\"75204\",\"75214\"],\"property_types\":[\"condo\",\"single_family\",\"townhouse\"],\"bedrooms_min\":1,\"bedrooms_max\":5,\"price_min_cents\":null,\"price_max_cents\":null,\"sqft_min\":null,\"sqft_max\":null},\"compare_regions\":false},\"query_sha256\":\"9afcc493e5d5ffb92e224522d0dc9b982ce09c69a98135f83f89649e02828a1a\",\"iteration\":0,\"plan\":{\"version\":0,\"canonical_query_sha256\":\"9afcc493e5d5ffb92e224522d0dc9b982ce09c69a98135f83f89649e02828a1a\",\"dataset_view_sha256\":\"bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b\",\"visible_months\":[\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\",\"2026-07\",\"2026-08\",\"2026-09\"],\"required_months\":[\"2024-10\",\"2024-11\",\"2024-12\",\"2025-01\",\"2025-02\",\"2025-03\",\"2025-04\",\"2025-05\",\"2025-06\",\"2025-07\",\"2025-08\",\"2025-09\",\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\",\"2026-07\",\"2026-08\",\"2026-09\"],\"scan_strategy\":\"indexed\",\"active_specialists\":[\"price\",\"supply\"],\"region_purpose\":\"none\",\"planner_decision_sha256\":\"b3b2d589ee3aaaf8e747bff904181fc1606cce34a5d9cfa0f0f2a90412226a9d\"},\"previous_review\":{\"role\":\"reviewer\",\"decision_type\":\"review\",\"decision\":\"ACCEPT\",\"signals\":[\"COMPLETE_SUPPORT\"],\"requested_action\":null},\"signals\":[\"COMPLETE_SUPPORT\"],\"monthly_counts\":{\"2025-10\":1440,\"2025-11\":1440,\"2025-12\":1440,\"2026-01\":1440,\"2026-02\":1440,\"2026-03\":1440,\"2026-04\":1440,\"2026-05\":1440,\"2026-06\":1440,\"2026-07\":1440,\"2026-08\":1440,\"2026-09\":1440},\"scan_complete\":true,\"receipt_hashes\":{\"price\":\"acf18a25bdb8cd45c7946053ac8cd7335a34e46cc3682fca2fe3a856b253b284\",\"supply\":\"92ac640c746c5758412866fcb95067f797684a21517e99ac4f7063a9497c5714\"},\"facts\":{\"observations\":\"17280 qualifying monthly observations from 2025-10 through 2026-09.\",\"source\":\"Synthetic Dallas-themed test feed; these are generated observations.\",\"support\":\"All twelve visible months have at least five qualifying observations.\",\"first_to_last_price\":\"First-to-last median price change: 3.506898% across eleven monthly intervals.\",\"last_month_yoy\":\"Final-month median price year-over-year change: 3.734688%.\"},\"required_caveats\":[\"SYNTHETIC_DATA\"]}",
+              "type": "text"
+            }
+          ],
+          "is_error": false,
+          "result_type": "complete"
+        }
+      }
+    },
+    {
+      "channels": {
+        "fast-agent-timing": [
+          {
+            "text": "{\"start_time\": 82880.992865708, \"end_time\": 82887.141146166, \"duration_ms\": 69395.260622, \"ttft_ms\": 6098.85, \"time_to_response_ms\": 6098.85}",
+            "type": "text"
+          }
+        ],
+        "fast-agent-usage": [
+          {
+            "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-s104729\", \"prompt\": {\"total\": 1886, \"uncached\": null, \"cache_read\": 599, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 79, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1790835017.897942, \"timing\": {\"duration_ms\": 69395.260622, \"ttft_ms\": 6098.85, \"time_to_response_ms\": 6098.85}, \"raw_usage\": {\"completion_tokens\": 79, \"prompt_tokens\": 1886, \"total_tokens\": 1965, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 599, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 1965}]}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "assistant",
+      "stop_reason": "toolUse",
+      "tool_calls": {
+        "call_vqp33x23": {
+          "method": "tools/call",
+          "params": {
+            "arguments": {
+              "decision_json": "{\"role\": \"composer\", \"decision_type\": \"report\", \"fact_ids\": [\"observations\", \"source\", \"support\", \"first_to_last_price\", \"last_month_yoy\"], \"caveat_codes\": [\"SYNTHETIC_DATA\"]}"
+            },
+            "name": "submit_decision"
+          }
+        }
+      }
+    },
+    {
+      "channels": {
+        "fast-agent-tool-timing": [
+          {
+            "text": "{\"call_vqp33x23\": {\"timing_ms\": 4.83, \"transport_channel\": null}}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "user",
+      "timestamp": "2026-10-01T06:10:18.028973Z",
+      "tool_results": {
+        "call_vqp33x23": {
+          "content": [
+            {
+              "text": "{\"status\":\"decision_applied\",\"role\":\"composer\",\"decision_sha256\":\"60384a128dbe4021c8e7d8f37e0585e84ecaa69741e48445521472133a370b0b\",\"stage\":\"COMPOSED\",\"iteration\":0,\"scan_strategy\":\"indexed\",\"active_specialists\":[\"price\",\"supply\"],\"completed_specialists\":[\"price\",\"supply\"],\"signals\":[\"COMPLETE_SUPPORT\"],\"next_action\":null}",
+              "type": "text"
+            }
+          ],
+          "is_error": false,
+          "result_type": "complete"
+        }
+      }
+    }
+  ],
+  "model_profile": "housing-s104729",
+  "prompt_bundle_sha256": "b35a9c6e1543fbe28540693911a38e3e68e922f1f94b2d8c32a3f5b48cae0035",
+  "retry_policy": {
+    "framework_retries": 1,
+    "sdk_retries": 0
+  },
+  "tools": {
+    "cache_scope": "private",
+    "result_type": "complete",
+    "tools": [
+      {
+        "description": "Read the immutable query, current plan, role receipts, coverage signals and grounded facts.",
+        "input_schema": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        },
+        "name": "inspect_context"
+      },
+      {
+        "description": "Submit one strict role-specific JSON decision. Trusted selection arguments are bound by Python.",
+        "input_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "decision_json": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "decision_json"
+          ],
+          "type": "object"
+        },
+        "name": "submit_decision"
+      }
+    ],
+    "ttl_ms": 0
+  }
+}

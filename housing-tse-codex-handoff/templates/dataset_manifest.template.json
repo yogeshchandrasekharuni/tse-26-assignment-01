@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "status": "template_not_generated",
+  "dataset_id": "dallas-synth-v1",
+  "source_kind": "synthetic",
+  "snapshot_path": "data/frozen/dallas-synth-v1.csv",
+  "snapshot_sha256": null,
+  "logical_multiset_sha256": null,
+  "generator_path": "src/housing/data/generate.py",
+  "generator_sha256": null,
+  "generator_config_path": "configs/generator_config.json",
+  "generator_config_sha256": null,
+  "generator_seed": 20261016,
+  "python_version": null,
+  "expected_rows": 34560,
+  "actual_rows": null,
+  "valid_rows": null,
+  "quarantined_rows": null,
+  "month_start": "2024-10",
+  "month_end": "2026-09",
+  "month_completeness": {},
+  "zips": [
+    "75001",
+    "75006",
+    "75019",
+    "75024",
+    "75034",
+    "75038",
+    "75063",
+    "75080",
+    "75093",
+    "75201",
+    "75204",
+    "75214"
+  ],
+  "property_types": [
+    "single_family",
+    "condo",
+    "townhouse"
+  ],
+  "row_schema_version": "1.0",
+  "row_schema_sha256": null,
+  "generated_at_utc": null,
+  "data_license": null,
+  "limitations": [
+    "Synthetic, uncalibrated prices and chosen ZIP subset",
+    "Fixed observation inventory; no real property addresses or seller behavior",
+    "Observation count is not unique-property inventory"
+  ]
+}

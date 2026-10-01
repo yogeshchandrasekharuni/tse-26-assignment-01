@@ -1,0 +1,45 @@
+Probe evidence: artifacts/framework_probe/20260930T192504Z-tool-playback-b3c5d3
+Traceback (most recent call last):
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/scripts/probe_tool_playback.py", line 133, in main
+    result = asyncio.run(run(evidence, args.capture.resolve() if args.capture else None))
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.python/cpython-3.15.0-macos-aarch64-none/lib/python3.15/asyncio/runners.py", line 205, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.python/cpython-3.15.0-macos-aarch64-none/lib/python3.15/asyncio/runners.py", line 128, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.python/cpython-3.15.0-macos-aarch64-none/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/scripts/probe_tool_playback.py", line 117, in run
+    valid = await replay(evidence, capture_dir, mutate=False)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/scripts/probe_tool_playback.py", line 92, in replay
+    final = await agents.price.send(PROMPT)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.venv/lib/python3.15/site-packages/fast_agent/agents/llm_decorator.py", line 686, in send
+    response = await self.generate(message, request_params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.venv/lib/python3.15/site-packages/fast_agent/agents/llm_decorator.py", line 723, in generate
+    return await self.generate_impl(multipart_messages, final_request_params, tools)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.venv/lib/python3.15/site-packages/fast_agent/agents/tool_agent.py", line 447, in generate_impl
+    return await self._generate_tool_turn_impl(messages, request_params, tools)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.venv/lib/python3.15/site-packages/fast_agent/agents/mcp_agent.py", line 2621, in _generate_tool_turn_impl
+    return await super()._generate_tool_turn_impl(messages, request_params, tools)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.venv/lib/python3.15/site-packages/fast_agent/agents/tool_agent.py", line 493, in _generate_tool_turn_impl
+    return await runner.until_done()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.venv/lib/python3.15/site-packages/fast_agent/agents/tool_runner.py", line 304, in until_done
+    async for message in self:
+    ...<2 lines>...
+            await self._persist_tool_loop_checkpoint(message)
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.venv/lib/python3.15/site-packages/fast_agent/agents/tool_runner.py", line 199, in __anext__
+    await self._run_before_llm_hook()
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.venv/lib/python3.15/site-packages/fast_agent/agents/tool_runner.py", line 229, in _run_before_llm_hook
+    await self._hooks.before_llm_call(self, self._delta_messages)
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/scripts/probe_tool_playback.py", line 81, in before
+    raise ValueError("REPLAY_MISS: upstream native tool result differs")
+ValueError: REPLAY_MISS: upstream native tool result differs

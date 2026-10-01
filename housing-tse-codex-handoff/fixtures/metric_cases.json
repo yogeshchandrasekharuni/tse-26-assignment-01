@@ -1,0 +1,106 @@
+{
+  "status": "hand_calculated_math_fixtures_not_measured_app_results",
+  "cases": [
+    {
+      "id": "median_of_individual_ratios",
+      "prices_cents": [
+        10000,
+        20000
+      ],
+      "sqft": [
+        1,
+        4
+      ],
+      "expected_median_price_usd": "150.000000",
+      "expected_median_ppsf_usd": "75.000000",
+      "wrong_ratio_of_medians": "60.000000"
+    },
+    {
+      "id": "odd_median",
+      "prices_cents": [
+        10001,
+        20002,
+        30003
+      ],
+      "sqft": [
+        1,
+        1,
+        1
+      ],
+      "expected_median_price_usd": "200.020000",
+      "expected_median_ppsf_usd": "200.020000"
+    },
+    {
+      "id": "even_half_cent",
+      "prices_cents": [
+        10000,
+        10001
+      ],
+      "sqft": [
+        1,
+        1
+      ],
+      "expected_median_price_usd": "100.005000",
+      "expected_median_ppsf_usd": "100.005000"
+    },
+    {
+      "id": "empty",
+      "prices_cents": [],
+      "sqft": [],
+      "expected_median_price_usd": null,
+      "expected_median_ppsf_usd": null
+    }
+  ],
+  "rounding": [
+    {
+      "rational": "1/2000000",
+      "expected_6dp": "0.000000"
+    },
+    {
+      "rational": "3/2000000",
+      "expected_6dp": "0.000002"
+    },
+    {
+      "rational": "-1/2000000",
+      "expected_6dp": "0.000000"
+    }
+  ],
+  "count_changes": [
+    {
+      "current": 0,
+      "previous": 5,
+      "expected": "-100.000000"
+    },
+    {
+      "current": 5,
+      "previous": 0,
+      "expected": null
+    },
+    {
+      "current": 0,
+      "previous": 0,
+      "expected": null
+    }
+  ],
+  "ci_anchors": [
+    {
+      "x": 0,
+      "n": 30,
+      "expected_low": 0.0,
+      "expected_high": 0.11351339317396876
+    },
+    {
+      "x": 15,
+      "n": 30,
+      "expected_low": 0.3315412564053376,
+      "expected_high": 0.6684587435946624
+    },
+    {
+      "x": 30,
+      "n": 30,
+      "expected_low": 0.8864866068260312,
+      "expected_high": 1.0
+    }
+  ],
+  "warning": "All numbers above follow arithmetic definitions. They are not violation rates measured on an application."
+}

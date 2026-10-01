@@ -1,0 +1,98 @@
+{
+  "version": {
+    "version": "0.40.4"
+  },
+  "running_models": {
+    "models": [
+      {
+        "name": "housing-qwen-s104729:latest",
+        "model": "housing-qwen-s104729:latest",
+        "size": 5653659646,
+        "digest": "49f41a71152697d35d2124dd094fd85d2b2d0b2acb2dafc75848320bd71cef02",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen35",
+          "families": [
+            "qwen35",
+            "clip"
+          ],
+          "parameter_size": "9.7B",
+          "quantization_level": "Q4_K_M"
+        },
+        "expires_at": "2026-10-01T00:55:27.916181+05:30",
+        "size_vram": 5653659646,
+        "context_length": 8192,
+        "runner": "llamacpp"
+      }
+    ]
+  },
+  "profiles": [
+    {
+      "seed": 104729,
+      "parameters": "presence_penalty               1.5\nseed                           104729\ntemperature                    0.2\ntop_k                          20\ntop_p                          0.95\nnum_ctx                        8192\nnum_predict                    1024",
+      "capabilities": [
+        "completion",
+        "vision",
+        "tools",
+        "thinking"
+      ],
+      "details": {
+        "parent_model": "qwen3.5:9b",
+        "format": "gguf",
+        "family": "qwen35",
+        "families": [
+          "qwen35",
+          "clip"
+        ],
+        "parameter_size": "9.7B",
+        "quantization_level": "Q4_K_M",
+        "runner": "llamacpp"
+      }
+    },
+    {
+      "seed": 130363,
+      "parameters": "presence_penalty               1.5\nseed                           130363\ntemperature                    0.2\ntop_k                          20\ntop_p                          0.95\nnum_ctx                        8192\nnum_predict                    1024",
+      "capabilities": [
+        "completion",
+        "vision",
+        "tools",
+        "thinking"
+      ],
+      "details": {
+        "parent_model": "qwen3.5:9b",
+        "format": "gguf",
+        "family": "qwen35",
+        "families": [
+          "qwen35",
+          "clip"
+        ],
+        "parameter_size": "9.7B",
+        "quantization_level": "Q4_K_M",
+        "runner": "llamacpp"
+      }
+    },
+    {
+      "seed": 155921,
+      "parameters": "top_k                          20\ntop_p                          0.95\nnum_ctx                        8192\nnum_predict                    1024\npresence_penalty               1.5\nseed                           155921\ntemperature                    0.2",
+      "capabilities": [
+        "completion",
+        "vision",
+        "tools",
+        "thinking"
+      ],
+      "details": {
+        "parent_model": "qwen3.5:9b",
+        "format": "gguf",
+        "family": "qwen35",
+        "families": [
+          "qwen35",
+          "clip"
+        ],
+        "parameter_size": "9.7B",
+        "quantization_level": "Q4_K_M",
+        "runner": "llamacpp"
+      }
+    }
+  ]
+}

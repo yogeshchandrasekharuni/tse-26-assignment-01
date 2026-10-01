@@ -1,0 +1,54 @@
+{
+  "model": "housing-qwen-s104729",
+  "stream": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "PROBE_ROLE=region. Conditional Region specialist: when assigned a coverage diagnostic call scan_region once and return its JSON receipt."
+    },
+    {
+      "role": "user",
+      "content": "Activate region diagnostics for synthetic index-omission probe with immutable query."
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_lli7lgqa",
+          "type": "function",
+          "function": {
+            "name": "scan_region",
+            "arguments": "{}"
+          }
+        }
+      ],
+      "content": ""
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_lli7lgqa",
+      "content": "{\"role\":\"region\",\"strategy\":\"full_csv\",\"query_sha256\":\"25f16ca91607f33ea413b4e1d73d9ec78e03b7d4d83aac1651ff17911812f8a5\",\"selection_sha256\":\"442111da7ed2f3be9a7cd7c23a658536491ee1c11b3a0169469fc757c8ccd95d\",\"selected_observations\":24,\"result\":{\"requested_zips\":[\"75204\"],\"support\":\"sparse_confirmed\"},\"receipt_sha256\":\"b2fedfc953beebca06d0141ccf0071d962b5d361d8b41051b0462fb9890780e6\"}"
+    }
+  ],
+  "max_tokens": 1024,
+  "parallel_tool_calls": true,
+  "stream_options": {
+    "include_usage": true
+  },
+  "temperature": 0.2,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "scan_region",
+        "description": "Diagnose the requested ZIP after REFINE activates Region. Never change filters.",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        }
+      }
+    }
+  ],
+  "reasoning_effort": "none"
+}

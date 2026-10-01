@@ -1,0 +1,572 @@
+{
+  "agent": "orchestrator",
+  "context": {
+    "contract_version": "1.0",
+    "facts": {},
+    "iteration": 0,
+    "monthly_counts": {
+      "2025-10": 1,
+      "2025-11": 1,
+      "2025-12": 0,
+      "2026-01": 0,
+      "2026-02": 1,
+      "2026-03": 0,
+      "2026-04": 0,
+      "2026-05": 0,
+      "2026-06": 0,
+      "2026-07": 0,
+      "2026-08": 0,
+      "2026-09": 0
+    },
+    "plan": {
+      "active_specialists": [
+        "price",
+        "supply"
+      ],
+      "canonical_query_sha256": "11534c753c0f13a58e886a498fa932bf8d9976c07bb82c6b0c8d486d5d3b8f26",
+      "dataset_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+      "planner_decision_sha256": "b3b2d589ee3aaaf8e747bff904181fc1606cce34a5d9cfa0f0f2a90412226a9d",
+      "region_purpose": "none",
+      "required_months": [
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01",
+        "2025-02",
+        "2025-03",
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09"
+      ],
+      "scan_strategy": "indexed",
+      "version": 0,
+      "visible_months": [
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09"
+      ]
+    },
+    "previous_review": {
+      "decision": "REFINE",
+      "decision_type": "review",
+      "requested_action": "EXACT_RESCAN_WITH_REGION",
+      "role": "reviewer",
+      "signals": [
+        "SPARSE_SLICE"
+      ]
+    },
+    "query": {
+      "compare_regions": false,
+      "criteria": {
+        "bedrooms_max": 2,
+        "bedrooms_min": 2,
+        "price_max_cents": null,
+        "price_min_cents": null,
+        "property_types": [
+          "condo"
+        ],
+        "sqft_max": 1420,
+        "sqft_min": 1400,
+        "zips": [
+          "75001"
+        ]
+      },
+      "dataset_id": "dallas-synth-v1",
+      "dataset_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+      "window_end": "2026-09"
+    },
+    "query_sha256": "11534c753c0f13a58e886a498fa932bf8d9976c07bb82c6b0c8d486d5d3b8f26",
+    "receipt_hashes": {
+      "price": "b7807ec4bcf40e8f289e05b192e688b0e6ef02f9aeea8b20796b00efdb3ae1ec",
+      "supply": "2a8f742723a327b83e15f6522df84cea8e9aa947369037e4358294d75b6a669a"
+    },
+    "required_caveats": [],
+    "scan_complete": true,
+    "signals": [
+      "SPARSE_SLICE"
+    ],
+    "stage": "PLAN_REQUIRED"
+  },
+  "dependency_lock_sha256": "c3a30f7a8c105aa379300b5ff82ebba9bf827cdf856a905aef0c601099b0ccfb",
+  "framework_config_sha256": "f31533b15d5fafe8b4e3f439c21d849af3ec609b09a5a6557e1b542648185dba",
+  "instruction": "You are the sole public Orchestrator of a synthetic housing analysis system. You receive the request and return the final acknowledgement. All other agents are internal tools. Never calculate housing statistics or fabricate role results.\n\nFirst inspect_context. Call plan_scan with decision_json containing a strict PlanDecision JSON object. Initial action INITIAL, scan_strategy indexed, specialists price and supply; add region with purpose public_comparison exactly when compare_regions is true, otherwise region_purpose none. After a real REFINE review, plan the requested action EXACT_RESCAN_WITH_REGION / full_csv and activate all three specialists. Region purpose remains public_comparison if requested, otherwise coverage_diagnostic. reason_codes are the actual review signals (empty on the initial plan).\n\nDelegate to each active specialist exactly once for the current iteration. Tell each child to inspect_context and submit its permitted decision. Delegate to reviewer only after all current specialist receipts exist. Follow the actual review: REFINE requires a new plan and fresh specialist calls; ACCEPT or ACCEPT_LIMITED requires composer next. Never call inactive Region or skip a role. If a child did not apply its decision the task failed; do not impersonate its submission.\n\nAfter composer completes, call finalize_analysis. Return exactly the JSON acknowledgement returned by finalize_analysis, without Markdown or extra fields. Every response is grounded in current tool results. A repair_required tool result permits only the single requested schema correction in that same role. A policy error ends the analysis.\n\nDecision schema:\n{\"$defs\":{\"Action\":{\"enum\":[\"INITIAL\",\"EXACT_RESCAN_WITH_REGION\",\"REBUILD_INDEX_AND_RESCAN\"],\"type\":\"string\"},\"RegionPurpose\":{\"enum\":[\"none\",\"public_comparison\",\"coverage_diagnostic\"],\"type\":\"string\"},\"Signal\":{\"enum\":[\"INDEX_COVERAGE_MISMATCH\",\"SPARSE_SLICE\",\"RECEIPT_MISMATCH\",\"COMPLETE_SUPPORT\",\"CONFIRMED_SPARSE\",\"UNRECOVERABLE_INTEGRITY\"],\"type\":\"string\"},\"Specialist\":{\"enum\":[\"price\",\"supply\",\"region\"],\"type\":\"string\"},\"Strategy\":{\"enum\":[\"indexed\",\"full_csv\",\"rebuilt_index\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"action\":{\"$ref\":\"#/$defs/Action\"},\"decision_type\":{\"const\":\"plan\",\"title\":\"Decision Type\",\"type\":\"string\"},\"reason_codes\":{\"items\":{\"$ref\":\"#/$defs/Signal\"},\"title\":\"Reason Codes\",\"type\":\"array\"},\"region_purpose\":{\"$ref\":\"#/$defs/RegionPurpose\"},\"role\":{\"const\":\"orchestrator\",\"title\":\"Role\",\"type\":\"string\"},\"scan_strategy\":{\"$ref\":\"#/$defs/Strategy\"},\"specialists\":{\"items\":{\"$ref\":\"#/$defs/Specialist\"},\"maxItems\":3,\"minItems\":2,\"title\":\"Specialists\",\"type\":\"array\"}},\"required\":[\"role\",\"decision_type\",\"action\",\"scan_strategy\",\"specialists\",\"region_purpose\",\"reason_codes\"],\"title\":\"PlanDecision\",\"type\":\"object\"}",
+  "messages": [
+    {
+      "content": [
+        {
+          "text": "Analyze the controller-bound immutable housing request. First call inspect_context with no arguments. Then submit the initial plan through plan_scan. Delegate the active specialists, then reviewer. Follow actual feedback until accepted, then delegate composer, call finalize_analysis and return its exact JSON acknowledgement.",
+          "type": "text"
+        }
+      ],
+      "is_template": false,
+      "role": "user"
+    },
+    {
+      "channels": {
+        "fast-agent-timing": [
+          {
+            "text": "{\"start_time\": 82940.798046666, \"end_time\": 82941.635607666, \"duration_ms\": 9453.488534, \"ttft_ms\": 790.66, \"time_to_response_ms\": 790.66}",
+            "type": "text"
+          }
+        ],
+        "fast-agent-usage": [
+          {
+            "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-s104729\", \"prompt\": {\"total\": 2778, \"uncached\": null, \"cache_read\": 2774, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 15, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1790835632.972216, \"timing\": {\"duration_ms\": 9453.488534, \"ttft_ms\": 790.66, \"time_to_response_ms\": 790.66}, \"raw_usage\": {\"completion_tokens\": 15, \"prompt_tokens\": 2778, \"total_tokens\": 2793, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 2774, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 2793}]}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "assistant",
+      "stop_reason": "toolUse",
+      "tool_calls": {
+        "call_ruuyof8s": {
+          "method": "tools/call",
+          "params": {
+            "arguments": {},
+            "name": "inspect_context"
+          }
+        }
+      }
+    },
+    {
+      "channels": {
+        "fast-agent-tool-timing": [
+          {
+            "text": "{\"call_ruuyof8s\": {\"timing_ms\": 2.06, \"transport_channel\": null}}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "user",
+      "timestamp": "2026-10-01T06:20:33.033380Z",
+      "tool_results": {
+        "call_ruuyof8s": {
+          "content": [
+            {
+              "text": "{\"contract_version\":\"1.0\",\"stage\":\"PLAN_REQUIRED\",\"query\":{\"dataset_id\":\"dallas-synth-v1\",\"dataset_view_sha256\":\"bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b\",\"window_end\":\"2026-09\",\"criteria\":{\"zips\":[\"75001\"],\"property_types\":[\"condo\"],\"bedrooms_min\":2,\"bedrooms_max\":2,\"price_min_cents\":null,\"price_max_cents\":null,\"sqft_min\":1400,\"sqft_max\":1420},\"compare_regions\":false},\"query_sha256\":\"11534c753c0f13a58e886a498fa932bf8d9976c07bb82c6b0c8d486d5d3b8f26\",\"iteration\":0,\"plan\":null,\"previous_review\":null,\"signals\":[],\"monthly_counts\":{},\"scan_complete\":null,\"receipt_hashes\":{},\"facts\":{},\"required_caveats\":[]}",
+              "type": "text"
+            }
+          ],
+          "is_error": false,
+          "result_type": "complete"
+        }
+      }
+    },
+    {
+      "channels": {
+        "fast-agent-timing": [
+          {
+            "text": "{\"start_time\": 82941.642721625, \"end_time\": 82946.116588, \"duration_ms\": 50496.297279, \"ttft_ms\": 4424.32, \"time_to_response_ms\": 4424.32}",
+            "type": "text"
+          }
+        ],
+        "fast-agent-usage": [
+          {
+            "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-s104729\", \"prompt\": {\"total\": 3080, \"uncached\": null, \"cache_read\": 2774, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 80, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1790835683.5522041, \"timing\": {\"duration_ms\": 50496.297279, \"ttft_ms\": 4424.32, \"time_to_response_ms\": 4424.32}, \"raw_usage\": {\"completion_tokens\": 80, \"prompt_tokens\": 3080, \"total_tokens\": 3160, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 2774, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3160}]}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "assistant",
+      "stop_reason": "toolUse",
+      "tool_calls": {
+        "call_jm4b27yk": {
+          "method": "tools/call",
+          "params": {
+            "arguments": {
+              "decision_json": "{\"role\": \"orchestrator\", \"decision_type\": \"plan\", \"action\": \"INITIAL\", \"scan_strategy\": \"indexed\", \"specialists\": [\"price\", \"supply\"], \"region_purpose\": \"none\", \"reason_codes\": []}"
+            },
+            "name": "plan_scan"
+          }
+        }
+      }
+    },
+    {
+      "channels": {
+        "fast-agent-tool-timing": [
+          {
+            "text": "{\"call_jm4b27yk\": {\"timing_ms\": 4.83, \"transport_channel\": null}}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "user",
+      "timestamp": "2026-10-01T06:21:23.639026Z",
+      "tool_results": {
+        "call_jm4b27yk": {
+          "content": [
+            {
+              "text": "{\"status\":\"decision_applied\",\"role\":\"orchestrator\",\"decision_sha256\":\"b3b2d589ee3aaaf8e747bff904181fc1606cce34a5d9cfa0f0f2a90412226a9d\",\"stage\":\"SCANNING\",\"iteration\":0,\"scan_strategy\":\"indexed\",\"active_specialists\":[\"price\",\"supply\"],\"completed_specialists\":[],\"signals\":[],\"next_action\":null}",
+              "type": "text"
+            }
+          ],
+          "is_error": false,
+          "result_type": "complete"
+        }
+      }
+    },
+    {
+      "channels": {
+        "fast-agent-timing": [
+          {
+            "text": "{\"start_time\": 82946.125981833, \"end_time\": 82948.070570166, \"duration_ms\": 21948.468491, \"ttft_ms\": 1895.08, \"time_to_response_ms\": 1895.08}",
+            "type": "text"
+          }
+        ],
+        "fast-agent-usage": [
+          {
+            "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-s104729\", \"prompt\": {\"total\": 3284, \"uncached\": null, \"cache_read\": 3076, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 32, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1790835705.609594, \"timing\": {\"duration_ms\": 21948.468491, \"ttft_ms\": 1895.08, \"time_to_response_ms\": 1895.08}, \"raw_usage\": {\"completion_tokens\": 32, \"prompt_tokens\": 3284, \"total_tokens\": 3316, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3076, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3316}]}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "assistant",
+      "stop_reason": "toolUse",
+      "tool_calls": {
+        "call_aysx7w3h": {
+          "method": "tools/call",
+          "params": {
+            "arguments": {
+              "message": "Inspect context and submit price decision"
+            },
+            "name": "agent__price"
+          }
+        }
+      }
+    },
+    {
+      "content": [],
+      "is_template": false,
+      "role": "user",
+      "timestamp": "2026-10-01T06:23:49.361307Z",
+      "tool_results": {
+        "call_aysx7w3h": {
+          "content": [
+            {
+              "text": "{\"status\":\"decision_applied\",\"role\":\"price\",\"decision_sha256\":\"e21ad0bd656fe99187f52bc568d37989abf68bc3488b8ac5ba94892eb249992f\",\"stage\":\"SCANNING\",\"iteration\":0,\"scan_strategy\":\"indexed\",\"active_specialists\":[\"price\",\"supply\"],\"completed_specialists\":[\"price\"],\"signals\":[],\"next_action\":null}",
+              "type": "text"
+            }
+          ],
+          "is_error": false,
+          "result_type": "complete"
+        }
+      }
+    },
+    {
+      "channels": {
+        "fast-agent-timing": [
+          {
+            "text": "{\"start_time\": 82959.038653666, \"end_time\": 82961.0352465, \"duration_ms\": 22535.389313, \"ttft_ms\": 1948.75, \"time_to_response_ms\": 1948.75}",
+            "type": "text"
+          }
+        ],
+        "fast-agent-usage": [
+          {
+            "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-s104729\", \"prompt\": {\"total\": 3439, \"uncached\": null, \"cache_read\": 3280, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 32, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1790835851.940863, \"timing\": {\"duration_ms\": 22535.389313, \"ttft_ms\": 1948.75, \"time_to_response_ms\": 1948.75}, \"raw_usage\": {\"completion_tokens\": 32, \"prompt_tokens\": 3439, \"total_tokens\": 3471, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3280, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3471}]}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "assistant",
+      "stop_reason": "toolUse",
+      "tool_calls": {
+        "call_jr608xuk": {
+          "method": "tools/call",
+          "params": {
+            "arguments": {
+              "message": "Inspect context and submit supply decision"
+            },
+            "name": "agent__supply"
+          }
+        }
+      }
+    },
+    {
+      "content": [],
+      "is_template": false,
+      "role": "user",
+      "timestamp": "2026-10-01T06:26:26.480982Z",
+      "tool_results": {
+        "call_jr608xuk": {
+          "content": [
+            {
+              "text": "{\"status\":\"decision_applied\",\"role\":\"supply\",\"decision_sha256\":\"eef637eaa8fe9902ae7a972a29e7c2acfa60bb0393270a370a666134ead22bf8\",\"stage\":\"REVIEW_REQUIRED\",\"iteration\":0,\"scan_strategy\":\"indexed\",\"active_specialists\":[\"price\",\"supply\"],\"completed_specialists\":[\"price\",\"supply\"],\"signals\":[\"SPARSE_SLICE\"],\"next_action\":null}",
+              "type": "text"
+            }
+          ],
+          "is_error": false,
+          "result_type": "complete"
+        }
+      }
+    },
+    {
+      "channels": {
+        "fast-agent-timing": [
+          {
+            "text": "{\"start_time\": 82972.959181125, \"end_time\": 82975.488748875, \"duration_ms\": 28551.102001, \"ttft_ms\": 2479.69, \"time_to_response_ms\": 2479.69}",
+            "type": "text"
+          }
+        ],
+        "fast-agent-usage": [
+          {
+            "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-s104729\", \"prompt\": {\"total\": 3599, \"uncached\": null, \"cache_read\": 3435, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 39, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1790836015.07704, \"timing\": {\"duration_ms\": 28551.102001, \"ttft_ms\": 2479.69, \"time_to_response_ms\": 2479.69}, \"raw_usage\": {\"completion_tokens\": 39, \"prompt_tokens\": 3599, \"total_tokens\": 3638, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3435, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3638}]}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "assistant",
+      "stop_reason": "toolUse",
+      "tool_calls": {
+        "call_lxvl2lz5": {
+          "method": "tools/call",
+          "params": {
+            "arguments": {
+              "message": "Inspect context and submit review decision with signals SPARSE_SLICE"
+            },
+            "name": "agent__reviewer"
+          }
+        }
+      }
+    },
+    {
+      "content": [],
+      "is_template": false,
+      "role": "user",
+      "timestamp": "2026-10-01T06:28:52.900120Z",
+      "tool_results": {
+        "call_lxvl2lz5": {
+          "content": [
+            {
+              "text": "{\"role\": \"reviewer\", \"decision_type\": \"review\", \"decision\": \"REFINE\", \"signals\": [\"SPARSE_SLICE\"], \"requested_action\": \"EXACT_RESCAN_WITH_REGION\"}",
+              "type": "text"
+            }
+          ],
+          "is_error": false,
+          "result_type": "complete"
+        }
+      }
+    },
+    {
+      "channels": {
+        "fast-agent-timing": [
+          {
+            "text": "{\"start_time\": 82985.92997425, \"end_time\": 82991.446165666, \"duration_ms\": 62260.89942, \"ttft_ms\": 5468.37, \"time_to_response_ms\": 5468.37}",
+            "type": "text"
+          }
+        ],
+        "fast-agent-usage": [
+          {
+            "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-s104729\", \"prompt\": {\"total\": 3693, \"uncached\": null, \"cache_read\": 3595, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 92, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1790836195.181934, \"timing\": {\"duration_ms\": 62260.89942, \"ttft_ms\": 5468.37, \"time_to_response_ms\": 5468.37}, \"raw_usage\": {\"completion_tokens\": 92, \"prompt_tokens\": 3693, \"total_tokens\": 3785, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3595, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3785}]}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "assistant",
+      "stop_reason": "toolUse",
+      "tool_calls": {
+        "call_oy18kr4j": {
+          "method": "tools/call",
+          "params": {
+            "arguments": {
+              "decision_json": "{\"role\": \"orchestrator\", \"decision_type\": \"plan\", \"action\": \"EXACT_RESCAN_WITH_REGION\", \"scan_strategy\": \"indexed\", \"specialists\": [\"price\", \"supply\", \"region\"], \"region_purpose\": \"public_comparison\", \"reason_codes\": [\"SPARSE_SLICE\"]}"
+            },
+            "name": "plan_scan"
+          }
+        }
+      }
+    },
+    {
+      "channels": {
+        "fast-agent-tool-timing": [
+          {
+            "text": "{\"call_oy18kr4j\": {\"timing_ms\": 2.24, \"transport_channel\": null}}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "user",
+      "timestamp": "2026-10-01T06:29:55.261811Z",
+      "tool_results": {
+        "call_oy18kr4j": {
+          "content": [
+            {
+              "text": "{\"status\":\"repair_required\",\"errors\":[{\"location\":[\"orchestrator\"],\"type\":\"value_error\"}],\"remaining_repairs\":0}",
+              "type": "text"
+            }
+          ],
+          "is_error": false,
+          "result_type": "complete"
+        }
+      }
+    }
+  ],
+  "model_profile": "housing-s104729",
+  "prompt_bundle_sha256": "b35a9c6e1543fbe28540693911a38e3e68e922f1f94b2d8c32a3f5b48cae0035",
+  "retry_policy": {
+    "framework_retries": 1,
+    "sdk_retries": 0
+  },
+  "tools": {
+    "cache_scope": "private",
+    "result_type": "complete",
+    "tools": [
+      {
+        "description": "Read the immutable query, current plan, role receipts, coverage signals and grounded facts.",
+        "input_schema": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        },
+        "name": "inspect_context"
+      },
+      {
+        "description": "Apply the Orchestrator's strict PlanDecision; preserve the query and implement real review feedback.",
+        "input_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "decision_json": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "decision_json"
+          ],
+          "type": "object"
+        },
+        "name": "plan_scan"
+      },
+      {
+        "description": "Finalize only after review acceptance and grounded composition. Return this exact JSON acknowledgement.",
+        "input_schema": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        },
+        "name": "finalize_analysis"
+      },
+      {
+        "description": "You are the internal Price specialist. First call inspect_context. Then call submit_decision with decision_json containing one strict PriceDecision: role price, decision_type tool_intent, tool price_stats, partition_order month_asc or zip_asc, purpose statistics. The controller binds the immutable query and executes the full exact scan. Never supply numbers or filters. If repair_required, submit the one requested correction. After decision_applied return the tool result as JSON and stop. Do not call the tool again after success.\n\nDecision schema:\n{\"$defs\":{\"PartitionOrder\":{\"enum\":[\"month_asc\",\"zip_asc\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"decision_type\":{\"const\":\"tool_intent\",\"title\":\"Decision Type\",\"type\":\"string\"},\"partition_order\":{\"$ref\":\"#/$defs/PartitionOrder\"},\"purpose\":{\"const\":\"statistics\",\"title\":\"Purpose\",\"type\":\"string\"},\"role\":{\"const\":\"price\",\"title\":\"Role\",\"type\":\"string\"},\"tool\":{\"const\":\"price_stats\",\"title\":\"Tool\",\"type\":\"string\"}},\"required\":[\"role\",\"decision_type\",\"tool\",\"partition_order\",\"purpose\"],\"title\":\"PriceDecision\",\"type\":\"object\"}",
+        "input_schema": {
+          "properties": {
+            "message": {
+              "description": "Message to send to the agent",
+              "type": "string"
+            }
+          },
+          "required": [
+            "message"
+          ],
+          "type": "object"
+        },
+        "name": "agent__price"
+      },
+      {
+        "description": "You are the internal Supply specialist. First call inspect_context. Then call submit_decision with decision_json containing one strict SupplyDecision: role supply, decision_type tool_intent, tool supply_stats, partition_order month_asc or zip_asc, purpose statistics. The controller binds the immutable query, counts observations and checks completeness. Never supply numbers or filters. If repair_required, submit the one requested correction. After decision_applied return the tool result as JSON and stop. Do not call the tool again after success.\n\nDecision schema:\n{\"$defs\":{\"PartitionOrder\":{\"enum\":[\"month_asc\",\"zip_asc\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"decision_type\":{\"const\":\"tool_intent\",\"title\":\"Decision Type\",\"type\":\"string\"},\"partition_order\":{\"$ref\":\"#/$defs/PartitionOrder\"},\"purpose\":{\"const\":\"statistics\",\"title\":\"Purpose\",\"type\":\"string\"},\"role\":{\"const\":\"supply\",\"title\":\"Role\",\"type\":\"string\"},\"tool\":{\"const\":\"supply_stats\",\"title\":\"Tool\",\"type\":\"string\"}},\"required\":[\"role\",\"decision_type\",\"tool\",\"partition_order\",\"purpose\"],\"title\":\"SupplyDecision\",\"type\":\"object\"}",
+        "input_schema": {
+          "properties": {
+            "message": {
+              "description": "Message to send to the agent",
+              "type": "string"
+            }
+          },
+          "required": [
+            "message"
+          ],
+          "type": "object"
+        },
+        "name": "agent__supply"
+      },
+      {
+        "description": "You are the conditional internal Region specialist. First call inspect_context. You may run only when region is active. Call submit_decision with decision_json containing one strict RegionDecision: role region, decision_type tool_intent, tool region_stats, partition_order month_asc or zip_asc, purpose exactly the current plan's region_purpose (public_comparison or coverage_diagnostic). Never alter requested ZIPs or filters. If repair_required, submit the one requested correction. After decision_applied return the tool result as JSON and stop.\n\nDecision schema:\n{\"$defs\":{\"PartitionOrder\":{\"enum\":[\"month_asc\",\"zip_asc\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"decision_type\":{\"const\":\"tool_intent\",\"title\":\"Decision Type\",\"type\":\"string\"},\"partition_order\":{\"$ref\":\"#/$defs/PartitionOrder\"},\"purpose\":{\"enum\":[\"public_comparison\",\"coverage_diagnostic\"],\"title\":\"Purpose\",\"type\":\"string\"},\"role\":{\"const\":\"region\",\"title\":\"Role\",\"type\":\"string\"},\"tool\":{\"const\":\"region_stats\",\"title\":\"Tool\",\"type\":\"string\"}},\"required\":[\"role\",\"decision_type\",\"tool\",\"partition_order\",\"purpose\"],\"title\":\"RegionDecision\",\"type\":\"object\"}",
+        "input_schema": {
+          "properties": {
+            "message": {
+              "description": "Message to send to the agent",
+              "type": "string"
+            }
+          },
+          "required": [
+            "message"
+          ],
+          "type": "object"
+        },
+        "name": "agent__region"
+      },
+      {
+        "description": "You are the internal Coverage Reviewer. First call inspect_context and use its actual signals, scan strategy, counts and receipts. Submit one strict ReviewDecision through submit_decision(decision_json=...). role reviewer; decision_type review; signals exactly the evidence signals; requested_action null except for REFINE.\n\nIf an indexed scan has INDEX_COVERAGE_MISMATCH or SPARSE_SLICE, choose REFINE with requested_action EXACT_RESCAN_WITH_REGION. The next plan changes the scan and activates Region; do not change criteria. A complete authoritative scan with CONFIRMED_SPARSE requires ACCEPT_LIMITED and null. COMPLETE_SUPPORT requires ACCEPT and null. Unrecoverable integrity requires FAIL. Do not invent signals, claim confidence or request a pointless repeat scan. If repair_required, make the single explicit correction. After decision_applied return the tool result as JSON and stop.\n\nDecision schema:\n{\"$defs\":{\"Signal\":{\"enum\":[\"INDEX_COVERAGE_MISMATCH\",\"SPARSE_SLICE\",\"RECEIPT_MISMATCH\",\"COMPLETE_SUPPORT\",\"CONFIRMED_SPARSE\",\"UNRECOVERABLE_INTEGRITY\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"decision\":{\"enum\":[\"ACCEPT\",\"REFINE\",\"ACCEPT_LIMITED\",\"FAIL\"],\"title\":\"Decision\",\"type\":\"string\"},\"decision_type\":{\"const\":\"review\",\"title\":\"Decision Type\",\"type\":\"string\"},\"requested_action\":{\"anyOf\":[{\"enum\":[\"EXACT_RESCAN_WITH_REGION\",\"REBUILD_INDEX_AND_RESCAN\"],\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Requested Action\"},\"role\":{\"const\":\"reviewer\",\"title\":\"Role\",\"type\":\"string\"},\"signals\":{\"items\":{\"$ref\":\"#/$defs/Signal\"},\"minItems\":1,\"title\":\"Signals\",\"type\":\"array\"}},\"required\":[\"role\",\"decision_type\",\"decision\",\"signals\",\"requested_action\"],\"title\":\"ReviewDecision\",\"type\":\"object\"}",
+        "input_schema": {
+          "properties": {
+            "message": {
+              "description": "Message to send to the agent",
+              "type": "string"
+            }
+          },
+          "required": [
+            "message"
+          ],
+          "type": "object"
+        },
+        "name": "agent__reviewer"
+      },
+      {
+        "description": "You are the internal Report Composer. First call inspect_context after review acceptance. Call submit_decision with decision_json containing a strict ReportDecision: role composer, decision_type report, fact_ids an ordered unique selection from the supplied fact registry, caveat_codes exactly the required_caveats. Always include source, observations and support. You may also select first_to_last_price and last_month_yoy when available. Python renders the chosen facts using verified values. Never write unsupported numerical or market claims. If repair_required, submit the one requested correction. After decision_applied return the tool result as JSON and stop.\n\nDecision schema:\n{\"additionalProperties\":false,\"properties\":{\"caveat_codes\":{\"items\":{\"enum\":[\"SYNTHETIC_DATA\",\"SPARSE_SUPPORT\",\"NO_MATCHES\",\"UNAVAILABLE_LOOKBACK\"],\"type\":\"string\"},\"title\":\"Caveat Codes\",\"type\":\"array\"},\"decision_type\":{\"const\":\"report\",\"title\":\"Decision Type\",\"type\":\"string\"},\"fact_ids\":{\"items\":{\"type\":\"string\"},\"maxItems\":8,\"minItems\":1,\"title\":\"Fact Ids\",\"type\":\"array\"},\"role\":{\"const\":\"composer\",\"title\":\"Role\",\"type\":\"string\"}},\"required\":[\"role\",\"decision_type\",\"fact_ids\",\"caveat_codes\"],\"title\":\"ReportDecision\",\"type\":\"object\"}",
+        "input_schema": {
+          "properties": {
+            "message": {
+              "description": "Message to send to the agent",
+              "type": "string"
+            }
+          },
+          "required": [
+            "message"
+          ],
+          "type": "object"
+        },
+        "name": "agent__composer"
+      }
+    ],
+    "ttl_ms": 0
+  }
+}

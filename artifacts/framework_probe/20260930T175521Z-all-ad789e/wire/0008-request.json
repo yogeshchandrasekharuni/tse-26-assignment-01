@@ -1,0 +1,21 @@
+{
+  "model": "housing-qwen-s155921",
+  "stream": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "PROBE_ROLE=supply. Return only {\"role\":\"supply\"}."
+    },
+    {
+      "role": "user",
+      "content": "Return your supply role JSON only."
+    }
+  ],
+  "max_tokens": 1024,
+  "stream_options": {
+    "include_usage": true
+  },
+  "temperature": 0.2,
+  "tools": [],
+  "reasoning_effort": "none"
+}

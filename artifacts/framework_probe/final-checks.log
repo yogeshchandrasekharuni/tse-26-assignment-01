@@ -1,0 +1,7 @@
+.venv/bin/ruff check --select E4,E7,E9,F scripts tests/unit/test_probe_guards.py
+All checks passed!
+.venv/bin/mypy --follow-imports=skip scripts/probe_fast_agent.py scripts/probe_tools.py scripts/probe_support.py scripts/probe_tool_playback.py scripts/replay_environment.py
+Success: no issues found in 5 source files
+.venv/bin/python -m pytest -q tests/unit/test_probe_guards.py
+.....                                                                    [100%]
+5 passed in 6.89 s

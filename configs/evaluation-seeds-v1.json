@@ -1,0 +1,15 @@
+{
+  "version": "evaluation-seeds-1",
+  "dataset_generator_seed": 20261016,
+  "candidate_generation_seed": 20261017,
+  "transform_seed_base": 20261018,
+  "python_hash_seed": 0,
+  "seed_pairs": [
+    {"pair_id": "s104729", "source_seed": 104729, "followup_seed": 104729, "model_profile": "housing-qwen-v4-s104729"},
+    {"pair_id": "s130363", "source_seed": 130363, "followup_seed": 130363, "model_profile": "housing-qwen-v4-s130363"},
+    {"pair_id": "s155921", "source_seed": 155921, "followup_seed": 155921, "model_profile": "housing-qwen-v4-s155921"}
+  ],
+  "transform_seed_recipe": "int(SHA256(UTF8('housing-mr-v1|' + mr_id + '|' + base_id + '|20261018'))[:8], 16)",
+  "seed_delivery": "Verified Ollama model defaults, with no universal framework seed keyword",
+  "repeatability_limit": "Fixed seeds are controlled evaluation conditions; hardware and model kernels may remain nondeterministic"
+}

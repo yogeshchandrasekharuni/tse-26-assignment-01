@@ -1,0 +1,34 @@
+{
+  "origin": "live_captured",
+  "boundary": {
+    "instruction": "PROBE_ROLE=price. Call scan_price exactly once, then return its receipt as JSON.",
+    "prompt": "Execute the real price scan for the controller-bound synthetic probe fixture.",
+    "model": {
+      "seed": 104729,
+      "wire_model": "housing-qwen-s104729",
+      "digest": "49f41a71152697d35d2124dd094fd85d2b2d0b2acb2dafc75848320bd71cef02"
+    },
+    "tool_schema_version": "framework-spike-1",
+    "semantic_projection": "framework-spike-1",
+    "tool_bundle_sha256": "a2a25e9ed79325c3942e67aca6bbfb90077c32eeed32c46852af150482ebba96",
+    "dependency_lock_sha256": "c3a30f7a8c105aa379300b5ff82ebba9bf827cdf856a905aef0c601099b0ccfb",
+    "framework_config_sha256": "7a0b758142890aabe0a84b2df9d0e01aaf7f7a8e15b016603df7a6b88559ea50",
+    "overlay_sha256": "5b369615213c03262e488ac66394ba80ceedcf36c45d628e74c433388e0a3db7"
+  },
+  "input_hashes": [
+    "358238999504dff3ebabde1034e284199ca5318192da836f6185ad5dfe70c210",
+    "f918ef2d8972b1bbffbd5adf4bb8fcf0d3c798517478713dc5ef4b6154987066"
+  ],
+  "final_response": "```json\n{\n  \"role\": \"price\",\n  \"strategy\": \"indexed\",\n  \"query_sha256\": \"25f16ca91607f33ea413b4e1d73d9ec78e03b7d4d83aac1651ff17911812f8a5\",\n  \"selection_sha256\": \"e2fb924b2285554b97c212009e503c38905a723bd153a28ef73608e85f55189d\",\n  \"selected_observations\": 22,\n  \"result\": {\n    \"pooled_median_usd_rational\": \"300000\"\n  },\n  \"receipt_sha256\": \"727bd8092fdc7d49341cbf7c24b8dc9f36722965f721fe2e1746a533caffed6a\"\n}\n```",
+  "expected_receipt": {
+    "role": "price",
+    "strategy": "indexed",
+    "query_sha256": "25f16ca91607f33ea413b4e1d73d9ec78e03b7d4d83aac1651ff17911812f8a5",
+    "selection_sha256": "e2fb924b2285554b97c212009e503c38905a723bd153a28ef73608e85f55189d",
+    "selected_observations": 22,
+    "result": {
+      "pooled_median_usd_rational": "300000"
+    },
+    "receipt_sha256": "727bd8092fdc7d49341cbf7c24b8dc9f36722965f721fe2e1746a533caffed6a"
+  }
+}

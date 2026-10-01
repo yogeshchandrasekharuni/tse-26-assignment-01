@@ -1,0 +1,20 @@
+.venv/bin/python -u scripts/probe_tool_playback.py
+Probe evidence: artifacts/framework_probe/20260930T202936Z-tool-playback-827065
+{
+  "status": "passed",
+  "capture": "artifacts/framework_probe/20260930T202936Z-tool-playback-827065",
+  "offline_native_playback": {
+    "status": "passed",
+    "native_tool_call_replayed": true,
+    "tools_reexecuted": 1,
+    "model_decisions_consumed": 2,
+    "network_attempts": 0
+  },
+  "injected_replay_guard_control": {
+    "status": "passed",
+    "changed_upstream_result_rejected": true,
+    "model_decisions_consumed": 1,
+    "tools_executed": 1
+  },
+  "headline_eligible": false
+}

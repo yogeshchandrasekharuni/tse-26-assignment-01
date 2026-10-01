@@ -1,0 +1,64 @@
+{
+  "status": "planned_control_not_observed_runtime_evidence",
+  "headline_eligible": false,
+  "dataset_id": "dallas-synth-v1",
+  "base_request": {
+    "dataset_id": "dallas-synth-v1",
+    "window_end": "2026-06",
+    "criteria": {
+      "zips": [
+        "75001",
+        "75006"
+      ],
+      "property_types": [
+        "single_family",
+        "condo",
+        "townhouse"
+      ],
+      "bedrooms_min": 1,
+      "bedrooms_max": 5,
+      "price_min_cents": null,
+      "price_max_cents": null,
+      "sqft_min": null,
+      "sqft_max": null
+    },
+    "display": {
+      "money": "USD",
+      "area": "SQFT"
+    },
+    "compare_regions": true,
+    "seed": 104729
+  },
+  "override_request": {
+    "compare_regions": false,
+    "window_end": "2026-08"
+  },
+  "injection": {
+    "type": "omit_partition_from_index_only",
+    "month": "2026-03",
+    "zip": "75001",
+    "raw_csv_unchanged": true,
+    "manifest_stays_complete": true
+  },
+  "expected_signal": "INDEX_COVERAGE_MISMATCH",
+  "expected_reviewer_action": "EXACT_RESCAN_WITH_REGION",
+  "expected_scan_strategy_before": "indexed",
+  "expected_scan_strategy_after": "full_csv",
+  "expected_active_specialists_before": [
+    "price",
+    "supply"
+  ],
+  "expected_active_specialists_after": [
+    "price",
+    "supply",
+    "region"
+  ],
+  "required_assertions": [
+    "A live Fast Agent reviewer emits REFINE",
+    "A subsequent live planner emits permitted revised plan",
+    "New tool receipts show full_csv, not the missing index",
+    "Same normalized housing-query hash before/after",
+    "Trace event causal link shows actual cycle traversed",
+    "Control is excluded from headline violations"
+  ]
+}

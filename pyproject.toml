@@ -1,0 +1,41 @@
+[project]
+name = "housing-tse"
+version = "0.1.0"
+description = "Exact synthetic housing trends and Fast Agent metamorphic testing"
+requires-python = ">=3.15,<3.16"
+dependencies = [
+  "fast-agent-mcp==0.10.45",
+  "fastapi>=0.115,<1",
+  "uvicorn>=0.34,<1",
+  "pydantic>=2.10,<3",
+  "jsonschema>=4.23,<5",
+  "reportlab>=4.4,<5",
+  "pypdf>=6,<7",
+  "pymupdf>=1.26,<2",
+]
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "pytest-asyncio>=1,<2", "httpx>=0.28,<1", "ruff>=0.13,<1", "mypy>=1.18,<2", "types-jsonschema>=4,<5"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/housing"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 110
+target-version = "py315"
+
+[tool.mypy]
+python_version = "3.15"
+ignore_missing_imports = true
+check_untyped_defs = true
+
+[project.scripts]
+housing = "housing.cli:main"

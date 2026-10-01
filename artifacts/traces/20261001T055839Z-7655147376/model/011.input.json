@@ -1,0 +1,172 @@
+{
+  "agent": "reviewer[1]",
+  "context": {
+    "contract_version": "1.0",
+    "facts": {},
+    "iteration": 0,
+    "monthly_counts": {
+      "2025-10": 1440,
+      "2025-11": 1440,
+      "2025-12": 1440,
+      "2026-01": 1440,
+      "2026-02": 1440,
+      "2026-03": 1440,
+      "2026-04": 1440,
+      "2026-05": 1440,
+      "2026-06": 1440,
+      "2026-07": 1440,
+      "2026-08": 1440,
+      "2026-09": 1440
+    },
+    "plan": {
+      "active_specialists": [
+        "price",
+        "supply"
+      ],
+      "canonical_query_sha256": "9afcc493e5d5ffb92e224522d0dc9b982ce09c69a98135f83f89649e02828a1a",
+      "dataset_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+      "planner_decision_sha256": "b3b2d589ee3aaaf8e747bff904181fc1606cce34a5d9cfa0f0f2a90412226a9d",
+      "region_purpose": "none",
+      "required_months": [
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01",
+        "2025-02",
+        "2025-03",
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09"
+      ],
+      "scan_strategy": "indexed",
+      "version": 0,
+      "visible_months": [
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09"
+      ]
+    },
+    "previous_review": null,
+    "query": {
+      "compare_regions": false,
+      "criteria": {
+        "bedrooms_max": 5,
+        "bedrooms_min": 1,
+        "price_max_cents": null,
+        "price_min_cents": null,
+        "property_types": [
+          "condo",
+          "single_family",
+          "townhouse"
+        ],
+        "sqft_max": null,
+        "sqft_min": null,
+        "zips": [
+          "75001",
+          "75006",
+          "75019",
+          "75024",
+          "75034",
+          "75038",
+          "75063",
+          "75080",
+          "75093",
+          "75201",
+          "75204",
+          "75214"
+        ]
+      },
+      "dataset_id": "dallas-synth-v1",
+      "dataset_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+      "window_end": "2026-09"
+    },
+    "query_sha256": "9afcc493e5d5ffb92e224522d0dc9b982ce09c69a98135f83f89649e02828a1a",
+    "receipt_hashes": {
+      "price": "acf18a25bdb8cd45c7946053ac8cd7335a34e46cc3682fca2fe3a856b253b284",
+      "supply": "92ac640c746c5758412866fcb95067f797684a21517e99ac4f7063a9497c5714"
+    },
+    "required_caveats": [],
+    "scan_complete": true,
+    "signals": [
+      "COMPLETE_SUPPORT"
+    ],
+    "stage": "REVIEW_REQUIRED"
+  },
+  "dependency_lock_sha256": "c3a30f7a8c105aa379300b5ff82ebba9bf827cdf856a905aef0c601099b0ccfb",
+  "framework_config_sha256": "f31533b15d5fafe8b4e3f439c21d849af3ec609b09a5a6557e1b542648185dba",
+  "instruction": "You are the internal Coverage Reviewer. First call inspect_context and use its actual signals, scan strategy, counts and receipts. Submit one strict ReviewDecision through submit_decision(decision_json=...). role reviewer; decision_type review; signals exactly the evidence signals; requested_action null except for REFINE.\n\nIf an indexed scan has INDEX_COVERAGE_MISMATCH or SPARSE_SLICE, choose REFINE with requested_action EXACT_RESCAN_WITH_REGION. The next plan changes the scan and activates Region; do not change criteria. A complete authoritative scan with CONFIRMED_SPARSE requires ACCEPT_LIMITED and null. COMPLETE_SUPPORT requires ACCEPT and null. Unrecoverable integrity requires FAIL. Do not invent signals, claim confidence or request a pointless repeat scan. If repair_required, make the single explicit correction. After decision_applied return the tool result as JSON and stop.\n\nDecision schema:\n{\"$defs\":{\"Signal\":{\"enum\":[\"INDEX_COVERAGE_MISMATCH\",\"SPARSE_SLICE\",\"RECEIPT_MISMATCH\",\"COMPLETE_SUPPORT\",\"CONFIRMED_SPARSE\",\"UNRECOVERABLE_INTEGRITY\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"decision\":{\"enum\":[\"ACCEPT\",\"REFINE\",\"ACCEPT_LIMITED\",\"FAIL\"],\"title\":\"Decision\",\"type\":\"string\"},\"decision_type\":{\"const\":\"review\",\"title\":\"Decision Type\",\"type\":\"string\"},\"requested_action\":{\"anyOf\":[{\"enum\":[\"EXACT_RESCAN_WITH_REGION\",\"REBUILD_INDEX_AND_RESCAN\"],\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Requested Action\"},\"role\":{\"const\":\"reviewer\",\"title\":\"Role\",\"type\":\"string\"},\"signals\":{\"items\":{\"$ref\":\"#/$defs/Signal\"},\"minItems\":1,\"title\":\"Signals\",\"type\":\"array\"}},\"required\":[\"role\",\"decision_type\",\"decision\",\"signals\",\"requested_action\"],\"title\":\"ReviewDecision\",\"type\":\"object\"}",
+  "messages": [
+    {
+      "content": [
+        {
+          "text": "Inspect context and submit review decision with signals COMPLETE_SUPPORT",
+          "type": "text"
+        }
+      ],
+      "is_template": false,
+      "role": "user"
+    }
+  ],
+  "model_profile": "housing-s104729",
+  "prompt_bundle_sha256": "b35a9c6e1543fbe28540693911a38e3e68e922f1f94b2d8c32a3f5b48cae0035",
+  "retry_policy": {
+    "framework_retries": 1,
+    "sdk_retries": 0
+  },
+  "tools": {
+    "cache_scope": "private",
+    "result_type": "complete",
+    "tools": [
+      {
+        "description": "Read the immutable query, current plan, role receipts, coverage signals and grounded facts.",
+        "input_schema": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        },
+        "name": "inspect_context"
+      },
+      {
+        "description": "Submit one strict role-specific JSON decision. Trusted selection arguments are bound by Python.",
+        "input_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "decision_json": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "decision_json"
+          ],
+          "type": "object"
+        },
+        "name": "submit_decision"
+      }
+    ],
+    "ttl_ms": 0
+  }
+}

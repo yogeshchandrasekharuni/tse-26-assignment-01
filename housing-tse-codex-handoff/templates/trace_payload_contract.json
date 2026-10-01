@@ -1,0 +1,49 @@
+{
+  "status": "normative_project_payload_requirements",
+  "common": [
+    "parent causal sequence",
+    "input and output content hashes",
+    "role/model/prompt/schema versions",
+    "tool receipt paths where applicable"
+  ],
+  "PLAN_DECIDED": [
+    "validated PlanDecision",
+    "previous_plan_sha256",
+    "active specialists",
+    "scan strategy"
+  ],
+  "TOOL_COMPLETED": [
+    "tool name/version",
+    "bound trusted arguments",
+    "selection multiset hash",
+    "source completeness",
+    "receipt path/hash",
+    "observed duration"
+  ],
+  "REVIEW_DECIDED": [
+    "typed ReviewDecision",
+    "signal evidence",
+    "counts/completeness/receipt mismatch inputs"
+  ],
+  "REFINEMENT_APPLIED": [
+    "review event causal reference",
+    "plan before/after or explicit diff",
+    "criteria hash before/after equal",
+    "strategy changed",
+    "active specialist set changed",
+    "refinements used"
+  ],
+  "RUN_COMPLETED": [
+    "final output hash/path",
+    "quality status",
+    "fact registry and composer receipt",
+    "live campaign/cassette lineage"
+  ],
+  "RUN_FAILED": [
+    "error code",
+    "stage",
+    "attempts",
+    "partial evidence paths"
+  ],
+  "note": "Payload has flexible JSON syntax but listed event fields must be checked in application tests; examples are never actual runtime proof."
+}

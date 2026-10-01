@@ -1,0 +1,49 @@
+{
+  "model": "housing-qwen-s104729",
+  "stream": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "PROBE_ROLE=composer. After acceptance, call compose_report with fact_ids [observations,support] and return its JSON exactly. Never recalculate statistics."
+    },
+    {
+      "role": "user",
+      "content": "Compose report for synthetic index-omission probe with immutable query after ACCEPT_LIMITED from reviewer."
+    }
+  ],
+  "max_tokens": 1024,
+  "parallel_tool_calls": true,
+  "stream_options": {
+    "include_usage": true
+  },
+  "temperature": 0.2,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "compose_report",
+        "description": "Select observations and support facts after acceptance; return the grounded report.",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {
+            "fact_ids": {
+              "items": {
+                "enum": [
+                  "observations",
+                  "support"
+                ],
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "fact_ids"
+          ],
+          "type": "object"
+        }
+      }
+    }
+  ],
+  "reasoning_effort": "none"
+}

@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExactMonthlyToolResult v1.0; available=false only for out-of-snapshot lookback",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "month": {
+        "type": "string",
+        "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+      },
+      "available": {
+        "type": "boolean"
+      },
+      "count": {
+        "anyOf": [
+          {
+            "type": "integer",
+            "minimum": 0
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "median_price_usd": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "numerator": {
+                "type": "integer"
+              },
+              "denominator": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "numerator",
+              "denominator"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "median_ppsf_usd": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "numerator": {
+                "type": "integer"
+              },
+              "denominator": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [
+              "numerator",
+              "denominator"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "required": [
+      "month",
+      "available",
+      "count",
+      "median_price_usd",
+      "median_ppsf_usd"
+    ],
+    "additionalProperties": false
+  },
+  "minItems": 12,
+  "maxItems": 24
+}

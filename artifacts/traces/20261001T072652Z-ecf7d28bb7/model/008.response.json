@@ -1,0 +1,25 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 83326.965779291, \"end_time\": 83333.791258875, \"duration_ms\": 77038.775636, \"ttft_ms\": 484.09, \"time_to_response_ms\": 484.09}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-s104729\", \"prompt\": {\"total\": 1652, \"uncached\": null, \"cache_read\": 1446, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 128, \"reasoning\": null}, \"tool_calls\": 0, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1790840059.2249959, \"timing\": {\"duration_ms\": 77038.775636, \"ttft_ms\": 484.09, \"time_to_response_ms\": 484.09}, \"raw_usage\": {\"completion_tokens\": 128, \"prompt_tokens\": 1652, \"total_tokens\": 1780, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 1446, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 1780}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [
+    {
+      "text": "{\"status\":\"decision_applied\",\"role\":\"supply\",\"decision_sha256\":\"eef637eaa8fe9902ae7a972a29e7c2acfa60bb0393270a370a666134ead22bf8\",\"stage\":\"REVIEW_REQUIRED\",\"iteration\":0,\"scan_strategy\":\"indexed\",\"active_specialists\":[\"price\",\"supply\"],\"completed_specialists\":[\"price\",\"supply\"],\"signals\":[\"INDEX_COVERAGE_MISMATCH\",\"SPARSE_SLICE\"],\"next_action\":null,\"planning_constraints\":null}",
+      "type": "text"
+    }
+  ],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "endTurn"
+}

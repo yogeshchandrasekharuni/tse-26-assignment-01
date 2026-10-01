@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "HeadlineSummary v1.0; count/rate/CI consistency checked in summary builder",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "mr_id": {
+        "type": "string",
+        "pattern": "^MR(0[1-9]|10)$"
+      },
+      "family": {
+        "enum": [
+          "invariance",
+          "monotonic",
+          "directional"
+        ]
+      },
+      "mode": {
+        "enum": [
+          "live",
+          "replay",
+          "policy_simulation"
+        ]
+      },
+      "campaign_id": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9_.:-]+$"
+      },
+      "eligible_bases": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "completed_bases": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "violating_bases": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "base_rate": {
+        "anyOf": [
+          {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "ci_method": {
+        "enum": [
+          "wilson_score"
+        ]
+      },
+      "ci_unit": {
+        "enum": [
+          "distinct_base"
+        ]
+      },
+      "ci95_low": {
+        "anyOf": [
+          {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "ci95_high": {
+        "anyOf": [
+          {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "seed_values": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "minItems": 3,
+        "uniqueItems": true
+      },
+      "seed_pair_violations": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "seed_pairs_completed": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "invalid_candidates": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "execution_errors": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "output_contract_violations": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "complete": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "mr_id",
+      "family",
+      "mode",
+      "campaign_id",
+      "eligible_bases",
+      "completed_bases",
+      "violating_bases",
+      "base_rate",
+      "ci_method",
+      "ci_unit",
+      "ci95_low",
+      "ci95_high",
+      "seed_values",
+      "seed_pair_violations",
+      "seed_pairs_completed",
+      "invalid_candidates",
+      "execution_errors",
+      "output_contract_violations",
+      "complete"
+    ],
+    "additionalProperties": false
+  },
+  "minItems": 10,
+  "maxItems": 10
+}

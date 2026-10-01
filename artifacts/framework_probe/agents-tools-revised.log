@@ -1,0 +1,53 @@
+Probe evidence: artifacts/framework_probe/20260930T185306Z-agents-tools-cda931
+▎◀ price[1] tool (Card) scan_price · id: call_…861acr
+{}
+▎▶ price[1] tool (Card) scan_price · text only 365 chars · 22.57 ms · id: 
+call_…861acr
+▎◀ supply[2] tool (Card) scan_supply · id: call_…xxakpq
+{}
+▎▶ supply[2] tool (Card) scan_supply · text only 545 chars · 33.86 ms · id: 
+call_…xxakpq
+▎◀ reviewer[1] tool (Card) inspect_coverage · id: call_…690dsj
+{}
+▎▶ reviewer[1] tool (Card) inspect_coverage · text only 339 chars · 22.57 ms · id: 
+call_…690dsj
+▎◀ reviewer[1] tool (Card) submit_review · id: call_…fzpi1e
+{
+  "decision": "REFINE",
+  "requested_action": "EXACT_RESCAN_WITH_REGION"
+}
+▎▶ reviewer[1] tool (Card) submit_review · text only 254 chars · 45.15 ms · id: 
+call_…fzpi1e
+▎◀ price[1] tool (Card) scan_price · id: call_…vhb8au
+{}
+▎▶ price[1] tool (Card) scan_price · text only 366 chars · 45.15 ms · id: 
+call_…vhb8au
+▎◀ supply[2] tool (Card) scan_supply · id: call_…6kpgyi
+{}
+▎▶ supply[2] tool (Card) scan_supply · text only 545 chars · 11.29 ms · id: 
+call_…6kpgyi
+▎◀ region[3] tool (Card) scan_region · id: call_…fre4gt
+{}
+▎▶ region[3] tool (Card) scan_region · text only 385 chars · 45.15 ms · id: 
+call_…fre4gt
+▎◀ reviewer[1] tool (Card) inspect_coverage · id: call_…x8y4fa
+{}
+▎▶ reviewer[1] tool (Card) inspect_coverage · text only 393 chars · 22.57 ms · id: 
+call_…x8y4fa
+▎◀ reviewer[1] tool (Card) submit_review · id: call_…xwwpoh
+{
+  "decision": "ACCEPT_LIMITED",
+  "requested_action": null
+}
+▎▶ reviewer[1] tool (Card) submit_review · text only 240 chars · 11.29 ms · id: 
+call_…xwwpoh
+▎◀ composer[1] tool (Card) compose_report · id: call_…gem36p
+{
+  "fact_ids": [
+    "observations",
+    "support"
+  ]
+}
+▎▶ composer[1] tool (Card) compose_report · text only 229 chars · 33.86 ms · id: 
+call_…gem36p
+{"agents_as_tools":{"actual_tool_routes":[["price","indexed"],["supply","indexed"],["price","full_csv"],["supply","full_csv"],["region","full_csv"]],"elapsed_seconds":1295.9281449608891,"engine":"@fast.agent(agents=[...])","entry_exit":"orchestrator","headline_eligible":false,"injected_control":"index_omission","plans":[{"active":["price","supply"],"strategy":"indexed"},{"active":["price","supply","region"],"strategy":"full_csv"}],"query_sha256":"25f16ca91607f33ea413b4e1d73d9ec78e03b7d4d83aac1651ff17911812f8a5","report":{"fact_ids":["observations","support"],"injection":"index_omission","quality":"limited","source_kind":"synthetic_probe_fixture","text":"Synthetic probe fixture: 24 observations; sparse support confirmed.","total_observations":24},"reviews":[{"decision":"REFINE","requested_action":"EXACT_RESCAN_WITH_REGION","role":"reviewer"},{"decision":"ACCEPT_LIMITED","requested_action":null,"role":"reviewer"}],"status":"passed","synthetic_fixture":true,"underlying_engine":"AgentsAsToolsAgent"},"elapsed_seconds_total":1299.3705663193881,"provider_requests":24,"status":"passed"}

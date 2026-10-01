@@ -1,0 +1,89 @@
+{
+  "model": "housing-qwen-s104729",
+  "stream": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "PROBE_ROLE=reviewer. First inspect_coverage, then submit_review. Indexed INDEX_COVERAGE_MISMATCH requires REFINE and EXACT_RESCAN_WITH_REGION. Full_csv confirmed sparsity requires ACCEPT_LIMITED and null requested_action. Return submit_review JSON."
+    },
+    {
+      "role": "user",
+      "content": "Submit review for synthetic index-omission probe with immutable query after full_csv scans and region diagnostics."
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_qhx8y4fa",
+          "type": "function",
+          "function": {
+            "name": "inspect_coverage",
+            "arguments": "{}"
+          }
+        }
+      ],
+      "content": ""
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_qhx8y4fa",
+      "content": "{\"strategy\":\"full_csv\",\"refinements\":1,\"scan_complete\":true,\"source_snapshot_complete\":true,\"signals\":[\"CONFIRMED_SPARSE\"],\"total_observations\":24,\"receipt_sha256\":{\"price\":\"f7534616d6ecfa68a48a04076a8731547e64154cad4c232cf105fb289ec4000c\",\"region\":\"b2fedfc953beebca06d0141ccf0071d962b5d361d8b41051b0462fb9890780e6\",\"supply\":\"897b29803e623585d2fa492118910a2cccfd6aed2f747b4307c608cbbb19a1cf\"}}"
+    }
+  ],
+  "max_tokens": 1024,
+  "parallel_tool_calls": true,
+  "stream_options": {
+    "include_usage": true
+  },
+  "temperature": 0.2,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "inspect_coverage",
+        "description": "Read actual specialist receipts before submitting a review decision.",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "submit_review",
+        "description": "Submit REFINE with EXACT_RESCAN_WITH_REGION for indexed mismatch;\nsubmit ACCEPT_LIMITED with null for authoritative confirmed sparse support.",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {
+            "decision": {
+              "enum": [
+                "REFINE",
+                "ACCEPT_LIMITED"
+              ],
+              "type": "string"
+            },
+            "requested_action": {
+              "anyOf": [
+                {
+                  "const": "EXACT_RESCAN_WITH_REGION",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "required": [
+            "decision"
+          ],
+          "type": "object"
+        }
+      }
+    }
+  ],
+  "reasoning_effort": "none"
+}

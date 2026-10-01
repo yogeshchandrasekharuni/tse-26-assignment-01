@@ -1,0 +1,86 @@
+{
+  "reviewed_on": "2026-10-16",
+  "research_status": "official_pages_read_not_apis_executed",
+  "assignment_original": "sources/originals/Assignment_MR_Housing_final_v2.pdf",
+  "architecture_baseline": "sources/originals/housing_trends_agent_architecture_no_fills.drawio",
+  "references": [
+    {
+      "id": "F01",
+      "title": "Fast Agent Python API",
+      "url": "https://fast-agent.ai/agents/defining/python_api/",
+      "supports": "Agent definition, lifecycle and named calls; no universal seed in generated RequestParams list"
+    },
+    {
+      "id": "F02",
+      "title": "Fast Agent class reference",
+      "url": "https://fast-agent.ai/ref/class_reference/",
+      "supports": "Embedding constructor parameters and documented workflow methods"
+    },
+    {
+      "id": "F03",
+      "title": "Fast Agent workflows",
+      "url": "https://fast-agent.ai/agents/workflows/",
+      "supports": "Conceptual workflow vocabulary; application loop remains project-owned"
+    },
+    {
+      "id": "F04",
+      "title": "Fast Agent structured outputs",
+      "url": "https://fast-agent.ai/guides/structured-outputs/",
+      "supports": "Pydantic/JSON support; model/provider capability caveats"
+    },
+    {
+      "id": "F05",
+      "title": "Fast Agent internal models",
+      "url": "https://fast-agent.ai/models/internal_models/",
+      "supports": "Playback and passthrough exist; exact cassette matching is project responsibility"
+    },
+    {
+      "id": "F06",
+      "title": "Fast Agent additional providers",
+      "url": "https://fast-agent.ai/models/providers/additional/",
+      "supports": "Generic OpenAI-compatible endpoint configuration"
+    },
+    {
+      "id": "F07",
+      "title": "Fast Agent configuration",
+      "url": "https://fast-agent.ai/ref/config_file/",
+      "supports": "Generic local base_url/api_key configuration shape"
+    },
+    {
+      "id": "F08",
+      "title": "Fast Agent repository pyproject",
+      "url": "https://raw.githubusercontent.com/evalstate/fast-agent/main/pyproject.toml",
+      "supports": "Observed main0.10.42, Python>=3.12,<3.15; not an installation/publication claim"
+    },
+    {
+      "id": "F09",
+      "title": "Fast Agent repository",
+      "url": "https://github.com/evalstate/fast-agent",
+      "supports": "Official project/distribution and top-level examples"
+    },
+    {
+      "id": "O01",
+      "title": "Ollama Modelfile reference",
+      "url": "https://docs.ollama.com/modelfile",
+      "supports": "Seed/temperature model parameters; effective profile must be verified"
+    },
+    {
+      "id": "O02",
+      "title": "Ollama OpenAI compatibility",
+      "url": "https://docs.ollama.com/api/openai-compatibility",
+      "supports": "Local compatible endpoint and provider field subset"
+    },
+    {
+      "id": "S01",
+      "title": "NIST confidence intervals",
+      "url": "https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm",
+      "supports": "Wilson score interval discussion; unit/estimand remain project design"
+    },
+    {
+      "id": "O03",
+      "title": "Ollama qwen2.5:7b-instruct model tag",
+      "url": "https://ollama.com/library/qwen2.5:7b-instruct",
+      "supports": "Suggested local model tag exists; actual availability/hardware/digest/schema behavior still requires probe"
+    }
+  ]
+}

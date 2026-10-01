@@ -1,0 +1,20 @@
+Probe evidence: artifacts/framework_probe/20260930T184341Z-agents-tools-0d8bfa
+Traceback (most recent call last):
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/scripts/probe_fast_agent.py", line 280, in main
+    result = asyncio.run(run(args, evidence))
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.python/cpython-3.15.0-macos-aarch64-none/lib/python3.15/asyncio/runners.py", line 205, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.python/cpython-3.15.0-macos-aarch64-none/lib/python3.15/asyncio/runners.py", line 128, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.python/cpython-3.15.0-macos-aarch64-none/lib/python3.15/asyncio/base_events.py", line 724, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/scripts/probe_fast_agent.py", line 265, in run
+    result["agents_as_tools"] = await native_orchestration(evidence, config, engine="agents-tools")
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/scripts/probe_fast_agent.py", line 221, in native_orchestration
+    assert tools.refinements == 1, tools.reviews
+           ^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: []

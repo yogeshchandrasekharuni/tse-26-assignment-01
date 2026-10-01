@@ -1,0 +1,3377 @@
+{
+  "components": {
+    "schemas": {
+      "AnalysisOutput": {
+        "additionalProperties": false,
+        "properties": {
+          "canonical": {
+            "$ref": "#/components/schemas/Canonical"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
+          },
+          "narrative": {
+            "$ref": "#/components/schemas/Narrative"
+          },
+          "presentation": {
+            "$ref": "#/components/schemas/Presentation"
+          },
+          "quality": {
+            "$ref": "#/components/schemas/Quality"
+          },
+          "status": {
+            "const": "completed",
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "canonical",
+          "presentation",
+          "quality",
+          "narrative",
+          "metadata"
+        ],
+        "title": "AnalysisOutput",
+        "type": "object"
+      },
+      "AnalysisRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "compare_regions": {
+            "title": "Compare Regions",
+            "type": "boolean"
+          },
+          "criteria": {
+            "$ref": "#/components/schemas/Criteria"
+          },
+          "dataset_id": {
+            "$ref": "#/components/schemas/Identifier"
+          },
+          "display": {
+            "$ref": "#/components/schemas/Display"
+          },
+          "seed": {
+            "$ref": "#/components/schemas/Seed"
+          },
+          "window_end": {
+            "$ref": "#/components/schemas/Month"
+          }
+        },
+        "required": [
+          "dataset_id",
+          "window_end",
+          "criteria",
+          "display",
+          "compare_regions",
+          "seed"
+        ],
+        "title": "AnalysisRequest",
+        "type": "object"
+      },
+      "AnalysisView": {
+        "additionalProperties": false,
+        "properties": {
+          "area_unit": {
+            "title": "Area Unit",
+            "type": "string"
+          },
+          "count_ticks": {
+            "items": {
+              "$ref": "#/components/schemas/AxisTick"
+            },
+            "title": "Count Ticks",
+            "type": "array"
+          },
+          "csv_url": {
+            "title": "Csv Url",
+            "type": "string"
+          },
+          "json_url": {
+            "title": "Json Url",
+            "type": "string"
+          },
+          "last_yoy_label": {
+            "title": "Last Yoy Label",
+            "type": "string"
+          },
+          "money_unit": {
+            "title": "Money Unit",
+            "type": "string"
+          },
+          "months": {
+            "items": {
+              "$ref": "#/components/schemas/MonthView"
+            },
+            "title": "Months",
+            "type": "array"
+          },
+          "origin": {
+            "enum": [
+              "live_capture",
+              "live",
+              "replay"
+            ],
+            "title": "Origin",
+            "type": "string"
+          },
+          "output": {
+            "$ref": "#/components/schemas/AnalysisOutput"
+          },
+          "ppsf_ticks": {
+            "items": {
+              "$ref": "#/components/schemas/AxisTick"
+            },
+            "title": "Ppsf Ticks",
+            "type": "array"
+          },
+          "price_ticks": {
+            "items": {
+              "$ref": "#/components/schemas/AxisTick"
+            },
+            "title": "Price Ticks",
+            "type": "array"
+          },
+          "purpose": {
+            "enum": [
+              "analysis",
+              "development_smoke",
+              "auxiliary_index_omission"
+            ],
+            "title": "Purpose",
+            "type": "string"
+          },
+          "request": {
+            "$ref": "#/components/schemas/AnalysisRequest"
+          },
+          "total_label": {
+            "title": "Total Label",
+            "type": "string"
+          },
+          "trace_url": {
+            "title": "Trace Url",
+            "type": "string"
+          },
+          "window_change_label": {
+            "title": "Window Change Label",
+            "type": "string"
+          }
+        },
+        "required": [
+          "output",
+          "request",
+          "origin",
+          "purpose",
+          "months",
+          "price_ticks",
+          "ppsf_ticks",
+          "count_ticks",
+          "money_unit",
+          "area_unit",
+          "total_label",
+          "window_change_label",
+          "last_yoy_label",
+          "csv_url",
+          "json_url",
+          "trace_url"
+        ],
+        "title": "AnalysisView",
+        "type": "object"
+      },
+      "Area": {
+        "enum": [
+          "SQFT",
+          "SQM"
+        ],
+        "type": "string"
+      },
+      "AxisTick": {
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "y": {
+            "title": "Y",
+            "type": "string"
+          }
+        },
+        "required": [
+          "y",
+          "label"
+        ],
+        "title": "AxisTick",
+        "type": "object"
+      },
+      "Bootstrap": {
+        "additionalProperties": false,
+        "properties": {
+          "captures": {
+            "items": {
+              "$ref": "#/components/schemas/CaptureSummary"
+            },
+            "title": "Captures",
+            "type": "array"
+          },
+          "contract_version": {
+            "const": "1.0",
+            "title": "Contract Version",
+            "type": "string"
+          },
+          "dataset": {
+            "$ref": "#/components/schemas/DatasetManifest"
+          },
+          "default_request": {
+            "$ref": "#/components/schemas/AnalysisRequest"
+          },
+          "fast_agent_version": {
+            "title": "Fast Agent Version",
+            "type": "string"
+          },
+          "live_model_profile": {
+            "title": "Live Model Profile",
+            "type": "string"
+          },
+          "live_model_requirements": {
+            "title": "Live Model Requirements",
+            "type": "string"
+          },
+          "mr_catalog": {
+            "items": {
+              "$ref": "#/components/schemas/CatalogEntry"
+            },
+            "title": "Mr Catalog",
+            "type": "array"
+          },
+          "python_version": {
+            "title": "Python Version",
+            "type": "string"
+          },
+          "seed_values": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Seed Values",
+            "type": "array"
+          }
+        },
+        "required": [
+          "default_request",
+          "captures",
+          "dataset",
+          "seed_values",
+          "contract_version",
+          "python_version",
+          "fast_agent_version",
+          "live_model_profile",
+          "live_model_requirements",
+          "mr_catalog"
+        ],
+        "title": "Bootstrap",
+        "type": "object"
+      },
+      "CampaignOverview": {
+        "additionalProperties": false,
+        "properties": {
+          "cohort_path": {
+            "title": "Cohort Path",
+            "type": "string"
+          },
+          "completed_comparisons": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "expected_comparisons": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "headlines": {
+            "items": {
+              "$ref": "#/components/schemas/HeadlineDisplay"
+            },
+            "title": "Headlines",
+            "type": "array"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "last_case": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Case"
+          },
+          "last_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Status"
+          },
+          "mode": {
+            "enum": [
+              "live",
+              "replay"
+            ],
+            "title": "Mode",
+            "type": "string"
+          },
+          "scope": {
+            "enum": [
+              "pilot",
+              "headline",
+              "auxiliary"
+            ],
+            "title": "Scope",
+            "type": "string"
+          },
+          "seeds": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Seeds",
+            "type": "array"
+          },
+          "state": {
+            "enum": [
+              "running",
+              "complete",
+              "incomplete"
+            ],
+            "title": "State",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "mode",
+          "scope",
+          "expected_comparisons",
+          "completed_comparisons",
+          "state",
+          "headlines",
+          "last_case",
+          "last_status",
+          "seeds",
+          "cohort_path"
+        ],
+        "title": "CampaignOverview",
+        "type": "object"
+      },
+      "Canonical": {
+        "additionalProperties": false,
+        "properties": {
+          "monthly": {
+            "items": {
+              "$ref": "#/components/schemas/Monthly"
+            },
+            "maxItems": 12,
+            "minItems": 12,
+            "title": "Monthly",
+            "type": "array"
+          },
+          "summary": {
+            "$ref": "#/components/schemas/Summary"
+          },
+          "window_end": {
+            "$ref": "#/components/schemas/Month"
+          },
+          "window_start": {
+            "$ref": "#/components/schemas/Month"
+          }
+        },
+        "required": [
+          "window_start",
+          "window_end",
+          "monthly",
+          "summary"
+        ],
+        "title": "Canonical",
+        "type": "object"
+      },
+      "CaptureId": {
+        "enum": [
+          "normal",
+          "feedback"
+        ],
+        "type": "string"
+      },
+      "CaptureSummary": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "id": {
+            "$ref": "#/components/schemas/CaptureId"
+          },
+          "model_decisions": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "purpose": {
+            "enum": [
+              "development_smoke",
+              "auxiliary_index_omission"
+            ],
+            "title": "Purpose",
+            "type": "string"
+          },
+          "request": {
+            "$ref": "#/components/schemas/AnalysisRequest"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "purpose",
+          "request",
+          "model_decisions",
+          "description"
+        ],
+        "title": "CaptureSummary",
+        "type": "object"
+      },
+      "CaseDetail": {
+        "additionalProperties": false,
+        "properties": {
+          "followup": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AnalysisView"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "recipe": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "title": "Recipe",
+            "type": "object"
+          },
+          "result": {
+            "$ref": "#/components/schemas/CaseResult"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AnalysisView"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "witness": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "title": "Witness",
+            "type": "object"
+          }
+        },
+        "required": [
+          "result",
+          "source",
+          "followup",
+          "witness",
+          "recipe"
+        ],
+        "title": "CaseDetail",
+        "type": "object"
+      },
+      "CaseIndexItem": {
+        "additionalProperties": false,
+        "properties": {
+          "base_id": {
+            "title": "Base Id",
+            "type": "string"
+          },
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "mr_id": {
+            "title": "Mr Id",
+            "type": "string"
+          },
+          "seed": {
+            "title": "Seed",
+            "type": "integer"
+          },
+          "source_reused": {
+            "title": "Source Reused",
+            "type": "boolean"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "violation_kind": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Violation Kind"
+          }
+        },
+        "required": [
+          "key",
+          "mr_id",
+          "base_id",
+          "seed",
+          "status",
+          "violation_kind",
+          "source_reused"
+        ],
+        "title": "CaseIndexItem",
+        "type": "object"
+      },
+      "CaseResult": {
+        "additionalProperties": false,
+        "properties": {
+          "base_id": {
+            "title": "Base Id",
+            "type": "string"
+          },
+          "base_semantic_sha256": {
+            "$ref": "#/components/schemas/Sha256"
+          },
+          "campaign_id": {
+            "title": "Campaign Id",
+            "type": "string"
+          },
+          "cohort_case_sha256": {
+            "$ref": "#/components/schemas/Sha256"
+          },
+          "comparison": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Comparison"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "eligibility_path": {
+            "title": "Eligibility Path",
+            "type": "string"
+          },
+          "followup": {
+            "$ref": "#/components/schemas/LegOutcome"
+          },
+          "live_campaign_id": {
+            "title": "Live Campaign Id",
+            "type": "string"
+          },
+          "mode": {
+            "enum": [
+              "live",
+              "replay"
+            ],
+            "title": "Mode",
+            "type": "string"
+          },
+          "mr_id": {
+            "$ref": "#/components/schemas/MRId"
+          },
+          "mr_version": {
+            "const": "1.0",
+            "title": "Mr Version",
+            "type": "string"
+          },
+          "reason_codes": {
+            "items": {
+              "$ref": "#/components/schemas/ErrorCode"
+            },
+            "title": "Reason Codes",
+            "type": "array"
+          },
+          "schema_version": {
+            "const": "case-2",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "seed": {
+            "title": "Seed",
+            "type": "integer"
+          },
+          "slice_group": {
+            "title": "Slice Group",
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/LegOutcome"
+          },
+          "source_reused_from": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Reused From"
+          },
+          "status": {
+            "enum": [
+              "pass",
+              "violation",
+              "execution_error"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "transform_sha256": {
+            "$ref": "#/components/schemas/Sha256"
+          },
+          "violation_kind": {
+            "anyOf": [
+              {
+                "enum": [
+                  "relation",
+                  "output_contract"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Violation Kind"
+          }
+        },
+        "required": [
+          "schema_version",
+          "campaign_id",
+          "live_campaign_id",
+          "mode",
+          "mr_id",
+          "mr_version",
+          "base_id",
+          "slice_group",
+          "base_semantic_sha256",
+          "cohort_case_sha256",
+          "transform_sha256",
+          "seed",
+          "eligibility_path",
+          "source",
+          "followup",
+          "source_reused_from",
+          "status",
+          "violation_kind",
+          "reason_codes",
+          "comparison"
+        ],
+        "title": "CaseResult",
+        "type": "object"
+      },
+      "CatalogEntry": {
+        "additionalProperties": false,
+        "properties": {
+          "compared_fields": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Compared Fields",
+            "type": "array"
+          },
+          "family": {
+            "title": "Family",
+            "type": "string"
+          },
+          "id": {
+            "$ref": "#/components/schemas/MRId"
+          },
+          "preconditions": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Preconditions",
+            "type": "array"
+          },
+          "relation": {
+            "title": "Relation",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "tolerances": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Tolerances",
+            "type": "object"
+          },
+          "witness": {
+            "title": "Witness",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "family",
+          "relation",
+          "preconditions",
+          "compared_fields",
+          "tolerances",
+          "witness"
+        ],
+        "title": "CatalogEntry",
+        "type": "object"
+      },
+      "Comparison": {
+        "additionalProperties": false,
+        "properties": {
+          "compared_numeric_count": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "differences": {
+            "items": {
+              "$ref": "#/components/schemas/Difference"
+            },
+            "title": "Differences",
+            "type": "array"
+          },
+          "max_absolute_error": {
+            "title": "Max Absolute Error",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "pass",
+              "violation"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "compared_numeric_count",
+          "max_absolute_error",
+          "differences"
+        ],
+        "title": "Comparison",
+        "type": "object"
+      },
+      "Criteria": {
+        "additionalProperties": false,
+        "properties": {
+          "bedrooms_max": {
+            "maximum": 5,
+            "minimum": 1,
+            "title": "Bedrooms Max",
+            "type": "integer"
+          },
+          "bedrooms_min": {
+            "maximum": 5,
+            "minimum": 1,
+            "title": "Bedrooms Min",
+            "type": "integer"
+          },
+          "price_max_cents": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/NonnegativeInt"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "price_min_cents": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/NonnegativeInt"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "property_types": {
+            "items": {
+              "$ref": "#/components/schemas/PropertyType"
+            },
+            "minItems": 1,
+            "title": "Property Types",
+            "type": "array"
+          },
+          "sqft_max": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PositiveInt"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sqft_min": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PositiveInt"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "zips": {
+            "items": {
+              "$ref": "#/components/schemas/Zip"
+            },
+            "minItems": 1,
+            "title": "Zips",
+            "type": "array"
+          }
+        },
+        "required": [
+          "zips",
+          "property_types",
+          "bedrooms_min",
+          "bedrooms_max",
+          "price_min_cents",
+          "price_max_cents",
+          "sqft_min",
+          "sqft_max"
+        ],
+        "title": "Criteria",
+        "type": "object"
+      },
+      "DatasetManifest": {
+        "additionalProperties": false,
+        "properties": {
+          "actual_rows": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "data_license": {
+            "title": "Data License",
+            "type": "string"
+          },
+          "dataset_id": {
+            "$ref": "#/components/schemas/Identifier"
+          },
+          "expected_rows": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "generated_at_utc": {
+            "title": "Generated At Utc",
+            "type": "string"
+          },
+          "generator": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GeneratorProvenance"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "limitations": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Limitations",
+            "type": "array"
+          },
+          "logical_multiset_sha256": {
+            "$ref": "#/components/schemas/Sha256"
+          },
+          "month_completeness": {
+            "additionalProperties": {
+              "enum": [
+                "complete",
+                "incomplete"
+              ],
+              "type": "string"
+            },
+            "title": "Month Completeness",
+            "type": "object"
+          },
+          "month_end": {
+            "$ref": "#/components/schemas/Month"
+          },
+          "month_start": {
+            "$ref": "#/components/schemas/Month"
+          },
+          "partition_row_counts": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/NonnegativeInt"
+            },
+            "title": "Partition Row Counts",
+            "type": "object"
+          },
+          "property_types": {
+            "items": {
+              "$ref": "#/components/schemas/PropertyType"
+            },
+            "title": "Property Types",
+            "type": "array"
+          },
+          "quarantined_rows": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "row_schema_sha256": {
+            "$ref": "#/components/schemas/Sha256"
+          },
+          "schema_version": {
+            "const": "1.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "snapshot_path": {
+            "title": "Snapshot Path",
+            "type": "string"
+          },
+          "snapshot_sha256": {
+            "$ref": "#/components/schemas/Sha256"
+          },
+          "source_kind": {
+            "enum": [
+              "synthetic",
+              "synthetic_fixture",
+              "transformed"
+            ],
+            "title": "Source Kind",
+            "type": "string"
+          },
+          "unbucketed_rows": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "valid_rows": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "zips": {
+            "items": {
+              "$ref": "#/components/schemas/Zip"
+            },
+            "title": "Zips",
+            "type": "array"
+          }
+        },
+        "required": [
+          "schema_version",
+          "dataset_id",
+          "source_kind",
+          "snapshot_path",
+          "snapshot_sha256",
+          "logical_multiset_sha256",
+          "expected_rows",
+          "actual_rows",
+          "valid_rows",
+          "quarantined_rows",
+          "month_start",
+          "month_end",
+          "month_completeness",
+          "partition_row_counts",
+          "unbucketed_rows",
+          "zips",
+          "property_types",
+          "row_schema_sha256",
+          "generator",
+          "generated_at_utc",
+          "data_license",
+          "limitations"
+        ],
+        "title": "DatasetManifest",
+        "type": "object"
+      },
+      "Decimal6": {
+        "pattern": "^(?!-0\\.000000$)-?(0|[1-9][0-9]*)\\.[0-9]{6}$",
+        "type": "string"
+      },
+      "Difference": {
+        "additionalProperties": false,
+        "properties": {
+          "absolute_error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Absolute Error"
+          },
+          "expected": {
+            "$ref": "#/components/schemas/JsonValue"
+          },
+          "followup": {
+            "$ref": "#/components/schemas/JsonValue"
+          },
+          "path": {
+            "title": "Path",
+            "type": "string"
+          },
+          "rule": {
+            "title": "Rule",
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/JsonValue"
+          },
+          "tolerance": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Tolerance"
+          }
+        },
+        "required": [
+          "path",
+          "rule",
+          "source",
+          "followup",
+          "expected"
+        ],
+        "title": "Difference",
+        "type": "object"
+      },
+      "Display": {
+        "additionalProperties": false,
+        "properties": {
+          "area": {
+            "enum": [
+              "SQFT",
+              "SQM"
+            ],
+            "title": "Area",
+            "type": "string"
+          },
+          "money": {
+            "enum": [
+              "USD",
+              "USD_THOUSANDS"
+            ],
+            "title": "Money",
+            "type": "string"
+          }
+        },
+        "required": [
+          "money",
+          "area"
+        ],
+        "title": "Display",
+        "type": "object"
+      },
+      "ErrorCode": {
+        "enum": [
+          "DATA_INVALID",
+          "DATA_INCOMPLETE",
+          "AGENT_OUTPUT_INVALID",
+          "AGENT_POLICY_ERROR",
+          "BUDGET_EXCEEDED",
+          "REPLAY_MISS",
+          "TOOL_ERROR",
+          "MODEL_UNAVAILABLE"
+        ],
+        "type": "string"
+      },
+      "ErrorInfo": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "stage": {
+            "title": "Stage",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "stage"
+        ],
+        "title": "ErrorInfo",
+        "type": "object"
+      },
+      "ExperimentView": {
+        "additionalProperties": false,
+        "properties": {
+          "campaigns": {
+            "items": {
+              "$ref": "#/components/schemas/CampaignOverview"
+            },
+            "title": "Campaigns",
+            "type": "array"
+          }
+        },
+        "required": [
+          "campaigns"
+        ],
+        "title": "ExperimentView",
+        "type": "object"
+      },
+      "GeneratorProvenance": {
+        "additionalProperties": false,
+        "properties": {
+          "algorithm": {
+            "title": "Algorithm",
+            "type": "string"
+          },
+          "config_path": {
+            "title": "Config Path",
+            "type": "string"
+          },
+          "config_sha256": {
+            "$ref": "#/components/schemas/Sha256"
+          },
+          "dependency_sha256": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Sha256"
+            },
+            "title": "Dependency Sha256",
+            "type": "object"
+          },
+          "path": {
+            "title": "Path",
+            "type": "string"
+          },
+          "python_version": {
+            "title": "Python Version",
+            "type": "string"
+          },
+          "seed": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "sha256": {
+            "$ref": "#/components/schemas/Sha256"
+          }
+        },
+        "required": [
+          "path",
+          "sha256",
+          "config_path",
+          "config_sha256",
+          "dependency_sha256",
+          "seed",
+          "python_version",
+          "algorithm"
+        ],
+        "title": "GeneratorProvenance",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "HeadlineDisplay": {
+        "additionalProperties": false,
+        "properties": {
+          "base_rate": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Base Rate"
+          },
+          "base_rate_label": {
+            "title": "Base Rate Label",
+            "type": "string"
+          },
+          "campaign_id": {
+            "title": "Campaign Id",
+            "type": "string"
+          },
+          "ci95_high": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ci95 High"
+          },
+          "ci95_label": {
+            "title": "Ci95 Label",
+            "type": "string"
+          },
+          "ci95_low": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ci95 Low"
+          },
+          "ci_method": {
+            "const": "wilson_score",
+            "title": "Ci Method",
+            "type": "string"
+          },
+          "ci_unit": {
+            "const": "distinct_completed_eligible_base",
+            "title": "Ci Unit",
+            "type": "string"
+          },
+          "complete": {
+            "title": "Complete",
+            "type": "boolean"
+          },
+          "completed_bases": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "eligible_bases": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "execution_errors": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "family": {
+            "enum": [
+              "invariance",
+              "monotonic",
+              "directional"
+            ],
+            "title": "Family",
+            "type": "string"
+          },
+          "interpretation": {
+            "title": "Interpretation",
+            "type": "string"
+          },
+          "invalid_candidates": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "live_campaign_id": {
+            "title": "Live Campaign Id",
+            "type": "string"
+          },
+          "mode": {
+            "enum": [
+              "live",
+              "replay"
+            ],
+            "title": "Mode",
+            "type": "string"
+          },
+          "mr_id": {
+            "$ref": "#/components/schemas/MRId"
+          },
+          "output_contract_violations": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "schema_version": {
+            "const": "headline-2",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "seed_pair_violations": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "seed_pairs_completed": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "seed_values": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Seed Values",
+            "type": "array"
+          },
+          "violating_bases": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          }
+        },
+        "required": [
+          "schema_version",
+          "mr_id",
+          "family",
+          "mode",
+          "campaign_id",
+          "live_campaign_id",
+          "eligible_bases",
+          "completed_bases",
+          "violating_bases",
+          "base_rate",
+          "ci_method",
+          "ci_unit",
+          "ci95_low",
+          "ci95_high",
+          "seed_values",
+          "seed_pair_violations",
+          "seed_pairs_completed",
+          "invalid_candidates",
+          "execution_errors",
+          "output_contract_violations",
+          "complete",
+          "interpretation",
+          "base_rate_label",
+          "ci95_label"
+        ],
+        "title": "HeadlineDisplay",
+        "type": "object"
+      },
+      "Identifier": {
+        "minLength": 1,
+        "pattern": "^[A-Za-z0-9_.:-]+$",
+        "type": "string"
+      },
+      "Job": {
+        "additionalProperties": false,
+        "properties": {
+          "created_at_utc": {
+            "title": "Created At Utc",
+            "type": "string"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ErrorInfo"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "output": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AnalysisOutput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "state": {
+            "enum": [
+              "queued",
+              "running",
+              "completed",
+              "failed"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "submission": {
+            "$ref": "#/components/schemas/Submission"
+          },
+          "updated_at_utc": {
+            "title": "Updated At Utc",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "state",
+          "created_at_utc",
+          "updated_at_utc",
+          "submission",
+          "output",
+          "error"
+        ],
+        "title": "Job",
+        "type": "object"
+      },
+      "JsonValue": {},
+      "LegOutcome": {
+        "additionalProperties": false,
+        "properties": {
+          "canonical_sha256": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Sha256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "capture_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Capture Path"
+          },
+          "duration_ns": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "effective_seed": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Effective Seed"
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ErrorCode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "error_stage": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Stage"
+          },
+          "execution_key": {
+            "$ref": "#/components/schemas/Sha256"
+          },
+          "output_sha256": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Sha256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "request_sha256": {
+            "$ref": "#/components/schemas/Sha256"
+          },
+          "requested_seed": {
+            "title": "Requested Seed",
+            "type": "integer"
+          },
+          "run_id": {
+            "title": "Run Id",
+            "type": "string"
+          },
+          "run_path": {
+            "title": "Run Path",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "completed",
+              "failed"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "view_sha256": {
+            "$ref": "#/components/schemas/Sha256"
+          }
+        },
+        "required": [
+          "execution_key",
+          "status",
+          "run_id",
+          "run_path",
+          "capture_path",
+          "request_sha256",
+          "view_sha256",
+          "requested_seed",
+          "effective_seed",
+          "canonical_sha256",
+          "output_sha256",
+          "error_code",
+          "error_stage",
+          "duration_ns"
+        ],
+        "title": "LegOutcome",
+        "type": "object"
+      },
+      "MRId": {
+        "enum": [
+          "MR01",
+          "MR02",
+          "MR03",
+          "MR04",
+          "MR05",
+          "MR06",
+          "MR07",
+          "MR08",
+          "MR09",
+          "MR10"
+        ],
+        "type": "string"
+      },
+      "Metadata": {
+        "additionalProperties": false,
+        "properties": {
+          "contract_version": {
+            "const": "1.0",
+            "title": "Contract Version",
+            "type": "string"
+          },
+          "dataset_id": {
+            "$ref": "#/components/schemas/Identifier"
+          },
+          "dataset_view_sha256": {
+            "$ref": "#/components/schemas/Sha256"
+          },
+          "effective_seed": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Seed"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "live_campaign_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Live Campaign Id"
+          },
+          "logical_multiset_sha256": {
+            "$ref": "#/components/schemas/Sha256"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/Mode"
+          },
+          "model_profile": {
+            "title": "Model Profile",
+            "type": "string"
+          },
+          "prompt_bundle_sha256": {
+            "$ref": "#/components/schemas/Sha256"
+          },
+          "query_sha256": {
+            "$ref": "#/components/schemas/Sha256"
+          },
+          "requested_seed": {
+            "$ref": "#/components/schemas/Seed"
+          },
+          "run_id": {
+            "$ref": "#/components/schemas/Identifier"
+          },
+          "seed_support": {
+            "enum": [
+              "verified_model_default",
+              "best_effort",
+              "unsupported",
+              "replay_recorded"
+            ],
+            "title": "Seed Support",
+            "type": "string"
+          },
+          "snapshot_sha256": {
+            "$ref": "#/components/schemas/Sha256"
+          },
+          "trace_path": {
+            "title": "Trace Path",
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id",
+          "dataset_id",
+          "snapshot_sha256",
+          "dataset_view_sha256",
+          "logical_multiset_sha256",
+          "query_sha256",
+          "contract_version",
+          "mode",
+          "model_profile",
+          "requested_seed",
+          "effective_seed",
+          "seed_support",
+          "prompt_bundle_sha256",
+          "trace_path",
+          "live_campaign_id"
+        ],
+        "title": "Metadata",
+        "type": "object"
+      },
+      "Mode": {
+        "enum": [
+          "live",
+          "replay",
+          "policy_simulation"
+        ],
+        "type": "string"
+      },
+      "ModelTurn": {
+        "additionalProperties": false,
+        "properties": {
+          "budget": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "title": "Budget",
+            "type": "object"
+          },
+          "dispatched": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/JsonValue"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dispatched"
+          },
+          "input": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "title": "Input",
+            "type": "object"
+          },
+          "response": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/JsonValue"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Response"
+          },
+          "sequence": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          }
+        },
+        "required": [
+          "sequence",
+          "input",
+          "response",
+          "dispatched",
+          "budget"
+        ],
+        "title": "ModelTurn",
+        "type": "object"
+      },
+      "Money": {
+        "enum": [
+          "USD",
+          "USD_THOUSANDS"
+        ],
+        "type": "string"
+      },
+      "Month": {
+        "pattern": "^(?!0000)\\d{4}-(0[1-9]|1[0-2])$",
+        "type": "string"
+      },
+      "MonthView": {
+        "additionalProperties": false,
+        "properties": {
+          "count_mom": {
+            "title": "Count Mom",
+            "type": "string"
+          },
+          "count_plot": {
+            "$ref": "#/components/schemas/PlotPoint"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "month": {
+            "title": "Month",
+            "type": "string"
+          },
+          "observations": {
+            "title": "Observations",
+            "type": "string"
+          },
+          "ppsf_mom": {
+            "title": "Ppsf Mom",
+            "type": "string"
+          },
+          "ppsf_plot": {
+            "$ref": "#/components/schemas/PlotPoint"
+          },
+          "price": {
+            "title": "Price",
+            "type": "string"
+          },
+          "price_mom": {
+            "title": "Price Mom",
+            "type": "string"
+          },
+          "price_per_area": {
+            "title": "Price Per Area",
+            "type": "string"
+          },
+          "price_plot": {
+            "$ref": "#/components/schemas/PlotPoint"
+          },
+          "price_yoy": {
+            "title": "Price Yoy",
+            "type": "string"
+          },
+          "short_label": {
+            "title": "Short Label",
+            "type": "string"
+          },
+          "support": {
+            "enum": [
+              "empty",
+              "sparse",
+              "supported"
+            ],
+            "title": "Support",
+            "type": "string"
+          }
+        },
+        "required": [
+          "month",
+          "label",
+          "short_label",
+          "observations",
+          "price",
+          "price_per_area",
+          "price_mom",
+          "price_yoy",
+          "ppsf_mom",
+          "count_mom",
+          "price_plot",
+          "ppsf_plot",
+          "count_plot",
+          "support"
+        ],
+        "title": "MonthView",
+        "type": "object"
+      },
+      "Monthly": {
+        "additionalProperties": false,
+        "properties": {
+          "count_mom_pct": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Decimal6"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "listing_count": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "median_ppsf_usd": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Unsigned6"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "median_price_usd": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Unsigned6"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "month": {
+            "$ref": "#/components/schemas/Month"
+          },
+          "ppsf_mom_pct": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Decimal6"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "ppsf_yoy_pct": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Decimal6"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "price_mom_pct": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Decimal6"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "price_yoy_pct": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Decimal6"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "month",
+          "listing_count",
+          "median_price_usd",
+          "median_ppsf_usd",
+          "price_mom_pct",
+          "ppsf_mom_pct",
+          "price_yoy_pct",
+          "ppsf_yoy_pct",
+          "count_mom_pct"
+        ],
+        "title": "Monthly",
+        "type": "object"
+      },
+      "Narrative": {
+        "additionalProperties": false,
+        "properties": {
+          "caveat_codes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Caveat Codes",
+            "type": "array"
+          },
+          "fact_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Fact Ids",
+            "type": "array"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "fact_ids",
+          "caveat_codes",
+          "text"
+        ],
+        "title": "Narrative",
+        "type": "object"
+      },
+      "NonnegativeInt": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "PlotPoint": {
+        "additionalProperties": false,
+        "properties": {
+          "x": {
+            "title": "X",
+            "type": "string"
+          },
+          "y": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Y"
+          }
+        },
+        "required": [
+          "x",
+          "y"
+        ],
+        "title": "PlotPoint",
+        "type": "object"
+      },
+      "PositiveInt": {
+        "minimum": 1,
+        "type": "integer"
+      },
+      "Presentation": {
+        "additionalProperties": false,
+        "properties": {
+          "area": {
+            "enum": [
+              "SQFT",
+              "SQM"
+            ],
+            "title": "Area",
+            "type": "string"
+          },
+          "money": {
+            "enum": [
+              "USD",
+              "USD_THOUSANDS"
+            ],
+            "title": "Money",
+            "type": "string"
+          },
+          "monthly": {
+            "items": {
+              "$ref": "#/components/schemas/PresentedMonth"
+            },
+            "maxItems": 12,
+            "minItems": 12,
+            "title": "Monthly",
+            "type": "array"
+          }
+        },
+        "required": [
+          "money",
+          "area",
+          "monthly"
+        ],
+        "title": "Presentation",
+        "type": "object"
+      },
+      "PresentedMonth": {
+        "additionalProperties": false,
+        "properties": {
+          "median_price": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Unsigned6"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "median_price_per_area": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Unsigned6"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "month": {
+            "$ref": "#/components/schemas/Month"
+          }
+        },
+        "required": [
+          "month",
+          "median_price",
+          "median_price_per_area"
+        ],
+        "title": "PresentedMonth",
+        "type": "object"
+      },
+      "PropertyType": {
+        "enum": [
+          "single_family",
+          "condo",
+          "townhouse"
+        ],
+        "type": "string"
+      },
+      "Quality": {
+        "additionalProperties": false,
+        "properties": {
+          "codes": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Codes",
+            "type": "array"
+          },
+          "sparse_months": {
+            "items": {
+              "$ref": "#/components/schemas/Month"
+            },
+            "title": "Sparse Months",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "complete",
+              "limited"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "codes",
+          "sparse_months"
+        ],
+        "title": "Quality",
+        "type": "object"
+      },
+      "Seed": {
+        "maximum": 2147483647,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "Sha256": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "Submission": {
+        "additionalProperties": false,
+        "properties": {
+          "capture_id": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CaptureId"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "mode": {
+            "enum": [
+              "live",
+              "replay"
+            ],
+            "title": "Mode",
+            "type": "string"
+          },
+          "request": {
+            "$ref": "#/components/schemas/AnalysisRequest"
+          }
+        },
+        "required": [
+          "request",
+          "mode"
+        ],
+        "title": "Submission",
+        "type": "object"
+      },
+      "Summary": {
+        "additionalProperties": false,
+        "properties": {
+          "last_month_ppsf_yoy_pct": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Decimal6"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "last_month_price_yoy_pct": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Decimal6"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "total_observations": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "window_ppsf_change_pct": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Decimal6"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "window_price_change_pct": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Decimal6"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "zip_rankings": {
+            "items": {
+              "$ref": "#/components/schemas/ZipRanking"
+            },
+            "maxItems": 12,
+            "title": "Zip Rankings",
+            "type": "array"
+          }
+        },
+        "required": [
+          "window_price_change_pct",
+          "window_ppsf_change_pct",
+          "last_month_price_yoy_pct",
+          "last_month_ppsf_yoy_pct",
+          "total_observations",
+          "zip_rankings"
+        ],
+        "title": "Summary",
+        "type": "object"
+      },
+      "TraceEvent": {
+        "additionalProperties": false,
+        "properties": {
+          "actor": {
+            "title": "Actor",
+            "type": "string"
+          },
+          "dataset_view_sha256": {
+            "$ref": "#/components/schemas/Sha256"
+          },
+          "event": {
+            "title": "Event",
+            "type": "string"
+          },
+          "illustrative_fixture": {
+            "title": "Illustrative Fixture",
+            "type": "boolean"
+          },
+          "iteration": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/Mode"
+          },
+          "parent_event_sequence": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Event Sequence"
+          },
+          "payload": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "title": "Payload",
+            "type": "object"
+          },
+          "payload_sha256": {
+            "$ref": "#/components/schemas/Sha256"
+          },
+          "plan_sha256": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Sha256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "query_sha256": {
+            "$ref": "#/components/schemas/Sha256"
+          },
+          "run_id": {
+            "title": "Run Id",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1.0",
+            "title": "Schema Version",
+            "type": "string"
+          },
+          "sequence": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "timestamp_utc": {
+            "title": "Timestamp Utc",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema_version",
+          "run_id",
+          "sequence",
+          "timestamp_utc",
+          "mode",
+          "iteration",
+          "event",
+          "actor",
+          "parent_event_sequence",
+          "query_sha256",
+          "dataset_view_sha256",
+          "plan_sha256",
+          "payload",
+          "payload_sha256",
+          "illustrative_fixture"
+        ],
+        "title": "TraceEvent",
+        "type": "object"
+      },
+      "Unsigned6": {
+        "pattern": "^(0|[1-9][0-9]*)\\.[0-9]{6}$",
+        "type": "string"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      },
+      "WorkflowView": {
+        "additionalProperties": false,
+        "properties": {
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/TraceEvent"
+            },
+            "title": "Events",
+            "type": "array"
+          },
+          "failure": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ErrorInfo"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "mode": {
+            "$ref": "#/components/schemas/Mode"
+          },
+          "model_decisions": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "query_unchanged": {
+            "title": "Query Unchanged",
+            "type": "boolean"
+          },
+          "refinements": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "run_id": {
+            "title": "Run Id",
+            "type": "string"
+          },
+          "schema_repairs": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "status": {
+            "enum": [
+              "completed",
+              "failed",
+              "running"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "trace_url": {
+            "title": "Trace Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "run_id",
+          "mode",
+          "events",
+          "model_decisions",
+          "refinements",
+          "schema_repairs",
+          "query_unchanged",
+          "trace_url",
+          "status",
+          "failure"
+        ],
+        "title": "WorkflowView",
+        "type": "object"
+      },
+      "Zip": {
+        "enum": [
+          "75001",
+          "75006",
+          "75019",
+          "75024",
+          "75034",
+          "75038",
+          "75063",
+          "75080",
+          "75093",
+          "75201",
+          "75204",
+          "75214"
+        ],
+        "type": "string"
+      },
+      "ZipRanking": {
+        "additionalProperties": false,
+        "properties": {
+          "median_ppsf_usd": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Unsigned6"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rank": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rank"
+          },
+          "zip": {
+            "$ref": "#/components/schemas/Zip"
+          }
+        },
+        "required": [
+          "zip",
+          "median_ppsf_usd",
+          "rank"
+        ],
+        "title": "ZipRanking",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Housing Evidence",
+    "version": "1.0.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/analyses/{kind}/{reference}": {
+      "get": {
+        "operationId": "get_analysis_api_analyses__kind___reference__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "kind",
+            "required": true,
+            "schema": {
+              "enum": [
+                "capture",
+                "job"
+              ],
+              "title": "Kind",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "reference",
+            "required": true,
+            "schema": {
+              "title": "Reference",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "money",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Money"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Money"
+            }
+          },
+          {
+            "in": "query",
+            "name": "area",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Area"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Area"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalysisView"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Analysis"
+      }
+    },
+    "/api/analyses/{kind}/{reference}/export.csv": {
+      "get": {
+        "operationId": "csv_export_api_analyses__kind___reference__export_csv_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "kind",
+            "required": true,
+            "schema": {
+              "enum": [
+                "capture",
+                "job"
+              ],
+              "title": "Kind",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "reference",
+            "required": true,
+            "schema": {
+              "title": "Reference",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "money",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Money"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Money"
+            }
+          },
+          {
+            "in": "query",
+            "name": "area",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Area"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Area"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Csv Export"
+      }
+    },
+    "/api/analyses/{kind}/{reference}/export.json": {
+      "get": {
+        "operationId": "json_export_api_analyses__kind___reference__export_json_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "kind",
+            "required": true,
+            "schema": {
+              "enum": [
+                "capture",
+                "job"
+              ],
+              "title": "Kind",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "reference",
+            "required": true,
+            "schema": {
+              "title": "Reference",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Json Export"
+      }
+    },
+    "/api/analyses/{kind}/{reference}/model/{sequence}": {
+      "get": {
+        "operationId": "get_model_turn_api_analyses__kind___reference__model__sequence__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "kind",
+            "required": true,
+            "schema": {
+              "enum": [
+                "capture",
+                "job"
+              ],
+              "title": "Kind",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "reference",
+            "required": true,
+            "schema": {
+              "title": "Reference",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "sequence",
+            "required": true,
+            "schema": {
+              "maximum": 70,
+              "minimum": 0,
+              "title": "Sequence",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelTurn"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Model Turn"
+      }
+    },
+    "/api/analyses/{kind}/{reference}/trace": {
+      "get": {
+        "operationId": "trace_export_api_analyses__kind___reference__trace_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "kind",
+            "required": true,
+            "schema": {
+              "enum": [
+                "capture",
+                "job"
+              ],
+              "title": "Kind",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "reference",
+            "required": true,
+            "schema": {
+              "title": "Reference",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Trace Export"
+      }
+    },
+    "/api/analyses/{kind}/{reference}/workflow": {
+      "get": {
+        "operationId": "get_workflow_api_analyses__kind___reference__workflow_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "kind",
+            "required": true,
+            "schema": {
+              "enum": [
+                "capture",
+                "job"
+              ],
+              "title": "Kind",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "reference",
+            "required": true,
+            "schema": {
+              "title": "Reference",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowView"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Workflow"
+      }
+    },
+    "/api/bootstrap": {
+      "get": {
+        "operationId": "bootstrap_api_bootstrap_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Bootstrap"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Bootstrap"
+      }
+    },
+    "/api/experiments": {
+      "get": {
+        "operationId": "experiments_api_experiments_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExperimentView"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Experiments"
+      }
+    },
+    "/api/experiments/{campaign_id}/cases": {
+      "get": {
+        "operationId": "case_index_api_experiments__campaign_id__cases_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "campaign_id",
+            "required": true,
+            "schema": {
+              "title": "Campaign Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/CaseIndexItem"
+                  },
+                  "title": "Response Case Index Api Experiments  Campaign Id  Cases Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Case Index"
+      }
+    },
+    "/api/experiments/{campaign_id}/cases/{key}": {
+      "get": {
+        "operationId": "case_detail_api_experiments__campaign_id__cases__key__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "campaign_id",
+            "required": true,
+            "schema": {
+              "title": "Campaign Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "schema": {
+              "title": "Key",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CaseDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Case Detail"
+      }
+    },
+    "/api/experiments/{campaign_id}/cases/{key}/{leg}/export.csv": {
+      "get": {
+        "operationId": "case_csv_api_experiments__campaign_id__cases__key___leg__export_csv_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "campaign_id",
+            "required": true,
+            "schema": {
+              "title": "Campaign Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "schema": {
+              "title": "Key",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "leg",
+            "required": true,
+            "schema": {
+              "enum": [
+                "source",
+                "followup"
+              ],
+              "title": "Leg",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Case Csv"
+      }
+    },
+    "/api/experiments/{campaign_id}/cases/{key}/{leg}/export.json": {
+      "get": {
+        "operationId": "case_json_api_experiments__campaign_id__cases__key___leg__export_json_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "campaign_id",
+            "required": true,
+            "schema": {
+              "title": "Campaign Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "schema": {
+              "title": "Key",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "leg",
+            "required": true,
+            "schema": {
+              "enum": [
+                "source",
+                "followup"
+              ],
+              "title": "Leg",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Case Json"
+      }
+    },
+    "/api/experiments/{campaign_id}/cases/{key}/{leg}/model/{sequence}": {
+      "get": {
+        "operationId": "case_model_turn_api_experiments__campaign_id__cases__key___leg__model__sequence__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "campaign_id",
+            "required": true,
+            "schema": {
+              "title": "Campaign Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "schema": {
+              "title": "Key",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "leg",
+            "required": true,
+            "schema": {
+              "enum": [
+                "source",
+                "followup"
+              ],
+              "title": "Leg",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "sequence",
+            "required": true,
+            "schema": {
+              "maximum": 70,
+              "minimum": 0,
+              "title": "Sequence",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelTurn"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Case Model Turn"
+      }
+    },
+    "/api/experiments/{campaign_id}/cases/{key}/{leg}/trace": {
+      "get": {
+        "operationId": "case_trace_api_experiments__campaign_id__cases__key___leg__trace_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "campaign_id",
+            "required": true,
+            "schema": {
+              "title": "Campaign Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "schema": {
+              "title": "Key",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "leg",
+            "required": true,
+            "schema": {
+              "enum": [
+                "source",
+                "followup"
+              ],
+              "title": "Leg",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Case Trace"
+      }
+    },
+    "/api/experiments/{campaign_id}/cases/{key}/{leg}/workflow": {
+      "get": {
+        "operationId": "case_workflow_api_experiments__campaign_id__cases__key___leg__workflow_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "campaign_id",
+            "required": true,
+            "schema": {
+              "title": "Campaign Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "schema": {
+              "title": "Key",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "leg",
+            "required": true,
+            "schema": {
+              "enum": [
+                "source",
+                "followup"
+              ],
+              "title": "Leg",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowView"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Case Workflow"
+      }
+    },
+    "/api/health": {
+      "get": {
+        "operationId": "health_api_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Health Api Health Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Health"
+      }
+    },
+    "/api/jobs": {
+      "get": {
+        "operationId": "all_jobs_api_jobs_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Job"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "All Jobs"
+      },
+      "post": {
+        "operationId": "create_job_api_jobs_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Submission"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Job"
+      }
+    },
+    "/api/jobs/{job_id}": {
+      "get": {
+        "operationId": "get_job_api_jobs__job_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "job_id",
+            "required": true,
+            "schema": {
+              "title": "Job Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Job"
+      }
+    }
+  }
+}

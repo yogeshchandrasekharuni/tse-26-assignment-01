@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/scripts/probe_fast_agent.py", line 57, in <module>
+    asyncio.run(main())
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/scripts/probe_fast_agent.py", line 35, in main
+    json.loads(response2)
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/json/decoder.py", line 338, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yogesh/Developer/Personal/iiith/tse-assignment/.python/cpython-3.12.14-macos-aarch64-none/lib/python3.12/json/decoder.py", line 356, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)

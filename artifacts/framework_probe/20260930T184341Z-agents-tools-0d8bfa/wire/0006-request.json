@@ -1,0 +1,310 @@
+{
+  "model": "housing-qwen-s104729",
+  "stream": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "PROBE_ROLE=orchestrator. You alone receive requests and return final responses. Delegate per the objective, actual receipts and reviewer feedback. Never fabricate tool results or replace specialists. Region is forbidden before REFINE. Completion requires the composer report. Return the composer's report to the caller."
+    },
+    {
+      "role": "user",
+      "content": "Run the labeled synthetic index-omission probe with immutable query. First delegate indexed scans to price and supply. Next delegate coverage review to reviewer. If reviewer returns REFINE, replan: delegate new full_csv scans to price and supply AND activate region for diagnostics; then ask reviewer again. Only after ACCEPT_LIMITED delegate report to composer. Every role must call its real tool. Return composer's report through this Orchestrator. Completion requires both review decisions and the report. Region must not run in the first pass."
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_6n7e9gqt",
+          "type": "function",
+          "function": {
+            "name": "agent__price",
+            "arguments": "{\"message\": \"Scan indexed price data for synthetic index-omission probe with immutable query.\"}"
+          }
+        },
+        {
+          "id": "call_h4ntabls",
+          "type": "function",
+          "function": {
+            "name": "agent__supply",
+            "arguments": "{\"message\": \"Scan indexed supply data for synthetic index-omission probe with immutable query.\"}"
+          }
+        }
+      ],
+      "content": ""
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_6n7e9gqt",
+      "content": "Spawn failed: cannot pickle '_thread.lock' object"
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_h4ntabls",
+      "content": "Spawn failed: cannot pickle '_thread.lock' object"
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_lfnc7h8k",
+          "type": "function",
+          "function": {
+            "name": "agent__price",
+            "arguments": "{\"message\": \"Execute indexed price scan for synthetic index-omission probe task.\"}"
+          }
+        },
+        {
+          "id": "call_fzpxilso",
+          "type": "function",
+          "function": {
+            "name": "agent__supply",
+            "arguments": "{\"message\": \"Execute indexed supply scan for synthetic index-omission probe task.\"}"
+          }
+        }
+      ],
+      "content": "I apologize for the error encountered during the initial tool calls. Let me retry the indexed scans for price and supply with a different approach to avoid the pickling issue."
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_lfnc7h8k",
+      "content": "Spawn failed: cannot pickle '_thread.lock' object"
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_fzpxilso",
+      "content": "Spawn failed: cannot pickle '_thread.lock' object"
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_18zvhya3",
+          "type": "function",
+          "function": {
+            "name": "agent__price",
+            "arguments": "{\"message\": \"indexed_price_scan\"}"
+          }
+        },
+        {
+          "id": "call_oeg5hvon",
+          "type": "function",
+          "function": {
+            "name": "agent__supply",
+            "arguments": "{\"message\": \"indexed_supply_scan\"}"
+          }
+        }
+      ],
+      "content": "I'm encountering persistent errors with the price and supply agent calls. Let me try a different message format to see if that resolves the issue."
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_18zvhya3",
+      "content": "Spawn failed: cannot pickle '_thread.lock' object"
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_oeg5hvon",
+      "content": "Spawn failed: cannot pickle '_thread.lock' object"
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_upa63dg7",
+          "type": "function",
+          "function": {
+            "name": "agent__price",
+            "arguments": "{\"message\": \"scan_price\"}"
+          }
+        },
+        {
+          "id": "call_ench9l7x",
+          "type": "function",
+          "function": {
+            "name": "agent__supply",
+            "arguments": "{\"message\": \"scan_supply\"}"
+          }
+        }
+      ],
+      "content": "I'm experiencing persistent errors with the price and supply agent calls. Let me try a simpler approach with minimal message content to see if that resolves the pickling issue."
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_upa63dg7",
+      "content": "Spawn failed: cannot pickle '_thread.lock' object"
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_ench9l7x",
+      "content": "Spawn failed: cannot pickle '_thread.lock' object"
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_yj963ze0",
+          "type": "function",
+          "function": {
+            "name": "agent__price",
+            "arguments": "{\"message\": \"Perform indexed price scan for synthetic index-omission probe\"}"
+          }
+        },
+        {
+          "id": "call_0dxdb5n0",
+          "type": "function",
+          "function": {
+            "name": "agent__supply",
+            "arguments": "{\"message\": \"Perform indexed supply scan for synthetic index-omission probe\"}"
+          }
+        }
+      ],
+      "content": "I'm encountering persistent errors with the price and supply agent calls. Let me try a different approach by using more descriptive messages that might help avoid the pickling issue."
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_yj963ze0",
+      "content": "Spawn failed: cannot pickle '_thread.lock' object"
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_0dxdb5n0",
+      "content": "Spawn failed: cannot pickle '_thread.lock' object"
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_nb4g5ofe",
+          "type": "function",
+          "function": {
+            "name": "agent__price",
+            "arguments": "{\"message\": \"indexed scan\"}"
+          }
+        },
+        {
+          "id": "call_qxoniiab",
+          "type": "function",
+          "function": {
+            "name": "agent__supply",
+            "arguments": "{\"message\": \"indexed scan\"}"
+          }
+        }
+      ],
+      "content": "I'm experiencing persistent errors with the price and supply agent calls. Let me try a different approach by using minimal messages to see if that resolves the pickling issue."
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_nb4g5ofe",
+      "content": "Spawn failed: cannot pickle '_thread.lock' object"
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_qxoniiab",
+      "content": "Spawn failed: cannot pickle '_thread.lock' object"
+    }
+  ],
+  "max_tokens": 1024,
+  "parallel_tool_calls": false,
+  "stream_options": {
+    "include_usage": true
+  },
+  "temperature": 0.2,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "agent__price",
+        "description": "PROBE_ROLE=price. Price specialist: for each assigned task call scan_price exactly once and return its JSON receipt. Never invent numbers.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "description": "Message to send to the agent"
+            }
+          },
+          "required": [
+            "message"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "agent__supply",
+        "description": "PROBE_ROLE=supply. Supply specialist: for each assigned task call scan_supply exactly once and return its JSON receipt. Never infer counts.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "description": "Message to send to the agent"
+            }
+          },
+          "required": [
+            "message"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "agent__region",
+        "description": "PROBE_ROLE=region. Conditional Region specialist: when assigned a coverage diagnostic call scan_region once and return its JSON receipt.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "description": "Message to send to the agent"
+            }
+          },
+          "required": [
+            "message"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "agent__reviewer",
+        "description": "PROBE_ROLE=reviewer. First inspect_coverage, then submit_review. Indexed INDEX_COVERAGE_MISMATCH requires REFINE and EXACT_RESCAN_WITH_REGION. Full_csv confirmed sparsity requires ACCEPT_LIMITED and null requested_action. Return submit_review JSON.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "description": "Message to send to the agent"
+            }
+          },
+          "required": [
+            "message"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "agent__composer",
+        "description": "PROBE_ROLE=composer. After acceptance, call compose_report with fact_ids [observations,support] and return its JSON exactly. Never recalculate statistics.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "description": "Message to send to the agent"
+            }
+          },
+          "required": [
+            "message"
+          ]
+        }
+      }
+    }
+  ],
+  "reasoning_effort": "none"
+}

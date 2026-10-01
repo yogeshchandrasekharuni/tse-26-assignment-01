@@ -1,0 +1,252 @@
+{
+  "model": "housing-qwen-s104729",
+  "stream": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "PROBE_ROLE=orchestrator. You alone receive requests and return final responses. Delegate per the objective, actual receipts and reviewer feedback. Never fabricate tool results or replace specialists. Region is forbidden before REFINE. Completion requires the composer report. Return the composer's report to the caller."
+    },
+    {
+      "role": "user",
+      "content": "Run the labeled synthetic index-omission probe with immutable query. First delegate indexed scans to price and supply. Next delegate coverage review to reviewer. If reviewer returns REFINE, replan: delegate new full_csv scans to price and supply AND activate region for diagnostics; then ask reviewer again. Only after ACCEPT_LIMITED delegate report to composer. Every role must call its real tool. Return composer's report through this Orchestrator. Completion requires both review decisions and the report. Region must not run in the first pass."
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_ejpyf3ht",
+          "type": "function",
+          "function": {
+            "name": "agent__price",
+            "arguments": "{\"message\": \"Scan indexed price data for synthetic index-omission probe with immutable query.\"}"
+          }
+        },
+        {
+          "id": "call_wq6iskm5",
+          "type": "function",
+          "function": {
+            "name": "agent__supply",
+            "arguments": "{\"message\": \"Scan indexed supply data for synthetic index-omission probe with immutable query.\"}"
+          }
+        }
+      ],
+      "content": ""
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_ejpyf3ht",
+      "content": "The scan has been executed. Here is the receipt:\n\n- **Role**: price\n- **Strategy**: indexed\n- **Query SHA256**: 25f16ca91607f33ea413b4e1d73d9ec78e03b7d4d83aac1651ff17911812f8a5\n- **Selection SHA256**: e2fb924b2285554b97c212009e503c38905a723bd153a28ef73608e85f55189d\n- **Selected Observations**: 22\n- **Result (Pooled Median USD Rational)**: 300000\n- **Receipt SHA256**: 727bd8092fdc7d49341cbf7c24b8dc9f36722965f721fe2e1746a533caffed6a"
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_wq6iskm5",
+      "content": "The scan of indexed supply data has been completed. The receipt indicates that the selection contains 22 observations, with monthly counts distributed across various months from October 2025 to September 2026. Notably, there are no observations recorded for March 2026. The scan is not yet complete, but the source snapshot is complete."
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_u71oevje",
+          "type": "function",
+          "function": {
+            "name": "agent__reviewer",
+            "arguments": "{\"message\": \"Inspect coverage for synthetic index-omission probe with immutable query.\"}"
+          }
+        }
+      ],
+      "content": ""
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_u71oevje",
+      "content": "{\"review\":{\"role\":\"reviewer\",\"decision\":\"REFINE\",\"requested_action\":\"EXACT_RESCAN_WITH_REGION\"},\"next_strategy\":\"full_csv\",\"active_specialists\":[\"price\",\"supply\",\"region\"],\"query_sha256\":\"25f16ca91607f33ea413b4e1d73d9ec78e03b7d4d83aac1651ff17911812f8a5\"}"
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_tped2v7d",
+          "type": "function",
+          "function": {
+            "name": "agent__price",
+            "arguments": "{\"message\": \"Scan full_csv price data for synthetic index-omission probe with immutable query.\"}"
+          }
+        },
+        {
+          "id": "call_l2yc429p",
+          "type": "function",
+          "function": {
+            "name": "agent__supply",
+            "arguments": "{\"message\": \"Scan full_csv supply data for synthetic index-omission probe with immutable query.\"}"
+          }
+        },
+        {
+          "id": "call_xh0bidp4",
+          "type": "function",
+          "function": {
+            "name": "agent__region",
+            "arguments": "{\"message\": \"Activate region diagnostics for synthetic index-omission probe with immutable query.\"}"
+          }
+        }
+      ],
+      "content": ""
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_tped2v7d",
+      "content": "The scan for the synthetic index-omission probe with immutable query has been completed. The receipt is as follows:\n\n```json\n{\n  \"role\": \"price\",\n  \"strategy\": \"full_csv\",\n  \"query_sha256\": \"25f16ca91607f33ea413b4e1d73d9ec78e03b7d4d83aac1651ff17911812f8a5\",\n  \"selection_sha256\": \"442111da7ed2f3be9a7cd7c23a658536491ee1c11b3a0169469fc757c8ccd95d\",\n  \"selected_observations\": 24,\n  \"result\": {\n    \"pooled_median_usd_rational\": \"300000\"\n  },\n  \"receipt_sha256\": \"f7534616d6ecfa68a48a04076a8731547e64154cad4c232cf105fb289ec4000c\"\n}\n```"
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_l2yc429p",
+      "content": "The scan for the full_csv supply data has been completed. The receipt confirms that the selection is complete with 24 observations selected, distributed evenly across the months from October 2025 to September 2026 (2 observations per month). Both the scan and source snapshot are marked as complete."
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_xh0bidp4",
+      "content": "The region diagnostic scan has been completed. Here are the results:\n\n- **Role**: region\n- **Strategy**: full_csv\n- **Query SHA256**: 25f16ca91607f33ea413b4e1d73d9ec78e03b7d4d83aac1651ff17911812f8a5\n- **Selection SHA256**: 442111da7ed2f3be9a7cd7c23a658536491ee1c11b3a0169469fc757c8ccd95d\n- **Selected Observations**: 24\n- **Requested ZIPs**: [\"75204\"]\n- **Support Type**: sparse_confirmed\n- **Receipt SHA256**: b2fedfc953beebca06d0141ccf0071d962b5d361d8b41051b0462fb9890780e6"
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_auabyznd",
+          "type": "function",
+          "function": {
+            "name": "agent__reviewer",
+            "arguments": "{\"message\": \"Submit review for synthetic index-omission probe with immutable query after full_csv scans and region diagnostics.\"}"
+          }
+        }
+      ],
+      "content": ""
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_auabyznd",
+      "content": "{\"review\":{\"role\":\"reviewer\",\"decision\":\"ACCEPT_LIMITED\",\"requested_action\":null},\"next_strategy\":\"full_csv\",\"active_specialists\":[\"price\",\"supply\",\"region\"],\"query_sha256\":\"25f16ca91607f33ea413b4e1d73d9ec78e03b7d4d83aac1651ff17911812f8a5\"}"
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_iaduxd7v",
+          "type": "function",
+          "function": {
+            "name": "agent__composer",
+            "arguments": "{\"message\": \"Compose report for synthetic index-omission probe with immutable query after ACCEPT_LIMITED from reviewer.\"}"
+          }
+        }
+      ],
+      "content": ""
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_iaduxd7v",
+      "content": "```json\n{\n  \"source_kind\": \"synthetic_probe_fixture\",\n  \"injection\": \"index_omission\",\n  \"total_observations\": 24,\n  \"quality\": \"limited\",\n  \"fact_ids\": [\n    \"observations\",\n    \"support\"\n  ],\n  \"text\": \"Synthetic probe fixture: 24 observations; sparse support confirmed.\"\n}\n```"
+    }
+  ],
+  "max_tokens": 1024,
+  "parallel_tool_calls": false,
+  "stream_options": {
+    "include_usage": true
+  },
+  "temperature": 0.2,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "agent__price",
+        "description": "PROBE_ROLE=price. Price specialist: for each assigned task call scan_price exactly once and return its JSON receipt. Never invent numbers.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "description": "Message to send to the agent"
+            }
+          },
+          "required": [
+            "message"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "agent__supply",
+        "description": "PROBE_ROLE=supply. Supply specialist: for each assigned task call scan_supply exactly once and return its JSON receipt. Never infer counts.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "description": "Message to send to the agent"
+            }
+          },
+          "required": [
+            "message"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "agent__region",
+        "description": "PROBE_ROLE=region. Conditional Region specialist: when assigned a coverage diagnostic call scan_region once and return its JSON receipt.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "description": "Message to send to the agent"
+            }
+          },
+          "required": [
+            "message"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "agent__reviewer",
+        "description": "PROBE_ROLE=reviewer. First inspect_coverage, then submit_review. Indexed INDEX_COVERAGE_MISMATCH requires REFINE and EXACT_RESCAN_WITH_REGION. Full_csv confirmed sparsity requires ACCEPT_LIMITED and null requested_action. Return submit_review JSON.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "description": "Message to send to the agent"
+            }
+          },
+          "required": [
+            "message"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "agent__composer",
+        "description": "PROBE_ROLE=composer. After acceptance, call compose_report with fact_ids [observations,support] and return its JSON exactly. Never recalculate statistics.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "description": "Message to send to the agent"
+            }
+          },
+          "required": [
+            "message"
+          ]
+        }
+      }
+    }
+  ],
+  "reasoning_effort": "none"
+}

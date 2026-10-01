@@ -1,0 +1,35 @@
+{
+  "model": "housing-qwen-s104729",
+  "stream": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "PROBE_ROLE=region. Conditional Region specialist: when assigned a coverage diagnostic call scan_region once and return its JSON receipt."
+    },
+    {
+      "role": "user",
+      "content": "Activate region diagnostics for synthetic index-omission probe with immutable query."
+    }
+  ],
+  "max_tokens": 1024,
+  "parallel_tool_calls": true,
+  "stream_options": {
+    "include_usage": true
+  },
+  "temperature": 0.2,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "scan_region",
+        "description": "Diagnose the requested ZIP after REFINE activates Region. Never change filters.",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        }
+      }
+    }
+  ],
+  "reasoning_effort": "none"
+}

@@ -1,0 +1,89 @@
+{
+  "model": "housing-qwen-s104729",
+  "stream": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "PROBE_ROLE=reviewer. First inspect_coverage, then submit_review. Indexed INDEX_COVERAGE_MISMATCH requires REFINE and EXACT_RESCAN_WITH_REGION. Full_csv confirmed sparsity requires ACCEPT_LIMITED and null requested_action. Return submit_review JSON."
+    },
+    {
+      "role": "user",
+      "content": "\nYou are a component in an orchestrated workflow to achieve an objective.\n\nThe overall objective is:\n\n```\n<fastagent:objective>\n    Run the labeled synthetic index-omission probe with immutable query. First delegate indexed scans to price and supply. Next delegate coverage review to reviewer. If reviewer returns REFINE, replan: delegate new full_csv scans to price and supply AND activate region for diagnostics; then ask reviewer again. Only after ACCEPT_LIMITED delegate report to composer. Every role must call its real tool. Return composer's report through this Orchestrator. Completion requires both review decisions and the report. Region must not run in the first pass.\n</fastagent:objective>\n```\n\nPrevious context in achieving the objective is below:\n\n```\n<fastagent:context>\n    <fastagent:progress><fastagent:objective>Run the labeled synthetic index-omission probe with immutable query. First delegate indexed scans to price and supply. Next delegate coverage review to reviewer. If reviewer returns REFINE, replan: delegate new full_csv scans to price and supply AND activate region for diagnostics; then ask reviewer again. Only after ACCEPT_LIMITED delegate report to composer. Every role must call its real tool. Return composer's report through this Orchestrator. Completion requires both review decisions and the report. Region must not run in the first pass.</fastagent:objective>\n<fastagent:steps>\n<fastagent:step-result><fastagent:description>Execute the initial phase of the synthetic index-omission probe by delegating indexed scans to the price and supply specialists, then delegate coverage review to the reviewer.</fastagent:description>\n<fastagent:summary>Step: Execute the initial phase of the synthetic index-omission probe by delegating indexed scans to the price and supply specialists, then delegate coverage review to the reviewer.\nStep Subtasks:\n  - Task: Delegate indexed scan to price specialist.\nResult: Indexed scan completed by price specialist. Receipt: `727bd8092fdc7d49341cbf7c24b8dc9f36722965f721fe2e1746a533caffed6a`.\n  - Task: Delegate indexed scan to supply specialist.\nResult: Indexed scan completed by supply specialist. Receipt: `2866c04c03eabe107757fbd319d68e36b0678893f109d13004301a9a2b37db96`.\n  - Task: Delegate coverage review to reviewer.\nResult: The objective requires delegating indexed scans to price and supply first before the reviewer can inspect coverage. Since no previous steps have been executed, I cannot proceed with the review yet. The workflow must be initiated by the orchestrator or another role (price/supply) to complete the prerequisite scans.</fastagent:summary>\n<fastagent:task-results>\n<fastagent:task-result description=\"Delegate indexed scan to price specialist.\">\n<fastagent:description>Delegate indexed scan to price specialist.</fastagent:description>\n<fastagent:result>Indexed scan completed by price specialist. Receipt: `727bd8092fdc7d49341cbf7c24b8dc9f36722965f721fe2e1746a533caffed6a`.</fastagent:result>\n</fastagent:task-result>\n<fastagent:task-result description=\"Delegate indexed scan to supply specialist.\">\n<fastagent:description>Delegate indexed scan to supply specialist.</fastagent:description>\n<fastagent:result>Indexed scan completed by supply specialist. Receipt: `2866c04c03eabe107757fbd319d68e36b0678893f109d13004301a9a2b37db96`.</fastagent:result>\n</fastagent:task-result>\n<fastagent:task-result description=\"Delegate coverage review to reviewer.\">\n<fastagent:description>Delegate coverage review to reviewer.</fastagent:description>\n<fastagent:result>The objective requires delegating indexed scans to price and supply first before the reviewer can inspect coverage. Since no previous steps have been executed, I cannot proceed with the review yet. The workflow must be initiated by the orchestrator or another role (price/supply) to complete the prerequisite scans.</fastagent:result>\n</fastagent:task-result>\n</fastagent:task-results>\n</fastagent:step-result>\n</fastagent:steps>\n<fastagent:status>In Progress</fastagent:status>\n</fastagent:progress>\n</fastagent:context>\n```\n\nYour job is to accomplish the \"task\" specified in `<fastagent:task>`. The overall objective and\nprevious context is supplied to inform your approach.\n\n```\n<fastagent:task>\n   Delegate coverage review to reviewer\n</fastagent:task>\n```\n\nProvide a direct, concise response on completion that makes it simple to assess the status of\nthe overall plan.\n"
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_bh6hr1uq",
+          "type": "function",
+          "function": {
+            "name": "inspect_coverage",
+            "arguments": "{}"
+          }
+        }
+      ],
+      "content": ""
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_bh6hr1uq",
+      "content": "{\"strategy\":\"indexed\",\"refinements\":0,\"scan_complete\":false,\"source_snapshot_complete\":true,\"signals\":[\"INDEX_COVERAGE_MISMATCH\",\"SPARSE_SLICE\"],\"total_observations\":22,\"receipt_sha256\":{\"price\":\"727bd8092fdc7d49341cbf7c24b8dc9f36722965f721fe2e1746a533caffed6a\",\"supply\":\"2866c04c03eabe107757fbd319d68e36b0678893f109d13004301a9a2b37db96\"}}"
+    }
+  ],
+  "max_tokens": 1024,
+  "parallel_tool_calls": true,
+  "stream_options": {
+    "include_usage": true
+  },
+  "temperature": 0.2,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "inspect_coverage",
+        "description": "Inspect current Price/Supply receipts before choosing a review decision. Do not infer evidence.",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "submit_review",
+        "description": "Submit your review: indexed mismatch needs REFINE plus EXACT_RESCAN_WITH_REGION;\nauthoritative confirmed sparsity needs ACCEPT_LIMITED plus null. Returns the accepted decision.",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {
+            "decision": {
+              "enum": [
+                "REFINE",
+                "ACCEPT_LIMITED"
+              ],
+              "type": "string"
+            },
+            "requested_action": {
+              "anyOf": [
+                {
+                  "const": "EXACT_RESCAN_WITH_REGION",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "required": [
+            "decision"
+          ],
+          "type": "object"
+        }
+      }
+    }
+  ],
+  "reasoning_effort": "none"
+}

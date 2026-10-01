@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TraceEvent v1.0; payload requirements in templates/trace_payload_contract.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "enum": [
+        "1.0"
+      ]
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "timestamp_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "mode": {
+      "enum": [
+        "live",
+        "replay",
+        "policy_simulation"
+      ]
+    },
+    "iteration": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2
+    },
+    "event": {
+      "enum": [
+        "RUN_STARTED",
+        "PLAN_DECIDED",
+        "SELECTION_COMPLETED",
+        "AGENT_DECISION",
+        "AGENT_REPAIR",
+        "TOOL_COMPLETED",
+        "AGGREGATE_COMPLETED",
+        "REVIEW_DECIDED",
+        "REFINEMENT_APPLIED",
+        "RUN_COMPLETED",
+        "RUN_FAILED"
+      ]
+    },
+    "actor": {
+      "enum": [
+        "controller",
+        "selector",
+        "aggregator",
+        "orchestrator",
+        "price",
+        "supply",
+        "region",
+        "reviewer",
+        "composer"
+      ]
+    },
+    "parent_event_sequence": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "query_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "dataset_view_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "plan_sha256": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "payload": {
+      "type": "object"
+    },
+    "payload_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "illustrative_fixture": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "run_id",
+    "sequence",
+    "timestamp_utc",
+    "mode",
+    "iteration",
+    "event",
+    "actor",
+    "parent_event_sequence",
+    "query_sha256",
+    "dataset_view_sha256",
+    "plan_sha256",
+    "payload",
+    "payload_sha256",
+    "illustrative_fixture"
+  ],
+  "additionalProperties": false
+}

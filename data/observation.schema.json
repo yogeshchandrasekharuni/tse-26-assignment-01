@@ -1,0 +1,84 @@
+{
+  "$defs": {
+    "Identifier": {
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$",
+      "type": "string"
+    },
+    "Month": {
+      "pattern": "^(?!0000)\\d{4}-(0[1-9]|1[0-2])$",
+      "type": "string"
+    },
+    "PositiveInt": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "PropertyType": {
+      "enum": [
+        "single_family",
+        "condo",
+        "townhouse"
+      ],
+      "type": "string"
+    },
+    "Zip": {
+      "enum": [
+        "75001",
+        "75006",
+        "75019",
+        "75024",
+        "75034",
+        "75038",
+        "75063",
+        "75080",
+        "75093",
+        "75201",
+        "75204",
+        "75214"
+      ],
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "bedrooms": {
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Bedrooms",
+      "type": "integer"
+    },
+    "listing_id": {
+      "$ref": "#/$defs/Identifier"
+    },
+    "month": {
+      "$ref": "#/$defs/Month"
+    },
+    "price_cents": {
+      "$ref": "#/$defs/PositiveInt"
+    },
+    "property_type": {
+      "$ref": "#/$defs/PropertyType"
+    },
+    "record_id": {
+      "$ref": "#/$defs/Identifier"
+    },
+    "sqft": {
+      "$ref": "#/$defs/PositiveInt"
+    },
+    "zip": {
+      "$ref": "#/$defs/Zip"
+    }
+  },
+  "required": [
+    "record_id",
+    "listing_id",
+    "month",
+    "zip",
+    "property_type",
+    "bedrooms",
+    "sqft",
+    "price_cents"
+  ],
+  "title": "Observation",
+  "type": "object"
+}

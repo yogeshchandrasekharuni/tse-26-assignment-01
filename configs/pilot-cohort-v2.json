@@ -1,0 +1,462 @@
+{
+  "candidate_recipe": "handoff thirty slices; coverage revision 2: g10 sqft in [2100,2110] for all three end months; MR-specific price bands applied before base identity; no outcome-based selection",
+  "cases": [
+    {
+      "base_id": "b001",
+      "base_query_sha256": "f2137ba990ccf675c71ef851bddf50dea8d22bbb6d5dcbcd4d214dabbcc250f2",
+      "eligibility": {
+        "eligible": true,
+        "reasons": [],
+        "witnesses": {
+          "even_nonempty_months": [
+            "2025-07",
+            "2025-08",
+            "2025-09",
+            "2025-10",
+            "2025-11",
+            "2025-12",
+            "2026-01",
+            "2026-02",
+            "2026-03",
+            "2026-04",
+            "2026-05",
+            "2026-06"
+          ],
+          "followup_membership_sha256": "58137fa2db92d5165d572fb4e926c972912d8d7de50291b9b55706690862c6db",
+          "followup_month_counts": {
+            "2025-07": 240,
+            "2025-08": 240,
+            "2025-09": 240,
+            "2025-10": 240,
+            "2025-11": 240,
+            "2025-12": 240,
+            "2026-01": 240,
+            "2026-02": 240,
+            "2026-03": 240,
+            "2026-04": 240,
+            "2026-05": 240,
+            "2026-06": 240
+          },
+          "followup_selected": 2880,
+          "odd_months": [],
+          "source_membership_sha256": "58137fa2db92d5165d572fb4e926c972912d8d7de50291b9b55706690862c6db",
+          "source_month_counts": {
+            "2025-07": 240,
+            "2025-08": 240,
+            "2025-09": 240,
+            "2025-10": 240,
+            "2025-11": 240,
+            "2025-12": 240,
+            "2026-01": 240,
+            "2026-02": 240,
+            "2026-03": 240,
+            "2026-04": 240,
+            "2026-05": 240,
+            "2026-06": 240
+          },
+          "source_selected": 2880,
+          "source_witness_ids": [
+            "obs-09-00-000",
+            "obs-09-00-001",
+            "obs-09-00-002",
+            "obs-09-00-003"
+          ],
+          "sparse_months": []
+        }
+      },
+      "followup_request": {
+        "compare_regions": true,
+        "criteria": {
+          "bedrooms_max": 5,
+          "bedrooms_min": 1,
+          "price_max_cents": null,
+          "price_min_cents": null,
+          "property_types": [
+            "condo",
+            "single_family",
+            "townhouse"
+          ],
+          "sqft_max": null,
+          "sqft_min": null,
+          "zips": [
+            "75001",
+            "75006"
+          ]
+        },
+        "dataset_id": "dallas-synth-v1",
+        "display": {
+          "area": "SQFT",
+          "money": "USD"
+        },
+        "seed": 104729,
+        "window_end": "2026-06"
+      },
+      "followup_view_sha256": "6f92417e2a8338dd532b3d1c03f944657e9503df403b1b40c85592896c586368",
+      "mr": "MR01",
+      "recipe": {
+        "delta_cents": 100000,
+        "excluded_zip": null,
+        "factor_denominator": 4,
+        "factor_numerator": 5,
+        "mr": "MR01",
+        "target_month": null,
+        "transform_seed": 239896943,
+        "version": "transform-1"
+      },
+      "slice_group": "g01",
+      "source_request": {
+        "compare_regions": true,
+        "criteria": {
+          "bedrooms_max": 5,
+          "bedrooms_min": 1,
+          "price_max_cents": null,
+          "price_min_cents": null,
+          "property_types": [
+            "condo",
+            "single_family",
+            "townhouse"
+          ],
+          "sqft_max": null,
+          "sqft_min": null,
+          "zips": [
+            "75001",
+            "75006"
+          ]
+        },
+        "dataset_id": "dallas-synth-v1",
+        "display": {
+          "area": "SQFT",
+          "money": "USD"
+        },
+        "seed": 104729,
+        "window_end": "2026-06"
+      },
+      "source_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b"
+    },
+    {
+      "base_id": "b002",
+      "base_query_sha256": "321efead172c11843d00fbb45eaed9b7819becb1cf5e7a0189f68a08dbcd45c3",
+      "eligibility": {
+        "eligible": true,
+        "reasons": [],
+        "witnesses": {
+          "even_nonempty_months": [
+            "2025-07",
+            "2025-08",
+            "2025-09",
+            "2025-10",
+            "2025-11",
+            "2025-12",
+            "2026-01",
+            "2026-02",
+            "2026-03",
+            "2026-04",
+            "2026-05",
+            "2026-06"
+          ],
+          "followup_membership_sha256": "58469be55f75032fe74d79da95548b814cc9caab31e453b43ee2f0a0eccd5446",
+          "followup_month_counts": {
+            "2025-07": 48,
+            "2025-08": 48,
+            "2025-09": 48,
+            "2025-10": 48,
+            "2025-11": 48,
+            "2025-12": 48,
+            "2026-01": 48,
+            "2026-02": 48,
+            "2026-03": 48,
+            "2026-04": 48,
+            "2026-05": 48,
+            "2026-06": 48
+          },
+          "followup_selected": 576,
+          "odd_months": [],
+          "source_membership_sha256": "58469be55f75032fe74d79da95548b814cc9caab31e453b43ee2f0a0eccd5446",
+          "source_month_counts": {
+            "2025-07": 48,
+            "2025-08": 48,
+            "2025-09": 48,
+            "2025-10": 48,
+            "2025-11": 48,
+            "2025-12": 48,
+            "2026-01": 48,
+            "2026-02": 48,
+            "2026-03": 48,
+            "2026-04": 48,
+            "2026-05": 48,
+            "2026-06": 48
+          },
+          "source_selected": 576,
+          "source_witness_ids": [
+            "obs-09-02-001",
+            "obs-09-02-007",
+            "obs-09-02-013",
+            "obs-09-02-016"
+          ],
+          "sparse_months": []
+        }
+      },
+      "followup_request": {
+        "compare_regions": false,
+        "criteria": {
+          "bedrooms_max": 4,
+          "bedrooms_min": 2,
+          "price_max_cents": null,
+          "price_min_cents": null,
+          "property_types": [
+            "condo"
+          ],
+          "sqft_max": null,
+          "sqft_min": null,
+          "zips": [
+            "75019",
+            "75024"
+          ]
+        },
+        "dataset_id": "dallas-synth-v1",
+        "display": {
+          "area": "SQFT",
+          "money": "USD"
+        },
+        "seed": 104729,
+        "window_end": "2026-06"
+      },
+      "followup_view_sha256": "79c400bd7604c1b6c86579d572a45c858125a81a47ab466547c7dbc09be44082",
+      "mr": "MR01",
+      "recipe": {
+        "delta_cents": 100000,
+        "excluded_zip": null,
+        "factor_denominator": 4,
+        "factor_numerator": 5,
+        "mr": "MR01",
+        "target_month": null,
+        "transform_seed": 4292662809,
+        "version": "transform-1"
+      },
+      "slice_group": "g02",
+      "source_request": {
+        "compare_regions": false,
+        "criteria": {
+          "bedrooms_max": 4,
+          "bedrooms_min": 2,
+          "price_max_cents": null,
+          "price_min_cents": null,
+          "property_types": [
+            "condo"
+          ],
+          "sqft_max": null,
+          "sqft_min": null,
+          "zips": [
+            "75019",
+            "75024"
+          ]
+        },
+        "dataset_id": "dallas-synth-v1",
+        "display": {
+          "area": "SQFT",
+          "money": "USD"
+        },
+        "seed": 104729,
+        "window_end": "2026-06"
+      },
+      "source_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b"
+    },
+    {
+      "base_id": "b010",
+      "base_query_sha256": "197e140e853ee5821e0d92bff3ba4fdeb978f73d1d10a7c9cb7dd86ed0915c8a",
+      "eligibility": {
+        "eligible": true,
+        "reasons": [],
+        "witnesses": {
+          "even_nonempty_months": [
+            "2025-07",
+            "2025-09",
+            "2025-10",
+            "2025-12",
+            "2026-02",
+            "2026-03",
+            "2026-05"
+          ],
+          "followup_membership_sha256": "4f5a9f9acd655c5d3f87f0699156a3bf59e42d5f44f637abe7f7c34344e983db",
+          "followup_month_counts": {
+            "2025-07": 2,
+            "2025-08": 3,
+            "2025-09": 4,
+            "2025-10": 2,
+            "2025-11": 5,
+            "2025-12": 2,
+            "2026-01": 3,
+            "2026-02": 4,
+            "2026-03": 2,
+            "2026-04": 3,
+            "2026-05": 2,
+            "2026-06": 3
+          },
+          "followup_selected": 35,
+          "odd_months": [
+            "2025-08",
+            "2025-11",
+            "2026-01",
+            "2026-04",
+            "2026-06"
+          ],
+          "source_membership_sha256": "4f5a9f9acd655c5d3f87f0699156a3bf59e42d5f44f637abe7f7c34344e983db",
+          "source_month_counts": {
+            "2025-07": 2,
+            "2025-08": 3,
+            "2025-09": 4,
+            "2025-10": 2,
+            "2025-11": 5,
+            "2025-12": 2,
+            "2026-01": 3,
+            "2026-02": 4,
+            "2026-03": 2,
+            "2026-04": 3,
+            "2026-05": 2,
+            "2026-06": 3
+          },
+          "source_selected": 35,
+          "source_witness_ids": [
+            "obs-09-00-038",
+            "obs-09-00-098",
+            "obs-10-04-008",
+            "obs-10-04-048"
+          ],
+          "sparse_months": [
+            "2025-07",
+            "2025-08",
+            "2025-09",
+            "2025-10",
+            "2025-12",
+            "2026-01",
+            "2026-02",
+            "2026-03",
+            "2026-04",
+            "2026-05",
+            "2026-06"
+          ]
+        }
+      },
+      "followup_request": {
+        "compare_regions": false,
+        "criteria": {
+          "bedrooms_max": 4,
+          "bedrooms_min": 2,
+          "price_max_cents": null,
+          "price_min_cents": null,
+          "property_types": [
+            "single_family",
+            "townhouse"
+          ],
+          "sqft_max": 2110,
+          "sqft_min": 2100,
+          "zips": [
+            "75001",
+            "75019",
+            "75034",
+            "75063",
+            "75093",
+            "75204"
+          ]
+        },
+        "dataset_id": "dallas-synth-v1",
+        "display": {
+          "area": "SQFT",
+          "money": "USD"
+        },
+        "seed": 104729,
+        "window_end": "2026-06"
+      },
+      "followup_view_sha256": "d65b8e4af4dd4c884a207b032e735bf088f4ef50fedb96a44e1fad60f022dccf",
+      "mr": "MR01",
+      "recipe": {
+        "delta_cents": 100000,
+        "excluded_zip": null,
+        "factor_denominator": 4,
+        "factor_numerator": 5,
+        "mr": "MR01",
+        "target_month": null,
+        "transform_seed": 1703908744,
+        "version": "transform-1"
+      },
+      "slice_group": "g10",
+      "source_request": {
+        "compare_regions": false,
+        "criteria": {
+          "bedrooms_max": 4,
+          "bedrooms_min": 2,
+          "price_max_cents": null,
+          "price_min_cents": null,
+          "property_types": [
+            "single_family",
+            "townhouse"
+          ],
+          "sqft_max": 2110,
+          "sqft_min": 2100,
+          "zips": [
+            "75001",
+            "75019",
+            "75034",
+            "75063",
+            "75093",
+            "75204"
+          ]
+        },
+        "dataset_id": "dallas-synth-v1",
+        "display": {
+          "area": "SQFT",
+          "money": "USD"
+        },
+        "seed": 104729,
+        "window_end": "2026-06"
+      },
+      "source_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b"
+    }
+  ],
+  "coverage": {
+    "dense_cells": 25,
+    "eligible_by_mr": {
+      "MR01": 3
+    },
+    "empty_cells": 0,
+    "end_months": [
+      "2026-06"
+    ],
+    "even_nonempty_cells": 31,
+    "interpretation": "Overlapping designed convenience queries on one synthetic feed; not a probability sample",
+    "odd_cells": 5,
+    "slice_groups": [
+      "g01",
+      "g02",
+      "g10"
+    ],
+    "sparse_nonempty_cells": 11,
+    "visible_month_cells": 36
+  },
+  "evaluation_inputs": {
+    "EVALUATION_NOTES.md": "64bd2f7a847770f01340b1d15f9eafb075a91ef088cba9cab566fdf6ef82ea16",
+    "configs/evaluation-seeds-v1.json": "1c4b5b06742775d10f7d03af8e3646cbab16e36a2c2af70f4d0adbb0690642a6",
+    "housing-tse-codex-handoff/EVALUATION_PROTOCOL.md": "52bb91a2875b9a7850d87681ec55fd4b6c9388d217fc3d43e5db890937125d53",
+    "housing-tse-codex-handoff/MR_CATALOG.md": "8422c26afaf76a33311c34fa1b216763fdc49506717e2c70601bb422af8f382e",
+    "housing-tse-codex-handoff/templates/base_candidates.json": "91b4d604bf937d0f92ff4052afad51ab65420999660b9a44a6111bddcab25068",
+    "src/housing/evaluation/__init__.py": "cc31e7e3645d122864d45e9ddef6c3ce3acfe28b843d2075f7198b7481493049",
+    "src/housing/evaluation/__main__.py": "103b44c38f695fb9323363eb6e13060a412f0f711a640cf08de58ab82361a91b",
+    "src/housing/evaluation/aggregate.py": "9c1c55e3896a4f033010f9d20432cf23c666c8db9afe8f6c66b108f3e70040d9",
+    "src/housing/evaluation/cohort.py": "46dfe3ed14a9c155e8f04d00963297b7a6fd36ef69689003a729b6e551a80906",
+    "src/housing/evaluation/compare.py": "82296c5bfab9e723592b19f30960e8b18cdf8ed4df67218fae1838713be97bdb",
+    "src/housing/evaluation/models.py": "a2f88ab953ecfd836a3c838d895cb9c481d93ef5a366341e1b2181385e55f09c",
+    "src/housing/evaluation/preflight.py": "8cb54cdcda3d81ef10be35a6d0c067c21d81d3716d08f1a21ae694da3eb226d0",
+    "src/housing/evaluation/runner.py": "84852f81d576545e66697e69b23367474c1455bf2b38e0e6e6cd9582b2f05f9d",
+    "src/housing/evaluation/statistics.py": "36d1a9aa4fbb3ff447fe200103a61196a0d7a9e9b5454839cd05feec625a9dd1",
+    "src/housing/evaluation/transforms.py": "6ff0e3477eff53e2283112634c1132de0680d948efef0c6f549553cf95a09cc9"
+  },
+  "frozen_at_utc": "2026-10-01T16:08:43.666255+00:00",
+  "invalid_candidates": [],
+  "seeds": [
+    104729,
+    130363,
+    155921
+  ],
+  "source_snapshot_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+  "version": "cohort-1"
+}

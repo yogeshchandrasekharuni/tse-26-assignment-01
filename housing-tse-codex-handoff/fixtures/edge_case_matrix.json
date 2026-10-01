@@ -1,0 +1,105 @@
+{
+  "status": "test_recipes_not_measured_results",
+  "cases": [
+    {
+      "id": "duplicate_record_id",
+      "change": "duplicate raw row with same record_id",
+      "expected": "DATA_INVALID"
+    },
+    {
+      "id": "repeated_listing_id",
+      "change": "fresh record_id, same listing_id and month",
+      "expected": "both valid observations count"
+    },
+    {
+      "id": "invalid_price_zero",
+      "change": "price_cents=0",
+      "expected": "quarantine before filtering"
+    },
+    {
+      "id": "invalid_price_negative",
+      "change": "price_cents=-1",
+      "expected": "quarantine before filtering"
+    },
+    {
+      "id": "invalid_sqft",
+      "change": "sqft=0",
+      "expected": "quarantine, not divide by zero"
+    },
+    {
+      "id": "invalid_month",
+      "change": "month=2026-13",
+      "expected": "quarantine"
+    },
+    {
+      "id": "invalid_zip",
+      "change": "zip=00000",
+      "expected": "quarantine"
+    },
+    {
+      "id": "missing_partition",
+      "change": "manifest completeness missing/incomplete",
+      "expected": "DATA_INCOMPLETE"
+    },
+    {
+      "id": "zero_selected",
+      "change": "valid slice with no matching observations",
+      "expected": "twelve zero counts/null medians, valid limited result"
+    },
+    {
+      "id": "price_endpoint",
+      "change": "record price equals inclusive upper/lower",
+      "expected": "included"
+    },
+    {
+      "id": "null_bound",
+      "change": "price bounds null",
+      "expected": "unbounded, not price=0"
+    },
+    {
+      "id": "naive_timestamp_future_importer",
+      "change": "timestamp lacks timezone",
+      "expected": "reject; do not infer local timezone"
+    },
+    {
+      "id": "utc_boundary",
+      "change": "2025-12-31T23:30:00-01:00",
+      "expected": "UTC month2026-01"
+    },
+    {
+      "id": "calendar_year",
+      "change": "YoY for2026-03",
+      "expected": "compare2025-03, not365days or first visible row"
+    },
+    {
+      "id": "ppsf_additive_counterexample",
+      "change": "add1000USD at varied sqft",
+      "expected": "median ppsf not generally oldmedian+1000/mediansqft"
+    },
+    {
+      "id": "ranking_tie",
+      "change": "equal exact pooled ppsf in two requested ZIPs",
+      "expected": "ZIP ascending tie-break; ordinal ranks"
+    },
+    {
+      "id": "null_ranking",
+      "change": "requested ZIP has zero selected rows",
+      "expected": "null median/rank, sort after nonempty"
+    },
+    {
+      "id": "schema_extra",
+      "change": "unknown request/agent decision field",
+      "expected": "strict validation failure"
+    },
+    {
+      "id": "replay_prompt_changed",
+      "change": "change exact semantic prompt hash",
+      "expected": "REPLAY_MISS"
+    },
+    {
+      "id": "too_many_refinements",
+      "change": "request third semantic refinement",
+      "expected": "BUDGET_EXCEEDED or integrity failure, no unbounded loop"
+    }
+  ]
+}

@@ -1,0 +1,978 @@
+{
+  "schema_version": "1.0",
+  "status": "candidates_not_evaluated",
+  "distinct_candidate_requests": 30,
+  "per_mr_overrides": {
+    "MR05": {
+      "price_min_cents": 20000000,
+      "price_max_cents": 45000000
+    },
+    "MR09": {
+      "price_min_cents": null,
+      "price_max_cents": null
+    },
+    "MR08": {
+      "bases": "b001-b010",
+      "price_min_cents": 20000000,
+      "price_max_cents": 45000000,
+      "other_bases": "unbounded",
+      "followup": "multiply finite bounds exactly by k"
+    }
+  },
+  "candidates": [
+    {
+      "base_id": "b001",
+      "slice_group": "g01",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-06",
+        "criteria": {
+          "zips": [
+            "75001",
+            "75006"
+          ],
+          "property_types": [
+            "single_family",
+            "condo",
+            "townhouse"
+          ],
+          "bedrooms_min": 1,
+          "bedrooms_max": 5,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": true,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b002",
+      "slice_group": "g02",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-06",
+        "criteria": {
+          "zips": [
+            "75019",
+            "75024"
+          ],
+          "property_types": [
+            "condo"
+          ],
+          "bedrooms_min": 2,
+          "bedrooms_max": 4,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": false,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b003",
+      "slice_group": "g03",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-06",
+        "criteria": {
+          "zips": [
+            "75034",
+            "75038"
+          ],
+          "property_types": [
+            "single_family"
+          ],
+          "bedrooms_min": 3,
+          "bedrooms_max": 5,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": true,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b004",
+      "slice_group": "g04",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-06",
+        "criteria": {
+          "zips": [
+            "75063",
+            "75080"
+          ],
+          "property_types": [
+            "townhouse"
+          ],
+          "bedrooms_min": 1,
+          "bedrooms_max": 3,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": false,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b005",
+      "slice_group": "g05",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-06",
+        "criteria": {
+          "zips": [
+            "75093",
+            "75201"
+          ],
+          "property_types": [
+            "single_family",
+            "condo",
+            "townhouse"
+          ],
+          "bedrooms_min": 2,
+          "bedrooms_max": 5,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": true,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b006",
+      "slice_group": "g06",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-06",
+        "criteria": {
+          "zips": [
+            "75204",
+            "75214"
+          ],
+          "property_types": [
+            "single_family",
+            "condo"
+          ],
+          "bedrooms_min": 1,
+          "bedrooms_max": 4,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": false,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b007",
+      "slice_group": "g07",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-06",
+        "criteria": {
+          "zips": [
+            "75001",
+            "75024",
+            "75063"
+          ],
+          "property_types": [
+            "condo",
+            "townhouse"
+          ],
+          "bedrooms_min": 2,
+          "bedrooms_max": 5,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": true,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b008",
+      "slice_group": "g08",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-06",
+        "criteria": {
+          "zips": [
+            "75006",
+            "75034",
+            "75080",
+            "75204"
+          ],
+          "property_types": [
+            "single_family",
+            "condo",
+            "townhouse"
+          ],
+          "bedrooms_min": 3,
+          "bedrooms_max": 4,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": false,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b009",
+      "slice_group": "g09",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-06",
+        "criteria": {
+          "zips": [
+            "75019",
+            "75038",
+            "75093",
+            "75214"
+          ],
+          "property_types": [
+            "single_family"
+          ],
+          "bedrooms_min": 1,
+          "bedrooms_max": 5,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": true,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b010",
+      "slice_group": "g10",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-06",
+        "criteria": {
+          "zips": [
+            "75001",
+            "75019",
+            "75034",
+            "75063",
+            "75093",
+            "75204"
+          ],
+          "property_types": [
+            "townhouse",
+            "single_family"
+          ],
+          "bedrooms_min": 2,
+          "bedrooms_max": 4,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": false,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b011",
+      "slice_group": "g01",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-07",
+        "criteria": {
+          "zips": [
+            "75001",
+            "75006"
+          ],
+          "property_types": [
+            "single_family",
+            "condo",
+            "townhouse"
+          ],
+          "bedrooms_min": 1,
+          "bedrooms_max": 5,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": true,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b012",
+      "slice_group": "g02",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-07",
+        "criteria": {
+          "zips": [
+            "75019",
+            "75024"
+          ],
+          "property_types": [
+            "condo"
+          ],
+          "bedrooms_min": 2,
+          "bedrooms_max": 4,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": false,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b013",
+      "slice_group": "g03",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-07",
+        "criteria": {
+          "zips": [
+            "75034",
+            "75038"
+          ],
+          "property_types": [
+            "single_family"
+          ],
+          "bedrooms_min": 3,
+          "bedrooms_max": 5,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": true,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b014",
+      "slice_group": "g04",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-07",
+        "criteria": {
+          "zips": [
+            "75063",
+            "75080"
+          ],
+          "property_types": [
+            "townhouse"
+          ],
+          "bedrooms_min": 1,
+          "bedrooms_max": 3,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": false,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b015",
+      "slice_group": "g05",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-07",
+        "criteria": {
+          "zips": [
+            "75093",
+            "75201"
+          ],
+          "property_types": [
+            "single_family",
+            "condo",
+            "townhouse"
+          ],
+          "bedrooms_min": 2,
+          "bedrooms_max": 5,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": true,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b016",
+      "slice_group": "g06",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-07",
+        "criteria": {
+          "zips": [
+            "75204",
+            "75214"
+          ],
+          "property_types": [
+            "single_family",
+            "condo"
+          ],
+          "bedrooms_min": 1,
+          "bedrooms_max": 4,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": false,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b017",
+      "slice_group": "g07",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-07",
+        "criteria": {
+          "zips": [
+            "75001",
+            "75024",
+            "75063"
+          ],
+          "property_types": [
+            "condo",
+            "townhouse"
+          ],
+          "bedrooms_min": 2,
+          "bedrooms_max": 5,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": true,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b018",
+      "slice_group": "g08",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-07",
+        "criteria": {
+          "zips": [
+            "75006",
+            "75034",
+            "75080",
+            "75204"
+          ],
+          "property_types": [
+            "single_family",
+            "condo",
+            "townhouse"
+          ],
+          "bedrooms_min": 3,
+          "bedrooms_max": 4,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": false,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b019",
+      "slice_group": "g09",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-07",
+        "criteria": {
+          "zips": [
+            "75019",
+            "75038",
+            "75093",
+            "75214"
+          ],
+          "property_types": [
+            "single_family"
+          ],
+          "bedrooms_min": 1,
+          "bedrooms_max": 5,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": true,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b020",
+      "slice_group": "g10",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-07",
+        "criteria": {
+          "zips": [
+            "75001",
+            "75019",
+            "75034",
+            "75063",
+            "75093",
+            "75204"
+          ],
+          "property_types": [
+            "townhouse",
+            "single_family"
+          ],
+          "bedrooms_min": 2,
+          "bedrooms_max": 4,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": false,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b021",
+      "slice_group": "g01",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-08",
+        "criteria": {
+          "zips": [
+            "75001",
+            "75006"
+          ],
+          "property_types": [
+            "single_family",
+            "condo",
+            "townhouse"
+          ],
+          "bedrooms_min": 1,
+          "bedrooms_max": 5,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": true,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b022",
+      "slice_group": "g02",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-08",
+        "criteria": {
+          "zips": [
+            "75019",
+            "75024"
+          ],
+          "property_types": [
+            "condo"
+          ],
+          "bedrooms_min": 2,
+          "bedrooms_max": 4,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": false,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b023",
+      "slice_group": "g03",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-08",
+        "criteria": {
+          "zips": [
+            "75034",
+            "75038"
+          ],
+          "property_types": [
+            "single_family"
+          ],
+          "bedrooms_min": 3,
+          "bedrooms_max": 5,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": true,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b024",
+      "slice_group": "g04",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-08",
+        "criteria": {
+          "zips": [
+            "75063",
+            "75080"
+          ],
+          "property_types": [
+            "townhouse"
+          ],
+          "bedrooms_min": 1,
+          "bedrooms_max": 3,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": false,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b025",
+      "slice_group": "g05",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-08",
+        "criteria": {
+          "zips": [
+            "75093",
+            "75201"
+          ],
+          "property_types": [
+            "single_family",
+            "condo",
+            "townhouse"
+          ],
+          "bedrooms_min": 2,
+          "bedrooms_max": 5,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": true,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b026",
+      "slice_group": "g06",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-08",
+        "criteria": {
+          "zips": [
+            "75204",
+            "75214"
+          ],
+          "property_types": [
+            "single_family",
+            "condo"
+          ],
+          "bedrooms_min": 1,
+          "bedrooms_max": 4,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": false,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b027",
+      "slice_group": "g07",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-08",
+        "criteria": {
+          "zips": [
+            "75001",
+            "75024",
+            "75063"
+          ],
+          "property_types": [
+            "condo",
+            "townhouse"
+          ],
+          "bedrooms_min": 2,
+          "bedrooms_max": 5,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": true,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b028",
+      "slice_group": "g08",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-08",
+        "criteria": {
+          "zips": [
+            "75006",
+            "75034",
+            "75080",
+            "75204"
+          ],
+          "property_types": [
+            "single_family",
+            "condo",
+            "townhouse"
+          ],
+          "bedrooms_min": 3,
+          "bedrooms_max": 4,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": false,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b029",
+      "slice_group": "g09",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-08",
+        "criteria": {
+          "zips": [
+            "75019",
+            "75038",
+            "75093",
+            "75214"
+          ],
+          "property_types": [
+            "single_family"
+          ],
+          "bedrooms_min": 1,
+          "bedrooms_max": 5,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": true,
+        "seed": 104729
+      }
+    },
+    {
+      "base_id": "b030",
+      "slice_group": "g10",
+      "status": "candidate_requires_per_mr_preflight",
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-08",
+        "criteria": {
+          "zips": [
+            "75001",
+            "75019",
+            "75034",
+            "75063",
+            "75093",
+            "75204"
+          ],
+          "property_types": [
+            "townhouse",
+            "single_family"
+          ],
+          "bedrooms_min": 2,
+          "bedrooms_max": 4,
+          "price_min_cents": null,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": false,
+        "seed": 104729
+      }
+    }
+  ]
+}

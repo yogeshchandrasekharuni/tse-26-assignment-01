@@ -1,0 +1,159 @@
+{
+  "agent": "reviewer[1]",
+  "context": {
+    "contract_version": "1.0",
+    "facts": {},
+    "iteration": 0,
+    "monthly_counts": {
+      "2025-10": 1,
+      "2025-11": 1,
+      "2025-12": 0,
+      "2026-01": 0,
+      "2026-02": 1,
+      "2026-03": 0,
+      "2026-04": 0,
+      "2026-05": 0,
+      "2026-06": 0,
+      "2026-07": 0,
+      "2026-08": 0,
+      "2026-09": 0
+    },
+    "plan": {
+      "active_specialists": [
+        "price",
+        "supply"
+      ],
+      "canonical_query_sha256": "11534c753c0f13a58e886a498fa932bf8d9976c07bb82c6b0c8d486d5d3b8f26",
+      "dataset_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+      "planner_decision_sha256": "b3b2d589ee3aaaf8e747bff904181fc1606cce34a5d9cfa0f0f2a90412226a9d",
+      "region_purpose": "none",
+      "required_months": [
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01",
+        "2025-02",
+        "2025-03",
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09"
+      ],
+      "scan_strategy": "indexed",
+      "version": 0,
+      "visible_months": [
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06",
+        "2026-07",
+        "2026-08",
+        "2026-09"
+      ]
+    },
+    "previous_review": null,
+    "query": {
+      "compare_regions": false,
+      "criteria": {
+        "bedrooms_max": 2,
+        "bedrooms_min": 2,
+        "price_max_cents": null,
+        "price_min_cents": null,
+        "property_types": [
+          "condo"
+        ],
+        "sqft_max": 1420,
+        "sqft_min": 1400,
+        "zips": [
+          "75001"
+        ]
+      },
+      "dataset_id": "dallas-synth-v1",
+      "dataset_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+      "window_end": "2026-09"
+    },
+    "query_sha256": "11534c753c0f13a58e886a498fa932bf8d9976c07bb82c6b0c8d486d5d3b8f26",
+    "receipt_hashes": {
+      "price": "b7807ec4bcf40e8f289e05b192e688b0e6ef02f9aeea8b20796b00efdb3ae1ec",
+      "supply": "2a8f742723a327b83e15f6522df84cea8e9aa947369037e4358294d75b6a669a"
+    },
+    "required_caveats": [],
+    "scan_complete": true,
+    "signals": [
+      "SPARSE_SLICE"
+    ],
+    "stage": "REVIEW_REQUIRED"
+  },
+  "dependency_lock_sha256": "c3a30f7a8c105aa379300b5ff82ebba9bf827cdf856a905aef0c601099b0ccfb",
+  "framework_config_sha256": "f31533b15d5fafe8b4e3f439c21d849af3ec609b09a5a6557e1b542648185dba",
+  "instruction": "You are the internal Coverage Reviewer. First call inspect_context and use its actual signals, scan strategy, counts and receipts. Submit one strict ReviewDecision through submit_decision(decision_json=...). role reviewer; decision_type review; signals exactly the evidence signals; requested_action null except for REFINE.\n\nIf an indexed scan has INDEX_COVERAGE_MISMATCH or SPARSE_SLICE, choose REFINE with requested_action EXACT_RESCAN_WITH_REGION. The next plan changes the scan and activates Region; do not change criteria. A complete authoritative scan with CONFIRMED_SPARSE requires ACCEPT_LIMITED and null. COMPLETE_SUPPORT requires ACCEPT and null. Unrecoverable integrity requires FAIL. Do not invent signals, claim confidence or request a pointless repeat scan. If repair_required, make the single explicit correction. After decision_applied return the tool result as JSON and stop.\n\nDecision schema:\n{\"$defs\":{\"Signal\":{\"enum\":[\"INDEX_COVERAGE_MISMATCH\",\"SPARSE_SLICE\",\"RECEIPT_MISMATCH\",\"COMPLETE_SUPPORT\",\"CONFIRMED_SPARSE\",\"UNRECOVERABLE_INTEGRITY\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"decision\":{\"enum\":[\"ACCEPT\",\"REFINE\",\"ACCEPT_LIMITED\",\"FAIL\"],\"title\":\"Decision\",\"type\":\"string\"},\"decision_type\":{\"const\":\"review\",\"title\":\"Decision Type\",\"type\":\"string\"},\"requested_action\":{\"anyOf\":[{\"enum\":[\"EXACT_RESCAN_WITH_REGION\",\"REBUILD_INDEX_AND_RESCAN\"],\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Requested Action\"},\"role\":{\"const\":\"reviewer\",\"title\":\"Role\",\"type\":\"string\"},\"signals\":{\"items\":{\"$ref\":\"#/$defs/Signal\"},\"minItems\":1,\"title\":\"Signals\",\"type\":\"array\"}},\"required\":[\"role\",\"decision_type\",\"decision\",\"signals\",\"requested_action\"],\"title\":\"ReviewDecision\",\"type\":\"object\"}",
+  "messages": [
+    {
+      "content": [
+        {
+          "text": "Inspect context and submit review decision with signals SPARSE_SLICE",
+          "type": "text"
+        }
+      ],
+      "is_template": false,
+      "role": "user"
+    }
+  ],
+  "model_profile": "housing-s104729",
+  "prompt_bundle_sha256": "b35a9c6e1543fbe28540693911a38e3e68e922f1f94b2d8c32a3f5b48cae0035",
+  "retry_policy": {
+    "framework_retries": 1,
+    "sdk_retries": 0
+  },
+  "tools": {
+    "cache_scope": "private",
+    "result_type": "complete",
+    "tools": [
+      {
+        "description": "Read the immutable query, current plan, role receipts, coverage signals and grounded facts.",
+        "input_schema": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        },
+        "name": "inspect_context"
+      },
+      {
+        "description": "Submit one strict role-specific JSON decision. Trusted selection arguments are bound by Python.",
+        "input_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "decision_json": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "decision_json"
+          ],
+          "type": "object"
+        },
+        "name": "submit_decision"
+      }
+    ],
+    "ttl_ms": 0
+  }
+}

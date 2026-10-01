@@ -1,0 +1,78 @@
+{
+  "agents_as_tools": {
+    "status": "passed",
+    "entry_exit": "orchestrator",
+    "engine": "@fast.agent(agents=[...])",
+    "underlying_engine": "AgentsAsToolsAgent",
+    "elapsed_seconds": 1316.60890210648012,
+    "synthetic_fixture": true,
+    "injected_control": "index_omission",
+    "headline_eligible": false,
+    "query_sha256": "25f16ca91607f33ea413b4e1d73d9ec78e03b7d4d83aac1651ff17911812f8a5",
+    "plans": [
+      {
+        "strategy": "indexed",
+        "active": [
+          "price",
+          "supply"
+        ]
+      },
+      {
+        "strategy": "full_csv",
+        "active": [
+          "price",
+          "supply",
+          "region"
+        ]
+      }
+    ],
+    "reviews": [
+      {
+        "role": "reviewer",
+        "decision": "REFINE",
+        "requested_action": "EXACT_RESCAN_WITH_REGION"
+      },
+      {
+        "role": "reviewer",
+        "decision": "ACCEPT_LIMITED",
+        "requested_action": null
+      }
+    ],
+    "actual_tool_routes": [
+      [
+        "price",
+        "indexed"
+      ],
+      [
+        "supply",
+        "indexed"
+      ],
+      [
+        "price",
+        "full_csv"
+      ],
+      [
+        "supply",
+        "full_csv"
+      ],
+      [
+        "region",
+        "full_csv"
+      ]
+    ],
+    "report": {
+      "source_kind": "synthetic_probe_fixture",
+      "injection": "index_omission",
+      "total_observations": 24,
+      "quality": "limited",
+      "fact_ids": [
+        "observations",
+        "support"
+      ],
+      "text": "Synthetic probe fixture: 24 observations; sparse support confirmed."
+    }
+  },
+  "provider_requests": 24,
+  "status": "passed",
+  "elapsed_seconds_total": 1319.24292044064726
+}

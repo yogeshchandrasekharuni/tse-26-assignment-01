@@ -1,0 +1,35 @@
+{
+  "model": "housing-qwen-s104729",
+  "stream": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "PROBE_ROLE=supply. Supply specialist: for each assigned task call scan_supply exactly once and return its JSON receipt. Never infer counts."
+    },
+    {
+      "role": "user",
+      "content": "\nYou are a component in an orchestrated workflow to achieve an objective.\n\nThe overall objective is:\n\n```\n<fastagent:objective>\n    Run the labeled synthetic index-omission probe with immutable query. First delegate indexed scans to price and supply. Next delegate coverage review to reviewer. If reviewer returns REFINE, replan: delegate new full_csv scans to price and supply AND activate region for diagnostics; then ask reviewer again. Only after ACCEPT_LIMITED delegate report to composer. Every role must call its real tool. Return composer's report through this Orchestrator. Completion requires both review decisions and the report. Region must not run in the first pass.\n</fastagent:objective>\n```\n\nPrevious context in achieving the objective is below:\n\n```\n<fastagent:context>\n    <fastagent:progress><fastagent:objective>Run the labeled synthetic index-omission probe with immutable query. First delegate indexed scans to price and supply. Next delegate coverage review to reviewer. If reviewer returns REFINE, replan: delegate new full_csv scans to price and supply AND activate region for diagnostics; then ask reviewer again. Only after ACCEPT_LIMITED delegate report to composer. Every role must call its real tool. Return composer's report through this Orchestrator. Completion requires both review decisions and the report. Region must not run in the first pass.</fastagent:objective>\n<fastagent:steps>No steps executed yet</fastagent:steps>\n<fastagent:status>Not Started</fastagent:status>\n</fastagent:progress>\n</fastagent:context>\n```\n\nYour job is to accomplish the \"task\" specified in `<fastagent:task>`. The overall objective and\nprevious context is supplied to inform your approach.\n\n```\n<fastagent:task>\n   Delegate indexed scan to supply specialist.\n</fastagent:task>\n```\n\nProvide a direct, concise response on completion that makes it simple to assess the status of\nthe overall plan.\n"
+    }
+  ],
+  "max_tokens": 1024,
+  "parallel_tool_calls": true,
+  "stream_options": {
+    "include_usage": true
+  },
+  "temperature": 0.2,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "scan_supply",
+        "description": "Count the current exact selection and check the index against the authoritative fixture.",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        }
+      }
+    }
+  ],
+  "reasoning_effort": "none"
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "status": "planned_not_executed",
+  "contract_version": "1.0",
+  "mr_catalog_version": "1.0",
+  "required_mrs": [
+    "MR01",
+    "MR02",
+    "MR03",
+    "MR04",
+    "MR05",
+    "MR06",
+    "MR07",
+    "MR08",
+    "MR09",
+    "MR10"
+  ],
+  "minimum_distinct_completed_eligible_bases_per_mr": 30,
+  "seed_manifest": "templates/seed_manifest.json",
+  "primary_outcome": "base has any violation under the three fixed paired seeds",
+  "primary_ci": {
+    "method": "wilson_score",
+    "confidence": 0.95,
+    "z": 1.959963984540054,
+    "unit": "distinct_completed_eligible_base",
+    "cross_base_independence": "not guaranteed; nominal interval for designed workload"
+  },
+  "secondary_seed_pair_interval": null,
+  "max_semantic_refinements": 2,
+  "max_schema_repairs_per_invocation": 1,
+  "max_transient_transport_retries": 1,
+  "temperature": 0.2,
+  "disable_final_output_cache_on_followup": true,
+  "modes": [
+    "live",
+    "replay",
+    "policy_simulation"
+  ],
+  "headline_modes": [
+    "live"
+  ],
+  "replay_role_engine": "Fast Agent playback with project exact cassette match",
+  "expected_comparisons": 900,
+  "expected_logical_analysis_legs_before_reuse": 1800,
+  "live_campaign_id": null,
+  "frozen_cohort_sha256": null,
+  "snapshot_sha256": null,
+  "model_digest": null,
+  "prompt_bundle_sha256": null,
+  "dependency_lock_sha256": null
+}

@@ -1,0 +1,54 @@
+{
+  "model": "housing-qwen-s104729",
+  "stream": true,
+  "messages": [
+    {
+      "role": "system",
+      "content": "PROBE_ROLE=supply. Supply specialist: for each assigned task call scan_supply exactly once and return its JSON receipt. Never infer counts."
+    },
+    {
+      "role": "user",
+      "content": "Scan full_csv supply data for synthetic index-omission probe with immutable query."
+    },
+    {
+      "role": "assistant",
+      "tool_calls": [
+        {
+          "id": "call_926kpgyi",
+          "type": "function",
+          "function": {
+            "name": "scan_supply",
+            "arguments": "{}"
+          }
+        }
+      ],
+      "content": ""
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_926kpgyi",
+      "content": "{\"role\":\"supply\",\"strategy\":\"full_csv\",\"query_sha256\":\"25f16ca91607f33ea413b4e1d73d9ec78e03b7d4d83aac1651ff17911812f8a5\",\"selection_sha256\":\"442111da7ed2f3be9a7cd7c23a658536491ee1c11b3a0169469fc757c8ccd95d\",\"selected_observations\":24,\"result\":{\"monthly_counts\":{\"2025-10\":2,\"2025-11\":2,\"2025-12\":2,\"2026-01\":2,\"2026-02\":2,\"2026-03\":2,\"2026-04\":2,\"2026-05\":2,\"2026-06\":2,\"2026-07\":2,\"2026-08\":2,\"2026-09\":2},\"scan_complete\":true,\"source_snapshot_complete\":true},\"receipt_sha256\":\"897b29803e623585d2fa492118910a2cccfd6aed2f747b4307c608cbbb19a1cf\"}"
+    }
+  ],
+  "max_tokens": 1024,
+  "parallel_tool_calls": true,
+  "stream_options": {
+    "include_usage": true
+  },
+  "temperature": 0.2,
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "scan_supply",
+        "description": "Count the current controller-bound selection and check index completeness.",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {},
+          "type": "object"
+        }
+      }
+    }
+  ],
+  "reasoning_effort": "none"
+}
