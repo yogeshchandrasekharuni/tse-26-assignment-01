@@ -19,6 +19,8 @@ Open http://127.0.0.1:5173. The initial screen displays a labeled genuine live c
 
 Explore links monthly chart selection to a tabular record, with backend unit conversion and CSV/JSON export. Workflow exposes parent/child topology, the actual feedback cycle, causal events, exact model inputs/responses and dispatcher results. Experiments exposes recorded campaign progress, base-level summaries, paired cases, witnesses and failure evidence. Provenance explains the frozen source and statistical contract.
 
+An optional [local Langfuse dashboard](observability/langfuse/README.md) imports the real recorded trajectories through OTLP. `make langfuse-up` starts its isolated Docker project on localhost19300; `make langfuse-watch` observes completed campaign and interactive live runs. It preserves failed calls and feedback links, verifies observation readback, and keeps the running experiment's frozen inputs unchanged. Langfuse is not needed for offline analysis reproduction or `make check`.
+
 ## Agent boundary and statistics
 
 The **Orchestrator is the sole public agentic entry and exit**. Fast Agent registers it with `@fast.agent(name="orchestrator", agents=[...])`. Price, Supply, conditional Region, Coverage Reviewer and Composer are internal agents as tools. This differs from Fast Agent's native `@fast.orchestrator` planner; the choice is supported by installed-source inspection and live probes in [FRAMEWORK_FINDINGS.md](FRAMEWORK_FINDINGS.md).

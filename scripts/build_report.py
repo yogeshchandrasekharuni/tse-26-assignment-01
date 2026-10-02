@@ -475,6 +475,16 @@ def report(draft: bool) -> Path:
         if len(document) != 12:
             raise ValueError("Report page count differs from twelve")
     inputs = [ROOT / "reports/content.json", ROOT / "reports/sources.json", Path(__file__)]
+    inputs.extend(
+        ROOT / name
+        for name in (
+            "artifacts/observability/setup/verified.json",
+            "artifacts/observability/demo-index.json",
+            "artifacts/observability/qa/inspection.json",
+            "observability/langfuse/compose.yaml",
+            "observability/langfuse/images.lock.json",
+        )
+    )
     if rows:
         inputs.append(campaign / "headline.json")
     if reproduction:

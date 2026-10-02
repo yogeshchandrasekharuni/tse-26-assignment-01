@@ -2,7 +2,7 @@ PYTHON := .venv/bin/python
 UV := $(if $(wildcard .cache/uv-bootstrap/bin/uv),.cache/uv-bootstrap/bin/uv,uv)
 UV_CACHE_DIR ?= .cache/uv
 UV_PYTHON_INSTALL_DIR ?= .python
-DELIVERY_SCRIPTS := scripts/build_report.py scripts/audit_provider_usage.py scripts/replay_case_leg.py scripts/clean_checkout.py scripts/submission_check.py scripts/prepare_diagnosis.py
+DELIVERY_SCRIPTS := scripts/build_report.py scripts/audit_provider_usage.py scripts/replay_case_leg.py scripts/clean_checkout.py scripts/submission_check.py scripts/prepare_diagnosis.py scripts/init_langfuse.py scripts/export_langfuse.py
 
 .PHONY: setup data check core-check contracts dev evaluate-live reproduce reproduce-pilot report report-draft clean-checkout submission-check probe-setup probe-check probe-live probe-seeds probe-tool-playback probe-replay
 
@@ -74,3 +74,21 @@ probe-tool-playback:
 
 probe-replay:
 	$(PYTHON) scripts/replay_environment.py
+
+LANGFUSE_COMPOSE := docker compose -f observability/langfuse/compose.yaml --env-file observability/langfuse/.env
+
+.PHONY: langfuse-init langfuse-up langfuse-down langfuse-export langfuse-watch
+langfuse-init:
+	$(PYTHON) scripts/init_langfuse.py
+
+langfuse-up: langfuse-init
+	$(LANGFUSE_COMPOSE) up -d
+
+langfuse-down:
+	$(LANGFUSE_COMPOSE) stop
+
+langfuse-export:
+	$(PYTHON) scripts/export_langfuse.py --campaign headline-live-v1 --verify
+
+langfuse-watch:
+	$(PYTHON) -u scripts/export_langfuse.py --campaign headline-live-v1 --include-web --watch --verify

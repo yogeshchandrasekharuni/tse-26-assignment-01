@@ -1,0 +1,38 @@
+# Local trajectory dashboard
+
+Langfuse is an optional observation sink. The analysis service, metamorphic comparisons and strict offline replay do not depend on it. The current live campaign keeps its original frozen Python, Fast Agent, prompts, model configuration and evaluation inputs.
+
+Run `make langfuse-up` once Docker is available, then open <http://localhost:19300>. The isolated Compose project is `housing-tse-langfuse`; its database, ClickHouse, Redis and object storage use dedicated volumes. It does not modify another local Langfuse installation. `make langfuse-down` stops these services and retains their data.
+
+The local login is `housing-review@example.invalid`. The generated password is `LANGFUSE_ADMIN_PASSWORD` in `observability/langfuse/.env`. That file is ignored and created with mode0600; keep it locally. Re-running initialization preserves existing credentials. Deleting the file does not reset persisted database users. No credentials belong in report attachments or screenshots.
+
+## Import a recorded trajectory
+
+```sh
+.venv/bin/python scripts/export_langfuse.py --run artifacts/traces/20261001T150456Z-6c0cbee2b9 --verify
+.venv/bin/python scripts/export_langfuse.py --run artifacts/traces/20261001T144318Z-82736e984f --verify
+make langfuse-export
+make langfuse-watch
+```
+
+The first example is an ordinary live development capture. The second is the explicitly auxiliary injected index-omission demonstration: genuine live model calls, with an injected tool defect that causes a real review/refinement cycle. It is excluded from headline empirical results. Campaign commands import finished physical live runs, including failures, as they become available. The watcher also observes completed local API live runs; replay jobs are explicitly skipped. Dashboard outages are retried every15seconds and failed delivery attempts are preserved. An active campaign remains partial. Reused sources are exported once at their actual capture location; they are not duplicated into new physical calls for other MR cases.
+
+Use `--dry-run` instead of `--verify` to prepare an OTLP payload entirely offline. Offline preparation uses preparation.json and preserves prior delivery acknowledgements. Exports and delivery receipts live under `artifacts/observability/langfuse/<trace-id>/`. The receipt contains the actual dashboard deep link. Offline preparation, HTTP acceptance and observation readback verification have distinct statuses. Stable trace/span IDs make delivery retries idempotent in the local project. An accepted export whose projection changes is refused; version the exporter before changing a delivered mapping. Earlier offline development drafts remain archived separately.
+
+## Read the trajectory
+
+Every trace has one Orchestrator root, matching the application's sole agentic entry and exit. Recorded specialist calls appear as agent children, with model generations and trusted receipt events beneath them. Preserved native tool-call IDs and order identify each delegation. Reviewer results, plan changes and refinement events retain causal links. Invalid decisions and terminal failures are visible as errors; a failed run does not acquire a fictitious Composer or result. Inputs, responses, schemas, prompt hashes, seeds and dataset identities remain inspectable.
+
+Model timing uses recorded live provider end timestamps and durations, parsed with Decimal. Workflow events are points with zero duration because the capture does not measure each operation's start. Missing telemetry remains unknown. Replay captures are refused because their provider usage/timing is historical. Prompt/completion counts are reported provider telemetry; missing fields are not zero and cached prompt tokens are not counted twice. No dollar cost is invented for local inference.
+
+The exporter checks cassette hashes/integrity, raw input/response agreement, workflow payload hashes and native delegation order. It reads only registered local captures and sends only to the requested localhost instance. It ignores proxy environment variables and refuses redirects and partial ingestion. It never sends credentials in the payload. Failure tracebacks are omitted from the dashboard payload; their original evidence remains preserved locally. Langfuse is a readable projection of the raw evidence, not the canonical experiment store or a replay substitute.
+
+## Integration choice and sources
+
+Fast Agent 0.10.45 has native OpenTelemetry setup, verified in its installed `fast_agent/context.py` and [official documentation](https://fast-agent.ai/ref/open_telemetry/). Enabling it now would change a frozen campaign configuration and cannot recover earlier calls. The sidecar exporter therefore projects the existing immutable live captures into [Langfuse OTLP/HTTP](https://langfuse.com/integrations/native/opentelemetry). It uses the [v4 observation attributes and ingestion header](https://langfuse.com/integrations/native/opentelemetry/migration-to-v4), supported [OTLP JSON encoding](https://opentelemetry.io/docs/specs/otlp/) and [v2 observation readback API](https://langfuse.com/docs/api-and-data-platform/features/observations-api). No additional SDK dependency or global instrumentation is needed. Native in-process tracing can be evaluated in a separately versioned future campaign.
+
+`release.json` records current stable release 4.63.0 and its official release URL. All six exercised image digests are pinned in compose.yaml and images.lock.json. The exercised host uses ARM64; other host architectures have not been verified. Actual HTTP200 health, six running services and read-only retention of all29 normal observations after a restart are recorded in artifacts/observability/setup/verified.json. Normal, feedback and naturally failed examples were imported and read back (29/53/14 observations); screenshots are under artifacts/observability/qa. Optional Docker image downloads are separate from the locked offline application setup.
+
+## Professor demo
+
+Start with the [natural sparse headline refinement](http://localhost:19300/project/housing-trajectories/traces/a5fdc6a530e296a7d540829fca6ca732?observation=01bb4d6c887ec741): real Reviewer REFINE, indexed to full_csv with diagnostic Region, then ACCEPT_LIMITED; the criteria hashes remain equal. Next inspect the [natural policy failure](http://localhost:19300/project/housing-trajectories/traces/3eaca745477d15f41b51f5a27c42f08d?observation=a638372fe75a0d09), including the invalid Price decision and terminal error. The [ordinary completed analysis](http://localhost:19300/project/housing-trajectories/traces/e147d0ebdf87944c1af4cbf5ce8fc1ea) gives the baseline flow. The older [injected index-omission example](http://localhost:19300/project/housing-trajectories/traces/acf9d6250e0a9db340bb27e831d6af40) demonstrates recovery of omitted rows and is explicitly auxiliary. These are explanatory examples, not selected estimates of the full campaign. Links and verified receipt hashes are preserved in artifacts/observability/demo-index.json.

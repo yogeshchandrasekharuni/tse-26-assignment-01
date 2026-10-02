@@ -7,6 +7,7 @@ import pymupdf
 
 from housing.evaluation.models import CaseResult, Cohort, HeadlineRow
 from housing.identity import ROOT, sha256_bytes
+from housing.reporting.observability import verify_observability
 from housing.reporting.usage import campaign_usage
 
 
@@ -15,6 +16,7 @@ def load(path: Path) -> object:
 
 
 def check() -> None:
+    verify_observability()
     campaign = ROOT / "artifacts/campaigns/headline-live-v1"
     headline_path = campaign / "headline.json"
     if not headline_path.exists():

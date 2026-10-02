@@ -1,0 +1,91 @@
+{
+  "checked_at_utc": "2026-10-02T16:35:50.098959+00:00",
+  "compose_sha256": "5f2c22b136b6a6ba1361142f8735495909b831a20b8cde423e30ddf34350bf74",
+  "health": {
+    "status": "OK",
+    "version": "4.63.0"
+  },
+  "health_http_status": 200,
+  "normal_capture_read_only_after_restart": {
+    "expected_ids_sha256": "e64fca6de8a881dde15d608a07603b1bfad7ebd7a8f6a98287f22265ff6f2c35",
+    "new_ingestion_requests": 0,
+    "observations": 29,
+    "observed_ids_sha256": "e64fca6de8a881dde15d608a07603b1bfad7ebd7a8f6a98287f22265ff6f2c35",
+    "trace_id": "e147d0ebdf87944c1af4cbf5ce8fc1ea"
+  },
+  "services": [
+    {
+      "bindings": {
+        "3000/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "19300"
+          }
+        ]
+      },
+      "health": null,
+      "image_id": "sha256:67f48d12a190e4ad585249c75ae1ce172b449de3dbbe7486b8179cd28e21408e",
+      "image_ref": "docker.io/langfuse/langfuse:4.63.0@sha256:67f48d12a190e4ad585249c75ae1ce172b449de3dbbe7486b8179cd28e21408e",
+      "name": "/housing-tse-langfuse-web-1",
+      "state": "running"
+    },
+    {
+      "bindings": {
+        "3030/tcp": null
+      },
+      "health": null,
+      "image_id": "sha256:ca32a8fb2a214c7b5f42dd9c540c8072e41db659cb621f317911ce695ad6bca2",
+      "image_ref": "docker.io/langfuse/langfuse-worker:4.63.0@sha256:ca32a8fb2a214c7b5f42dd9c540c8072e41db659cb621f317911ce695ad6bca2",
+      "name": "/housing-tse-langfuse-worker-1",
+      "state": "running"
+    },
+    {
+      "bindings": {
+        "5432/tcp": null
+      },
+      "health": "healthy",
+      "image_id": "sha256:67f41722b7a8cbdb868a44a4995c846eddfdc2973bccb291ce937dce88ad5675",
+      "image_ref": "docker.io/postgres:17@sha256:67f41722b7a8cbdb868a44a4995c846eddfdc2973bccb291ce937dce88ad5675",
+      "name": "/housing-tse-langfuse-postgres-1",
+      "state": "running"
+    },
+    {
+      "bindings": {
+        "8123/tcp": null,
+        "9000/tcp": null,
+        "9009/tcp": null
+      },
+      "health": "healthy",
+      "image_id": "sha256:8a790dd3468db22b1d4e7b18a176f378ff5ff6053b9c48dd4ea1fa71a24c5ba6",
+      "image_ref": "docker.io/clickhouse/clickhouse-server:25.12@sha256:8a790dd3468db22b1d4e7b18a176f378ff5ff6053b9c48dd4ea1fa71a24c5ba6",
+      "name": "/housing-tse-langfuse-clickhouse-1",
+      "state": "running"
+    },
+    {
+      "bindings": {
+        "6379/tcp": null
+      },
+      "health": "healthy",
+      "image_id": "sha256:71da9275c5f3fcb97d0fa0c8c5b36cc995327265420f17a04bfd544f458059f7",
+      "image_ref": "docker.io/redis:7@sha256:71da9275c5f3fcb97d0fa0c8c5b36cc995327265420f17a04bfd544f458059f7",
+      "name": "/housing-tse-langfuse-redis-1",
+      "state": "running"
+    },
+    {
+      "bindings": {
+        "9000/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "19301"
+          }
+        ]
+      },
+      "health": "healthy",
+      "image_id": "sha256:039800e64ec7247d2fde7cff3697e964f6fe20b6d7d2c46aa7d82cc63355d512",
+      "image_ref": "cgr.dev/chainguard/minio:latest@sha256:039800e64ec7247d2fde7cff3697e964f6fe20b6d7d2c46aa7d82cc63355d512",
+      "name": "/housing-tse-langfuse-minio-1",
+      "state": "running"
+    }
+  ],
+  "status": "verified"
+}

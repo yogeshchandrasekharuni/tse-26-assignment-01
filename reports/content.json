@@ -201,8 +201,8 @@
           "Sorted JSON keys originally reordered native Price/Supply tool-call identifiers and changed execution order. Explicit ordered identifiers now preserve it. Detached child names such as reviewer[1] also repeat across parent turns; initializing each clone with every matching-name response replayed the first review twice. Exact second-pass playback exposed this, and each child now receives its one-decision packet. Historical failed attempts remain preserved."
         ],
         [
-          "Environment and limits",
-          "The lock selects Python 3.15.0 and Fast Agent 0.10.45. Three explicit Qwen3.5 local profile defaults and digests are checked before live calls. Seed propagation is verified, but hardware kernels remain best effort. Offline setup uses locked dependencies; reproduction needs the committed live capture, not an Ollama server or paid credential. The provider uses Ollama's local OpenAI-compatible endpoint with a dummy key; no paid account is involved. [6]"
+          "Environment and observability",
+          "The lock selects Python 3.15.0 and Fast Agent 0.10.45. Three explicit Qwen3.5 local profile defaults and digests are checked before live calls. Seed propagation is verified, but hardware kernels remain best effort. Offline setup uses locked dependencies; reproduction needs the committed live capture, not an Ollama server or paid credential. The provider uses Ollama's local OpenAI-compatible endpoint with a dummy key; no paid account is involved. [6] Langfuse 4.63.0 provides an optional local OTLP view of recorded parent/child calls, receipts and feedback. Observation readback and capture hashes bind that view to the evidence; it does not replace strict replay. [7]"
         ]
       ]
     },

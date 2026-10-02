@@ -1,0 +1,83 @@
+{
+  "checked_at_utc": "2026-10-02T14:59:11.428518+00:00",
+  "images": [
+    {
+      "service": "web",
+      "image_ref": "docker.io/langfuse/langfuse:4.63.0",
+      "image_id": "sha256:67f48d12a190e4ad585249c75ae1ce172b449de3dbbe7486b8179cd28e21408e",
+      "repo_digests": [
+        "langfuse/langfuse@sha256:67f48d12a190e4ad585249c75ae1ce172b449de3dbbe7486b8179cd28e21408e"
+      ],
+      "architecture": "arm64",
+      "state": "running",
+      "health": null,
+      "image_label_version": "4.63.0",
+      "locked_ref": "docker.io/langfuse/langfuse:4.63.0@sha256:67f48d12a190e4ad585249c75ae1ce172b449de3dbbe7486b8179cd28e21408e"
+    },
+    {
+      "service": "worker",
+      "image_ref": "docker.io/langfuse/langfuse-worker:4.63.0",
+      "image_id": "sha256:ca32a8fb2a214c7b5f42dd9c540c8072e41db659cb621f317911ce695ad6bca2",
+      "repo_digests": [
+        "langfuse/langfuse-worker@sha256:ca32a8fb2a214c7b5f42dd9c540c8072e41db659cb621f317911ce695ad6bca2"
+      ],
+      "architecture": "arm64",
+      "state": "running",
+      "health": null,
+      "image_label_version": "4.63.0",
+      "locked_ref": "docker.io/langfuse/langfuse-worker:4.63.0@sha256:ca32a8fb2a214c7b5f42dd9c540c8072e41db659cb621f317911ce695ad6bca2"
+    },
+    {
+      "service": "postgres",
+      "image_ref": "docker.io/postgres:17",
+      "image_id": "sha256:67f41722b7a8cbdb868a44a4995c846eddfdc2973bccb291ce937dce88ad5675",
+      "repo_digests": [
+        "postgres@sha256:67f41722b7a8cbdb868a44a4995c846eddfdc2973bccb291ce937dce88ad5675"
+      ],
+      "architecture": "arm64",
+      "state": "running",
+      "health": "healthy",
+      "image_label_version": null,
+      "locked_ref": "docker.io/postgres:17@sha256:67f41722b7a8cbdb868a44a4995c846eddfdc2973bccb291ce937dce88ad5675"
+    },
+    {
+      "service": "clickhouse",
+      "image_ref": "docker.io/clickhouse/clickhouse-server:25.12",
+      "image_id": "sha256:8a790dd3468db22b1d4e7b18a176f378ff5ff6053b9c48dd4ea1fa71a24c5ba6",
+      "repo_digests": [
+        "clickhouse/clickhouse-server@sha256:8a790dd3468db22b1d4e7b18a176f378ff5ff6053b9c48dd4ea1fa71a24c5ba6"
+      ],
+      "architecture": "arm64",
+      "state": "running",
+      "health": "healthy",
+      "image_label_version": "22.04",
+      "locked_ref": "docker.io/clickhouse/clickhouse-server:25.12@sha256:8a790dd3468db22b1d4e7b18a176f378ff5ff6053b9c48dd4ea1fa71a24c5ba6"
+    },
+    {
+      "service": "redis",
+      "image_ref": "docker.io/redis:7",
+      "image_id": "sha256:71da9275c5f3fcb97d0fa0c8c5b36cc995327265420f17a04bfd544f458059f7",
+      "repo_digests": [
+        "redis@sha256:71da9275c5f3fcb97d0fa0c8c5b36cc995327265420f17a04bfd544f458059f7"
+      ],
+      "architecture": "arm64",
+      "state": "running",
+      "health": "healthy",
+      "image_label_version": null,
+      "locked_ref": "docker.io/redis:7@sha256:71da9275c5f3fcb97d0fa0c8c5b36cc995327265420f17a04bfd544f458059f7"
+    },
+    {
+      "service": "minio",
+      "image_ref": "cgr.dev/chainguard/minio:latest",
+      "image_id": "sha256:039800e64ec7247d2fde7cff3697e964f6fe20b6d7d2c46aa7d82cc63355d512",
+      "repo_digests": [
+        "cgr.dev/chainguard/minio@sha256:039800e64ec7247d2fde7cff3697e964f6fe20b6d7d2c46aa7d82cc63355d512"
+      ],
+      "architecture": "arm64",
+      "state": "running",
+      "health": "healthy",
+      "image_label_version": null,
+      "locked_ref": "cgr.dev/chainguard/minio:latest@sha256:039800e64ec7247d2fde7cff3697e964f6fe20b6d7d2c46aa7d82cc63355d512"
+    }
+  ]
+}

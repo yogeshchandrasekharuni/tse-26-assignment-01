@@ -1,0 +1,136 @@
+name: housing-tse-langfuse
+
+x-common: &common
+  DATABASE_URL: postgresql://housing:${POSTGRES_PASSWORD:?Run make langfuse-init}@postgres:5432/housing
+  NEXTAUTH_URL: http://localhost:19300
+  SALT: ${SALT:?}
+  ENCRYPTION_KEY: ${ENCRYPTION_KEY:?}
+  TELEMETRY_ENABLED: "false"
+  CLICKHOUSE_MIGRATION_URL: clickhouse://clickhouse:9000
+  CLICKHOUSE_URL: http://clickhouse:8123
+  CLICKHOUSE_USER: housing
+  CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD:?}
+  CLICKHOUSE_CLUSTER_ENABLED: "false"
+  REDIS_HOST: redis
+  REDIS_PORT: "6379"
+  REDIS_AUTH: ${REDIS_PASSWORD:?}
+  LANGFUSE_S3_EVENT_UPLOAD_BUCKET: langfuse
+  LANGFUSE_S3_EVENT_UPLOAD_REGION: auto
+  LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: housing
+  LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: ${MINIO_PASSWORD:?}
+  LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: http://minio:9000
+  LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: "true"
+  LANGFUSE_S3_EVENT_UPLOAD_PREFIX: events/
+  LANGFUSE_S3_MEDIA_UPLOAD_BUCKET: langfuse
+  LANGFUSE_S3_MEDIA_UPLOAD_REGION: auto
+  LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID: housing
+  LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY: ${MINIO_PASSWORD:?}
+  LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: http://minio:9000
+  LANGFUSE_S3_MEDIA_UPLOAD_FORCE_PATH_STYLE: "true"
+  LANGFUSE_S3_MEDIA_UPLOAD_PREFIX: media/
+  LANGFUSE_S3_BATCH_EXPORT_ENABLED: "false"
+  LANGFUSE_IN_APP_AGENT_ENABLED: "false"
+
+services:
+  web:
+    image: docker.io/langfuse/langfuse:4.63.0@sha256:67f48d12a190e4ad585249c75ae1ce172b449de3dbbe7486b8179cd28e21408e
+    restart: unless-stopped
+    mem_limit: 1536m
+    ports: ["127.0.0.1:19300:3000"]
+    environment:
+      <<: *common
+      NODE_OPTIONS: --max-old-space-size=1024
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:?}
+      LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: http://localhost:19301
+      LANGFUSE_S3_MEDIA_UPLOAD_INTERNAL_ENDPOINT: http://minio:9000
+      LANGFUSE_INIT_ORG_ID: housing-tse-2026
+      LANGFUSE_INIT_ORG_NAME: Housing TSE
+      LANGFUSE_INIT_PROJECT_ID: housing-trajectories
+      LANGFUSE_INIT_PROJECT_NAME: Housing trajectories
+      LANGFUSE_INIT_PROJECT_PUBLIC_KEY: ${LANGFUSE_PUBLIC_KEY:?}
+      LANGFUSE_INIT_PROJECT_SECRET_KEY: ${LANGFUSE_SECRET_KEY:?}
+      LANGFUSE_INIT_USER_EMAIL: housing-review@example.invalid
+      LANGFUSE_INIT_USER_NAME: Housing reviewer
+      LANGFUSE_INIT_USER_PASSWORD: ${LANGFUSE_ADMIN_PASSWORD:?}
+    depends_on: &dependencies
+      postgres: {condition: service_healthy}
+      clickhouse: {condition: service_healthy}
+      redis: {condition: service_healthy}
+      minio: {condition: service_healthy}
+
+  worker:
+    image: docker.io/langfuse/langfuse-worker:4.63.0@sha256:ca32a8fb2a214c7b5f42dd9c540c8072e41db659cb621f317911ce695ad6bca2
+    restart: unless-stopped
+    mem_limit: 1536m
+    environment:
+      <<: *common
+      NODE_OPTIONS: --max-old-space-size=1024
+    depends_on: *dependencies
+
+  postgres:
+    image: docker.io/postgres:17@sha256:67f41722b7a8cbdb868a44a4995c846eddfdc2973bccb291ce937dce88ad5675
+    restart: unless-stopped
+    mem_limit: 384m
+    environment:
+      POSTGRES_USER: housing
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      POSTGRES_DB: housing
+    volumes: [postgres:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U housing -d housing]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  clickhouse:
+    image: docker.io/clickhouse/clickhouse-server:25.12@sha256:8a790dd3468db22b1d4e7b18a176f378ff5ff6053b9c48dd4ea1fa71a24c5ba6
+    restart: unless-stopped
+    mem_limit: 2g
+    environment:
+      CLICKHOUSE_DB: default
+      CLICKHOUSE_USER: housing
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD:?}
+    volumes: [clickhouse:/var/lib/clickhouse, clickhouse-logs:/var/log/clickhouse-server]
+    healthcheck:
+      test: [CMD, wget, --no-verbose, --tries=1, --spider, http://localhost:8123/ping]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  redis:
+    image: docker.io/redis:7@sha256:71da9275c5f3fcb97d0fa0c8c5b36cc995327265420f17a04bfd544f458059f7
+    restart: unless-stopped
+    mem_limit: 192m
+    command: [redis-server, --requirepass, "${REDIS_PASSWORD:?}", --maxmemory, 128mb, --maxmemory-policy, noeviction, --appendonly, "yes"]
+    volumes: [redis:/data]
+    environment:
+      REDISCLI_AUTH: ${REDIS_PASSWORD:?}
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  minio:
+    image: cgr.dev/chainguard/minio:latest@sha256:039800e64ec7247d2fde7cff3697e964f6fe20b6d7d2c46aa7d82cc63355d512
+    restart: unless-stopped
+    mem_limit: 384m
+    entrypoint: sh
+    command: -c 'mkdir -p /data/langfuse && minio server --address ":9000" /data'
+    environment:
+      MINIO_ROOT_USER: housing
+      MINIO_ROOT_PASSWORD: ${MINIO_PASSWORD:?}
+    ports: ["127.0.0.1:19301:9000"]
+    volumes: [minio:/data]
+    healthcheck:
+      test: [CMD, mc, ready, local]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+volumes:
+  postgres:
+  clickhouse:
+  clickhouse-logs:
+  minio:
+  redis:
