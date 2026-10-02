@@ -1,0 +1,72 @@
+{
+  "bootstrap": "Previously completed setup supplies package caches and pinned Python; no model server required",
+  "commands": [
+    {
+      "command": [
+        "make",
+        "setup",
+        "UV=/Users/yogesh/Developer/Personal/iiith/tse-assignment/.cache/uv-bootstrap/bin/uv"
+      ],
+      "ended_at_utc": "2026-10-02T18:01:12.834969+00:00",
+      "exit_code": 0,
+      "log": "artifacts/verification/clean-20261002T175954Z/01-setup.log",
+      "log_sha256": "daba728d82a1e9f3a95eb05ab3f1450ac91a98c6b930931dcfb2c09cc1052e87",
+      "started_at_utc": "2026-10-02T18:00:31.073125+00:00"
+    },
+    {
+      "command": [
+        "make",
+        "data"
+      ],
+      "ended_at_utc": "2026-10-02T18:02:51.771771+00:00",
+      "exit_code": 0,
+      "log": "artifacts/verification/clean-20261002T175954Z/02-data.log",
+      "log_sha256": "9306b1ba66a536ff53cba918c1a77b3481304cada5ce5546fcf1ecc3f1eaee0c",
+      "started_at_utc": "2026-10-02T18:01:12.844743+00:00"
+    },
+    {
+      "command": [
+        "make",
+        "check"
+      ],
+      "ended_at_utc": "2026-10-02T18:55:25.566982+00:00",
+      "exit_code": 0,
+      "log": "artifacts/verification/clean-20261002T175954Z/03-check.log",
+      "log_sha256": "e78c69b6211054a36f36192aa15ad2a8a57f1ed4523014c6988e205af2922540",
+      "started_at_utc": "2026-10-02T18:02:51.776760+00:00"
+    },
+    {
+      "command": [
+        "make",
+        "probe-replay"
+      ],
+      "ended_at_utc": "2026-10-02T18:55:45.334611+00:00",
+      "exit_code": 0,
+      "log": "artifacts/verification/clean-20261002T175954Z/04-probe-replay.log",
+      "log_sha256": "81951c86e13348510a0599e063d7155089824d2e8a7721b3c330d087c01bd9a3",
+      "started_at_utc": "2026-10-02T18:55:25.622413+00:00"
+    },
+    {
+      "command": [
+        "make",
+        "reproduce-pilot"
+      ],
+      "ended_at_utc": "2026-10-02T18:58:49.198484+00:00",
+      "exit_code": 0,
+      "log": "artifacts/verification/clean-20261002T175954Z/05-reproduce-pilot.log",
+      "log_sha256": "52c591a05e1345a0ab286da5338dd1dbb38b0e731304eb3aa4c8ec32f8b4c673",
+      "started_at_utc": "2026-10-02T18:55:45.341790+00:00"
+    }
+  ],
+  "completed_at_utc": "2026-10-02T18:58:53.420951+00:00",
+  "headline_sha256": "5e654386806b850c7d67e7c404a64795ea1a33dc029de3d3615113036d654e88",
+  "initial_git_status": "",
+  "logical_comparisons": 9,
+  "network_policy": "uv and npm offline; production playback blocks socket connections",
+  "reproductions": [
+    "artifacts/reproductions/20261002T185558Z"
+  ],
+  "revision": "f7c11d657f0a3cef21ea89b858e6cd5228adc643",
+  "scope": "pilot",
+  "status": "verified"
+}
