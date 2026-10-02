@@ -1,5 +1,6 @@
 """Exercise a detached committed checkout offline; preserve logs and full recomputed evidence."""
 
+import argparse
 import json
 import os
 import shutil
@@ -12,11 +13,18 @@ from housing.identity import ROOT, sha256_bytes, write_json
 
 
 def main() -> None:
-    reference = ROOT / "artifacts/campaigns/headline-live-v1"
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--pilot", action="store_true", help="Verify only the completed pilot; cannot satisfy the final gate"
+    )
+    args = parser.parse_args()
+    scope = "pilot" if args.pilot else "headline"
+    expected = 9 if args.pilot else 900
+    reference = ROOT / f"artifacts/campaigns/{scope}-live-v1"
     if not (reference / "headline.json").is_file() or not all(
         row["complete"] for row in json.loads((reference / "headline.json").read_bytes())
     ):
-        raise SystemExit("Clean-checkout verification requires a complete committed headline campaign")
+        raise SystemExit(f"Clean-checkout verification requires a complete committed {scope} campaign")
     stamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
     evidence = ROOT / "artifacts/verification" / f"clean-{stamp}"
     evidence.mkdir(parents=True, exist_ok=False)
@@ -26,7 +34,7 @@ def main() -> None:
     initial_status = subprocess.check_output(["git", "status", "--porcelain"], cwd=checkout, text=True)
     if initial_status:
         raise ValueError("Detached checkout was not initially clean")
-    committed_headline = checkout / "artifacts/campaigns/headline-live-v1/headline.json"
+    committed_headline = checkout / reference.relative_to(ROOT) / "headline.json"
     if (
         not committed_headline.is_file()
         or committed_headline.read_bytes() != (reference / "headline.json").read_bytes()
@@ -49,7 +57,7 @@ def main() -> None:
         ["make", "data"],
         ["make", "check"],
         ["make", "probe-replay"],
-        ["make", "reproduce"],
+        ["make", "reproduce-pilot" if args.pilot else "reproduce"],
     ]
     records = []
     try:
@@ -81,7 +89,11 @@ def main() -> None:
         reproduced = []
         for path in sorted((checkout / "artifacts/reproductions").glob("*/reproduction-comparison.json")):
             item = json.loads(path.read_bytes())
-            if item["logical_comparisons"] == 900 and item["status"] == "matched":
+            if (
+                item["logical_comparisons"] == expected
+                and item["status"] == "matched"
+                and item["live_reference"] == str(reference.relative_to(ROOT))
+            ):
                 # Only copy a newly created directory, never overwrite committed evidence.
                 target = ROOT / path.parent.relative_to(checkout)
                 if not target.exists():
@@ -91,6 +103,8 @@ def main() -> None:
             raise ValueError("No new complete offline reproduction was produced")
         packet = {
             "status": "verified",
+            "scope": scope,
+            "logical_comparisons": expected,
             "revision": revision,
             "initial_git_status": initial_status,
             "completed_at_utc": datetime.now(UTC).isoformat(),
@@ -101,11 +115,14 @@ def main() -> None:
             "headline_sha256": sha256_bytes(committed_headline.read_bytes()),
         }
         write_json(evidence / "result.json", packet)
-        write_json(ROOT / "reports/data/clean-checkout.json", packet)
+        write_json(
+            ROOT / "reports/data" / ("pilot-clean-checkout.json" if args.pilot else "clean-checkout.json"),
+            packet,
+        )
         subprocess.run(["git", "worktree", "remove", "--force", str(checkout)], cwd=ROOT, check=True)
         checkout.parent.rmdir()
         print(
-            f"Verified committed clean checkout {revision}; {len(reproduced)} full offline reproduction(s)."
+            f"Verified committed clean checkout {revision}; {len(reproduced)} {scope} offline reproduction(s)."
         )
     except Exception:
         write_json(
