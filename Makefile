@@ -1,5 +1,7 @@
 PYTHON := .venv/bin/python
 UV := $(if $(wildcard .cache/uv-bootstrap/bin/uv),.cache/uv-bootstrap/bin/uv,uv)
+UV_CACHE_DIR ?= .cache/uv
+UV_PYTHON_INSTALL_DIR ?= .python
 DELIVERY_SCRIPTS := scripts/build_report.py scripts/audit_provider_usage.py scripts/replay_case_leg.py scripts/clean_checkout.py scripts/submission_check.py
 
 .PHONY: setup data check core-check contracts dev evaluate-live reproduce reproduce-pilot report report-draft clean-checkout submission-check probe-setup probe-check probe-live probe-seeds probe-tool-playback probe-replay
@@ -54,7 +56,7 @@ core-check:
 	$(PYTHON) -m pytest -q tests
 
 probe-setup:
-	UV_CACHE_DIR=.cache/uv UV_PYTHON_INSTALL_DIR=.python $(UV) sync --frozen
+	UV_CACHE_DIR="$(UV_CACHE_DIR)" UV_PYTHON_INSTALL_DIR="$(UV_PYTHON_INSTALL_DIR)" $(UV) sync --frozen
 
 probe-check:
 	.venv/bin/ruff check --select E4,E7,E9,F scripts tests/unit/test_probe_guards.py
