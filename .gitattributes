@@ -1,0 +1,10 @@
+# Frozen hashes bind exact bytes; do not normalize line endings on checkout.
+* -text
+
+# These authored artifacts may contain ASCII streams; always treat them as binary.
+*.pdf binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.webp binary
+*.woff2 binary

@@ -69,6 +69,7 @@ def campaign_usage(directory: Path) -> dict[str, Any]:
     hashes = {str(manifest_path.relative_to(ROOT)): sha256_bytes(manifest_path.read_bytes())}
     runs: list[dict[str, Any]] = []
     response_count = usage_records = reported_attempts = unknown_attempt_responses = retries = 0
+    inputs_without_response = 0
     by_role: Counter[str] = Counter()
     totals: dict[str, dict[str, int | None]] = {
         label: {"sum_reported": None, "records_with_value": 0, "records_without_value": 0}
@@ -82,6 +83,15 @@ def campaign_usage(directory: Path) -> dict[str, Any]:
             raise ValueError(f"Physical run is still active: {run.relative_to(ROOT)}")
         hashes[str(terminal_path.relative_to(ROOT))] = sha256_bytes(terminal_path.read_bytes())
         terminal = json.loads(terminal_path.read_bytes())
+        input_paths = sorted((run / "model").glob("*.input.json"))
+        input_sequences = {p.name.removesuffix(".input.json") for p in input_paths}
+        for path in input_paths:
+            hashes[str(path.relative_to(ROOT))] = sha256_bytes(path.read_bytes())
+        response_sequences = {
+            p.name.removesuffix(".response.json") for p in (run / "model").glob("*.response.json")
+        }
+        missing_responses = len(input_sequences - response_sequences)
+        inputs_without_response += missing_responses
         row: dict[str, Any] = {
             "run_path": str(run.relative_to(ROOT)),
             "status": terminal["status"],
@@ -89,11 +99,11 @@ def campaign_usage(directory: Path) -> dict[str, Any]:
             "responses": 0,
             "reported_provider_attempts": 0,
             "responses_without_attempt_telemetry": 0,
+            "recorded_inputs_without_response": missing_responses,
         }
         for response_path in sorted((run / "model").glob("*.response.json")):
             input_path = response_path.with_name(response_path.name.replace(".response.", ".input."))
-            for path in (response_path, input_path):
-                hashes[str(path.relative_to(ROOT))] = sha256_bytes(path.read_bytes())
+            hashes[str(response_path.relative_to(ROOT))] = sha256_bytes(response_path.read_bytes())
             role = json.loads(input_path.read_bytes())["agent"].split("[", 1)[0]
             by_role[role] += 1
             usage = response_usage(json.loads(response_path.read_bytes()))
@@ -116,7 +126,7 @@ def campaign_usage(directory: Path) -> dict[str, Any]:
                     total[field] = (total[field] or 0) + subtotal[field]
         runs.append(row)
     return {
-        "schema_version": "report-provider-usage-1",
+        "schema_version": "report-provider-usage-2",
         "campaign_id": directory.name,
         "mode": "live_telemetry_audit",
         "physical_runs": len(runs),
@@ -125,6 +135,7 @@ def campaign_usage(directory: Path) -> dict[str, Any]:
         "usage_records": usage_records,
         "reported_provider_attempts": reported_attempts,
         "responses_without_attempt_telemetry": unknown_attempt_responses,
+        "recorded_inputs_without_response": inputs_without_response,
         "reported_retries": retries,
         "tokens": totals,
         "cost": "Local inference; monetary cost not assigned",
@@ -133,6 +144,7 @@ def campaign_usage(directory: Path) -> dict[str, Any]:
             "including historical failed attempts. Null means unavailable, never zero. Reported attempts "
             "are not an independent network-traffic measurement. Token sums include repeated prompts; "
             "cache-read tokens are a subset, not additional prompt tokens. Replay is not new inference."
+            " An input without a response does not establish whether a provider request began; its usage is unknown."
         ),
         "runs": runs,
         "source_hashes": hashes,

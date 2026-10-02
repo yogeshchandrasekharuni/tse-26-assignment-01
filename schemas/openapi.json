@@ -1204,19 +1204,6 @@
         "title": "GeneratorProvenance",
         "type": "object"
       },
-      "HTTPValidationError": {
-        "properties": {
-          "detail": {
-            "items": {
-              "$ref": "#/components/schemas/ValidationError"
-            },
-            "title": "Detail",
-            "type": "array"
-          }
-        },
-        "title": "HTTPValidationError",
-        "type": "object"
-      },
       "HeadlineDisplay": {
         "additionalProperties": false,
         "properties": {
@@ -2306,46 +2293,6 @@
         "pattern": "^(0|[1-9][0-9]*)\\.[0-9]{6}$",
         "type": "string"
       },
-      "ValidationError": {
-        "properties": {
-          "ctx": {
-            "title": "Context",
-            "type": "object"
-          },
-          "input": {
-            "title": "Input"
-          },
-          "loc": {
-            "items": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "integer"
-                }
-              ]
-            },
-            "title": "Location",
-            "type": "array"
-          },
-          "msg": {
-            "title": "Message",
-            "type": "string"
-          },
-          "type": {
-            "title": "Error Type",
-            "type": "string"
-          }
-        },
-        "required": [
-          "loc",
-          "msg",
-          "type"
-        ],
-        "title": "ValidationError",
-        "type": "object"
-      },
       "WorkflowView": {
         "additionalProperties": false,
         "properties": {
@@ -2555,11 +2502,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ErrorInfo"
                 }
               }
             },
-            "description": "Validation Error"
+            "description": "Invalid typed request"
           }
         },
         "summary": "Get Analysis"
@@ -2632,11 +2579,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ErrorInfo"
                 }
               }
             },
-            "description": "Validation Error"
+            "description": "Invalid typed request"
           }
         },
         "summary": "Csv Export"
@@ -2677,11 +2624,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ErrorInfo"
                 }
               }
             },
-            "description": "Validation Error"
+            "description": "Invalid typed request"
           }
         },
         "summary": "Json Export"
@@ -2740,11 +2687,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ErrorInfo"
                 }
               }
             },
-            "description": "Validation Error"
+            "description": "Invalid typed request"
           }
         },
         "summary": "Get Model Turn"
@@ -2785,11 +2732,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ErrorInfo"
                 }
               }
             },
-            "description": "Validation Error"
+            "description": "Invalid typed request"
           }
         },
         "summary": "Trace Export"
@@ -2837,11 +2784,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ErrorInfo"
                 }
               }
             },
-            "description": "Validation Error"
+            "description": "Invalid typed request"
           }
         },
         "summary": "Get Workflow"
@@ -2860,6 +2807,16 @@
               }
             },
             "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Invalid typed request"
           }
         },
         "summary": "Bootstrap"
@@ -2878,6 +2835,16 @@
               }
             },
             "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Invalid typed request"
           }
         },
         "summary": "Experiments"
@@ -2916,11 +2883,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ErrorInfo"
                 }
               }
             },
-            "description": "Validation Error"
+            "description": "Invalid typed request"
           }
         },
         "summary": "Case Index"
@@ -2964,11 +2931,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ErrorInfo"
                 }
               }
             },
-            "description": "Validation Error"
+            "description": "Invalid typed request"
           }
         },
         "summary": "Case Detail"
@@ -3018,11 +2985,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ErrorInfo"
                 }
               }
             },
-            "description": "Validation Error"
+            "description": "Invalid typed request"
           }
         },
         "summary": "Case Csv"
@@ -3072,11 +3039,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ErrorInfo"
                 }
               }
             },
-            "description": "Validation Error"
+            "description": "Invalid typed request"
           }
         },
         "summary": "Case Json"
@@ -3144,11 +3111,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ErrorInfo"
                 }
               }
             },
-            "description": "Validation Error"
+            "description": "Invalid typed request"
           }
         },
         "summary": "Case Model Turn"
@@ -3198,11 +3165,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ErrorInfo"
                 }
               }
             },
-            "description": "Validation Error"
+            "description": "Invalid typed request"
           }
         },
         "summary": "Case Trace"
@@ -3259,11 +3226,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ErrorInfo"
                 }
               }
             },
-            "description": "Validation Error"
+            "description": "Invalid typed request"
           }
         },
         "summary": "Case Workflow"
@@ -3286,6 +3253,16 @@
               }
             },
             "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Invalid typed request"
           }
         },
         "summary": "Health"
@@ -3307,6 +3284,16 @@
               }
             },
             "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorInfo"
+                }
+              }
+            },
+            "description": "Invalid typed request"
           }
         },
         "summary": "All Jobs"
@@ -3338,11 +3325,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ErrorInfo"
                 }
               }
             },
-            "description": "Validation Error"
+            "description": "Invalid typed request"
           }
         },
         "summary": "Create Job"
@@ -3377,11 +3364,11 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
+                  "$ref": "#/components/schemas/ErrorInfo"
                 }
               }
             },
-            "description": "Validation Error"
+            "description": "Invalid typed request"
           }
         },
         "summary": "Get Job"

@@ -2,7 +2,7 @@
 
 An exact, inspectable multi-agent housing-trends application for the IIIT Hyderabad TSE assignment. The data is **synthetic**, generated locally and frozen; it does not measure the Dallas housing market.
 
-Current verified milestone: the production MAS, strict offline playback, local API, independent ten-MR workload, and a **three-base MR01 live/replay pilot** work. All nine paired pilot comparisons passed and reproduced; that is pilot evidence, not the thirty-base headline evaluation. Desktop/mobile browser verification and the independent design fix review are complete. The full 900-comparison live campaign is running. Its first natural output-contract failure has been diagnosed and strictly replayed; no final rate is claimed. The twelve-page report is a marked draft. Full campaign completion, final diagnosis/report and clean-checkout reproduction remain outstanding.
+Current verified milestone: the production MAS, strict offline playback, local API, independent ten-MR workload, and a **three-base MR01 live/replay pilot** work. All nine paired pilot comparisons passed and reproduced, including from a clean committed checkout with offline setup; that is pilot evidence, not the thirty-base headline evaluation. Desktop/mobile browser verification and the independent design fix review are complete. The full 900-comparison live campaign is running. Its first natural output-contract failure has been diagnosed and strictly replayed; no final rate is claimed. The twelve-page report is a marked draft. Full campaign completion, final diagnosis/report and full clean-checkout reproduction remain outstanding.
 
 ## Run locally
 
@@ -39,6 +39,8 @@ The shared entrypoint is [run_analysis](src/housing/workflow/service.py), used b
 - Frontend resolves React **19.3.1**, Vite **8.3.4**, TypeScript **6.0.3**, self-hosted Public Sans and Lucide icons; npm's full resolution is locked.
 
 Live commands require those existing local profiles. Offline reproduction requires completed setup and captured evidence, and never downloads or starts a model. Historical profile manifests and failed probes are retained separately.
+
+Offline setup may reuse completed caches with `UV_CACHE_DIR` and `UV_PYTHON_INSTALL_DIR`; Makefile defaults stay inside the checkout and honor explicit environment overrides. The clean-checkout verifier also sets uv/npm offline mode. Font/icon/runtime dependency notices ship under frontend/public/licenses; see [third-party notices](THIRD_PARTY_NOTICES.md).
 
 ## Experiments and reproduction
 
@@ -77,6 +79,7 @@ The index-omission command is an explicitly labeled auxiliary control. It preser
 
 - [Pilot live](artifacts/campaigns/pilot-live-v1/headline.json) and [pilot replay match](artifacts/campaigns/pilot-replay-v1/reproduction-comparison.json): three bases, nine comparisons, eighteen physical analyses, 210 model decisions, six natural sparse refinements, zero schema repairs. These numbers describe the pilot only.
 - [Pilot provider audit](reports/data/pilot-provider-usage.json): actual usage/retry channels from unique physical live runs. Replay usage is historical, not new inference; null fields remain unavailable.
+- [Clean-checkout pilot verification](reports/data/pilot-clean-checkout.json): revision aa2c022, initially clean; offline setup, data regeneration,65 tests, frontend checks, framework playback and nine recomputed pilot pairs passed. Its scope is explicitly pilot and cannot satisfy final headline gates. Run the same rehearsal with `.venv/bin/python scripts/clean_checkout.py --pilot`.
 - [First natural failure diagnosis](artifacts/rca/MR01-b003-s155921/diagnosis.md) and strict single-leg replay: preliminary evidence, not a final ranking or rate. `scripts/replay_case_leg.py --case MR01-b003-s155921` recomputes its failure through the shared service.
 - [Architecture/design note](DESIGN_NOTE.md), [visual system](DESIGN.md), and [finish verdict](.impeccable/review/finish-verdict.md): the reviewer scored all three named fixes resolved across replacement desktop/mobile/user-width captures.
 - [NOTEBOOK.md](NOTEBOOK.md): actual commands, timestamps, versions, failures, corrections and remaining work.

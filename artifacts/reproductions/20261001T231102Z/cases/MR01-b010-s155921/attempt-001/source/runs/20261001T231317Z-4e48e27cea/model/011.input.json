@@ -1,0 +1,626 @@
+{
+  "agent": "orchestrator",
+  "boundary_sha256": "719a7a1ab5e7a030b1780d8b24c277d4340205913d72284c892d7f7e7ed21d45",
+  "context": {
+    "contract_version": "1.0",
+    "facts": {},
+    "iteration": 1,
+    "monthly_counts": {
+      "2025-07": 2,
+      "2025-08": 3,
+      "2025-09": 4,
+      "2025-10": 2,
+      "2025-11": 5,
+      "2025-12": 2,
+      "2026-01": 3,
+      "2026-02": 4,
+      "2026-03": 2,
+      "2026-04": 3,
+      "2026-05": 2,
+      "2026-06": 3
+    },
+    "plan": {
+      "active_specialists": [
+        "price",
+        "supply",
+        "region"
+      ],
+      "canonical_query_sha256": "197e140e853ee5821e0d92bff3ba4fdeb978f73d1d10a7c9cb7dd86ed0915c8a",
+      "dataset_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+      "planner_decision_sha256": "4f4395a5ecb2893035a3e90042cee66430de41feae2b3b09cf168bd8cb5fc90f",
+      "region_purpose": "coverage_diagnostic",
+      "required_months": [
+        "2024-07",
+        "2024-08",
+        "2024-09",
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01",
+        "2025-02",
+        "2025-03",
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06"
+      ],
+      "scan_strategy": "full_csv",
+      "version": 1,
+      "visible_months": [
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06"
+      ]
+    },
+    "planning_constraints": null,
+    "previous_review": {
+      "decision": "REFINE",
+      "decision_type": "review",
+      "requested_action": "EXACT_RESCAN_WITH_REGION",
+      "role": "reviewer",
+      "signals": [
+        "SPARSE_SLICE"
+      ]
+    },
+    "previous_signals": [
+      "SPARSE_SLICE"
+    ],
+    "query": {
+      "compare_regions": false,
+      "criteria": {
+        "bedrooms_max": 4,
+        "bedrooms_min": 2,
+        "price_max_cents": null,
+        "price_min_cents": null,
+        "property_types": [
+          "single_family",
+          "townhouse"
+        ],
+        "sqft_max": 2110,
+        "sqft_min": 2100,
+        "zips": [
+          "75001",
+          "75019",
+          "75034",
+          "75063",
+          "75093",
+          "75204"
+        ]
+      },
+      "dataset_id": "dallas-synth-v1",
+      "dataset_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+      "window_end": "2026-06"
+    },
+    "query_sha256": "197e140e853ee5821e0d92bff3ba4fdeb978f73d1d10a7c9cb7dd86ed0915c8a",
+    "receipt_hashes": {
+      "price": "2a1bb33573e8f57ad0391fbce513ff579295548b9081fb14c8859340b60cb044",
+      "region": "cf95a785480e958c34737fb223ce552b90b77c9bb896fe46780dc8c2b2512bc8",
+      "supply": "fc0460591ab665cbe942a8e38a95b72acf451d75c780c6409d3d214bdd86776c"
+    },
+    "required_caveats": [],
+    "scan_complete": true,
+    "schema_repair": null,
+    "signals": [
+      "CONFIRMED_SPARSE"
+    ],
+    "stage": "REVIEW_REQUIRED"
+  },
+  "effective_seed": 155921,
+  "instruction": "You are the sole public Orchestrator of a synthetic housing analysis system. Only you receive the application request and return its final acknowledgement. Five internal agents are available as tools: price, supply, region, reviewer and composer. Never impersonate a child or calculate statistics.\n\nA trusted controller context is supplied at the beginning. Use its planning_constraints to submit a strict PlanDecision through plan_scan(decision_json). All fields must match the current constraints: action, scan_strategy, specialists, region_purpose and reason_codes. Initial plans use indexed scanning with price and supply, adding region only for requested public comparison. A real REFINE review changes the next plan to full_csv and activates region for diagnosis. A further new receipt mismatch can request rebuilt_index; there are at most two refinements and no repeated plans. Never change the query.\n\nDelegate each active specialist once. Children receive authoritative context automatically and return validated decisions plus execution receipts. Only after all active specialists finish delegate reviewer. REFINE requires a new plan and fresh scans; ACCEPT or ACCEPT_LIMITED requires composer. Region is forbidden unless the current plan activates it. If repair_required is returned, delegate that same role once more or correct your own plan once, using the supplied validation feedback. A second invalid response or policy failure ends the run.\n\nAfter composition return only this final JSON decision: {\"role\":\"orchestrator\",\"decision_type\":\"finalize\",\"action\":\"return_verified_report\"}. Native tools are disabled for this terminal turn. The trusted finalizer validates your decision and returns the verified report acknowledgement through you. To inspect earlier state call inspect_context with section=\"current\". Never fabricate receipts, omit a mandatory role or complete early.\n\nDecision schema:\n{\"$defs\":{\"Action\":{\"enum\":[\"INITIAL\",\"EXACT_RESCAN_WITH_REGION\",\"REBUILD_INDEX_AND_RESCAN\"],\"type\":\"string\"},\"RegionPurpose\":{\"enum\":[\"none\",\"public_comparison\",\"coverage_diagnostic\"],\"type\":\"string\"},\"Signal\":{\"enum\":[\"INDEX_COVERAGE_MISMATCH\",\"SPARSE_SLICE\",\"RECEIPT_MISMATCH\",\"COMPLETE_SUPPORT\",\"CONFIRMED_SPARSE\",\"UNRECOVERABLE_INTEGRITY\"],\"type\":\"string\"},\"Specialist\":{\"enum\":[\"price\",\"supply\",\"region\"],\"type\":\"string\"},\"Strategy\":{\"enum\":[\"indexed\",\"full_csv\",\"rebuilt_index\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"action\":{\"$ref\":\"#/$defs/Action\"},\"decision_type\":{\"const\":\"plan\",\"title\":\"Decision Type\",\"type\":\"string\"},\"reason_codes\":{\"items\":{\"$ref\":\"#/$defs/Signal\"},\"title\":\"Reason Codes\",\"type\":\"array\"},\"region_purpose\":{\"$ref\":\"#/$defs/RegionPurpose\"},\"role\":{\"const\":\"orchestrator\",\"title\":\"Role\",\"type\":\"string\"},\"scan_strategy\":{\"$ref\":\"#/$defs/Strategy\"},\"specialists\":{\"items\":{\"$ref\":\"#/$defs/Specialist\"},\"maxItems\":3,\"minItems\":2,\"title\":\"Specialists\",\"type\":\"array\"}},\"required\":[\"role\",\"decision_type\",\"action\",\"scan_strategy\",\"specialists\",\"region_purpose\",\"reason_codes\"],\"title\":\"PlanDecision\",\"type\":\"object\"}\nFinalization schema:\n{\"additionalProperties\":false,\"properties\":{\"action\":{\"const\":\"return_verified_report\",\"title\":\"Action\",\"type\":\"string\"},\"decision_type\":{\"const\":\"finalize\",\"title\":\"Decision Type\",\"type\":\"string\"},\"role\":{\"const\":\"orchestrator\",\"title\":\"Role\",\"type\":\"string\"}},\"required\":[\"role\",\"decision_type\",\"action\"],\"title\":\"FinalizeDecision\",\"type\":\"object\"}",
+  "message_tool_call_order": [
+    [],
+    [],
+    [
+      "call_wy64u9h4"
+    ],
+    [],
+    [
+      "call_mh1twwdc",
+      "call_a8skydvh"
+    ],
+    [],
+    [
+      "call_g9lcq5k8"
+    ],
+    [],
+    [
+      "call_67m47awo"
+    ],
+    [],
+    [
+      "call_u9j3vfnt",
+      "call_aw5v1ajb",
+      "call_bnz450mr"
+    ],
+    []
+  ],
+  "messages": [
+    {
+      "content": [
+        {
+          "text": "Analyze the trusted controller-bound request through your internal agents. Submit the current constrained plan, delegate the active specialists, then reviewer. Follow genuine feedback. After acceptance delegate composer, finalize, and return the exact acknowledgement.",
+          "type": "text"
+        }
+      ],
+      "is_template": false,
+      "role": "user"
+    },
+    {
+      "content": [
+        {
+          "text": "{\"state\":{\"contract_version\":\"1.0\",\"facts\":{},\"iteration\":0,\"monthly_counts\":{},\"plan\":null,\"planning_constraints\":{\"required_action\":\"INITIAL\",\"required_reason_codes\":[],\"required_region_purpose\":\"none\",\"required_scan_strategy\":\"indexed\",\"required_specialists\":[\"price\",\"supply\"]},\"previous_review\":null,\"previous_signals\":[],\"query\":{\"compare_regions\":false,\"criteria\":{\"bedrooms_max\":4,\"bedrooms_min\":2,\"price_max_cents\":null,\"price_min_cents\":null,\"property_types\":[\"single_family\",\"townhouse\"],\"sqft_max\":2110,\"sqft_min\":2100,\"zips\":[\"75001\",\"75019\",\"75034\",\"75063\",\"75093\",\"75204\"]},\"dataset_id\":\"dallas-synth-v1\",\"dataset_view_sha256\":\"bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b\",\"window_end\":\"2026-06\"},\"query_sha256\":\"197e140e853ee5821e0d92bff3ba4fdeb978f73d1d10a7c9cb7dd86ed0915c8a\",\"receipt_hashes\":{},\"required_caveats\":[],\"scan_complete\":null,\"schema_repair\":null,\"signals\":[],\"stage\":\"PLAN_REQUIRED\"},\"trusted_role\":\"orchestrator\"}",
+          "type": "text"
+        }
+      ],
+      "is_template": false,
+      "role": "user"
+    },
+    {
+      "channels": {
+        "fast-agent-timing": [
+          {
+            "text": "{\"start_time\": 87436.261224666, \"end_time\": 87441.76771, \"duration_ms\": 62151.416113, \"ttft_ms\": 5460.64, \"time_to_response_ms\": 5460.64}",
+            "type": "text"
+          }
+        ],
+        "fast-agent-usage": [
+          {
+            "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s155921\", \"prompt\": {\"total\": 3187, \"uncached\": null, \"cache_read\": 2675, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 80, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1790886425.946109, \"timing\": {\"duration_ms\": 62151.416113, \"ttft_ms\": 5460.64, \"time_to_response_ms\": 5460.64}, \"raw_usage\": {\"completion_tokens\": 80, \"prompt_tokens\": 3187, \"total_tokens\": 3267, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 2675, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3267}]}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "assistant",
+      "stop_reason": "toolUse",
+      "tool_calls": {
+        "call_wy64u9h4": {
+          "method": "tools/call",
+          "params": {
+            "arguments": {
+              "decision_json": "{\"role\": \"orchestrator\", \"decision_type\": \"plan\", \"action\": \"INITIAL\", \"scan_strategy\": \"indexed\", \"specialists\": [\"price\", \"supply\"], \"region_purpose\": \"none\", \"reason_codes\": []}"
+            },
+            "name": "plan_scan"
+          }
+        }
+      }
+    },
+    {
+      "channels": {
+        "fast-agent-tool-timing": [
+          {
+            "text": "{\"call_wy64u9h4\": {\"timing_ms\": 6.3, \"transport_channel\": null}}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "user",
+      "timestamp": "2026-10-01T23:13:23.994383Z",
+      "tool_results": {
+        "call_wy64u9h4": {
+          "content": [
+            {
+              "text": "{\"status\":\"decision_applied\",\"role\":\"orchestrator\",\"decision_sha256\":\"b3b2d589ee3aaaf8e747bff904181fc1606cce34a5d9cfa0f0f2a90412226a9d\",\"stage\":\"SCANNING\",\"iteration\":0,\"scan_strategy\":\"indexed\",\"active_specialists\":[\"price\",\"supply\"],\"completed_specialists\":[],\"semantic_receipt_hashes\":{},\"signals\":[],\"next_action\":null,\"planning_constraints\":null}",
+              "type": "text"
+            }
+          ],
+          "is_error": false,
+          "result_type": "complete"
+        }
+      }
+    },
+    {
+      "channels": {
+        "fast-agent-timing": [
+          {
+            "text": "{\"start_time\": 87441.787472791, \"end_time\": 87453.199409583, \"duration_ms\": 128805.869365, \"ttft_ms\": 5975.76, \"time_to_response_ms\": 5975.76}",
+            "type": "text"
+          }
+        ],
+        "fast-agent-usage": [
+          {
+            "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s155921\", \"prompt\": {\"total\": 3403, \"uncached\": null, \"cache_read\": 3183, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 224, \"reasoning\": null}, \"tool_calls\": 2, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1790886554.963924, \"timing\": {\"duration_ms\": 128805.869365, \"ttft_ms\": 5975.76, \"time_to_response_ms\": 5975.76}, \"raw_usage\": {\"completion_tokens\": 224, \"prompt_tokens\": 3403, \"total_tokens\": 3627, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3183, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3627}]}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "assistant",
+      "stop_reason": "toolUse",
+      "tool_calls": {
+        "call_a8skydvh": {
+          "method": "tools/call",
+          "params": {
+            "arguments": {
+              "message": "Delegate supply specialist for indexed scan with query constraints: bedrooms 2-4, sqft 2100-2110, property_types single_family/townhouse, zips 75001/75019/75034/75063/75093/75204, window_end 2026-06"
+            },
+            "name": "agent__supply"
+          }
+        },
+        "call_mh1twwdc": {
+          "method": "tools/call",
+          "params": {
+            "arguments": {
+              "message": "Delegate price specialist for indexed scan with query constraints: bedrooms 2-4, sqft 2100-2110, property_types single_family/townhouse, zips 75001/75019/75034/75063/75093/75204, window_end 2026-06"
+            },
+            "name": "agent__price"
+          }
+        }
+      }
+    },
+    {
+      "content": [],
+      "is_template": false,
+      "role": "user",
+      "timestamp": "2026-10-01T23:13:24.209896Z",
+      "tool_results": {
+        "call_a8skydvh": {
+          "content": [
+            {
+              "text": "{\"active_specialists\":[\"price\",\"supply\"],\"completed_specialists\":[\"price\",\"supply\"],\"decision_sha256\":\"eef637eaa8fe9902ae7a972a29e7c2acfa60bb0393270a370a666134ead22bf8\",\"iteration\":0,\"next_action\":null,\"planning_constraints\":null,\"role\":\"supply\",\"scan_strategy\":\"indexed\",\"semantic_receipt_hashes\":{\"price\":\"5e3fd7795459cd02ffe8625eab0bccd1481a78e69ecaef430d8690b5b9190b85\",\"supply\":\"79f50bb63efe72eabe37634f0439948f572d628dd3b6db06d26891a6ce425ee3\"},\"signals\":[\"SPARSE_SLICE\"],\"stage\":\"REVIEW_REQUIRED\",\"status\":\"decision_applied\"}",
+              "type": "text"
+            }
+          ],
+          "is_error": false,
+          "result_type": "complete"
+        },
+        "call_mh1twwdc": {
+          "content": [
+            {
+              "text": "{\"active_specialists\":[\"price\",\"supply\"],\"completed_specialists\":[\"price\"],\"decision_sha256\":\"e21ad0bd656fe99187f52bc568d37989abf68bc3488b8ac5ba94892eb249992f\",\"iteration\":0,\"next_action\":null,\"planning_constraints\":null,\"role\":\"price\",\"scan_strategy\":\"indexed\",\"semantic_receipt_hashes\":{\"price\":\"5e3fd7795459cd02ffe8625eab0bccd1481a78e69ecaef430d8690b5b9190b85\"},\"signals\":[],\"stage\":\"SCANNING\",\"status\":\"decision_applied\"}",
+              "type": "text"
+            }
+          ],
+          "is_error": false,
+          "result_type": "complete"
+        }
+      }
+    },
+    {
+      "channels": {
+        "fast-agent-timing": [
+          {
+            "text": "{\"start_time\": 87463.116145541, \"end_time\": 87467.659063958, \"duration_ms\": 51275.66041, \"ttft_ms\": 4490.98, \"time_to_response_ms\": 4490.98}",
+            "type": "text"
+          }
+        ],
+        "fast-agent-usage": [
+          {
+            "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s155921\", \"prompt\": {\"total\": 4062, \"uncached\": null, \"cache_read\": 3399, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 62, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1790886718.1829921, \"timing\": {\"duration_ms\": 51275.66041, \"ttft_ms\": 4490.98, \"time_to_response_ms\": 4490.98}, \"raw_usage\": {\"completion_tokens\": 62, \"prompt_tokens\": 4062, \"total_tokens\": 4124, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3399, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 4124}]}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "assistant",
+      "stop_reason": "toolUse",
+      "tool_calls": {
+        "call_g9lcq5k8": {
+          "method": "tools/call",
+          "params": {
+            "arguments": {
+              "message": "Review signals: SPARSE_SLICE from supply specialist. Requested action: REFINE with EXACT_RESCAN_WITH_REGION. This is iteration 0, first mismatch detected."
+            },
+            "name": "agent__reviewer"
+          }
+        }
+      }
+    },
+    {
+      "content": [],
+      "is_template": false,
+      "role": "user",
+      "timestamp": "2026-10-01T23:13:24.290349Z",
+      "tool_results": {
+        "call_g9lcq5k8": {
+          "content": [
+            {
+              "text": "{\"active_specialists\":[\"price\",\"supply\"],\"completed_specialists\":[\"price\",\"supply\"],\"decision_sha256\":\"357ddf7c9735d3cf71e9851b4f6bb85152cb7166a4b4dc962293e5d26048d806\",\"iteration\":0,\"next_action\":\"EXACT_RESCAN_WITH_REGION\",\"planning_constraints\":{\"required_action\":\"EXACT_RESCAN_WITH_REGION\",\"required_reason_codes\":[\"SPARSE_SLICE\"],\"required_region_purpose\":\"coverage_diagnostic\",\"required_scan_strategy\":\"full_csv\",\"required_specialists\":[\"price\",\"supply\",\"region\"]},\"role\":\"reviewer\",\"scan_strategy\":\"indexed\",\"semantic_receipt_hashes\":{\"price\":\"5e3fd7795459cd02ffe8625eab0bccd1481a78e69ecaef430d8690b5b9190b85\",\"supply\":\"79f50bb63efe72eabe37634f0439948f572d628dd3b6db06d26891a6ce425ee3\"},\"signals\":[\"SPARSE_SLICE\"],\"stage\":\"PLAN_REQUIRED\",\"status\":\"decision_applied\"}",
+              "type": "text"
+            }
+          ],
+          "is_error": false,
+          "result_type": "complete"
+        }
+      }
+    },
+    {
+      "channels": {
+        "fast-agent-timing": [
+          {
+            "text": "{\"start_time\": 87473.224574625, \"end_time\": 87478.748083166, \"duration_ms\": 62343.519813, \"ttft_ms\": 5477.41, \"time_to_response_ms\": 5477.41}",
+            "type": "text"
+          }
+        ],
+        "fast-agent-usage": [
+          {
+            "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s155921\", \"prompt\": {\"total\": 4430, \"uncached\": null, \"cache_read\": 4058, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 94, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1790886843.346308, \"timing\": {\"duration_ms\": 62343.519813, \"ttft_ms\": 5477.41, \"time_to_response_ms\": 5477.41}, \"raw_usage\": {\"completion_tokens\": 94, \"prompt_tokens\": 4430, \"total_tokens\": 4524, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 4058, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 4524}]}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "assistant",
+      "stop_reason": "toolUse",
+      "tool_calls": {
+        "call_67m47awo": {
+          "method": "tools/call",
+          "params": {
+            "arguments": {
+              "decision_json": "{\"role\": \"orchestrator\", \"decision_type\": \"plan\", \"action\": \"EXACT_RESCAN_WITH_REGION\", \"scan_strategy\": \"full_csv\", \"specialists\": [\"price\", \"supply\", \"region\"], \"region_purpose\": \"coverage_diagnostic\", \"reason_codes\": [\"SPARSE_SLICE\"]}"
+            },
+            "name": "plan_scan"
+          }
+        }
+      }
+    },
+    {
+      "channels": {
+        "fast-agent-tool-timing": [
+          {
+            "text": "{\"call_67m47awo\": {\"timing_ms\": 182.29, \"transport_channel\": null}}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "user",
+      "timestamp": "2026-10-01T23:13:26.387993Z",
+      "tool_results": {
+        "call_67m47awo": {
+          "content": [
+            {
+              "text": "{\"status\":\"decision_applied\",\"role\":\"orchestrator\",\"decision_sha256\":\"4f4395a5ecb2893035a3e90042cee66430de41feae2b3b09cf168bd8cb5fc90f\",\"stage\":\"SCANNING\",\"iteration\":1,\"scan_strategy\":\"full_csv\",\"active_specialists\":[\"price\",\"supply\",\"region\"],\"completed_specialists\":[],\"semantic_receipt_hashes\":{},\"signals\":[],\"next_action\":null,\"planning_constraints\":null}",
+              "type": "text"
+            }
+          ],
+          "is_error": false,
+          "result_type": "complete"
+        }
+      }
+    },
+    {
+      "channels": {
+        "fast-agent-timing": [
+          {
+            "text": "{\"start_time\": 87478.945465291, \"end_time\": 87496.700298708, \"duration_ms\": 200397.681163, \"ttft_ms\": 6104.23, \"time_to_response_ms\": 6104.23}",
+            "type": "text"
+          }
+        ],
+        "fast-agent-usage": [
+          {
+            "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s155921\", \"prompt\": {\"total\": 4662, \"uncached\": null, \"cache_read\": 4426, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 352, \"reasoning\": null}, \"tool_calls\": 3, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1790887045.9620395, \"timing\": {\"duration_ms\": 200397.681163, \"ttft_ms\": 6104.23, \"time_to_response_ms\": 6104.23}, \"raw_usage\": {\"completion_tokens\": 352, \"prompt_tokens\": 4662, \"total_tokens\": 5014, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 4426, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 5014}]}",
+            "type": "text"
+          }
+        ]
+      },
+      "content": [],
+      "is_template": false,
+      "role": "assistant",
+      "stop_reason": "toolUse",
+      "tool_calls": {
+        "call_aw5v1ajb": {
+          "method": "tools/call",
+          "params": {
+            "arguments": {
+              "message": "Delegate supply specialist for full_csv rescan with region activation, query constraints: bedrooms 2-4, sqft 2100-2110, property_types single_family/townhouse, zips 75001/75019/75034/75063/75093/75204, window_end 2026-06"
+            },
+            "name": "agent__supply"
+          }
+        },
+        "call_bnz450mr": {
+          "method": "tools/call",
+          "params": {
+            "arguments": {
+              "message": "Delegate region specialist for coverage_diagnostic with full_csv rescan, query constraints: bedrooms 2-4, sqft 2100-2110, property_types single_family/townhouse, zips 75001/75019/75034/75063/75093/75204, window_end 2026-06"
+            },
+            "name": "agent__region"
+          }
+        },
+        "call_u9j3vfnt": {
+          "method": "tools/call",
+          "params": {
+            "arguments": {
+              "message": "Delegate price specialist for full_csv rescan with region activation, query constraints: bedrooms 2-4, sqft 2100-2110, property_types single_family/townhouse, zips 75001/75019/75034/75063/75093/75204, window_end 2026-06"
+            },
+            "name": "agent__price"
+          }
+        }
+      }
+    },
+    {
+      "content": [],
+      "is_template": false,
+      "role": "user",
+      "timestamp": "2026-10-01T23:13:26.599826Z",
+      "tool_results": {
+        "call_aw5v1ajb": {
+          "content": [
+            {
+              "text": "{\"active_specialists\":[\"price\",\"supply\",\"region\"],\"completed_specialists\":[\"price\",\"supply\"],\"decision_sha256\":\"eef637eaa8fe9902ae7a972a29e7c2acfa60bb0393270a370a666134ead22bf8\",\"iteration\":1,\"next_action\":null,\"planning_constraints\":null,\"role\":\"supply\",\"scan_strategy\":\"full_csv\",\"semantic_receipt_hashes\":{\"price\":\"2a1bb33573e8f57ad0391fbce513ff579295548b9081fb14c8859340b60cb044\",\"supply\":\"fc0460591ab665cbe942a8e38a95b72acf451d75c780c6409d3d214bdd86776c\"},\"signals\":[],\"stage\":\"SCANNING\",\"status\":\"decision_applied\"}",
+              "type": "text"
+            }
+          ],
+          "is_error": false,
+          "result_type": "complete"
+        },
+        "call_bnz450mr": {
+          "content": [
+            {
+              "text": "{\"active_specialists\":[\"price\",\"supply\",\"region\"],\"completed_specialists\":[\"price\",\"region\",\"supply\"],\"decision_sha256\":\"faa8f49b2adfca21c3f16f00da88e9e39149bbcc36f48adaf10fb3feb83ad6e9\",\"iteration\":1,\"next_action\":null,\"planning_constraints\":null,\"role\":\"region\",\"scan_strategy\":\"full_csv\",\"semantic_receipt_hashes\":{\"price\":\"2a1bb33573e8f57ad0391fbce513ff579295548b9081fb14c8859340b60cb044\",\"region\":\"cf95a785480e958c34737fb223ce552b90b77c9bb896fe46780dc8c2b2512bc8\",\"supply\":\"fc0460591ab665cbe942a8e38a95b72acf451d75c780c6409d3d214bdd86776c\"},\"signals\":[\"CONFIRMED_SPARSE\"],\"stage\":\"REVIEW_REQUIRED\",\"status\":\"decision_applied\"}",
+              "type": "text"
+            }
+          ],
+          "is_error": false,
+          "result_type": "complete"
+        },
+        "call_u9j3vfnt": {
+          "content": [
+            {
+              "text": "{\"active_specialists\":[\"price\",\"supply\",\"region\"],\"completed_specialists\":[\"price\"],\"decision_sha256\":\"e21ad0bd656fe99187f52bc568d37989abf68bc3488b8ac5ba94892eb249992f\",\"iteration\":1,\"next_action\":null,\"planning_constraints\":null,\"role\":\"price\",\"scan_strategy\":\"full_csv\",\"semantic_receipt_hashes\":{\"price\":\"2a1bb33573e8f57ad0391fbce513ff579295548b9081fb14c8859340b60cb044\"},\"signals\":[],\"stage\":\"SCANNING\",\"status\":\"decision_applied\"}",
+              "type": "text"
+            }
+          ],
+          "is_error": false,
+          "result_type": "complete"
+        }
+      }
+    }
+  ],
+  "model_profile": "housing-v4-s155921",
+  "normalization_version": "production-semantic-2",
+  "prompt_bundle_sha256": "47c9578424b4c58836d002685bf6173c4687fe4fe48bcda41ddeeb9cecdbc4f6",
+  "requested_seed": 155921,
+  "retry_policy": {
+    "framework_retries": 1,
+    "sdk_retries": 0
+  },
+  "role_schema_sha256": "89e3431627dc46019043bcd55349f28f1d0112f07b34750a9145b9e41026b122",
+  "tools": {
+    "cache_scope": "private",
+    "result_type": "complete",
+    "tools": [
+      {
+        "description": "Read the trusted immutable query, current state, receipts, constraints and evidence.",
+        "input_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "section": {
+              "const": "current",
+              "type": "string"
+            }
+          },
+          "required": [
+            "section"
+          ],
+          "type": "object"
+        },
+        "name": "inspect_context"
+      },
+      {
+        "description": "Apply your strict PlanDecision. Match the current planning_constraints; never change the query.",
+        "input_schema": {
+          "additionalProperties": false,
+          "properties": {
+            "decision_json": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "decision_json"
+          ],
+          "type": "object"
+        },
+        "name": "plan_scan"
+      },
+      {
+        "description": "You are the internal Price specialist. Return only one JSON object matching PriceDecision, with no Markdown or prose: role price, decision_type tool_intent, tool price_stats, partition_order month_asc or zip_asc, purpose statistics. The trusted context contains the immutable query and plan. Python validates your intent, binds the full selection and executes exact price statistics. Never return numbers, filters or invented evidence. If schema_repair names your role, correct that prior response using the recorded errors. Do not call tools yourself.\n\nDecision schema:\n{\"$defs\":{\"PartitionOrder\":{\"enum\":[\"month_asc\",\"zip_asc\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"decision_type\":{\"const\":\"tool_intent\",\"title\":\"Decision Type\",\"type\":\"string\"},\"partition_order\":{\"$ref\":\"#/$defs/PartitionOrder\"},\"purpose\":{\"const\":\"statistics\",\"title\":\"Purpose\",\"type\":\"string\"},\"role\":{\"const\":\"price\",\"title\":\"Role\",\"type\":\"string\"},\"tool\":{\"const\":\"price_stats\",\"title\":\"Tool\",\"type\":\"string\"}},\"required\":[\"role\",\"decision_type\",\"tool\",\"partition_order\",\"purpose\"],\"title\":\"PriceDecision\",\"type\":\"object\"}",
+        "input_schema": {
+          "properties": {
+            "message": {
+              "description": "Message to send to the agent",
+              "type": "string"
+            }
+          },
+          "required": [
+            "message"
+          ],
+          "type": "object"
+        },
+        "name": "agent__price"
+      },
+      {
+        "description": "You are the internal Supply specialist. Return only one JSON object matching SupplyDecision, with no Markdown or prose: role supply, decision_type tool_intent, tool supply_stats, partition_order month_asc or zip_asc, purpose statistics. Python binds the immutable selection, counts observations and verifies coverage. Never return counts, filters or invented evidence. If schema_repair names your role, correct that prior response using the recorded errors. Do not call tools yourself.\n\nDecision schema:\n{\"$defs\":{\"PartitionOrder\":{\"enum\":[\"month_asc\",\"zip_asc\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"decision_type\":{\"const\":\"tool_intent\",\"title\":\"Decision Type\",\"type\":\"string\"},\"partition_order\":{\"$ref\":\"#/$defs/PartitionOrder\"},\"purpose\":{\"const\":\"statistics\",\"title\":\"Purpose\",\"type\":\"string\"},\"role\":{\"const\":\"supply\",\"title\":\"Role\",\"type\":\"string\"},\"tool\":{\"const\":\"supply_stats\",\"title\":\"Tool\",\"type\":\"string\"}},\"required\":[\"role\",\"decision_type\",\"tool\",\"partition_order\",\"purpose\"],\"title\":\"SupplyDecision\",\"type\":\"object\"}",
+        "input_schema": {
+          "properties": {
+            "message": {
+              "description": "Message to send to the agent",
+              "type": "string"
+            }
+          },
+          "required": [
+            "message"
+          ],
+          "type": "object"
+        },
+        "name": "agent__supply"
+      },
+      {
+        "description": "You are the conditional internal Region specialist. Return only one JSON object matching RegionDecision, without Markdown: role region, decision_type tool_intent, tool region_stats, partition_order month_asc or zip_asc. Set purpose exactly to the current plan's region_purpose: public_comparison or coverage_diagnostic. Python binds the requested ZIPs and executes the exact pooled comparison or diagnosis. Never broaden criteria or invent numbers. If schema_repair names your role, correct that prior response using its errors. Do not call tools yourself.\n\nDecision schema:\n{\"$defs\":{\"PartitionOrder\":{\"enum\":[\"month_asc\",\"zip_asc\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"decision_type\":{\"const\":\"tool_intent\",\"title\":\"Decision Type\",\"type\":\"string\"},\"partition_order\":{\"$ref\":\"#/$defs/PartitionOrder\"},\"purpose\":{\"enum\":[\"public_comparison\",\"coverage_diagnostic\"],\"title\":\"Purpose\",\"type\":\"string\"},\"role\":{\"const\":\"region\",\"title\":\"Role\",\"type\":\"string\"},\"tool\":{\"const\":\"region_stats\",\"title\":\"Tool\",\"type\":\"string\"}},\"required\":[\"role\",\"decision_type\",\"tool\",\"partition_order\",\"purpose\"],\"title\":\"RegionDecision\",\"type\":\"object\"}",
+        "input_schema": {
+          "properties": {
+            "message": {
+              "description": "Message to send to the agent",
+              "type": "string"
+            }
+          },
+          "required": [
+            "message"
+          ],
+          "type": "object"
+        },
+        "name": "agent__region"
+      },
+      {
+        "description": "You are the internal Coverage Reviewer. Return only one strict ReviewDecision JSON object, without Markdown. role reviewer; decision_type review; signals exactly the trusted evidence signals; requested_action null except for REFINE. Do not calculate or invent evidence.\n\nFor indexed INDEX_COVERAGE_MISMATCH, SPARSE_SLICE or RECEIPT_MISMATCH choose REFINE with EXACT_RESCAN_WITH_REGION. Complete authoritative CONFIRMED_SPARSE requires ACCEPT_LIMITED and null. COMPLETE_SUPPORT requires ACCEPT and null. A NEW RECEIPT_MISMATCH at iteration1, absent from previous_signals, permits REFINE with REBUILD_INDEX_AND_RESCAN. Persistent mismatch or iteration2 mismatch requires FAIL and null. Do not repeat a sparse scan pointlessly or change user criteria. If schema_repair names your role, correct that prior response using its errors.\n\nDecision schema:\n{\"$defs\":{\"Signal\":{\"enum\":[\"INDEX_COVERAGE_MISMATCH\",\"SPARSE_SLICE\",\"RECEIPT_MISMATCH\",\"COMPLETE_SUPPORT\",\"CONFIRMED_SPARSE\",\"UNRECOVERABLE_INTEGRITY\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"decision\":{\"enum\":[\"ACCEPT\",\"REFINE\",\"ACCEPT_LIMITED\",\"FAIL\"],\"title\":\"Decision\",\"type\":\"string\"},\"decision_type\":{\"const\":\"review\",\"title\":\"Decision Type\",\"type\":\"string\"},\"requested_action\":{\"anyOf\":[{\"enum\":[\"EXACT_RESCAN_WITH_REGION\",\"REBUILD_INDEX_AND_RESCAN\"],\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Requested Action\"},\"role\":{\"const\":\"reviewer\",\"title\":\"Role\",\"type\":\"string\"},\"signals\":{\"items\":{\"$ref\":\"#/$defs/Signal\"},\"minItems\":1,\"title\":\"Signals\",\"type\":\"array\"}},\"required\":[\"role\",\"decision_type\",\"decision\",\"signals\",\"requested_action\"],\"title\":\"ReviewDecision\",\"type\":\"object\"}",
+        "input_schema": {
+          "properties": {
+            "message": {
+              "description": "Message to send to the agent",
+              "type": "string"
+            }
+          },
+          "required": [
+            "message"
+          ],
+          "type": "object"
+        },
+        "name": "agent__reviewer"
+      },
+      {
+        "description": "You are the internal Report Composer. Return only one strict ReportDecision JSON object, without Markdown: role composer, decision_type report, fact_ids a nonempty ordered unique selection of the trusted fact registry's keys, caveat_codes exactly required_caveats. Prefer observations and support, and first_to_last_price or last_month_yoy when available. Python renders selected facts and caveats using verified values. Never supply numerical claims or outside market explanations. If schema_repair names your role, correct that prior response using its errors.\n\nDecision schema:\n{\"additionalProperties\":false,\"properties\":{\"caveat_codes\":{\"items\":{\"enum\":[\"SYNTHETIC_DATA\",\"SPARSE_SUPPORT\",\"NO_MATCHES\",\"UNAVAILABLE_LOOKBACK\"],\"type\":\"string\"},\"title\":\"Caveat Codes\",\"type\":\"array\"},\"decision_type\":{\"const\":\"report\",\"title\":\"Decision Type\",\"type\":\"string\"},\"fact_ids\":{\"items\":{\"type\":\"string\"},\"maxItems\":8,\"minItems\":1,\"title\":\"Fact Ids\",\"type\":\"array\"},\"role\":{\"const\":\"composer\",\"title\":\"Role\",\"type\":\"string\"}},\"required\":[\"role\",\"decision_type\",\"fact_ids\",\"caveat_codes\"],\"title\":\"ReportDecision\",\"type\":\"object\"}",
+        "input_schema": {
+          "properties": {
+            "message": {
+              "description": "Message to send to the agent",
+              "type": "string"
+            }
+          },
+          "required": [
+            "message"
+          ],
+          "type": "object"
+        },
+        "name": "agent__composer"
+      }
+    ],
+    "ttl_ms": 0
+  }
+}

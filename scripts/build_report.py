@@ -2,12 +2,15 @@
 
 import argparse
 import json
+import math
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
 from xml.sax.saxutils import escape
 
 import pymupdf
+from reportlab.graphics import renderPDF, renderSVG
+from reportlab.graphics.shapes import Circle, Drawing, Line, String
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle
@@ -83,7 +86,10 @@ class Page:
         self.text(value)
 
     def table(self, rows: list[list[str]], widths: list[float] | None = None) -> None:
-        table = Table([[Paragraph(escape(cell), CELL) for cell in row] for row in rows], colWidths=widths)
+        table = Table(
+            [[Paragraph(escape(cell).replace("\n", "<br/>"), CELL) for cell in row] for row in rows],
+            colWidths=widths,
+        )
         table.setStyle(
             TableStyle(
                 [
@@ -134,24 +140,94 @@ class Page:
             x1, y1 = positions[a]
             x2, y2 = positions[b]
             c.line(x1, y1, x2, y2)
+            length = math.hypot(x2 - x1, y2 - y1)
+            ux, uy = (x2 - x1) / length, (y2 - y1) / length
+            tx, ty = x2 - ux * 10, y2 - uy * 10
+            c.lines(
+                [
+                    (tx, ty, tx - ux * 5 - uy * 2, ty - uy * 5 + ux * 2),
+                    (tx, ty, tx - ux * 5 + uy * 2, ty - uy * 5 - ux * 2),
+                ]
+            )
         c.setStrokeColor(AMBER)
         c.lines([(430, 105, 430, 177), (430, 177, 65, 177), (65, 177, 65, 108)])
+        c.lines([(65, 105, 62, 112), (65, 105, 68, 112)])
         c.setFillColor(AMBER)
         c.setFont("Helvetica-Bold", 8)
         c.drawCentredString(255, 181, "REFINE: new scan strategy / conditional Region")
         c.setStrokeColor(MUTED)
         c.lines([(430, 25, 430, 12), (430, 12, 25, 12), (25, 12, 25, 95), (25, 95, 54, 95)])
+        c.lines([(55, 95, 49, 92), (55, 95, 49, 98)])
         for name, (x, y) in positions.items():
             c.setFillColor(colors.white)
             c.setStrokeColor(BLUE if name != "Aggregate" else MUTED)
             c.circle(x, y, 9, fill=1, stroke=1)
             c.setFillColor(INK)
             c.setFont("Helvetica-Bold", 9)
-            c.drawCentredString(x, y - 23 if name != "Composer" else y + 16, name)
+            if name in {"Reviewer", "Composer"}:
+                c.drawString(x + 13, y - 3, name)
+            else:
+                c.drawCentredString(x, y - 23, name)
         c.restoreState()
         self.y -= 10
         self.text(
             "Figure 1. All model roles are inside the parent boundary. Region* is conditional; Aggregate is deterministic Python. Every child result returns to the parent. The amber cycle changes actual work.",
+            SMALL,
+        )
+
+    def wilson_plot(self, rows: list[dict[str, Any]]) -> None:
+        """Render already-computed exact endpoints; float is used only for drawing coordinates."""
+        height = 155
+        drawing = Drawing(WIDTH, height)
+        start, span = 110, WIDTH - 120
+        drawing.add(
+            String(
+                0,
+                146,
+                "Base any-seed rate / nominal 95% interval",
+                fontName="Helvetica-Bold",
+                fontSize=8,
+                fillColor=INK,
+            )
+        )
+        for index, row in enumerate(rows):
+            y = 129 - index * 11.5
+            drawing.add(String(0, y - 2.5, row["mr_id"], fontName="Helvetica", fontSize=7.7, fillColor=INK))
+            drawing.add(
+                String(
+                    45, y - 2.5, percent(row["base_rate"]), fontName="Helvetica", fontSize=7.7, fillColor=INK
+                )
+            )
+            low, high, rate = [
+                start + float(Fraction(row[field])) * span for field in ("ci95_low", "ci95_high", "base_rate")
+            ]
+            drawing.add(Line(low, y, high, y, strokeColor=BLUE, strokeWidth=1.2))
+            for x in (low, high):
+                drawing.add(Line(x, y - 2, x, y + 2, strokeColor=BLUE, strokeWidth=0.8))
+            drawing.add(Circle(rate, y, 2, fillColor=BLUE, strokeColor=BLUE))
+        drawing.add(Line(start, 15, start + span, 15, strokeColor=LINE, strokeWidth=0.6))
+        for numerator in range(5):
+            x = start + numerator * span / 4
+            drawing.add(
+                String(
+                    x,
+                    2,
+                    f"{numerator * 25}%",
+                    textAnchor="middle",
+                    fontName="Helvetica",
+                    fontSize=7.5,
+                    fillColor=MUTED,
+                )
+            )
+        if self.y - height < 61:
+            raise ValueError("Wilson figure exceeds its page")
+        renderPDF.draw(drawing, self.canvas, MARGIN, self.y - height)
+        self.y -= height + 9
+        figures = ROOT / "reports/figures"
+        figures.mkdir(parents=True, exist_ok=True)
+        renderSVG.drawToFile(drawing, str(figures / "headline-wilson.svg"))
+        self.text(
+            "Figure 2. Nominal Wilson intervals on completed bases. Overlapping designed slices limit generalization.",
             SMALL,
         )
 
@@ -178,6 +254,23 @@ def completed_reference(draft: bool) -> tuple[Path, list[dict[str, Any]] | None,
         for path in (ROOT / "reports/data/diagnosis.json", ROOT / "reports/data/clean-checkout.json"):
             if not path.exists() or load(path).get("status") != "verified":
                 raise ValueError(f"Final report requires verified evidence: {path.relative_to(ROOT)}")
+        clean = load(ROOT / "reports/data/clean-checkout.json")
+        if (
+            clean.get("scope") != "headline"
+            or clean.get("logical_comparisons") != 900
+            or clean.get("headline_sha256") != sha256_bytes((campaign / "headline.json").read_bytes())
+        ):
+            raise ValueError("Clean-checkout evidence does not verify this full headline table")
+        diagnosis = load(ROOT / "reports/data/diagnosis.json")
+        if (
+            diagnosis.get("campaign_id") != campaign.name
+            or diagnosis.get("headline_sha256") != sha256_bytes((campaign / "headline.json").read_bytes())
+            or not diagnosis.get("report_blocks")
+        ):
+            raise ValueError("Diagnosis must describe this exact completed campaign")
+        usage_path = ROOT / "reports/data/headline-provider-usage.json"
+        if not usage_path.is_file() or load(usage_path).get("campaign_id") != campaign.name:
+            raise ValueError("Final report requires the full live provider telemetry audit")
         for name, expected in load(campaign / "artifact_hashes.json").items():
             path = (campaign / name).resolve()
             if not path.is_relative_to(campaign) or sha256_bytes(path.read_bytes()) != expected:
@@ -245,7 +338,19 @@ def report(draft: bool) -> Path:
             )
         if number == 8:
             if rows:
-                table = [["MR / family", "n", "x/n", "Rate", "Nominal 95% CI", "Pairs*", "Inv.", "Err."]]
+                table = [
+                    [
+                        "MR / family",
+                        "n",
+                        "x/n",
+                        "Rate",
+                        "Nominal 95% CI",
+                        "Pairs*",
+                        "C-faults",
+                        "Inv.",
+                        "Err.",
+                    ]
+                ]
                 for row in rows:
                     table.append(
                         [
@@ -255,18 +360,19 @@ def report(draft: bool) -> Path:
                             percent(row["base_rate"]),
                             percent(row["ci95_low"]) + " - " + percent(row["ci95_high"]),
                             f"{row['seed_pair_violations']}/{row['seed_pairs_completed']}",
+                            str(row["output_contract_violations"]),
                             str(row["invalid_candidates"]),
                             str(row["execution_errors"]),
                         ]
                     )
-                page.table(table, [70, 24, 35, 48, 137, 57, 43, WIDTH - 414])
+                page.table(table, [65, 22, 34, 46, 119, 57, 54, 54, WIDTH - 451])
                 page.text(
-                    "I=invariance; M=monotonic; D=directional. *Violating/completed paired-seed comparisons. Source: headline-live-v1/headline.json; every completed row uses seeds 104729, 130363, 155921.",
+                    "I=invariance; M=monotonic; D=directional. *Violating/completed seed pairs. C-faults=eligible output-contract pairs. Source: headline-live-v1/headline.json; all rows use seeds 104729, 130363, 155921.",
                     SMALL,
                 )
                 runtime = load(campaign / "runtime.json")
                 page.text(
-                    f"Measured execution: {runtime['logical_comparisons']} logical comparisons; {runtime['physical_analysis_attempts']} physical attempts; {sum(runtime['model_calls_by_role'].values())} model decisions; {runtime['refinements']} refinements; {runtime['schema_repairs']} repairs.",
+                    f"Measured execution: {runtime['logical_comparisons']} logical comparisons; {runtime['physical_analysis_attempts']} physical attempts; {sum(runtime['model_calls_by_role'].values())} model decisions; {runtime['refinements']} refinements; {runtime['schema_repairs']} repairs. Sum of physical analysis durations: {serial(Fraction(runtime['sum_analysis_duration_ns'], 1_000_000_000), digits=2)} seconds.",
                     SMALL,
                 )
             else:
@@ -279,17 +385,22 @@ def report(draft: bool) -> Path:
                     "Completed pilot - separate evidence",
                     f"MR01 only: 9 paired comparisons across 3 distinct bases; {pilot['violating_bases']}/3 violating bases; nominal 95% Wilson {percent(pilot['ci95_low'])} - {percent(pilot['ci95_high'])}. All nine recomputed case semantics and the pilot table matched offline. This pilot does not satisfy the thirty-base headline requirement.",
                 )
+        blocks = section["blocks"]
+        if number == 8 and rows:
+            page.wilson_plot(rows)
+            blocks = []
         if number == 9:
             diagnosis_path = ROOT / "reports/data/diagnosis.json"
             if diagnosis_path.exists():
                 diagnosis = load(diagnosis_path)
                 page.block("Observed diagnosis", diagnosis["summary"])
+                blocks = diagnosis["report_blocks"]
             else:
                 page.block(
                     "Diagnosis awaits completed outcomes",
                     "No final top-three ranking is available yet. The frozen selection rule and evidence requirements below will be applied to the completed headline table; historical integration bugs are not relabeled as natural headline violations.",
                 )
-        for heading, text in section["blocks"]:
+        for heading, text in blocks:
             page.block(heading, text)
         if number == 2:
             page.table(
@@ -315,13 +426,37 @@ def report(draft: bool) -> Path:
                 ],
                 [150, WIDTH - 150],
             )
-        if number == 10 and reproduction:
-            page.text(
-                "Full offline evidence: "
-                + str(reproduction.relative_to(ROOT))
-                + "/reproduction-comparison.json",
-                SMALL,
+        if number == 10:
+            page.table(
+                [
+                    ["Local inference configuration", "Frozen values"],
+                    ["Model", "Qwen3.5:9b; resolved 9.7B, Q4_K_M; Ollama 0.40.4"],
+                    ["Sampling defaults", "temperature 0.2; top_p 0.95; top_k 20; presence_penalty 1.5"],
+                    [
+                        "Context / completion",
+                        "65,536 / 1,024; reasoning_effort none; three seeded v4 profiles",
+                    ],
+                ],
+                [145, WIDTH - 145],
             )
+            if reproduction:
+                page.text(
+                    "Full offline evidence: "
+                    + str(reproduction.relative_to(ROOT))
+                    + "/reproduction-comparison.json",
+                    SMALL,
+                )
+            usage_path = ROOT / "reports/data/headline-provider-usage.json"
+            if rows and usage_path.exists():
+                usage = load(usage_path)
+                page.text(
+                    f"Live telemetry: {usage['reported_provider_attempts']} reported provider attempts; "
+                    f"{usage['tokens']['prompt_total']['sum_reported']} prompt tokens; "
+                    f"{usage['tokens']['completion_total']['sum_reported']} completion tokens. "
+                    f"{usage['responses_without_attempt_telemetry']} responses lack attempt telemetry. "
+                    "No monetary cost assigned. Raw audit: reports/data/headline-provider-usage.json.",
+                    SMALL,
+                )
         if number == 12:
             page.text("References", HEADING, gap=9)
             for index, source in enumerate(sources, 1):
@@ -344,6 +479,10 @@ def report(draft: bool) -> Path:
         inputs.append(campaign / "headline.json")
     if reproduction:
         inputs.append(reproduction / "reproduction-comparison.json")
+    for name in ("diagnosis", "clean-checkout", "headline-provider-usage"):
+        path = ROOT / "reports/data" / f"{name}.json"
+        if path.is_file():
+            inputs.append(path)
     write_json(
         destination.with_suffix(".manifest.json"),
         {

@@ -1,9 +1,10 @@
 {
   "campaign_id": "pilot-live-v1",
   "cost": "Local inference; monetary cost not assigned",
-  "interpretation": "Integer sums of Fast Agent usage/v2 and retry/v1 telemetry from unique physical live runs, including historical failed attempts. Null means unavailable, never zero. Reported attempts are not an independent network-traffic measurement. Token sums include repeated prompts; cache-read tokens are a subset, not additional prompt tokens. Replay is not new inference.",
+  "interpretation": "Integer sums of Fast Agent usage/v2 and retry/v1 telemetry from unique physical live runs, including historical failed attempts. Null means unavailable, never zero. Reported attempts are not an independent network-traffic measurement. Token sums include repeated prompts; cache-read tokens are a subset, not additional prompt tokens. Replay is not new inference. An input without a response does not establish whether a provider request began; its usage is unknown.",
   "mode": "live_telemetry_audit",
   "physical_runs": 18,
+  "recorded_inputs_without_response": 0,
   "recorded_responses": 210,
   "reported_provider_attempts": 210,
   "reported_retries": 0,
@@ -19,6 +20,7 @@
   "runs": [
     {
       "model_decisions": 10,
+      "recorded_inputs_without_response": 0,
       "reported_provider_attempts": 10,
       "responses": 10,
       "responses_without_attempt_telemetry": 0,
@@ -27,6 +29,7 @@
     },
     {
       "model_decisions": 10,
+      "recorded_inputs_without_response": 0,
       "reported_provider_attempts": 10,
       "responses": 10,
       "responses_without_attempt_telemetry": 0,
@@ -35,6 +38,7 @@
     },
     {
       "model_decisions": 10,
+      "recorded_inputs_without_response": 0,
       "reported_provider_attempts": 10,
       "responses": 10,
       "responses_without_attempt_telemetry": 0,
@@ -43,6 +47,7 @@
     },
     {
       "model_decisions": 10,
+      "recorded_inputs_without_response": 0,
       "reported_provider_attempts": 10,
       "responses": 10,
       "responses_without_attempt_telemetry": 0,
@@ -51,6 +56,7 @@
     },
     {
       "model_decisions": 10,
+      "recorded_inputs_without_response": 0,
       "reported_provider_attempts": 10,
       "responses": 10,
       "responses_without_attempt_telemetry": 0,
@@ -59,6 +65,7 @@
     },
     {
       "model_decisions": 10,
+      "recorded_inputs_without_response": 0,
       "reported_provider_attempts": 10,
       "responses": 10,
       "responses_without_attempt_telemetry": 0,
@@ -67,6 +74,7 @@
     },
     {
       "model_decisions": 9,
+      "recorded_inputs_without_response": 0,
       "reported_provider_attempts": 9,
       "responses": 9,
       "responses_without_attempt_telemetry": 0,
@@ -75,6 +83,7 @@
     },
     {
       "model_decisions": 9,
+      "recorded_inputs_without_response": 0,
       "reported_provider_attempts": 9,
       "responses": 9,
       "responses_without_attempt_telemetry": 0,
@@ -83,6 +92,7 @@
     },
     {
       "model_decisions": 9,
+      "recorded_inputs_without_response": 0,
       "reported_provider_attempts": 9,
       "responses": 9,
       "responses_without_attempt_telemetry": 0,
@@ -91,6 +101,7 @@
     },
     {
       "model_decisions": 9,
+      "recorded_inputs_without_response": 0,
       "reported_provider_attempts": 9,
       "responses": 9,
       "responses_without_attempt_telemetry": 0,
@@ -99,6 +110,7 @@
     },
     {
       "model_decisions": 9,
+      "recorded_inputs_without_response": 0,
       "reported_provider_attempts": 9,
       "responses": 9,
       "responses_without_attempt_telemetry": 0,
@@ -107,6 +119,7 @@
     },
     {
       "model_decisions": 9,
+      "recorded_inputs_without_response": 0,
       "reported_provider_attempts": 9,
       "responses": 9,
       "responses_without_attempt_telemetry": 0,
@@ -115,6 +128,7 @@
     },
     {
       "model_decisions": 16,
+      "recorded_inputs_without_response": 0,
       "reported_provider_attempts": 16,
       "responses": 16,
       "responses_without_attempt_telemetry": 0,
@@ -123,6 +137,7 @@
     },
     {
       "model_decisions": 16,
+      "recorded_inputs_without_response": 0,
       "reported_provider_attempts": 16,
       "responses": 16,
       "responses_without_attempt_telemetry": 0,
@@ -131,6 +146,7 @@
     },
     {
       "model_decisions": 16,
+      "recorded_inputs_without_response": 0,
       "reported_provider_attempts": 16,
       "responses": 16,
       "responses_without_attempt_telemetry": 0,
@@ -139,6 +155,7 @@
     },
     {
       "model_decisions": 16,
+      "recorded_inputs_without_response": 0,
       "reported_provider_attempts": 16,
       "responses": 16,
       "responses_without_attempt_telemetry": 0,
@@ -147,6 +164,7 @@
     },
     {
       "model_decisions": 16,
+      "recorded_inputs_without_response": 0,
       "reported_provider_attempts": 16,
       "responses": 16,
       "responses_without_attempt_telemetry": 0,
@@ -155,6 +173,7 @@
     },
     {
       "model_decisions": 16,
+      "recorded_inputs_without_response": 0,
       "reported_provider_attempts": 16,
       "responses": 16,
       "responses_without_attempt_telemetry": 0,
@@ -162,7 +181,7 @@
       "status": "completed"
     }
   ],
-  "schema_version": "report-provider-usage-1",
+  "schema_version": "report-provider-usage-2",
   "source_hashes": {
     "artifacts/campaigns/pilot-live-v1/cases/MR01-b001-s104729/attempt-001/followup/runs/20261001T162827Z-9b0bf17482/model/000.input.json": "5babd5e929a46c28087e3a877d0115bfb161a30eb8732fc8ac131173db57cfcb",
     "artifacts/campaigns/pilot-live-v1/cases/MR01-b001-s104729/attempt-001/followup/runs/20261001T162827Z-9b0bf17482/model/000.response.json": "5e9c820a0401c050a1562d1ab0e989743d10bad7988687ca7239cff40a35e0a2",

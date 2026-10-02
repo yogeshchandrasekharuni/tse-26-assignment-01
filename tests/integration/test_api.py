@@ -47,7 +47,15 @@ def test_public_contracts_exports_units_and_path_guards(tmp_path: Path) -> None:
             "capture_id": "normal",
             "path": "/etc/passwd",
         }
-        assert client.post("/api/jobs", json=invalid).status_code == 422
+        rejected = client.post("/api/jobs", json=invalid)
+        assert rejected.status_code == 422
+        validate("ErrorInfo", rejected.json())
+        published = client.get("/openapi.json").json()
+        error_schema = published["paths"]["/api/jobs"]["post"]["responses"]["422"]["content"][
+            "application/json"
+        ]["schema"]
+        assert error_schema == {"$ref": "#/components/schemas/ErrorInfo"}
+        Draft202012Validator(published["components"]["schemas"]["ErrorInfo"]).validate(rejected.json())
         assert client.get("/api/jobs").json() == []
 
 

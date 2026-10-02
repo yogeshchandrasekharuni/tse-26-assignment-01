@@ -75,7 +75,12 @@ def create_app(runtime_root: Path | None = None) -> FastAPI:
             with suppress(asyncio.CancelledError):
                 await worker
 
-    application = FastAPI(title="Housing Evidence", version="1.0.0", lifespan=lifespan)
+    application = FastAPI(
+        title="Housing Evidence",
+        version="1.0.0",
+        lifespan=lifespan,
+        responses={422: {"model": ErrorInfo, "description": "Invalid typed request"}},
+    )
     application.add_middleware(TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1", "testserver"])
 
     @application.exception_handler(HousingError)
