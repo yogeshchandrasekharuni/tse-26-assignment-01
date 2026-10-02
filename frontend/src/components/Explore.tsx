@@ -49,7 +49,11 @@ export function Explore({
         </div>
         <label className="record-select">
           Recorded example
-          <select value={capture} onChange={(event) => chooseCapture(event.target.value)}>
+          <select
+            value={capture}
+            disabled={busy}
+            onChange={(event) => chooseCapture(event.target.value)}
+          >
             <option value="" disabled>
               Current analysis
             </option>
@@ -203,6 +207,7 @@ export function Explore({
           </div>
         </div>
         <div className="table-scroll">
+          <p className="table-hint">Scroll horizontally to see every measure.</p>
           <table className="data-table monthly-table">
             <caption className="sr-only">
               Synthetic housing observations and median statistics by month

@@ -341,6 +341,11 @@ export type RunId1 = string
 export type SchemaVersion3 = '1.0'
 export type TimestampUtc = string
 export type Events = TraceEvent[]
+/**
+ * This interface was referenced by `ClientContracts`'s JSON-Schema
+ * via the `definition` "EvidenceScope".
+ */
+export type EvidenceScope = 'analysis' | 'development_smoke' | 'auxiliary_index_omission' | 'pilot' | 'headline'
 export type QueryUnchanged = boolean
 export type RunId2 = string
 export type Status6 = 'completed' | 'failed' | 'running'
@@ -871,6 +876,7 @@ export interface Input {
  */
 export interface WorkflowView {
   events: Events
+  evidence_scope: EvidenceScope
   failure: ErrorInfo | null
   mode: Mode
   model_decisions: NonnegativeInt

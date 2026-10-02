@@ -1,0 +1,55 @@
+[
+  {
+    "id": "assignment",
+    "title": "TSE Assignment: Metamorphic Testing of a Multi-Agent Housing-Trends Application",
+    "authors": "Course-provided assignment; no author attribution inferred",
+    "url": null,
+    "local_path": "housing-tse-codex-handoff/sources/originals/Assignment_MR_Housing_final_v2.pdf",
+    "verified_on": "2026-10-16",
+    "supports": "Requirements: feedback, conditional iteration, genuine dependency, frozen data, >=30 distinct bases per MR, >=3 seeds, confidence intervals, diagnosis, 10-12-page report, AI-use reflection."
+  },
+  {
+    "id": "segura2016",
+    "title": "A Survey on Metamorphic Testing",
+    "authors": "Sergio Segura, Gordon Fraser, Ana B. Sanchez, Antonio Ruiz-Cortes",
+    "publication": "IEEE Transactions on Software Engineering 42(9), 805-824, 2016",
+    "doi": "10.1109/TSE.2016.2532875",
+    "url": "https://eprints.whiterose.ac.uk/id/eprint/110335/",
+    "verified_on": "2026-10-16",
+    "supports": "Metamorphic testing relates executions under input transformations; it addresses the test-oracle problem. Does not validate our chosen properties or empirical outcomes."
+  },
+  {
+    "id": "wilson1927",
+    "title": "Probable Inference, the Law of Succession, and Statistical Inference",
+    "authors": "Edwin B. Wilson",
+    "publication": "Journal of the American Statistical Association 22(158), 209-212, 1927",
+    "doi": "10.1080/01621459.1927.10502953",
+    "url": "https://jhanley.biostat.mcgill.ca/c607/ch08/wilson_jasa_1927.pdf",
+    "verified_on": "2026-10-16",
+    "supports": "Historical source of the score interval; operational formula checked against NIST."
+  },
+  {
+    "id": "nist",
+    "title": "NIST/SEMATECH e-Handbook, 7.2.4.1 Confidence intervals",
+    "authors": "NIST/SEMATECH",
+    "url": "https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm",
+    "verified_on": "2026-10-16",
+    "supports": "Wilson score interval by inversion of a proportion test; two-sided formula and bounded limits. Does not establish independence of overlapping designed query slices."
+  },
+  {
+    "id": "fast-agent",
+    "title": "Fast Agent workflows: Agents As Tools and Orchestrator",
+    "authors": "Fast Agent project",
+    "url": "https://fast-agent.ai/agents/workflows/",
+    "verified_on": "2026-10-16",
+    "supports": "Child agents exposed through @fast.agent(agents=[...]); distinct native @fast.orchestrator planning workflow. Installed 0.10.45 source and actual probe remain the authority for version-specific integration behavior."
+  },
+  {
+    "id": "ollama",
+    "title": "Ollama OpenAI compatibility",
+    "authors": "Ollama project",
+    "url": "https://docs.ollama.com/api/openai-compatibility",
+    "verified_on": "2026-10-16",
+    "supports": "Local OpenAI-compatible provider integration; concrete profile parameters/digests are independently recorded in configs/model_manifest_v4.json."
+  }
+]

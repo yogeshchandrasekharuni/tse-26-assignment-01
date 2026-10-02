@@ -1,3 +1,43 @@
+.field > input,
+.field > select {
+  width: 100%;
+}
+.mobile-month-picker {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 6px 0 22px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.mobile-month-picker select {
+  flex: 1;
+  min-height: 41px;
+}
+.workflow-identity {
+  margin-top: 12px;
+  font-size: 0.72rem;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.workflow-identity code {
+  font-size: 0.7rem;
+}
+.mobile-headlines {
+  display: none;
+}
+.table-hint {
+  display: none;
+}
+.data-table tbody th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: white;
+}
+.data-table tr.selected th:first-child {
+  background: var(--accent-pale);
+}
 .app-header {
   min-height: 76px;
   display: flex;
@@ -116,6 +156,7 @@
   margin-bottom: 2px;
 }
 .field {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -132,7 +173,7 @@ fieldset > small {
 }
 .field-pair {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 11px;
 }
 .zip-grid {
@@ -409,14 +450,15 @@ fieldset > small {
 }
 .month-selector {
   display: flex;
-  margin: 0 0 22px 65px;
-  padding: 0 4px 2px;
+  justify-content: space-between;
+  margin: 0 0 22px;
+  padding: 0 0 2px 56px;
   overflow-x: auto;
   scrollbar-width: thin;
 }
 .month-selector button {
-  flex: 1;
-  min-width: 35px;
+  flex: 0 0 44px;
+  min-width: 44px;
   padding: 7px 2px;
   display: flex;
   flex-direction: column;
@@ -786,7 +828,7 @@ dd {
 .agent-map > svg {
   display: block;
   width: 100%;
-  max-height: 455px;
+  max-height: 500px;
 }
 .agent-boundary {
   stroke: #54739f;
@@ -820,7 +862,7 @@ dd {
   fill: #b2c9f2;
   stroke: none;
 }
-.agent-node.selected > circle:first-child {
+.agent-node.selected > circle:first-of-type {
   fill: #294e84;
   stroke: #fff;
   stroke-width: 3;
@@ -938,13 +980,8 @@ dd {
   min-width: 0;
   padding: 24px 0 20px 27px;
 }
-.event-type {
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  color: var(--muted);
-}
 .trace-detail h3 {
-  margin: 7px 0 17px;
+  margin: 0 0 17px;
   font-size: 1.07rem;
 }
 .trace-facts {
@@ -1010,12 +1047,15 @@ dd {
   border-radius: 12px;
 }
 .campaign-progress h2 {
-  margin: 13px 0 7px;
+  margin: 0 0 7px;
   font-size: 1.25rem;
 }
 .campaign-progress p {
   color: var(--muted);
   font-size: 0.82rem;
+}
+.campaign-progress .campaign-metadata {
+  margin: 12px 0;
 }
 .progress-detail {
   display: flex;
@@ -1403,7 +1443,7 @@ dd {
     gap: 18px;
   }
   .snapshot-label {
-    display: none;
+    font-size: 0.72rem;
   }
   .explore-layout {
     grid-template-columns: 238px minmax(0, 1fr);
@@ -1438,6 +1478,30 @@ dd {
   }
   .wide-content {
     padding-inline: 28px;
+  }
+}
+@media (max-width: 900px) {
+  .app-header {
+    min-height: auto;
+    flex-wrap: wrap;
+    gap: 0;
+    padding: 15px 22px 0;
+  }
+  .app-header nav {
+    order: 2;
+    flex-basis: 100%;
+    justify-content: space-between;
+    min-height: 44px;
+  }
+  .brand {
+    order: 0;
+    margin-bottom: 12px;
+  }
+  .snapshot-label {
+    order: 1;
+    margin-left: auto;
+    margin-bottom: 12px;
+    font-size: 0.68rem;
   }
 }
 @media (max-width: 760px) {
@@ -1583,6 +1647,40 @@ dd {
   }
   .data-table {
     font-size: 0.75rem;
+  }
+  .headline-desktop {
+    display: none;
+  }
+  .mobile-headlines {
+    display: block;
+  }
+  .mobile-headlines article {
+    padding: 19px 0;
+    border-block: 1px solid var(--line);
+  }
+  .mobile-headlines h3 {
+    font-size: 0.87rem;
+  }
+  .mobile-headlines dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 18px 0 14px;
+  }
+  .mobile-headlines dd {
+    margin-top: 3px;
+    font-size: 1rem;
+    font-weight: 550;
+  }
+  .mobile-headlines p {
+    font-size: 0.76rem;
+    color: var(--muted);
+  }
+  .table-hint {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin: 0 0 10px;
   }
   .replay-row {
     display: block;

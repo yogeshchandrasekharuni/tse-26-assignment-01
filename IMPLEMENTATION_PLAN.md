@@ -1,6 +1,6 @@
 # Implementation, experiments and reporting plan
 
-Status: G0–G5 implemented and verified: exact data/tools, production MAS, strict normal/feedback playback, paired live/replay MR01 pilot and300-case independent headline preflight. G6 API and React interface are implemented; browser/design verification is ongoing. G7–G9 full campaign, diagnosis, report and clean-checkout submission verification remain outstanding. Updated 16 October2026. Original AI handoff is preserved under housing-tse-codex-handoff/; the original assignment governs coursework requirements.
+Status: G0–G6 implemented and verified: exact data/tools, production MAS, strict normal/feedback/failure playback, paired live/replay MR01 pilot, 300-case independent preflight, API and responsive React interface. Independent finish review scored its three fixes resolved; design documentation exists. G7 full live campaign is running. G8 preliminary natural-failure diagnosis and strict replay exist. G9 twelve-page report draft and completion gates exist. Full campaign completion, final diagnosis/report and clean-checkout reproduction remain outstanding. Updated 25 September 2026. The original assignment governs coursework requirements.
 
 ## Agreed shape
 
@@ -44,7 +44,7 @@ G6 can overlap harness development once the production contracts/service are sta
 - `data/frozen/` and `data/manifests/`: generated CSV bytes, schema, provenance, completeness and hashes.
 - `artifacts/traces/`: requests, plans, model decisions, tool invocations/receipts, aggregate/review/finalization events with causal links.
 - `artifacts/cassettes/`: only genuine live model captures with exact semantic lookup and raw response integrity. Policy simulation is stored separately.
-- `artifacts/evaluations/<campaign>/`: frozen manifest/cohort, immutable cases, witnesses/transform recipes, source/follow-up outputs, raw outcomes, base summaries, headline CSV/JSON, runtime and artifact hashes.
+- `artifacts/campaigns/<campaign>/`: frozen manifest/cohort, immutable cases, witnesses/transform recipes, source/follow-up outputs, raw outcomes, base summaries, headline CSV/JSON, runtime and artifact hashes.
 - `artifacts/rca/`: actual ranked findings, minimal reproducers and competing explanations. Separate injected controls do not enter headline counts.
 - `make reproduce`: after setup, deny network/model access, re-materialize data views, invoke Fast Agent playback for recorded decisions, rerun current tools/controller/MRs, rebuild the table and compare semantic headline values. It may not load saved final outputs as its arithmetic source.
 
@@ -56,4 +56,4 @@ Use the handoff's 12-page allocation including title/references: system/topology
 
 ## Immediate next work
 
-The MR01 pilot completed nine live comparisons across three distinct bases and all three fixed paired seeds; all passed. Strict offline replay reran tools/control/comparisons and matched every case and the recomputed summary. Eighteen physical analyses made210 model decisions, including six actual sparse refinements and no schema repairs. This is pilot evidence only. The headline cohort now has thirty distinct eligible bases for each of ten MRs, with independently frozen witnesses,324 sparse nonempty month cells, ten empty cells and odd/even coverage. Next launch the frozen full campaign while completing browser/Impeccable review, then base diagnosis/reporting on actual outcomes and verify complete offline reproduction from a clean checkout.
+The frozen full campaign launched from commit 8a50f75 at 15:17:57 UTC on 25 September 2026. Continue it without changing production/evaluation inputs. Preserve and diagnose observed failures, then summarize all 900 outcomes, audit provider telemetry, strictly reproduce the full campaign, complete actual ranked diagnoses, commit required evidence and run the clean-checkout command. Populate the final report from those artifacts, inspect every final rendered page and complete submission checks. The pilot's 210 model decisions and six refinements are pilot evidence only.

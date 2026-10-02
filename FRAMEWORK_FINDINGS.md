@@ -76,7 +76,9 @@ A further native-tool-call probe passed in `20260930T193332Z-tool-playback-d83da
 
 The first two native-playback attempts failed because matching included runtime timestamps/tool timings. Raw input snapshots demonstrated the difference. The corrected projection excludes only message timestamps and the framework's timing/usage audit channels. It preserves all text, tool calls, arguments, tool results, reasoning channels and control fields. Unit tests demonstrate that changed tool results and reasoning still change the semantic projection. Raw messages remain saved separately.
 
-## Production constraints still to implement and prove
+## Production constraints identified by this probe (historical)
+
+The following list records the probe's original implementation gate. Production and its normal/feedback/failure playback are now implemented; see the dated NOTEBOOK.md entries, shared service, live MR01 pilot and current IMPLEMENTATION_PLAN.md. The probe's raw results and narrower claims remain unchanged. The full headline campaign is still executing.
 
 - The Orchestrator must use typed planning/finalization actions; public results come from validated specialist receipts and grounded facts. Reject invalid model decisions instead of silently substituting a deterministic answer.
 - Validate every requested child/tool action before execution. A parent can still request a forbidden or premature action; the pattern itself is not a policy engine.

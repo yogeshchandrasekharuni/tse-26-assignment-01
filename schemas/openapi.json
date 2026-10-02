@@ -1128,6 +1128,16 @@
         "title": "ErrorInfo",
         "type": "object"
       },
+      "EvidenceScope": {
+        "enum": [
+          "analysis",
+          "development_smoke",
+          "auxiliary_index_omission",
+          "pilot",
+          "headline"
+        ],
+        "type": "string"
+      },
       "ExperimentView": {
         "additionalProperties": false,
         "properties": {
@@ -2346,6 +2356,9 @@
             "title": "Events",
             "type": "array"
           },
+          "evidence_scope": {
+            "$ref": "#/components/schemas/EvidenceScope"
+          },
           "failure": {
             "anyOf": [
               {
@@ -2400,7 +2413,8 @@
           "query_unchanged",
           "trace_url",
           "status",
-          "failure"
+          "failure",
+          "evidence_scope"
         ],
         "title": "WorkflowView",
         "type": "object"

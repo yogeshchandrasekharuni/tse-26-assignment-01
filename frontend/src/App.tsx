@@ -63,7 +63,9 @@ function App() {
   )
   const history = useResource<Job[]>('/api/jobs', 5000)
   useEffect(() => {
-    const onHash = () => setPage(pageFromHash())
+    const onHash = () => {
+      if (window.location.hash !== '#main-content') setPage(pageFromHash())
+    }
     window.addEventListener('hashchange', onHash)
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
@@ -323,6 +325,7 @@ function App() {
             {page === 'workflow' && (
               <>
                 <Workflow
+                  busy={busy}
                   key={workflowOverride ?? baseUrl}
                   baseUrl={workflowOverride ?? baseUrl}
                   feedback={() => {

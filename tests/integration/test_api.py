@@ -34,6 +34,7 @@ def test_public_contracts_exports_units_and_path_guards(tmp_path: Path) -> None:
         workflow = client.get("/api/analyses/capture/feedback/workflow").json()
         validate("WorkflowView", workflow)
         assert workflow["refinements"] == 1 and workflow["query_unchanged"]
+        assert workflow["evidence_scope"] == "auxiliary_index_omission"
         csv = client.get("/api/analyses/capture/normal/export.csv?area=SQM")
         assert csv.status_code == 200 and "display_median_price_per_SQM_USD" in csv.text
         assert len(csv.text.splitlines()) == 13

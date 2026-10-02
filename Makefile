@@ -1,7 +1,8 @@
 PYTHON := .venv/bin/python
 UV := $(if $(wildcard .cache/uv-bootstrap/bin/uv),.cache/uv-bootstrap/bin/uv,uv)
+DELIVERY_SCRIPTS := scripts/build_report.py scripts/audit_provider_usage.py scripts/replay_case_leg.py scripts/clean_checkout.py scripts/submission_check.py
 
-.PHONY: setup data check core-check contracts dev evaluate-live reproduce reproduce-pilot probe-setup probe-check probe-live probe-seeds probe-tool-playback probe-replay
+.PHONY: setup data check core-check contracts dev evaluate-live reproduce reproduce-pilot report report-draft clean-checkout submission-check probe-setup probe-check probe-live probe-seeds probe-tool-playback probe-replay
 
 setup: probe-setup
 	npm --prefix frontend ci --ignore-scripts --no-fund
@@ -11,6 +12,9 @@ contracts:
 	cd frontend && node scripts/generate-contracts.mjs
 
 check: core-check
+	.venv/bin/ruff check $(DELIVERY_SCRIPTS)
+	.venv/bin/ruff format --check $(DELIVERY_SCRIPTS)
+	.venv/bin/mypy $(DELIVERY_SCRIPTS)
 	$(PYTHON) scripts/export_contracts.py --check
 	cd frontend && node scripts/generate-contracts.mjs --check
 	npm --prefix frontend run build
@@ -27,6 +31,18 @@ reproduce:
 
 reproduce-pilot:
 	PYTHONHASHSEED=0 $(PYTHON) scripts/reproduce_campaign.py --pilot --reference artifacts/campaigns/pilot-live-v1
+
+report:
+	$(PYTHON) scripts/build_report.py
+
+report-draft:
+	$(PYTHON) scripts/build_report.py --draft
+
+clean-checkout:
+	$(PYTHON) scripts/clean_checkout.py
+
+submission-check: check
+	$(PYTHON) scripts/submission_check.py
 
 data:
 	$(PYTHON) -m housing.cli data

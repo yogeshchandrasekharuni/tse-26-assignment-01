@@ -1,0 +1,120 @@
+{
+  "title": "Housing Evidence",
+  "subtitle": "Metamorphic testing across a bounded multi-agent system",
+  "pages": [
+    {
+      "title": "A number is only useful with its trail",
+      "intro": "This project asks whether a cooperating agent system preserves precise housing-trend relationships when its inputs change. It combines genuine local model decisions with exact Python tools, then tests the complete application through paired metamorphic executions.",
+      "blocks": [
+        ["The application", "A user selects Dallas-themed ZIPs, property types, bedroom, price and size bounds, and a twelve-month window. Price and Supply inspect the same immutable selection. Region runs when public comparison is requested or a review activates a diagnostic. Reviewer can send work upstream; Composer selects grounded facts; the parent Orchestrator alone returns the verified result."],
+        ["The empirical question", "For each of ten declared relations, does at least one of three fixed paired seeds produce a relation or eligible output-contract violation on a distinct base? The workload contains thirty eligible bases per relation. The unit of the primary rate is a base with its entire seed panel, not an individual model call."],
+        ["Scope of the evidence", "The feed is synthetic, the scenarios are designed and overlapping, and the model is one local frozen profile family. The work tests relational consistency and execution reliability. It does not estimate real Dallas prices or establish an arbitrary-query failure probability. [1,2]"]
+      ]
+    },
+    {
+      "title": "Define the quantity before testing it",
+      "intro": "The output contract fixes what a twelve-month trend means before any relation is evaluated. Asking-price observations, physical homes and unique sellers are different quantities; only the first is represented here.",
+      "blocks": [
+        ["Frozen synthetic observations", "The generator emits 120 monthly observation records per ZIP for twelve ZIPs across October 2024 through September 2026. Record identity is unique; listing labels deliberately repeat across months. Counts include each qualifying observation. A repeated record identity invalidates the input rather than silently deduplicating it. Independent malformed rows are quarantined with evidence."],
+        ["Exact statistics", "For month t, count is the size of the qualifying observation multiset. Median list price is the median of its raw USD prices, with the exact mean of the two central values for even cardinality. Median price per square foot is the median of individual price/size ratios, not a ratio of medians. Regional price-per-area medians pool individual ratios for each ZIP."],
+        ["Calendar and arithmetic", "The visible window contains twelve calendar months. Historical lookbacks are retained where available. Month-over-month and year-over-year change are 100 times (current/previous minus 1), evaluated from exact values. Undefined values remain null. Integers and Fraction values carry internal arithmetic; serialization uses six decimal places with half-even rounding. Display conversion uses exactly 0.09290304 square metres per square foot."],
+        ["Immutable criteria", "All raw filters are inclusive. Price bounds apply before display conversion. A review may change scan strategy, diagnostics and the active specialist set, but cannot broaden the user's criteria to conceal low support. Empty months remain visible and are not plotted as zero prices."]
+      ]
+    },
+    {
+      "title": "One public boundary, five internal roles",
+      "intro": "The parent uses Fast Agent agents as tools. This is distinct from the framework's native planning Orchestrator decorator. The choice was checked against official documentation, installed 0.10.45 source, and an instrumented integration probe. [5]",
+      "blocks": [
+        ["Decisions and statistical truth", "Each role performs a genuine model call and returns a role-specific strict decision. Trusted Python binds dataset, query, plan and selection handles; model text cannot supply a count, median or arbitrary tool argument. Aggregation requires validated Price and Supply receipts and the requested Region receipt. It checks their view, query, plan, month and selection identities before constructing a result."],
+        ["Capability and history boundaries", "Child contexts are fresh and do not inherit or merge a source conversation. The parent may delegate only the currently permitted actions. A specialist cannot call another specialist or choose arbitrary SQL or file paths. Premature review, inactive roles, foreign receipts and unapproved plan changes fail explicitly. Canonical output is published only after the real parent returns a validated final acknowledgement."],
+        ["A small explicit state machine", "Plan, select, scan, aggregate, review, compose and finalize are explicit states. At most two distinct semantic refinements are allowed. One schema repair is separate from one framework transport retry; underlying SDK retries are disabled. A conservative context guard rejects overflow before inference. These controls constrain decisions without replacing the model with a hidden scripted agent."]
+      ]
+    },
+    {
+      "title": "The feedback changes the work",
+      "intro": "The loop exists because an index can disagree with authoritative coverage, and a sparse slice can justify a diagnostic before accepting a limited result. Sending the same work around unchanged would not meet that purpose.",
+      "blocks": [
+        ["A real recorded loop", "The auxiliary index-omission control deliberately hides one qualifying October observation from the index. Reviewer sees INDEX_COVERAGE_MISMATCH and SPARSE_SLICE, requests EXACT_RESCAN_WITH_REGION, and returns control to the parent. The next plan selects full_csv and activates Region. Fresh specialist calls recover the observation; Reviewer accepts the remaining genuine sparsity as limited support."],
+        ["Why the dependency is substantive", "Review changes which selector runs, which specialist is invoked, the produced receipts, and the later acceptance decision. The criteria hash stays constant. Composer receives the accepted evidence only after review. The loop is observable in model responses, validated decisions, plan hashes, receipts and the append-only trace."],
+        ["Evidence classes stay separate", "This deliberately omitted index is an auxiliary control. Natural sparse slices in the live pilot also triggered review and rescanning, without an injected omission. Policy-simulated decisions exercise guards in unit tests. None of these is substituted for the full ten-relation headline campaign or counted as an additional independent base."]
+      ]
+    },
+    {
+      "title": "Invariance needs a precise projection",
+      "intro": "Metamorphic testing checks a declared relationship across executions rather than demanding a known answer for each one. A relation is a hypothesis on a subdomain; an unjustified full-response equality can flag harmless metadata or miss a vacuous transformation. [2]",
+      "blocks": [
+        ["MR01 - Row permutation", "Shuffle all raw rows with a recorded transformation seed. On a valid complete snapshot with at least two qualifying observations and changed row order, canonical month/summary/rank values must match exactly. This targets order-sensitive selection, premature stopping and unstable aggregation."],
+        ["MR02 - Nominal ID relabeling", "Apply bijections to record and listing identities while preserving listing equality classes and every semantic field. Canonical statistics must match exactly. This targets accidental interpretation of nominal identity or a hidden business-label deduplication rule."],
+        ["MR03 - Twofold observation replication", "Append a fresh-record-identity replica of every observation while retaining the same business listing labels. Every count and count delta doubles; medians, price changes and ranks stay exact. The witness proves a true doubled multiset. Unique-property metrics would require a different relation."],
+        ["MR04 - Display scale and area units", "Switch USD to USD thousands and square feet to square metres. Canonical statistics, percentages and rankings stay exact; displayed monetary levels divide by 1000 and per-area levels also divide by 0.09290304. Display comparisons use the declared absolute 0.000001 tolerance. The source has nonzero eligible values and the display settings actually change."],
+        ["MR10 - Excluded-ZIP injection", "Append valid fresh-identity observations in a ZIP excluded by the query, while matching its other filters. The independent witness proves that the injection could matter if ZIP filtering were absent. Canonical statistics remain exact. This targets scope leakage and incorrect predicate composition."]
+      ]
+    },
+    {
+      "title": "Direction and monotonicity are conditional",
+      "intro": "Changing membership does not imply a median must move monotonically. The catalog distinguishes count inclusion, scale equivariance, calendar overlap and the bounded effect of a single-month additive shift.",
+      "blocks": [
+        ["MR05 - Broaden the price band", "Widen finite bounds from [a,b] to [max(0,a-10000000), b+30000000] cents. Independent preflight must exhibit at least one added qualifying record. Each monthly observation count is nondecreasing. Prices and medians are deliberately outside this projection because composition changes can move them either way."],
+        ["MR06 - Restrict ZIPs", "Retain a proper nonempty subset with both removed and retained eligible observations. Monthly counts cannot increase. When public regional results exist, retained-ZIP medians remain exact because their own observations are unchanged. Aggregate medians and ranks are not assumed invariant."],
+        ["MR07 - Advance the window", "Advance the end month by one with complete coverage and available lookbacks. All eleven overlapping monthly rows match exactly, including count, levels and defined changes. The rolling observation total follows the exact entering-minus-leaving-month identity. Window summaries and regional rankings are not compared across changed windows."],
+        ["MR08 - Positive price scaling", "Multiply every raw price, including lookbacks and any finite price bounds, by exactly 5/4. Products must be valid integer cents and membership must be preserved. Monetary levels and regional levels scale within 0.000003; percentages agree within 0.000001. Counts, count changes, ranks and null structure remain exact. Unscaled price bounds would invalidate the relation."],
+        ["MR09 - One-month additive shift", "On an unbounded price query, add exactly USD 1000 to every raw observation in one nonempty visible month. Its median price rises by USD 1000 within 0.000001. Its individual-ratio median is at least the source plus 1000/max_sqft, allowing 0.000003 for serialization. Other monthly levels/counts stay exact. Affected percentage changes and window summaries are excluded."]
+      ]
+    },
+    {
+      "title": "Count bases, preserve the paired panel",
+      "intro": "The full frozen design contains ten slice groups crossed with three end months for each relation, yielding thirty distinct semantic source queries per MR. Each is evaluated under seeds 104729, 130363 and 155921, using the same seed for source and follow-up.",
+      "blocks": [
+        ["Freeze before outcomes", "Raw-CSV preflight independently checks schema, coverage, transformation determinism, membership correspondence and nonvacuity. It shares no production selector, median or comparator. A preliminary sparse size band made MR05 widening vacuous; input-only checks caught that before pilot model outcomes, and a versioned corrected cohort replaced it. Both configurations remain visible."],
+        ["The estimand", "Let v(i,j) indicate a relation or eligible output-contract violation on base i and paired seed j. A completed base has all three outcomes; Y(i) is their maximum. The headline rate is sum(Y)/n completed eligible bases. Three seeds give three fixed evaluation conditions, not three independent base samples. Infrastructure errors keep the base incomplete; invalid preconditions remain outside the semantic denominator."],
+        ["Nominal uncertainty", "The two-sided Wilson interval uses z=1.959963984540054, n bases and Decimal precision 60, then stores 24 decimal places. For zero violations in thirty bases its upper bound is about 11.35%, so zero observed failures cannot establish a sub-1% risk. The designed, overlapping slices do not meet a simple random-independent sampling interpretation; the interval is explicitly nominal for this workload. [3,4]"],
+        ["Logical and physical work", "Completed source execution can be reused only under an identical complete semantic input/model/seed key, with explicit lineage. Every logical follow-up executes afresh. The harness retains all failed attempts. Logical pair counts, physical analyses, model decisions, provider telemetry and elapsed time are reported as different quantities."]
+      ]
+    },
+    {
+      "title": "Results from the frozen workload",
+      "intro": "This page is populated directly from the immutable live headline table and its strict offline reproduction. The three-seed panel and nominal base-level Wilson interval are shared across rows.",
+      "blocks": [
+        ["Reading the table", "The numerator is the number of bases with any paired-seed violation. A seed-pair violation count is descriptive. Eligible output-contract faults count as violations even without a numeric result; unresolved infrastructure errors prevent a complete row. Invalid candidates, when present, remain visible."],
+        ["Strength of the result", "A consistency result supports only the tested projections, designed bases and recorded model conditions. It does not prove absolute statistical correctness, independently sampled seed reliability or market validity. The observed confidence-interval width determines how restrained the conclusion must be."]
+      ]
+    },
+    {
+      "title": "Diagnose the first divergence",
+      "intro": "Natural violations are ranked by primary base-level rate, then violating-base count, then MR identifier. Diagnosis follows actual failing evidence rather than choosing an attractive story.",
+      "blocks": [
+        ["Four competing explanations", "An agent/aggregation fault requires valid data, a sound relation and a contradictory decision or tool path. A data artifact requires a concrete raw observation and provenance. A bad relation requires a mathematical counterexample or failed precondition. A harness fault requires a demonstrated transformation, alignment, comparator or denominator error. A label without that evidence is not a diagnosis."],
+        ["Minimize without erasing lineage", "Each diagnosed case keeps its full original attempt, seed, model profile, request, transformation, raw decision, receipts, first divergent field and diff. A minimized reproducer is additional evidence, not a replacement campaign case. Correcting an implementation or hypothesis creates a new version and campaign rather than rewriting the original result."],
+        ["When fewer than three relations fail", "The report states the actual number of violated relations. Zero-violation relations remain consistency observations with uncertainty. Labeled injected controls may demonstrate sensitivity or guard behavior, but never fill a natural-failure table or enter the headline denominator."]
+      ]
+    },
+    {
+      "title": "Reproduction executes the system again",
+      "intro": "Live execution and offline playback answer different questions. Live captures actual model behavior. Replay reproduces that recorded decision panel while rerunning the current tools, state transitions, comparisons and uncertainty calculations.",
+      "blocks": [
+        ["Exact semantic matching", "Every parent and detached-child turn matches prompt text, strict schema, tool definitions, model profile, seed, iteration, dataset view and upstream receipt identities. Only declared volatile message timestamps and framework timing/usage audit channels are excluded from semantic matching. Raw bytes remain independently hashed. A miss fails with REPLAY_MISS; there is no approximate lookup or network fallback."],
+        ["Playback is not a saved-answer shortcut", "Fast Agent PlaybackLLM returns the captured model decision. The current dispatcher executes the real numeric tools and receipt checks. A changed current receipt invalidates the next model boundary. Integration checks successfully replay with saved final outputs, numeric results and source traces absent. Network connection functions are blocked during playback."],
+        ["Two integration mistakes caught by evidence", "Sorted JSON keys originally reordered native Price/Supply tool-call identifiers and changed execution order. Explicit ordered identifiers now preserve it. Detached child names such as reviewer[1] also repeat across parent turns; initializing each clone with every matching-name response replayed the first review twice. Exact second-pass playback exposed this, and each child now receives its one-decision packet. Historical failed attempts remain preserved."],
+        ["Environment and limits", "The lock selects Python 3.15.0 and Fast Agent 0.10.45. Three explicit Qwen3.5 local profile defaults and digests are checked before live calls. Seed propagation is verified, but hardware kernels remain best effort. Offline setup uses locked dependencies; reproduction needs the committed live capture, not an Ollama server or paid credential."]
+      ]
+    },
+    {
+      "title": "What the evidence cannot establish",
+      "intro": "A precise and reproducible workload still has boundaries. These limitations determine the claims we can make, and the AI-use reflection distinguishes plausible authored material from observed execution.",
+      "blocks": [
+        ["Threats to validity", "Construct: observation counts are not unique homes; asking-price medians are not sale prices; first-to-last change is not year-over-year change. Internal: common helpers can share faults; independent raw preflight and hand-calculated tests reduce but do not eliminate this risk. Statistical: thirty overlapping designed slices, shared source executions and three fixed seed conditions do not supply independent representative Bernoulli trials. Nominal Wilson intervals and any ranking of the top failures inherit that limitation. External: a regular synthetic feed, selected ZIPs, one local model, one machine and a frozen period do not characterize live housing markets or other agents."],
+        ["AI-use reflection", "An LLM could draft the architecture, strict schemas, relation hypotheses, code scaffolding, diagrams, report prose and plausible tests without running this system. The initial AI-generated handoff is substantive assistance too. Those artifacts can look convincing while containing wrong API assumptions or invalid mathematics. The observed evidence is different: exact generated bytes, real parent and specialist responses, a review changing scan strategy, complete paired outcomes, recorded failures and a clean offline rerun must come from execution. An LLM can calculate a Wilson interval; it cannot honestly invent the outcomes to which that interval is applied. During implementation, an AI-chosen sparse band made price widening vacuous, which independent input counts caught. Exact replay exposed reordered tool calls and repeated clone-name response selection. A framework documentation assumption was checked against installed source rather than trusted from prose. These mistakes and their corrections are recorded in AI_USE.md and NOTEBOOK.md. Authored test fixtures and injected omissions remain labeled controls; they do not become empirical model findings. The interface also keeps rounded display values separate from canonical statistics. Human authorship and submission remain the team's responsibility; author identities have not been fabricated."],
+        ["Replay is a reproducibility claim", "Playback establishes consistency of the saved model panel with the current exact implementation and contracts. It does not sample fresh model behavior, establish deterministic inference on a different machine, or double the experiment's sample size."]
+      ]
+    },
+    {
+      "title": "A reviewable, rerunnable submission",
+      "intro": "The repository is the evidence package: frozen input, strict contracts, editable sources, actual captures and one-command recomputation of the reported table.",
+      "blocks": [
+        ["Commands", "make setup installs frozen Python and frontend dependencies. make data regenerates and checks the frozen bytes. make check checks Python, schemas, generated TypeScript and frontend build/lint. make dev starts the local application. make evaluate-live executes the frozen live workload. make reproduce verifies the capture and recomputes the headline campaign offline. make report builds this document from evidence. make submission-check rejects incomplete or inconsistent deliverables."],
+        ["Evidence index", "data/frozen and data/manifests contain the snapshot and provenance. configs/headline-cohort-v1.json contains frozen queries, seeds and witnesses. artifacts/campaigns/headline-live-v1 contains logical cases and all physical attempts. artifacts/reproductions contains current offline reruns and semantic comparisons. reports/data contains derived usage and diagnosis audits. NOTEBOOK.md records commands, AI_USE.md records assistance and mistakes, and FRAMEWORK_FINDINGS.md preserves the framework probe's narrower scope."],
+        ["Coursework context", "The assignment deadline is 16 October 2026 and the specified team size is two. No submission hour, earlier design-note submission, or author identity is inferred. This report records the work and evidence that actually exist. [1]"]
+      ]
+    }
+  ]
+}

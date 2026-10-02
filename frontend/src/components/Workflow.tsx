@@ -1,5 +1,5 @@
 import { Braces, Download, GitBranch, Play, ShieldCheck } from 'lucide-react'
-import { useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import type { ModelTurn, TraceEvent, WorkflowView } from '../generated/contracts'
 import { shortHash, useResource } from '../api'
 
@@ -11,6 +11,8 @@ const eventNames: Record<string, string> = {
   PLAN_CREATED: 'Scan plan created',
   TOOL_COMPLETED: 'Specialist tool completed',
   AGGREGATE_COMPLETED: 'Receipts aggregated',
+  PLAN_DECIDED: 'Scan plan decided',
+  SELECTION_COMPLETED: 'Immutable selection completed',
   REVIEW_DECIDED: 'Coverage review',
   REFINEMENT_APPLIED: 'Plan changed after feedback',
   RUN_COMPLETED: 'Verified result returned',
@@ -55,7 +57,7 @@ function AgentMap({
   return (
     <div className="agent-map">
       <svg
-        viewBox="0 0 920 392"
+        viewBox="0 0 920 438"
         aria-label="Agent topology inside the Orchestrator boundary"
         role="group"
       >
@@ -64,7 +66,7 @@ function AgentMap({
             <path d="M0,0 L6,3 L0,6" fill="currentColor" />
           </marker>
         </defs>
-        <rect className="agent-boundary" x="18" y="18" width="884" height="356" rx="14" />
+        <rect className="agent-boundary" x="18" y="18" width="884" height="402" rx="14" />
         <g className="agent-edges" fill="none" markerEnd="url(#flow-arrow)">
           <path d="M140,180 L205,180 L295,90 L320,90" />
           <path d="M140,180 L320,180" />
@@ -80,7 +82,7 @@ function AgentMap({
           />
           <path d="M575,180 L710,180" />
           <path d="M730,204 L730,281" />
-          <path d="M710,300 L210,300 L130,220 L130,204" />
+          <path d="M747,300 L850,300 L850,376 L50,376 L50,215 L92,180" />
           <path
             d="M730,156 L730,62 L210,62 L115,157"
             className={refined ? 'feedback-edge fired' : 'feedback-edge inactive-edge'}
@@ -122,6 +124,15 @@ function AgentMap({
                 }
               }}
             >
+              <rect
+                x={node.x - 100}
+                y={node.y - 25}
+                width="200"
+                height="88"
+                fill="transparent"
+                stroke="none"
+                aria-hidden="true"
+              />
               <circle cx={node.x} cy={node.y} r={node.id === 'orchestrator' ? 24 : 17} />
               <circle className="node-core" cx={node.x} cy={node.y} r={5} />
               <text x={node.x} y={node.y + 42} textAnchor="middle" className="node-label">
@@ -133,10 +144,10 @@ function AgentMap({
             </g>
           )
         })}
-        <text x="42" y="353" className="map-boundary-label">
+        <text x="42" y="412" className="map-boundary-label">
           ORCHESTRATOR BOUNDARY
         </text>
-        <text x="880" y="353" textAnchor="end" className="map-boundary-label">
+        <text x="880" y="412" textAnchor="end" className="map-boundary-label">
           CHILD RESULTS RETURN TO PARENT
         </text>
       </svg>
@@ -167,13 +178,41 @@ function AgentMap({
   )
 }
 
-export function Workflow({ baseUrl, feedback }: { baseUrl: string; feedback: () => void }) {
+export function Workflow({
+  baseUrl,
+  feedback,
+  busy = false,
+}: {
+  baseUrl: string
+  feedback: () => void
+  busy?: boolean
+}) {
   const resource = useResource<WorkflowView>(baseUrl + '/workflow', 4000)
   const [eventSequence, setEventSequence] = useState<number | null>(null)
   const [iteration, setIteration] = useState('all')
   const [showModel, setShowModel] = useState(false)
   const [turn, setTurn] = useState(0)
   const workflow = resource.data
+  const traceList = useRef<HTMLOListElement>(null)
+  const selectedButton = useRef<HTMLButtonElement>(null)
+  const events = !workflow
+    ? []
+    : iteration === 'all'
+      ? workflow.events
+      : workflow.events.filter((event) => event.iteration === Number(iteration))
+  const selected =
+    events.find((event) => event.sequence === eventSequence) ??
+    events.find((event) => event.event === 'REVIEW_DECIDED') ??
+    events[0]
+  useLayoutEffect(() => {
+    const list = traceList.current
+    const button = selectedButton.current
+    if (!list || !button) return
+    const bounds = list.getBoundingClientRect()
+    const chosen = button.getBoundingClientRect()
+    if (chosen.top < bounds.top) list.scrollTop += chosen.top - bounds.top
+    else if (chosen.bottom > bounds.bottom) list.scrollTop += chosen.bottom - bounds.bottom
+  }, [baseUrl, selected?.sequence, showModel])
   const model = useResource<ModelTurn>(
     showModel && workflow && workflow.model_decisions > 0 ? baseUrl + '/model/' + turn : null,
   )
@@ -193,14 +232,6 @@ export function Workflow({ baseUrl, feedback }: { baseUrl: string; feedback: () 
         <div className="skeleton chart" />
       </div>
     )
-  const events =
-    iteration === 'all'
-      ? workflow.events
-      : workflow.events.filter((event) => event.iteration === Number(iteration))
-  const selected =
-    workflow.events.find((event) => event.sequence === eventSequence) ??
-    workflow.events.find((event) => event.event === 'REVIEW_DECIDED') ??
-    workflow.events[0]
   const pickRole = (role: string) => {
     const event = [...workflow.events].reverse().find((item) => item.actor === role)
     if (event) {
@@ -215,7 +246,7 @@ export function Workflow({ baseUrl, feedback }: { baseUrl: string; feedback: () 
           <h1>The agent route</h1>
           <p>One public Orchestrator. Internal specialists. A real way back.</p>
         </div>
-        <button className="button secondary" onClick={feedback}>
+        <button className="button secondary" onClick={feedback} disabled={busy}>
           <GitBranch size={17} />
           Open feedback control
         </button>
@@ -225,13 +256,27 @@ export function Workflow({ baseUrl, feedback }: { baseUrl: string; feedback: () 
           {workflow.mode === 'replay' ? 'Offline replay' : 'Captured live'}
         </span>
         <span>{workflow.model_decisions} model decisions</span>
-        <span>{workflow.refinements} refinements</span>
+        <span>
+          {workflow.refinements} refinement{workflow.refinements === 1 ? '' : 's'}
+        </span>
         <span>{workflow.schema_repairs} repairs</span>
         <span className="status-right">
           <ShieldCheck size={15} />
           {workflow.query_unchanged ? 'Criteria unchanged' : 'Inspect query lineage'}
         </span>
       </div>
+      <p className="workflow-identity">
+        <code>{workflow.run_id}</code> ·{' '}
+        {workflow.evidence_scope === 'auxiliary_index_omission'
+          ? 'Auxiliary index-omission control · excluded from headline results'
+          : workflow.evidence_scope === 'pilot'
+            ? 'Pilot evidence · separate from headline evaluation'
+            : workflow.evidence_scope === 'headline'
+              ? 'Headline campaign evidence'
+              : workflow.evidence_scope === 'development_smoke'
+                ? 'Development smoke run'
+                : 'Application analysis'}
+      </p>
       {workflow.failure && (
         <div className="notice error" role="alert">
           <p>
@@ -320,7 +365,13 @@ export function Workflow({ baseUrl, feedback }: { baseUrl: string; feedback: () 
             <div className="trace-list">
               <label className="field inline">
                 Pass
-                <select value={iteration} onChange={(event) => setIteration(event.target.value)}>
+                <select
+                  value={iteration}
+                  onChange={(event) => {
+                    setIteration(event.target.value)
+                    setEventSequence(null)
+                  }}
+                >
                   <option value="all">All passes</option>
                   {Array.from({ length: workflow.refinements + 1 }, (_, index) => (
                     <option value={index} key={index}>
@@ -329,13 +380,14 @@ export function Workflow({ baseUrl, feedback }: { baseUrl: string; feedback: () 
                   ))}
                 </select>
               </label>
-              <ol>
+              <ol ref={traceList}>
                 {events.map((event) => (
                   <li key={event.sequence}>
                     <button
                       type="button"
                       className={event.sequence === selected?.sequence ? 'selected' : ''}
                       aria-pressed={event.sequence === selected?.sequence}
+                      ref={event.sequence === selected?.sequence ? selectedButton : null}
                       onClick={() => setEventSequence(event.sequence)}
                     >
                       <span className="event-sequence">{event.sequence}</span>
@@ -352,9 +404,14 @@ export function Workflow({ baseUrl, feedback }: { baseUrl: string; feedback: () 
             </div>
             {selected ? (
               <div className="trace-detail">
-                <span className="event-type">{selected.event}</span>
                 <h3>{label(selected)}</h3>
                 <dl className="trace-facts">
+                  <div>
+                    <dt>Event type</dt>
+                    <dd>
+                      <code>{selected.event}</code>
+                    </dd>
+                  </div>
                   <div>
                     <dt>Actor</dt>
                     <dd>{selected.actor}</dd>

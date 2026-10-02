@@ -9,6 +9,7 @@ from housing.data.models import DatasetManifest
 from housing.evaluation.models import CaseResult, HeadlineRow, MRId
 
 type CaptureId = Literal["normal", "feedback"]
+type EvidenceScope = Literal["analysis", "development_smoke", "auxiliary_index_omission", "pilot", "headline"]
 
 
 class ErrorInfo(FrozenModel):
@@ -149,6 +150,7 @@ class WorkflowView(FrozenModel):
     trace_url: str
     status: Literal["completed", "failed", "running"]
     failure: ErrorInfo | None
+    evidence_scope: EvidenceScope
 
 
 class ModelTurn(FrozenModel):

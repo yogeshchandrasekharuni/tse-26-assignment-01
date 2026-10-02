@@ -29,6 +29,7 @@ from housing.api.models import (
     CatalogEntry,
     ClientContracts,
     ErrorInfo,
+    EvidenceScope,
     ExperimentView,
     HeadlineDisplay,
     Job,
@@ -149,7 +150,9 @@ def create_app(runtime_root: Path | None = None) -> FastAPI:
             "auxiliary_index_omission" if job.submission.capture_id == "feedback" else "analysis",
         )
 
-    def workflow_path(directory: Path, run_id: str, mode: Mode, base_url: str) -> WorkflowView:
+    def workflow_path(
+        directory: Path, run_id: str, mode: Mode, base_url: str, scope: EvidenceScope = "analysis"
+    ) -> WorkflowView:
         text = (directory / "trace.jsonl").read_text() if (directory / "trace.jsonl").exists() else ""
         lines = text.splitlines() if text.endswith("\n") else text.splitlines()[:-1]
         events = tuple(TraceEvent.model_validate_json(line) for line in lines)
@@ -169,6 +172,7 @@ def create_app(runtime_root: Path | None = None) -> FastAPI:
         return WorkflowView.model_validate(
             {
                 "run_id": run_id,
+                "evidence_scope": scope,
                 "mode": mode,
                 "events": events,
                 "model_decisions": terminal["model_decisions"],
@@ -185,7 +189,7 @@ def create_app(runtime_root: Path | None = None) -> FastAPI:
 
     def workflow(resolved: Resolved, base_url: str) -> WorkflowView:
         output, _, directory, _, _ = resolved
-        return workflow_path(directory, output.metadata.run_id, output.metadata.mode, base_url)
+        return workflow_path(directory, output.metadata.run_id, output.metadata.mode, base_url, resolved[4])
 
     def view(resolved: Resolved, base_url: str, money: Money | None, area: Area | None) -> AnalysisView:
         output, query, _, origin, purpose = resolved
@@ -264,7 +268,7 @@ def create_app(runtime_root: Path | None = None) -> FastAPI:
             python_version=platform.python_version(),
             fast_agent_version=version("fast-agent-mcp"),
             live_model_profile="Qwen3.5 9B · frozen v4 seed profiles",
-            live_model_requirements="Live analysis uses local Ollama at127.0.0.1:11434. Exact replay needs no running model.",
+            live_model_requirements="Live analysis uses local Ollama at 127.0.0.1:11434. Exact replay needs no running model.",
             mr_catalog=tuple(
                 CatalogEntry(
                     id=row["id"],
@@ -333,7 +337,11 @@ def create_app(runtime_root: Path | None = None) -> FastAPI:
             if len(runs) != 1:
                 raise HTTPException(409, "This queued job has not started its evidence trace")
             return workflow_path(
-                runs[0], runs[0].name, job.submission.mode, f"/api/analyses/{kind}/{reference}"
+                runs[0],
+                runs[0].name,
+                job.submission.mode,
+                f"/api/analyses/{kind}/{reference}",
+                "auxiliary_index_omission" if job.submission.capture_id == "feedback" else "analysis",
             )
         return workflow(resolve(kind, reference, request), f"/api/analyses/{kind}/{reference}")
 
@@ -505,13 +513,19 @@ def create_app(runtime_root: Path | None = None) -> FastAPI:
 
     @application.get("/api/experiments/{campaign_id}/cases/{key}/{leg}/workflow", response_model=WorkflowView)
     async def case_workflow(campaign_id: str, key: str, leg: Literal["source", "followup"]) -> WorkflowView:
-        result, _ = case_for(campaign_id, key)
+        result, campaign_directory = case_for(campaign_id, key)
         evidence = result.source if leg == "source" else result.followup
         directory = (ROOT / evidence.run_path).resolve()
         if not directory.is_relative_to(ROOT / "artifacts/campaigns"):
             raise HTTPException(404, "Case evidence is outside the campaign registry")
         return workflow_path(
-            directory, evidence.run_id, result.mode, f"/api/experiments/{campaign_id}/cases/{key}/{leg}"
+            directory,
+            evidence.run_id,
+            result.mode,
+            f"/api/experiments/{campaign_id}/cases/{key}/{leg}",
+            "pilot"
+            if json.loads((campaign_directory / "manifest.json").read_bytes())["expected_comparisons"] == 9
+            else "headline",
         )
 
     @application.get("/api/experiments/{campaign_id}/cases/{key}/{leg}/export.json", response_class=Response)

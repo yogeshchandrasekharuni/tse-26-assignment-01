@@ -25,11 +25,12 @@ export function TrendChart({
     observer.observe(frame.current)
     return () => observer.disconnect()
   }, [])
-  const height = width < 540 ? 242 : 280
+  const compact = width < 584
+  const height = compact ? 252 : 280
   const left = 78,
     right = width - 22,
     top = 24,
-    bottom = height - 24
+    bottom = height - (compact ? 40 : 24)
   const pointFor = (month: MonthView): PlotPoint =>
     metric === 'price' ? month.price_plot : metric === 'ppsf' ? month.ppsf_plot : month.count_plot
   const xFor = (point: PlotPoint) => left + Number(point.x) * (right - left)
@@ -54,7 +55,7 @@ export function TrendChart({
       <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-labelledby="trend-title trend-desc">
         <title id="trend-title">{metricNames[metric]} across twelve months</title>
         <desc id="trend-desc">
-          Synthetic observations. Select a month using the buttons below; its exact values also
+          Synthetic observations. Select a month using the controls below; its exact values also
           appear in the monthly table. Gaps represent months without observations.
         </desc>
         {ticks.map((tick) => {
@@ -80,9 +81,7 @@ export function TrendChart({
         <path className="chart-line" d={path} fill="none" />
         {view.months.map((month) => {
           const point = pointFor(month)
-          return point.y === null ? (
-            <circle key={month.month} className="chart-empty" cx={xFor(point)} cy={bottom} r={4} />
-          ) : (
+          return point.y === null ? null : (
             <circle
               key={month.month}
               className={month.month === selectedMonth ? 'chart-station selected' : 'chart-station'}
@@ -92,40 +91,70 @@ export function TrendChart({
             />
           )
         })}
+        {compact &&
+          [0, 3, 6, 9, 11].map((index) => {
+            const month = view.months[index]
+            return (
+              month && (
+                <text
+                  key={month.month}
+                  className="chart-tick chart-month-tick"
+                  x={xFor(pointFor(month))}
+                  y={height - 12}
+                  textAnchor="middle"
+                >
+                  {month.short_label} ’{month.month.slice(2, 4)}
+                </text>
+              )
+            )
+          })}
       </svg>
-      <div className="month-selector" role="group" aria-label="Select a month to inspect">
-        {view.months.map((month, index) => (
-          <button
-            key={month.month}
-            type="button"
-            aria-pressed={month.month === selectedMonth}
-            onClick={() => selectMonth(month.month)}
-            onKeyDown={(event) => {
-              const next =
-                event.key === 'ArrowRight'
-                  ? Math.min(index + 1, 11)
-                  : event.key === 'ArrowLeft'
-                    ? Math.max(0, index - 1)
-                    : event.key === 'Home'
-                      ? 0
-                      : event.key === 'End'
-                        ? 11
-                        : null
-              const target = next === null ? null : view.months[next]
-              if (target && next !== null) {
-                event.preventDefault()
-                selectMonth(target.month)
-                const sibling = event.currentTarget.parentElement?.children[next]
-                if (sibling instanceof HTMLButtonElement) sibling.focus()
-              }
-            }}
-            aria-label={`Inspect ${month.label}`}
-          >
-            <span>{month.short_label}</span>
-            <small>{month.month.slice(2, 4)}</small>
-          </button>
-        ))}
-      </div>
+      {compact ? (
+        <label className="mobile-month-picker">
+          Inspect month
+          <select value={selectedMonth} onChange={(event) => selectMonth(event.target.value)}>
+            {view.months.map((month) => (
+              <option key={month.month} value={month.month}>
+                {month.label}
+              </option>
+            ))}
+          </select>
+        </label>
+      ) : (
+        <div className="month-selector" role="group" aria-label="Select a month to inspect">
+          {view.months.map((month, index) => (
+            <button
+              key={month.month}
+              type="button"
+              aria-pressed={month.month === selectedMonth}
+              onClick={() => selectMonth(month.month)}
+              onKeyDown={(event) => {
+                const next =
+                  event.key === 'ArrowRight'
+                    ? Math.min(index + 1, 11)
+                    : event.key === 'ArrowLeft'
+                      ? Math.max(0, index - 1)
+                      : event.key === 'Home'
+                        ? 0
+                        : event.key === 'End'
+                          ? 11
+                          : null
+                const target = next === null ? null : view.months[next]
+                if (target && next !== null) {
+                  event.preventDefault()
+                  selectMonth(target.month)
+                  const sibling = event.currentTarget.parentElement?.children[next]
+                  if (sibling instanceof HTMLButtonElement) sibling.focus()
+                }
+              }}
+              aria-label={`Inspect ${month.label}`}
+            >
+              <span>{month.short_label}</span>
+              <small>{month.month.slice(2, 4)}</small>
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

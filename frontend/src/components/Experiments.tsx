@@ -38,65 +38,104 @@ function ResultTable({
       </div>
     )
   return (
-    <div className="table-scroll">
-      <table className="data-table headline-table">
-        <caption className="sr-only">
-          Base-level any-seed violations and nominal Wilson 95% intervals
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col">Relation</th>
-            <th scope="col">Violating bases</th>
-            <th scope="col">Rate</th>
-            <th scope="col">Nominal 95% CI</th>
-            <th scope="col">Seed pairs</th>
-            <th scope="col">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {campaign.headlines.map((row) => (
-            <tr key={row.mr_id}>
-              <th scope="row">
-                <span className="mr-label">{row.mr_id}</span>
-                {catalog.find((item) => item.id === row.mr_id)?.title}
-              </th>
-              <td>
-                {row.violating_bases} / {row.completed_bases}
-              </td>
-              <td>{row.base_rate_label}</td>
-              <td>
-                <span>{row.ci95_label}</span>
-                {row.ci95_low !== null && row.ci95_high !== null && (
-                  <svg
-                    className="interval"
-                    viewBox="-2 0 104 10"
-                    role="img"
-                    aria-label={row.ci95_label}
-                  >
-                    <line x1="0" x2="100" y1="5" y2="5" className="interval-ground" />
-                    <line
-                      x1={Number(row.ci95_low) * 100}
-                      x2={Number(row.ci95_high) * 100}
-                      y1="5"
-                      y2="5"
-                      className="interval-range"
-                    />
-                    <circle cx={Number(row.base_rate ?? 0) * 100} cy="5" r="2.5" />
-                  </svg>
-                )}
-              </td>
-              <td>{row.seed_pairs_completed}</td>
-              <td>
-                <span className={`result-status ${row.complete ? 'pass' : 'execution_error'}`}>
-                  {row.complete ? 'Complete' : 'Incomplete'}
-                </span>
-                {row.execution_errors > 0 && <small>{row.execution_errors} execution errors</small>}
-              </td>
+    <>
+      <div className="table-scroll headline-desktop">
+        <table className="data-table headline-table">
+          <caption className="sr-only">
+            Base-level any-seed violations and nominal Wilson 95% intervals
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Relation</th>
+              <th scope="col">Violating bases</th>
+              <th scope="col">Rate</th>
+              <th scope="col">Nominal 95% CI</th>
+              <th scope="col">Seed pairs</th>
+              <th scope="col">Status</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {campaign.headlines.map((row) => (
+              <tr key={row.mr_id}>
+                <th scope="row">
+                  <span className="mr-label">{row.mr_id}</span>
+                  {catalog.find((item) => item.id === row.mr_id)?.title}
+                </th>
+                <td>
+                  {row.violating_bases} / {row.completed_bases}
+                </td>
+                <td>{row.base_rate_label}</td>
+                <td>
+                  <span>{row.ci95_label}</span>
+                  {row.ci95_low !== null && row.ci95_high !== null && (
+                    <svg
+                      className="interval"
+                      viewBox="-2 0 104 10"
+                      role="img"
+                      aria-label={row.ci95_label}
+                    >
+                      <line x1="0" x2="100" y1="5" y2="5" className="interval-ground" />
+                      <line
+                        x1={Number(row.ci95_low) * 100}
+                        x2={Number(row.ci95_high) * 100}
+                        y1="5"
+                        y2="5"
+                        className="interval-range"
+                      />
+                      <circle cx={Number(row.base_rate ?? 0) * 100} cy="5" r="2.5" />
+                    </svg>
+                  )}
+                </td>
+                <td>{row.seed_pairs_completed}</td>
+                <td>
+                  <span className={`result-status ${row.complete ? 'pass' : 'execution_error'}`}>
+                    {row.complete ? 'Complete' : 'Incomplete'}
+                  </span>
+                  {row.execution_errors > 0 && (
+                    <small>{row.execution_errors} execution errors</small>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="mobile-headlines">
+        {campaign.headlines.map((row) => (
+          <article key={row.mr_id}>
+            <h3>
+              <span className="mr-label">{row.mr_id}</span>
+              {catalog.find((item) => item.id === row.mr_id)?.title}
+            </h3>
+            <dl>
+              <div>
+                <dt>Violating bases</dt>
+                <dd>
+                  {row.violating_bases} / {row.completed_bases}
+                </dd>
+              </div>
+              <div>
+                <dt>Rate</dt>
+                <dd>{row.base_rate_label}</dd>
+              </div>
+              <div className="full-span">
+                <dt>Nominal 95% Wilson CI</dt>
+                <dd>{row.ci95_label}</dd>
+              </div>
+            </dl>
+            <p>
+              {row.seed_pairs_completed} paired outcomes ·{' '}
+              <span className={`result-status ${row.complete ? 'pass' : 'execution_error'}`}>
+                {row.complete ? 'Complete' : 'Incomplete'}
+              </span>
+            </p>
+            {row.execution_errors > 0 && (
+              <p className="error-text">{row.execution_errors} unresolved execution errors</p>
+            )}
+          </article>
+        ))}
+      </div>
+    </>
   )
 }
 
@@ -166,6 +205,9 @@ function PairDetail({
       </div>
       {detail.source && detail.followup && (
         <div className="table-scroll">
+          <p className="table-hint">
+            Scroll horizontally for both prices. Month labels stay visible.
+          </p>
           <table className="data-table pair-table">
             <caption>
               Selected projection for inspection · all assertions are in the case record
@@ -201,7 +243,12 @@ function PairDetail({
       {detail.result.comparison && (
         <p className="comparison-scope">
           {detail.result.comparison.compared_numeric_count} numeric fields compared · maximum
-          declared-projection error <code>{detail.result.comparison.max_absolute_error}</code>
+          declared-projection error{' '}
+          <code>
+            {detail.result.comparison.max_absolute_error
+              .replace(/(\.\d*?)0+$/, '$1')
+              .replace(/\.$/, '')}
+          </code>
         </p>
       )}
       {!!detail.result.comparison?.differences.length && (
@@ -287,6 +334,14 @@ export function Experiments({
   const filtered = (index.data ?? []).filter((item) => mr === 'all' || item.mr_id === mr)
   const current = filtered.find((item) => item.key === selectedCase) ?? filtered[0]
   const pageItems = filtered.slice(page * 30, page * 30 + 30)
+  if (resource.loading && !resource.data)
+    return (
+      <div className="wide-content loading-surface" role="status">
+        <h1>Metamorphic experiments</h1>
+        <p>Loading captured campaigns and their evidence…</p>
+        <div className="skeleton chart" />
+      </div>
+    )
   return (
     <div className="wide-content experiments-page">
       <div className="page-heading">
@@ -326,18 +381,21 @@ export function Experiments({
         <>
           <section className="campaign-progress">
             <div>
-              <span className="status-badge">
-                {campaign.scope === 'headline'
-                  ? 'Headline'
-                  : campaign.scope === 'pilot'
-                    ? 'Pilot · MR01 only'
-                    : 'Auxiliary'}{' '}
-                · {campaign.mode}
-              </span>
               <h2>
                 {campaign.completed_comparisons} / {campaign.expected_comparisons} comparisons
                 recorded
               </h2>
+              <p className="campaign-metadata">
+                Scope:{' '}
+                <span className="status-badge">
+                  {campaign.scope === 'headline'
+                    ? 'Headline'
+                    : campaign.scope === 'pilot'
+                      ? 'Pilot · MR01 only'
+                      : 'Auxiliary'}{' '}
+                  · {campaign.mode}
+                </span>
+              </p>
               <p>
                 {campaign.state === 'complete'
                   ? 'All expected paired outcomes are available.'
