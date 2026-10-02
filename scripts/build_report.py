@@ -56,7 +56,7 @@ class Page:
         canvas.drawString(MARGIN, PAGE_H - 35, "HOUSING EVIDENCE / TSE")
         canvas.setFillColor(MUTED)
         canvas.setFont("Helvetica", 8)
-        canvas.drawRightString(PAGE_W - MARGIN, PAGE_H - 35, "Synthetic observations | 16 October 2026")
+        canvas.drawRightString(PAGE_W - MARGIN, PAGE_H - 35, "Synthetic observations | Due 16 October 2026")
         canvas.setStrokeColor(LINE)
         canvas.line(MARGIN, PAGE_H - 46, PAGE_W - MARGIN, PAGE_H - 46)
         canvas.line(MARGIN, 45, PAGE_W - MARGIN, 45)
