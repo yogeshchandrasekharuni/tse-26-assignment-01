@@ -148,7 +148,7 @@
         ],
         [
           "Logical and physical work",
-          "Completed source execution can be reused only under an identical complete semantic input/model/seed key, with explicit lineage. Every logical follow-up executes afresh. The harness retains all failed attempts. Logical pair counts, physical analyses, model decisions, provider telemetry and elapsed time are reported as different quantities."
+          "Only successful sources enter the complete semantic input/model/seed cache; failures remain recorded and are not reused. Later relations can inherit a prior successful trajectory. Every follow-up executes afresh, with explicit source lineage. Logical pairs, physical analyses, model decisions, provider telemetry and elapsed time remain distinct. Rankings describe this declared execution policy, not isolated transformation effects."
         ]
       ]
     },
@@ -212,7 +212,7 @@
       "blocks": [
         [
           "Threats to validity",
-          "Construct: observation counts are not unique homes; asking-price medians are not sale prices; first-to-last change is not year-over-year change. Internal: common helpers can share faults; independent raw preflight and hand-calculated tests reduce but do not eliminate this risk. Statistical: thirty overlapping designed slices, shared source executions and three fixed seed conditions do not supply independent representative Bernoulli trials. Nominal Wilson intervals and any ranking of the top failures inherit that limitation. External: a regular synthetic feed, selected ZIPs, one local model, one machine and a frozen period do not characterize live housing markets or other agents."
+          "Construct: observation counts are not unique homes; asking-price medians are not sale prices; first-to-last change is not year-over-year change. Internal: common helpers can share faults; independent raw preflight and hand-calculated tests reduce but do not eliminate this risk. Statistical: thirty overlapping designed slices, reuse of successful sources and three fixed seed conditions are not independent representative Bernoulli trials. Intervals are nominal; rankings mix model-contract behavior, transformations and the declared reuse policy. External: a regular synthetic feed, selected ZIPs, one local model, one machine and a frozen period do not characterize live housing markets or other agents."
         ],
         [
           "AI-use reflection",
