@@ -168,10 +168,14 @@ class Page:
                 c.drawString(x + 13, y - 3, name)
             else:
                 c.drawCentredString(x, y - 23, name)
+        c.setFillColor(BLUE)
+        c.setFont("Helvetica", 7.5)
+        c.drawCentredString(65, 54, "sole public")
+        c.drawCentredString(65, 44, "entry / exit")
         c.restoreState()
         self.y -= 10
         self.text(
-            "Figure 1. All model roles are inside the parent boundary. Region* is conditional; Aggregate is deterministic Python. Every child result returns to the parent. The amber cycle changes actual work.",
+            "Figure 1. Arrows show evidence dependencies; every child call and return passes through the parent. Region* is conditional; Aggregate is deterministic Python. The amber refinement changes actual work.",
             SMALL,
         )
 
@@ -478,6 +482,13 @@ def report(draft: bool) -> Path:
     inputs.extend(
         ROOT / name
         for name in (
+            "data/frozen/dallas-synth-v1.csv",
+            "data/manifests/dallas-synth-v1.json",
+            "configs/headline-cohort-v1.json",
+            "configs/model_manifest_v4.json",
+            "uv.lock",
+            "artifacts/traces/20261001T144318Z-82736e984f/trace.jsonl",
+            "artifacts/traces/20261001T144318Z-82736e984f/terminal.json",
             "artifacts/observability/setup/verified.json",
             "artifacts/observability/demo-index.json",
             "artifacts/observability/qa/inspection.json",
@@ -486,9 +497,12 @@ def report(draft: bool) -> Path:
         )
     )
     if rows:
-        inputs.append(campaign / "headline.json")
+        inputs.extend(campaign / name for name in ("headline.json", "runtime.json", "artifact_hashes.json"))
+    else:
+        inputs.append(ROOT / "artifacts/campaigns/pilot-live-v1/headline.json")
     if reproduction:
         inputs.append(reproduction / "reproduction-comparison.json")
+        inputs.append(reproduction / "artifact_hashes.json")
     for name in ("diagnosis", "clean-checkout", "headline-provider-usage"):
         path = ROOT / "reports/data" / f"{name}.json"
         if path.is_file():

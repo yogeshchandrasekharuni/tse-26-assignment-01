@@ -202,7 +202,7 @@
         ],
         [
           "Environment and observability",
-          "The lock selects Python 3.15.0 and Fast Agent 0.10.45. Three explicit Qwen3.5 local profile defaults and digests are checked before live calls. Seed propagation is verified, but hardware kernels remain best effort. Offline setup uses locked dependencies; reproduction needs the committed live capture, not an Ollama server or paid credential. The provider uses Ollama's local OpenAI-compatible endpoint with a dummy key; no paid account is involved. [6] Langfuse 4.63.0 provides an optional local OTLP view of recorded parent/child calls, receipts and feedback. Observation readback and capture hashes bind that view to the evidence; it does not replace strict replay. [7]"
+          "Python 3.15.0 and Fast Agent 0.10.45 are locked. Three Qwen3.5 profile defaults and digests are checked before live calls. Seed propagation is verified; hardware kernels remain best effort. Offline reproduction uses locked dependencies and committed captures, without a model server. Live inference uses Ollama's local OpenAI-compatible endpoint and a dummy key; no paid account is involved. [6] Optional local Langfuse 4.63.0 displays recorded calls, receipts and feedback through OTLP. Verified observation readback and capture hashes bind that view to the raw evidence; it does not replace strict replay. [7]"
         ]
       ]
     },
@@ -230,7 +230,7 @@
       "blocks": [
         [
           "Commands",
-          "make setup installs frozen Python and frontend dependencies. make data regenerates and checks the frozen bytes. make check checks Python, schemas, generated TypeScript and frontend build/lint. make dev starts the local application. make evaluate-live executes the frozen live workload. make reproduce verifies the capture and recomputes the headline campaign offline. make report builds this document from evidence. make submission-check rejects incomplete or inconsistent deliverables."
+          "make setup installs frozen Python and frontend dependencies. make data regenerates and checks the frozen bytes. make check checks Python, schemas, generated TypeScript and frontend tests/build/lint. make dev starts the local application. make evaluate-live executes the frozen live workload. make reproduce verifies the capture and recomputes the headline campaign offline. make report builds this document from evidence. make submission-check rejects incomplete or inconsistent deliverables."
         ],
         [
           "Evidence index",

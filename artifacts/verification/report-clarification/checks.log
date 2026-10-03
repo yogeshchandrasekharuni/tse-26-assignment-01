@@ -1,0 +1,9 @@
+COMMAND: .venv/bin/ruff check scripts/build_report.py
+All checks passed!
+COMMAND: .venv/bin/ruff format --check scripts/build_report.py
+1 file already formatted
+COMMAND: .venv/bin/mypy scripts/build_report.py
+Success: no issues found in 1 source file
+COMMAND: make report-draft
+.venv/bin/python scripts/build_report.py --draft
+Built output/pdf/housing-report-draft.pdf (12 pages; DRAFT)
