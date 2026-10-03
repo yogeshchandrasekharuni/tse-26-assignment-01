@@ -1,0 +1,16 @@
+.F                                                                       [100%]
+=================================== FAILURES ===================================
+____________ test_missing_price_levels_do_not_invent_a_dollar_axis _____________
+
+    def test_missing_price_levels_do_not_invent_a_dollar_axis() -> None:
+        ticks, points = axis((None,) * 12, prefix="$", places=0)
+>       assert ticks == ()
+E       AssertionError: assert (AxisTick(y='..., label='$0')) == ()
+E         
+E         Left contains 5 more items, first extra item: AxisTick(y='0.000000', label='$1')
+E         Use -v to get more diff
+
+tests/unit/test_display_formatting.py:16: AssertionError
+=========================== short test summary info ============================
+FAILED tests/unit/test_display_formatting.py::test_missing_price_levels_do_not_invent_a_dollar_axis
+1 failed, 1 passed in 0.45 s

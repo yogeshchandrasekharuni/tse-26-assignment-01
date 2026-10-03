@@ -59,6 +59,12 @@ CAPTURES: dict[CaptureId, CaptureBinding] = {
         "Auxiliary control: an omitted index partition triggers a full CSV rescan and Region diagnosis; two observations become three.",
         True,
     ),
+    "empty": CaptureBinding(
+        ROOT / "artifacts/traces/20261003T130940Z-89d7c2c082",
+        ROOT / "artifacts/traces/20261003T130940Z-89d7c2c082/request.json",
+        "No matching observations",
+        "Auxiliary live empty-state check: a price bound above the frozen feed yields zero observations; a real rescan confirms no matches without changing the criteria.",
+    ),
 }
 
 

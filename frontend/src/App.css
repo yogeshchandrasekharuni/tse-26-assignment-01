@@ -1319,6 +1319,10 @@ dd {
   font-size: 0.82rem;
   color: var(--muted);
 }
+.empty-trend p {
+  max-width: 65ch;
+  font-size: 1rem;
+}
 .catalog-entry {
   border-top: 1px solid var(--line);
 }
@@ -1517,6 +1521,9 @@ dd {
   }
 }
 @media (max-width: 760px) {
+  .empty-trend p {
+    font-size: 16px;
+  }
   .app-header {
     min-height: auto;
     flex-wrap: wrap;

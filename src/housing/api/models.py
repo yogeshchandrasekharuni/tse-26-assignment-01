@@ -8,7 +8,7 @@ from housing.contracts.request import AnalysisRequest
 from housing.data.models import DatasetManifest
 from housing.evaluation.models import CaseResult, HeadlineRow, MRId
 
-type CaptureId = Literal["normal", "feedback"]
+type CaptureId = Literal["normal", "feedback", "empty"]
 type EvidenceScope = Literal["analysis", "development_smoke", "auxiliary_index_omission", "pilot", "headline"]
 
 

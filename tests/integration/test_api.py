@@ -35,6 +35,14 @@ def test_public_contracts_exports_units_and_path_guards(tmp_path: Path) -> None:
         validate("WorkflowView", workflow)
         assert workflow["refinements"] == 1 and workflow["query_unchanged"]
         assert workflow["evidence_scope"] == "auxiliary_index_omission"
+        empty = client.get("/api/analyses/capture/empty").json()
+        validate("AnalysisView", empty)
+        assert empty["output"]["canonical"]["summary"]["total_observations"] == 0
+        assert empty["price_ticks"] == [] and empty["ppsf_ticks"] == []
+        assert len(empty["months"]) == 12
+        assert all(month["price_plot"]["y"] is None for month in empty["months"])
+        assert all(month["observations"] == "0" for month in empty["months"])
+        assert all(month["price_mom"] == "Unavailable" for month in empty["months"])
         csv = client.get("/api/analyses/capture/normal/export.csv?area=SQM")
         assert csv.status_code == 200 and "display_median_price_per_SQM_USD" in csv.text
         assert len(csv.text.splitlines()) == 13

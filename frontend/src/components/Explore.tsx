@@ -40,6 +40,7 @@ export function Explore({
     view.months.find((month) => month.month === selectedMonth) ?? view.months.at(-1)
   const selectedId = selected?.month ?? selectedMonth
   const csv = `${view.csv_url}?money=${money}&area=${area}`
+  const noMatches = view.output.canonical.summary.total_observations === 0
   return (
     <div className="explore-content">
       <div className="page-heading">
@@ -77,8 +78,12 @@ export function Explore({
           {view.output.canonical.window_start} – {view.output.canonical.window_end}
         </span>
         <span className="status-right">
-          <ShieldCheck size={15} />
-          {view.output.quality.status === 'complete' ? 'Complete support' : 'Limited support'}
+          {noMatches ? <Info size={15} /> : <ShieldCheck size={15} />}
+          {noMatches
+            ? 'No matches'
+            : view.output.quality.status === 'complete'
+              ? 'Complete support'
+              : 'Limited support'}
         </span>
       </div>
       {view.purpose === 'auxiliary_index_omission' && (
@@ -132,12 +137,23 @@ export function Explore({
             </button>
           ))}
         </div>
-        <TrendChart
-          view={view}
-          selectedMonth={selectedId}
-          selectMonth={selectMonth}
-          metric={metric}
-        />
+        {noMatches ? (
+          <div className="empty-state empty-trend" role="status">
+            <Info size={24} aria-hidden="true" />
+            <h3>No matching observations</h3>
+            <p>
+              These criteria match none of the frozen synthetic observations in this twelve-month
+              window. Adjust the criteria and run again, or choose a recorded example.
+            </p>
+          </div>
+        ) : (
+          <TrendChart
+            view={view}
+            selectedMonth={selectedId}
+            selectMonth={selectMonth}
+            metric={metric}
+          />
+        )}
         {selected && (
           <div className="month-inspector" aria-live="polite">
             <div className="inspector-title">

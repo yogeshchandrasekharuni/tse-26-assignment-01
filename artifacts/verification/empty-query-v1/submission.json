@@ -1,0 +1,53 @@
+{
+  "checked_at_utc": "2026-10-03T13:16:59.648561+00:00",
+  "scope": "Auxiliary whole-query empty-state check; excluded from headline denominator.",
+  "job": {
+    "id": "033b04b8cd7349b192ef52d77fa886a7",
+    "state": "running",
+    "created_at_utc": "2026-10-03T13:09:51.511007+00:00",
+    "updated_at_utc": "2026-10-03T13:09:51.632375+00:00",
+    "submission": {
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-09",
+        "criteria": {
+          "zips": [
+            "75001",
+            "75006",
+            "75019",
+            "75024",
+            "75034",
+            "75038",
+            "75063",
+            "75080",
+            "75093",
+            "75201",
+            "75204",
+            "75214"
+          ],
+          "property_types": [
+            "condo",
+            "single_family",
+            "townhouse"
+          ],
+          "bedrooms_min": 1,
+          "bedrooms_max": 5,
+          "price_min_cents": 10000000000,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": false,
+        "seed": 104729
+      },
+      "mode": "live",
+      "capture_id": null
+    },
+    "output": null,
+    "error": null
+  }
+}

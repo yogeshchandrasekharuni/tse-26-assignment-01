@@ -45,7 +45,9 @@ def axis(
     values: tuple[str | None, ...], *, prefix: str, places: int, suffix: str = ""
 ) -> tuple[tuple[AxisTick, ...], tuple[str | None, ...]]:
     known = [Fraction(value) for value in values if value is not None]
-    low, high = (min(known), max(known)) if known else (Fraction(0), Fraction(1))
+    if not known:
+        return (), (None,) * len(values)
+    low, high = min(known), max(known)
     padding = (high - low) / 6 if high != low else max(high / 10, Fraction(1))
     low, high = max(Fraction(0), low - padding), high + padding
     span = high - low

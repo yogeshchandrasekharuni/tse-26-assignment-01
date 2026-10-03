@@ -207,7 +207,7 @@ export type Description = string
  * This interface was referenced by `ClientContracts`'s JSON-Schema
  * via the `definition` "CaptureId".
  */
-export type CaptureId = 'normal' | 'feedback'
+export type CaptureId = 'normal' | 'feedback' | 'empty'
 export type Purpose1 = 'development_smoke' | 'auxiliary_index_omission'
 export type Title = string
 export type Captures = CaptureSummary[]
