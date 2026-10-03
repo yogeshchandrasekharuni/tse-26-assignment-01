@@ -19,6 +19,7 @@ check: core-check
 	.venv/bin/mypy $(DELIVERY_SCRIPTS)
 	$(PYTHON) scripts/export_contracts.py --check
 	cd frontend && node scripts/generate-contracts.mjs --check
+	npm --prefix frontend test
 	npm --prefix frontend run build
 	npm --prefix frontend run lint
 

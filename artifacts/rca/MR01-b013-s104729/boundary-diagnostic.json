@@ -1,0 +1,57 @@
+{
+  "status": "verified",
+  "checked_at_utc": "2026-10-03T02:07:08.423903+00:00",
+  "scope": "Offline boundary diagnostic of actual captured responses. Constructed valid control is auxiliary, not a model call or a new MR comparison.",
+  "capture": "artifacts/campaigns/headline-live-v1/cases/MR01-b013-s104729/attempt-001/followup/runs/20261002T212554Z-5422070b41",
+  "source_sha256": {
+    "artifacts/campaigns/headline-live-v1/cases/MR01-b013-s104729/attempt-001/followup/runs/20261002T212554Z-5422070b41/model/006.input.json": "cba61367189694ee99257ac1b4be32d3c83fcf7f60befd585559cfb41a507b83",
+    "artifacts/campaigns/headline-live-v1/cases/MR01-b013-s104729/attempt-001/followup/runs/20261002T212554Z-5422070b41/model/006.response.json": "1f69d8c56ebb49125c4aac05ae526495ec52b985b43486ce4a31732abd25a571",
+    "artifacts/campaigns/headline-live-v1/cases/MR01-b013-s104729/attempt-001/followup/runs/20261002T212554Z-5422070b41/model/009.input.json": "2136196ea8008ca4d17d629afb1c5394be48067fa849bc2f682a118beea5a4c5",
+    "artifacts/campaigns/headline-live-v1/cases/MR01-b013-s104729/attempt-001/followup/runs/20261002T212554Z-5422070b41/model/009.response.json": "7bed7d44b9d445cfd3d077a095ea2011ee330295ab0a578f9f7a6c2a341278c0"
+  },
+  "responses": [
+    {
+      "ordinal": "006",
+      "raw_response": "{\"$defs\":{\"Signal\":{\"enum\":[\"INDEX_COVERAGE_MISMATCH\",\"SPARSE_SLICE\",\"RECEIPT_MISMATCH\",\"COMPLETE_SUPPORT\",\"CONFIRMED_SPARSE\",\"UNRECOVERABLE_INTEGRITY\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"decision\":{\"enum\":[\"ACCEPT\",\"REFINE\",\"ACCEPT_LIMITED\",\"FAIL\"],\"title\":\"Decision\",\"type\":\"string\"},\"decision_type\":{\"const\":\"review\",\"title\":\"Decision Type\",\"type\":\"string\"},\"requested_action\":{\"anyOf\":[{\"enum\":[\"EXACT_RESCAN_WITH_REGION\",\"REBUILD_INDEX_AND_RESCAN\"],\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Requested Action\"},\"role\":{\"const\":\"reviewer\",\"title\":\"Role\",\"type\":\"string\"},\"signals\":{\"items\":{\"$ref\":\"#/$defs/Signal\"},\"minItems\":1,\"title\":\"Signals\",\"type\":\"array\"}},\"required\":[\"role\",\"decision_type\",\"decision\",\"signals\",\"requested_action\"],\"title\":\"ReviewDecision\",\"type\":\"object\"}",
+      "raw_response_sha256": "bf1e1171610faef09f471e9309ba5896f46dd9b41c324bc0eeb8803b15a57e00",
+      "matches_supplied_schema": true,
+      "validation_errors": [
+        {
+          "type": "union_tag_not_found",
+          "loc": [],
+          "msg": "Unable to extract tag using discriminator 'role'",
+          "ctx": {
+            "discriminator": "'role'"
+          }
+        }
+      ]
+    },
+    {
+      "ordinal": "009",
+      "raw_response": "{\"$defs\":{\"Signal\":{\"enum\":[\"INDEX_COVERAGE_MISMATCH\",\"SPARSE_SLICE\",\"RECEIPT_MISMATCH\",\"COMPLETE_SUPPORT\",\"CONFIRMED_SPARSE\",\"UNRECOVERABLE_INTEGRITY\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"decision\":{\"enum\":[\"ACCEPT\",\"REFINE\",\"ACCEPT_LIMITED\",\"FAIL\"],\"title\":\"Decision\",\"type\":\"string\"},\"decision_type\":{\"const\":\"review\",\"title\":\"Decision Type\",\"type\":\"string\"},\"requested_action\":{\"anyOf\":[{\"enum\":[\"EXACT_RESCAN_WITH_REGION\",\"REBUILD_INDEX_AND_RESCAN\"],\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Requested Action\"},\"role\":{\"const\":\"reviewer\",\"title\":\"Role\",\"type\":\"string\"},\"signals\":{\"items\":{\"$ref\":\"#/$defs/Signal\"},\"minItems\":1,\"title\":\"Signals\",\"type\":\"array\"}},\"required\":[\"role\",\"decision_type\",\"decision\",\"signals\",\"requested_action\"],\"title\":\"ReviewDecision\",\"type\":\"object\"}",
+      "raw_response_sha256": "bf1e1171610faef09f471e9309ba5896f46dd9b41c324bc0eeb8803b15a57e00",
+      "matches_supplied_schema": true,
+      "validation_errors": [
+        {
+          "type": "union_tag_not_found",
+          "loc": [],
+          "msg": "Unable to extract tag using discriminator 'role'",
+          "ctx": {
+            "discriminator": "'role'"
+          }
+        }
+      ]
+    }
+  ],
+  "same_invalid_response_after_repair": true,
+  "constructed_valid_control": {
+    "role": "reviewer",
+    "decision_type": "review",
+    "decision": "ACCEPT",
+    "signals": [
+      "COMPLETE_SUPPORT"
+    ],
+    "requested_action": null
+  },
+  "constructed_control_validates": true
+}

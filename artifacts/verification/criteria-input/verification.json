@@ -1,0 +1,48 @@
+{
+  "status": "verified",
+  "recorded_at_utc": "2026-10-03T02:38:12.505541+00:00",
+  "scope": "Criteria parsing and invalid-state persistence only; auxiliary live regression is outside the headline campaign.",
+  "source_hashes": {
+    "Makefile": "26e481206b52f637ff86d0418808ad361f9d6f3b78b73b70a0b60d782221633d",
+    "frontend/package.json": "286aeea25270ad650e6a4d4e1004429ff503a15aa11cea553fd2b978f0302b81",
+    "frontend/src/App.css": "71cffd94c12b11980a33ff6f2bebff347db509276fdf9d7b8a98b55bf693da8a",
+    "frontend/src/App.tsx": "aa516c0110f8438bc4602eb0df33e8e2344d3b3474449b099fdd105b2a53d58f",
+    "frontend/src/components/CriteriaForm.tsx": "0da01d39adbf6569d547e48d824b7e8b8c7a2bec5e6ba9518d305413acae0e7e",
+    "frontend/src/criteria-numbers.ts": "e6dd25727524451fd57843f281e0ddf7307c84915827886ad6d92a67d29431fa",
+    "frontend/tests/criteria-numbers.test.mjs": "2d0e343f70ad004937b891079659410c2ddc50c9db45637d3b9980ecc3dd03b4"
+  },
+  "proof_hashes": {
+    "baseline-check.log": "d3e73e1425c8c3507169f2dc8602fdccefa37587b7d24b19960144c896ecb816",
+    "before.json": "0429541dd881dcbcc4633d23faa8bf0e9823f8df194c6fbefb069992db12c2f5",
+    "blocked-submit.json": "4635272c431403b5cecdf6ccb2df430cb390a738c6a05b4820c5570b75516cc2",
+    "incremental-typing.json": "a7746cfde3683cc9430eca0257500d4ed4d1686fe144b76bda661660e1541792",
+    "restore.json": "82fddf8ef7d649ee8d563738b4f3981bd6abb5494fe28a353e3e7a319c0c13d4",
+    "exact-cent-submission.json": "75f9f889876f6217a51e31a96ff7b442fe3405e4178ab70913afd8525ee4b91c",
+    "exact-cent-outcome.json": "52b1f52b66310e1714b68b220c8c7713b692ef596cc1a5c4e6f0e364d1b62af3",
+    "reviewer-recheck.json": "26f86d4250bfa5760692ef618fc357170161611dd6527e0b40ce867b6abbc1cc",
+    "reviewer-desktop.jpg": "3fe7efa90643d56d6d31fdef7b1d780b561252a608280eb1dd9176e345e6a778",
+    "reviewer-mobile.jpg": "417d2e008f0d150ab903fbd305405775b9969fbdfde017c7673acd64b9fef2f0"
+  },
+  "checks": {
+    "baseline_make_check": {
+      "python_tests": 72,
+      "node_tests": 3,
+      "note": "Full log precedes the scoped persistence/type-size fix batch."
+    },
+    "after_fix_commands": [
+      "npm --prefix frontend test",
+      "npm --prefix frontend run build",
+      "npm --prefix frontend run lint"
+    ],
+    "after_fix_exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "independent_browser_recheck": "three named findings resolved; desktop1512/mobile390; temporary viewport reset"
+  },
+  "accepted_job_id": "6708e286e5274ae59cb400752ab3ea17",
+  "accepted_price_min_cents": 12865525,
+  "auxiliary_live_state": "completed",
+  "auxiliary_run_id": "20261003T014014Z-947634b1d7"
+}

@@ -32,6 +32,7 @@ function App() {
   const bootstrap = useResource<Bootstrap>('/api/bootstrap')
   const [page, setPage] = useState<Page>(pageFromHash)
   const [draft, setDraft] = useState<AnalysisRequest | null>(null)
+  const [formRevision, setFormRevision] = useState(0)
   const [baseUrl, setBaseUrl] = useState('/api/analyses/capture/normal')
   const [workflowOverride, setWorkflowOverride] = useState<string | null>(null)
   const [captureId, setCaptureId] = useState('normal')
@@ -83,6 +84,7 @@ function App() {
     setCaptureId(id)
     setBaseUrl('/api/analyses/capture/' + id)
     setDraft(capture.request)
+    setFormRevision((value) => value + 1)
     setSelectedMonth(capture.request.window_end)
     setJob(null)
     setSubmissionError(null)
@@ -270,58 +272,60 @@ function App() {
                 {busy && <progress aria-label="Analysis in progress" />}
               </div>
             )}
-            {page === 'explore' && (
-              <div className="explore-layout">
-                <CriteriaForm
-                  bootstrap={bootstrap.data}
-                  draft={displayedDraft}
-                  onChange={setDraft}
-                  onSubmit={() => void submit('live')}
-                  busy={busy}
-                  reset={() => {
-                    if (view) setDraft(view.request)
-                  }}
-                />
-                <div className="analysis-area">
-                  {changedDraft && (
-                    <div className="draft-notice">
-                      <InfoIcon />
-                      Draft criteria changed. Run a live analysis to update the result.
-                    </div>
-                  )}
-                  {analysis.error ? (
-                    <div className="notice error" role="alert">
-                      <p>{analysis.error}</p>
-                      <button className="button secondary" onClick={analysis.retry}>
-                        Retry result
-                      </button>
-                    </div>
-                  ) : analysis.loading || !view ? (
-                    <div className="explore-content loading-surface" role="status">
-                      <h1>Loading the recorded analysis</h1>
-                      <div className="skeleton title" />
-                      <div className="skeleton chart" />
-                    </div>
-                  ) : (
-                    <Explore
-                      view={view}
-                      selectedMonth={selectedMonth}
-                      selectMonth={setSelectedMonth}
-                      money={money}
-                      area={area}
-                      setMoney={setMoney}
-                      setArea={setArea}
-                      openWorkflow={() => inspectWorkflow()}
-                      replay={() => void submit('replay')}
-                      busy={busy}
-                      captures={bootstrap.data.captures}
-                      capture={captureId}
-                      chooseCapture={chooseCapture}
-                    />
-                  )}
-                </div>
+            <div className="explore-layout" hidden={page !== 'explore'}>
+              <CriteriaForm
+                key={formRevision}
+                bootstrap={bootstrap.data}
+                draft={displayedDraft}
+                onChange={setDraft}
+                onSubmit={() => void submit('live')}
+                busy={busy}
+                reset={() => {
+                  if (view) {
+                    setDraft(view.request)
+                    setFormRevision((value) => value + 1)
+                  }
+                }}
+              />
+              <div className="analysis-area">
+                {changedDraft && (
+                  <div className="draft-notice">
+                    <InfoIcon />
+                    Draft criteria changed. Run a live analysis to update the result.
+                  </div>
+                )}
+                {analysis.error ? (
+                  <div className="notice error" role="alert">
+                    <p>{analysis.error}</p>
+                    <button className="button secondary" onClick={analysis.retry}>
+                      Retry result
+                    </button>
+                  </div>
+                ) : analysis.loading || !view ? (
+                  <div className="explore-content loading-surface" role="status">
+                    <h1>Loading the recorded analysis</h1>
+                    <div className="skeleton title" />
+                    <div className="skeleton chart" />
+                  </div>
+                ) : (
+                  <Explore
+                    view={view}
+                    selectedMonth={selectedMonth}
+                    selectMonth={setSelectedMonth}
+                    money={money}
+                    area={area}
+                    setMoney={setMoney}
+                    setArea={setArea}
+                    openWorkflow={() => inspectWorkflow()}
+                    replay={() => void submit('replay')}
+                    busy={busy}
+                    captures={bootstrap.data.captures}
+                    capture={captureId}
+                    chooseCapture={chooseCapture}
+                  />
+                )}
               </div>
-            )}
+            </div>
             {page === 'workflow' && (
               <>
                 <Workflow
@@ -372,6 +376,7 @@ function App() {
                         setBaseUrl('/api/analyses/job/' + item.id)
                         setCaptureId('')
                         setDraft(item.submission.request)
+                        setFormRevision((value) => value + 1)
                         setJob(item)
                         navigate('explore')
                       } else {

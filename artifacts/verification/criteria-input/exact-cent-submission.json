@@ -1,0 +1,55 @@
+{
+  "checked_at_utc": "2026-10-03T01:41:44.961042+00:00",
+  "typed_usd": "128655.25",
+  "expected_integer_cents": 12865525,
+  "scope": "Auxiliary UI regression; excluded from headline campaign denominator.",
+  "job": {
+    "id": "6708e286e5274ae59cb400752ab3ea17",
+    "state": "running",
+    "created_at_utc": "2026-10-03T01:40:24.967256+00:00",
+    "updated_at_utc": "2026-10-03T01:40:25.238402+00:00",
+    "submission": {
+      "request": {
+        "dataset_id": "dallas-synth-v1",
+        "window_end": "2026-09",
+        "criteria": {
+          "zips": [
+            "75001",
+            "75006",
+            "75019",
+            "75024",
+            "75034",
+            "75038",
+            "75063",
+            "75080",
+            "75093",
+            "75201",
+            "75204",
+            "75214"
+          ],
+          "property_types": [
+            "condo",
+            "single_family",
+            "townhouse"
+          ],
+          "bedrooms_min": 1,
+          "bedrooms_max": 5,
+          "price_min_cents": 12865525,
+          "price_max_cents": null,
+          "sqft_min": null,
+          "sqft_max": null
+        },
+        "display": {
+          "money": "USD",
+          "area": "SQFT"
+        },
+        "compare_regions": false,
+        "seed": 104729
+      },
+      "mode": "live",
+      "capture_id": null
+    },
+    "output": null,
+    "error": null
+  }
+}

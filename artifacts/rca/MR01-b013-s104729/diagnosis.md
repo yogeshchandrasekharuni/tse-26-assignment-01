@@ -1,0 +1,13 @@
+# Preliminary schema-echo diagnosis: MR01-b013-s104729
+
+The shuffled follow-up fails with `AGENT_OUTPUT_INVALID` at `REVIEW_REQUIRED`; the source completes. This eligible pair is an output-contract violation. The running campaign has no final ranking or rate yet, and this case does not establish an arithmetic or row-order defect.
+
+Price, Supply and Region return valid decisions and receipts. Trace event10 records their deterministic aggregate with `receipt_mismatch: false`. Reviewer response006 then returns the JSON Schema supplied in its instruction, rather than an instance of ReviewDecision. Its top level contains properties/required/type, with no top-level role discriminator. Event11 records `union_tag_not_found`; event12 grants the one explicit schema repair. The parent reads the current role contract and delegates Reviewer again. Response009 repeats the same schema, byte for byte, and event14 terminates the run when the repair budget is exhausted. No Composer or final numerical MR comparison executes.
+
+The offline [boundary diagnostic](boundary-diagnostic.json) verifies that both returned objects equal the schema embedded in their actual role instructions and fail the production decision adapter. A hand-constructed ACCEPT/COMPLETE_SUPPORT instance validates; it is explicitly auxiliary and is not a model output, a new paired sample or a reduced end-to-end counterexample.
+
+`PYTHONHASHSEED=0 .venv/bin/python scripts/replay_case_leg.py --case MR01-b013-s104729 --leg followup` actually reproduced all ten captured decisions through the current Fast Agent playback and production service. The [comparison](20261003T020129Z/comparison.json) records the same failure and zero network attempts. Current tools and receipt aggregation run during playback; the saved final answer is not used.
+
+The observed mechanism differs from the Price-purpose/pending-repair failures already inspected. Both are contract failures, and neither proves a numerical transformation violation. Schema copying suggests a prospective prompt/structured-output investigation, but no untested mitigation is claimed to work. Any implementation or model change requires a separately versioned experiment; the frozen headline code and inputs remain unchanged.
+
+To inspect the decisive boundary independently, load `model/006.response.json` and `model/009.response.json` under the recorded capture, take their text content, and call `housing.contracts.decisions.ROLE_DECISION.validate_json`. Both raise the recorded discriminator error. This local diagnostic narrows the boundary failure; the ten-decision command above is the actual end-to-end failure replay.

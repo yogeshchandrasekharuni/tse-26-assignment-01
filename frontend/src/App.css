@@ -143,6 +143,10 @@
   gap: 23px;
   padding-top: 13px;
 }
+.criteria-form[hidden],
+.explore-layout[hidden] {
+  display: none;
+}
 .form-context,
 .form-footnote,
 .collapsed-summary {
@@ -705,6 +709,14 @@ dd {
 }
 .error-text {
   color: var(--danger);
+}
+.field .error-text {
+  color: var(--danger);
+  font-size: 14px;
+  line-height: 1.4;
+}
+.field input[aria-invalid='true'] {
+  border-color: var(--danger);
 }
 .draft-notice {
   display: flex;
@@ -1546,6 +1558,9 @@ dd {
     grid-template-columns: 1fr 1fr;
     gap: 24px;
     margin-top: 12px;
+  }
+  .bound-input {
+    font-size: 16px;
   }
   .criteria-form > .form-context,
   .criteria-form > .advanced,

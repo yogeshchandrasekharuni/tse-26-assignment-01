@@ -68,6 +68,16 @@ typography:
     fontFamily: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace
     fontSize: 0.78rem
     lineHeight: 1.55
+  field-error:
+    fontFamily: Public Sans Variable, Public Sans, sans-serif
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: 1.4
+  bound-mobile:
+    fontFamily: Public Sans Variable, Public Sans, sans-serif
+    fontSize: 16px
+    fontWeight: 550
+    lineHeight: 1.55
 rounded:
   compact: 5px
   field: 6px
@@ -147,6 +157,11 @@ components:
     rounded: '{rounded.diagram}'
   table-selected:
     backgroundColor: '{colors.accent-pale}'
+  bound-input-mobile:
+    typography: '{typography.bound-mobile}'
+  field-error:
+    textColor: '{colors.danger}'
+    typography: '{typography.field-error}'
 ---
 
 # Design System: Housing Evidence
@@ -212,6 +227,7 @@ A restrained cobalt accent sits against porcelain white and cool gray, with dist
 - **Body:** the root role is `body`, with paragraphs limited to (74ch). Operational descriptions commonly use (0.82–0.88rem), with inherited line height unless specified.
 - **Label:** fields use `label`; supporting text uses `small` or compact provenance variants. Labels remain sentence case. The diagram's small uppercase boundary annotation is functional geometry labeling, not a heading treatment.
 - **Numeric:** selected-month values use `numeric`; they reduce at narrower widths and use tabular figures. Table text is (0.79rem), reducing to (0.75rem) on mobile.
+- **Bound inputs and errors:** USD and area fields retain the compact desktop label size, with the `bound-mobile` role at (760px) and below. Associated validation messages use `field-error`, independent of the smaller help-text role.
 - **Mono:** hashes and payloads use `mono`; code blocks use a longer line height (1.6). Monospace is not a display face.
 
 **The Evidence Type Rule.** Keep prose and interface labels in Public Sans, use tabular figures for compared values, and reserve monospace for hashes, code and captured payloads.
@@ -262,6 +278,12 @@ The selected-month inspector is the canonical tonal panel: cool rail background,
 
 White controls use a thin steel border, the field radius, recorded input padding and a minimum height (39px). Hover strengthens the border; keyboard focus adds the common cobalt outline. Field labels appear above inputs, with help text below; paired bounds remain aligned. Native checkboxes use the global cobalt accent. Unit selects are intentionally more compact and sit beside the chart title.
 
+USD and area bounds use the shared `BoundInput` pattern: text inputs with decimal or numeric input mode, a (32-character) limit and an “Any” placeholder for a blank, unbounded value. USD is parsed as decimal text into exact BigInt cents before conversion to a safe JSON integer; up to two decimal places are accepted, including zero dollars. Area accepts positive whole square feet only, also checked as BigInt before conversion. Typed text is not rounded or truncated to make an invalid entry fit.
+
+Invalid raw text stays visible while the canonical draft retains its last valid value. Native custom validity blocks form submission, `aria-invalid` marks the field, and `aria-describedby` connects its visible error. The border and associated error use the danger color; the message uses `field-error` typography and wraps beneath the input. At (760px) and below, bound inputs use `bound-mobile` typography so their editable text remains readable without mobile focus zoom. Help copy retains its separate compact treatment.
+
+Collapsing “Your slice” hides the mounted form, and ordinary area navigation hides the mounted Explore subtree; both preserve raw edits, errors and custom validity. Reset these only for explicit recorded-criteria restoration, capture selection or loading a completed recent run. The restore control is a non-submit button and can clear invalid text even when the canonical value was already blank. The standalone sidecar snippet illustrates the invalid-field appearance; exact parsing, native validity and preserved edit state belong to the application implementation.
+
 ### Navigation
 
 Icon-and-text links use slate at rest and cobalt on hover. The current area uses cobalt text plus an underline (2px). Desktop links stretch through the header; mobile navigation becomes a full-width row with at least (44px) link height. Icons remain inline SVG; no icon font or glyph substitute is used.
@@ -287,6 +309,7 @@ Use aligned, tabular values; right-align numeric columns and left-align the iden
 - **Do** retain visible keyboard focus, readable mobile evidence and reduced-motion behavior.
 - **Do** let open circles and connectors represent actual data positions and workflow dependencies.
 - **Do** place event type, scope and mode in labeled metadata below the related heading.
+- **Do** preserve raw bound edits and their associated validity across ordinary collapse and area navigation; clear them through explicit restore or record loading.
 
 ### Don't:
 
@@ -294,5 +317,6 @@ Use aligned, tabular values; right-align numeric columns and left-align the iden
 - **Don't** replace the light reading ground with a page-wide dark theme; navy belongs to the workflow diagram.
 - **Don't** turn unavailable or pending evidence into a positive status or a completed-looking numerical result.
 - **Don't** introduce decorative transit hardware, photographic surfaces or unlabelled color-only controls.
+- **Don't** silently round, truncate or discard invalid USD or area text, or substitute small help text for its readable field error.
 
-Not canonized or repaired in this documentation pass: no unresolved defect from the scored finish fixes. The very small diagram boundary annotations are diagram-local labels, not a reusable type role. The finish verdict covers the scored fixes and sampled captures; it does not establish an exhaustive audit of every surface or a completed experiment campaign.
+Not canonized or repaired in this documentation pass: no unresolved defect from the scored finish fixes. The very small diagram boundary annotations are diagram-local labels, not a reusable type role. The finish verdict covers the scored fixes and sampled captures; it does not establish an exhaustive audit of every surface or a completed experiment campaign. The subsequent criteria-input review independently cleared its three scoped fixes: preserved invalid edits and validity, readable field errors and mobile input sizing. This documentation update follows the current source, `artifacts/verification/criteria-input/reviewer-recheck.json` and its saved mobile capture; it does not rerun the interface or evaluation.

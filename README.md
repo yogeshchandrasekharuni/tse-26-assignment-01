@@ -11,7 +11,7 @@ Requirements: current uv, Node 26.5.0/npm, and the completed locked Python/front
 ```sh
 make setup               # locked Python environment and npm ci; downloads allowed here
 make data                # two independent regenerations; verify frozen bytes/provenance
-make check               # Python lint/format/types/tests, schema/type freshness, frontend build/lint
+make check               # Python lint/format/types/tests, schema/type freshness, frontend parser tests/build/lint
 make dev                 # local API on 8000 and React on 5173; Ctrl-C stops the owned processes
 ```
 

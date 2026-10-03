@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-02T04:38:37.111707+00:00",
+  "generatedAt": "2026-10-03T02:28:14.431124+00:00",
   "title": "Design System: Housing Evidence",
   "extensions": {
     "colorMeta": {
@@ -293,6 +293,14 @@
       "mono": {
         "displayName": "Mono",
         "purpose": "Hashes, code and recorded payloads."
+      },
+      "field-error": {
+        "displayName": "Field Error",
+        "purpose": "Associated bound validation messages, readable at 14px with 1.4 line height."
+      },
+      "bound-mobile": {
+        "displayName": "Mobile Bound Input",
+        "purpose": "USD and whole-area edit text at 16px on viewports at or below 760px."
       }
     },
     "shadows": [],
@@ -370,9 +378,9 @@
       "name": "Bound Field",
       "kind": "input",
       "refersTo": "input",
-      "description": "A labeled criteria input and its nearby unit.",
-      "html": "<label class=\"ds-field\">Minimum list price <input class=\"ds-input\" type=\"number\" min=\"0\" placeholder=\"Any\"/><small class=\"ds-help\">Inclusive bound in raw US dollars.</small></label>",
-      "css": ".ds-field{display:flex;flex-direction:column;gap:6px;color:var(--ink,#18263d);font-family:'Public Sans Variable','Public Sans',sans-serif;font-size:12px;font-weight:550}.ds-input{font:inherit;border:1px solid #b9c6d9;border-radius:6px;background:#fff;color:var(--ink,#18263d);min-height:39px;padding:7px 9px;min-width:0}.ds-input:hover{border-color:#8498b6}.ds-input::placeholder{color:#60718a;opacity:1}.ds-input:focus-visible{outline:3px solid var(--focus,#466be1);outline-offset:3px}.ds-help{color:var(--muted,#53627a);font-size:10.8px;font-weight:400;margin-top:2px}"
+      "description": "USD and positive whole-area text bounds preserve raw invalid edits. This preview shows the associated error; exact BigInt parsing, native custom validity and edit persistence run in the app.",
+      "html": "<label class=\"ds-field\">Minimum list price<input class=\"ds-input ds-bound-input\" type=\"text\" inputmode=\"decimal\" maxlength=\"32\" placeholder=\"Any\" aria-label=\"Minimum list price in USD\" aria-invalid=\"true\" aria-describedby=\"ds-price-error\" value=\"250000.255\"/><small id=\"ds-price-error\" class=\"ds-error\" role=\"alert\">Use dollars with up to two decimal places.</small></label>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:6px;min-width:0;color:var(--ink,#18263d);font-family:'Public Sans Variable','Public Sans',sans-serif;font-size:12px;font-weight:550;line-height:1.55}.ds-input{font:inherit;width:100%;border:1px solid #b9c6d9;border-radius:6px;background:#fff;color:var(--ink,#18263d);min-height:39px;padding:7px 9px;min-width:0;max-width:100%}.ds-input:hover{border-color:#8498b6}.ds-input::placeholder{color:#60718a;opacity:1}.ds-input:focus-visible{outline:3px solid var(--focus,#466be1);outline-offset:3px}.ds-field .ds-input[aria-invalid='true']{border-color:var(--danger,#9c2424)}.ds-error{display:block;color:var(--danger,#9c2424);font-size:14px;font-weight:400;line-height:1.4;margin-top:2px}@media(max-width:760px){.ds-bound-input{font-size:16px}}"
     },
     {
       "name": "Area Navigation",
@@ -454,13 +462,15 @@
       "Do pair semantic color with visible state words, including Synthetic and the live or replay mode.",
       "Do retain visible keyboard focus, readable mobile evidence and reduced-motion behavior.",
       "Do let open circles and connectors represent actual data positions and workflow dependencies.",
-      "Do place event type, scope and mode in labeled metadata below the related heading."
+      "Do place event type, scope and mode in labeled metadata below the related heading.",
+      "Do preserve raw bound edits and their associated validity across ordinary collapse and area navigation; clear them through explicit restore or record loading."
     ],
     "donts": [
       "Don't plot a missing observation as a price or connect across an absent value.",
       "Don't replace the light reading ground with a page-wide dark theme; navy belongs to the workflow diagram.",
       "Don't turn unavailable or pending evidence into a positive status or a completed-looking numerical result.",
-      "Don't introduce decorative transit hardware, photographic surfaces or unlabelled color-only controls."
+      "Don't introduce decorative transit hardware, photographic surfaces or unlabelled color-only controls.",
+      "Don't silently round, truncate or discard invalid USD or area text, or substitute small help text for its readable field error."
     ]
   }
 }
