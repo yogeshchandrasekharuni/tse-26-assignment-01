@@ -1,0 +1,49 @@
+{
+  "checked_at_utc": "2026-10-04T12:49:57.879501+00:00",
+  "scope": "Preliminary role variant and partial-receipt safety proof; no new live sample, distinct-bug or final-ranking claim.",
+  "case": "artifacts/campaigns/headline-live-v1/cases/MR02-b013-s155921/result.json",
+  "source_status": "failed",
+  "source_error_code": "AGENT_POLICY_ERROR",
+  "source_reused_from": null,
+  "price_decision": {
+    "role": "price",
+    "decision_type": "tool_intent",
+    "tool": "price_stats",
+    "partition_order": "month_asc",
+    "purpose": "statistics"
+  },
+  "supply_decision": {
+    "role": "supply",
+    "decision_type": "tool_intent",
+    "tool": "supply_stats",
+    "partition_order": "month_asc",
+    "purpose": "public_comparison"
+  },
+  "next_region_decision": {
+    "role": "region",
+    "decision_type": "tool_intent",
+    "tool": "region_stats",
+    "partition_order": "zip_asc",
+    "purpose": "public_comparison"
+  },
+  "accepted_tools_before_failure": [
+    "price_stats"
+  ],
+  "price_tool_sequence": 5,
+  "invalid_supply_sequence": 6,
+  "repair_sequence": 7,
+  "terminal_sequence": 8,
+  "aggregate_published": false,
+  "final_output_published": false,
+  "recorded_price_result_matches_recomputed": true,
+  "price_result_sha256": "a7571b51b0a57a5db54b62b83c46f5f7230e5c81a9977f6cc641abfb7061e4f4",
+  "raw_receipt_differences": [
+    "duration_ms",
+    "partition_receipts_path",
+    "receipt_id",
+    "result_path",
+    "run_id"
+  ],
+  "strict_replay_decisions": 5,
+  "network_attempts": []
+}

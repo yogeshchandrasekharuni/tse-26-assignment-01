@@ -1,0 +1,48 @@
+ISC004 Unparenthesized implicit string concatenation in collection
+  --> tests/integration/test_failure_playback.py:27:13
+   |
+25 |               "MR01",
+26 |               "b003",
+27 | /             "artifacts/campaigns/headline-live-v1/cases/MR01-b003-s155921/attempt-001/"
+28 | |             "followup/runs/20261002T033100Z-17d9d8cdf3",
+   | |_______________________________________________________^
+29 |               "price",
+30 |               4,
+   |
+help: Did you forget a comma?
+help: Wrap implicitly concatenated strings in parentheses
+   |
+26 |             "b003",
+   -             "artifacts/campaigns/headline-live-v1/cases/MR01-b003-s155921/attempt-001/"
+   -             "followup/runs/20261002T033100Z-17d9d8cdf3",
+27 +             ("artifacts/campaigns/headline-live-v1/cases/MR01-b003-s155921/attempt-001/"
+28 +             "followup/runs/20261002T033100Z-17d9d8cdf3"),
+29 |             "price",
+   |
+note: This is an unsafe fix and may change runtime behavior
+
+ISC004 Unparenthesized implicit string concatenation in collection
+  --> tests/integration/test_failure_playback.py:36:13
+   |
+34 |               "MR02",
+35 |               "b013",
+36 | /             "artifacts/campaigns/headline-live-v1/cases/MR02-b013-s155921/attempt-001/"
+37 | |             "followup/runs/20261004T114202Z-39a221977d",
+   | |_______________________________________________________^
+38 |               "supply",
+39 |               5,
+   |
+help: Did you forget a comma?
+help: Wrap implicitly concatenated strings in parentheses
+   |
+35 |             "b013",
+   -             "artifacts/campaigns/headline-live-v1/cases/MR02-b013-s155921/attempt-001/"
+   -             "followup/runs/20261004T114202Z-39a221977d",
+36 +             ("artifacts/campaigns/headline-live-v1/cases/MR02-b013-s155921/attempt-001/"
+37 +             "followup/runs/20261004T114202Z-39a221977d"),
+38 |             "supply",
+   |
+note: This is an unsafe fix and may change runtime behavior
+
+Found 2 errors.
+2 unsafe fixes available with `--fix --unsafe-fixes`.
