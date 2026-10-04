@@ -1,0 +1,86 @@
+{
+  "checked_at_utc": "2026-10-04T06:06:22.272887+00:00",
+  "scope": "Preliminary single-case diagnosis, not a final rank/rate or new model sample.",
+  "case": "artifacts/campaigns/headline-live-v1/cases/MR02-b001-s104729/result.json",
+  "transformation": "MR02 nominal-ID relabeling",
+  "raw_rows_checked": 34560,
+  "nonidentity_fields_equal_per_row": true,
+  "bijections": {
+    "record_id": {
+      "distinct_old": 34560,
+      "distinct_new": 34560,
+      "changed_rows": 34560
+    },
+    "listing_id": {
+      "distinct_old": 1440,
+      "distinct_new": 1440,
+      "changed_rows": 34560
+    }
+  },
+  "independent_visible_counts": {
+    "2025-07": 240,
+    "2025-08": 240,
+    "2025-09": 240,
+    "2025-10": 240,
+    "2025-11": 240,
+    "2025-12": 240,
+    "2026-01": 240,
+    "2026-02": 240,
+    "2026-03": 240,
+    "2026-04": 240,
+    "2026-05": 240,
+    "2026-06": 240
+  },
+  "qualifying_observations_each": 2880,
+  "source_reused_from": "artifacts/campaigns/headline-live-v1/cases/MR01-b001-s104729/attempt-001/source/record.json",
+  "first_invalid_sequence": 4,
+  "parent_price_message": "Execute price_stats for indexed scan with partition_order month_asc, purpose public_comparison",
+  "native_child_order": [
+    "agent__price",
+    "agent__supply",
+    "agent__region"
+  ],
+  "next_child_decision": {
+    "role": "supply",
+    "decision_type": "tool_intent",
+    "tool": "supply_stats",
+    "partition_order": "month_asc",
+    "purpose": "statistics"
+  },
+  "invalid_decision": {
+    "role": "price",
+    "decision_type": "tool_intent",
+    "tool": "price_stats",
+    "partition_order": "month_asc",
+    "purpose": "public_comparison"
+  },
+  "validation_errors": [
+    {
+      "location": [
+        "price",
+        "purpose"
+      ],
+      "message": "Input should be 'statistics'",
+      "type": "literal_error"
+    }
+  ],
+  "pending_repair_sequence": 5,
+  "terminal_sequence": 6,
+  "accepted_statistical_tools": 0,
+  "error_code": "AGENT_POLICY_ERROR",
+  "error_stage": "SCANNING",
+  "strict_replay_decisions": 4,
+  "network_attempts": [],
+  "supporting_artifact_hashes": {
+    "artifacts/campaigns/headline-live-v1/cases/MR02-b001-s104729/result.json": "839a164cdf076126c62f9bee7a903d12308c5d1eb9e27e0f7fa0890dbed4a4bb",
+    "configs/headline-cohort-v1.json": "804806c955bb0d1ab8dbafff592cad65537a1052d8ebbd88d3a2ee34b6c4a158",
+    "artifacts/campaigns/headline-live-v1/cases/MR02-b001-s104729/attempt-001/followup/runs/20261004T044918Z-15e5c44c66/terminal.json": "69dbe2925bf7a95cd70c1b59d77d001d6109c97a0c0051b3f2e71b1be717f69c",
+    "artifacts/campaigns/headline-live-v1/cases/MR02-b001-s104729/attempt-001/followup/runs/20261004T044918Z-15e5c44c66/trace.jsonl": "1b7bbc4a868412218d3b6187fb346dd8938f0e0c5def07b460c4c16d1a137862",
+    "artifacts/campaigns/headline-live-v1/cases/MR02-b001-s104729/attempt-001/followup/runs/20261004T044918Z-15e5c44c66/model/001.response.json": "42261ad840008cb0b2015876da3d3685004be11e2ee1467aeac6d89e559ff748",
+    "artifacts/campaigns/headline-live-v1/cases/MR02-b001-s104729/attempt-001/followup/runs/20261004T044918Z-15e5c44c66/model/002.response.json": "bc1a7133c881c058115399688c522a23b2b4feb91c5cb4deb1c2c492ea029f7a",
+    "artifacts/campaigns/headline-live-v1/cases/MR02-b001-s104729/attempt-001/followup/runs/20261004T044918Z-15e5c44c66/model/003.response.json": "c2f0179eb553e73ef916bf83ade5d512d0c2d164533e510364132f16ffb4d9e0",
+    "artifacts/campaigns/headline-live-v1/cases/MR02-b001-s104729/attempt-001/followup/runs/20261004T044918Z-15e5c44c66/cassettes/001.json": "ba444fd3a10971a757cfc6775794e28d633761de6f9959c02460df72182f68dd",
+    "artifacts/campaigns/headline-live-v1/cases/MR01-b001-s104729/attempt-001/source/record.json": "40627575873d635a6babc95407c8181b7a542738f7b1aa7e4471f8e621211356",
+    "artifacts/rca/MR02-b001-s104729/20261004T054210Z/comparison.json": "99d116ab94fc4403e7f4279553b18aec7eab2e65af6d56290cb8b630ac5252d7"
+  }
+}

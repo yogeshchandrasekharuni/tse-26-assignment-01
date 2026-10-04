@@ -1,0 +1,48 @@
+{
+  "checked_at_utc": "2026-10-04T05:53:29.761369+00:00",
+  "scope": "Preliminary single-case diagnosis, not a final rank/rate or new model sample.",
+  "case": "artifacts/campaigns/headline-live-v1/cases/MR02-b001-s104729/result.json",
+  "transformation": "MR02 nominal-ID relabeling",
+  "raw_rows_checked": 34560,
+  "nonidentity_fields_equal_per_row": true,
+  "bijections": {
+    "record_id": {
+      "distinct_old": 34560,
+      "distinct_new": 34560,
+      "changed_rows": 34560
+    },
+    "listing_id": {
+      "distinct_old": 1440,
+      "distinct_new": 1440,
+      "changed_rows": 34560
+    }
+  },
+  "qualifying_observations_each": 2880,
+  "source_reused_from": "artifacts/campaigns/headline-live-v1/cases/MR01-b001-s104729/attempt-001/source/record.json",
+  "first_invalid_sequence": 4,
+  "parent_price_message": "Execute price_stats for indexed scan with partition_order month_asc, purpose public_comparison",
+  "invalid_decision": {
+    "role": "price",
+    "decision_type": "tool_intent",
+    "tool": "price_stats",
+    "partition_order": "month_asc",
+    "purpose": "public_comparison"
+  },
+  "validation_errors": [
+    {
+      "location": [
+        "price",
+        "purpose"
+      ],
+      "message": "Input should be 'statistics'",
+      "type": "literal_error"
+    }
+  ],
+  "pending_repair_sequence": 5,
+  "terminal_sequence": 6,
+  "accepted_statistical_tools": 0,
+  "error_code": "AGENT_POLICY_ERROR",
+  "error_stage": "SCANNING",
+  "strict_replay_decisions": 4,
+  "network_attempts": []
+}
