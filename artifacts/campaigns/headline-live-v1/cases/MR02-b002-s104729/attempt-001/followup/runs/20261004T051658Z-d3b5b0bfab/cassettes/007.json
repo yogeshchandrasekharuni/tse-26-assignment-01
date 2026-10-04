@@ -1,0 +1,208 @@
+{
+  "boundary_sha256": "0c3caef4812dfb419bb75bc5b0b4eec055dc0e2709f115d25adc3b3141982696",
+  "input": {
+    "agent": "composer[1]",
+    "boundary_sha256": "0c3caef4812dfb419bb75bc5b0b4eec055dc0e2709f115d25adc3b3141982696",
+    "context": {
+      "contract_version": "1.0",
+      "facts": {
+        "first_to_last_price": "First-to-last median price change: -2.301561% across eleven monthly intervals.",
+        "last_month_yoy": "Final-month median price year-over-year change: -0.373747%.",
+        "observations": "576 qualifying monthly observations from 2025-07 through 2026-06.",
+        "source": "Synthetic Dallas-themed test feed; these are generated observations.",
+        "support": "All twelve visible months have at least five qualifying observations."
+      },
+      "iteration": 0,
+      "monthly_counts": {
+        "2025-07": 48,
+        "2025-08": 48,
+        "2025-09": 48,
+        "2025-10": 48,
+        "2025-11": 48,
+        "2025-12": 48,
+        "2026-01": 48,
+        "2026-02": 48,
+        "2026-03": 48,
+        "2026-04": 48,
+        "2026-05": 48,
+        "2026-06": 48
+      },
+      "plan": {
+        "active_specialists": [
+          "price",
+          "supply"
+        ],
+        "canonical_query_sha256": "b45f78cc46824539e0309a62232b9da21be7e3ed9dcb4b9130d46916b0cb3009",
+        "dataset_view_sha256": "b1df685e7994d2ec198c2f239288f7a9294caedf5abd0ed912941372c4490aea",
+        "planner_decision_sha256": "b3b2d589ee3aaaf8e747bff904181fc1606cce34a5d9cfa0f0f2a90412226a9d",
+        "region_purpose": "none",
+        "required_months": [
+          "2024-07",
+          "2024-08",
+          "2024-09",
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01",
+          "2025-02",
+          "2025-03",
+          "2025-04",
+          "2025-05",
+          "2025-06",
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06"
+        ],
+        "scan_strategy": "indexed",
+        "version": 0,
+        "visible_months": [
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06"
+        ]
+      },
+      "planning_constraints": null,
+      "previous_review": {
+        "decision": "ACCEPT",
+        "decision_type": "review",
+        "requested_action": null,
+        "role": "reviewer",
+        "signals": [
+          "COMPLETE_SUPPORT"
+        ]
+      },
+      "previous_signals": [
+        "COMPLETE_SUPPORT"
+      ],
+      "query": {
+        "compare_regions": false,
+        "criteria": {
+          "bedrooms_max": 4,
+          "bedrooms_min": 2,
+          "price_max_cents": null,
+          "price_min_cents": null,
+          "property_types": [
+            "condo"
+          ],
+          "sqft_max": null,
+          "sqft_min": null,
+          "zips": [
+            "75019",
+            "75024"
+          ]
+        },
+        "dataset_id": "dallas-synth-v1",
+        "dataset_view_sha256": "b1df685e7994d2ec198c2f239288f7a9294caedf5abd0ed912941372c4490aea",
+        "window_end": "2026-06"
+      },
+      "query_sha256": "b45f78cc46824539e0309a62232b9da21be7e3ed9dcb4b9130d46916b0cb3009",
+      "receipt_hashes": {
+        "price": "106fcc5db3714b40283607de4fc0490c75ef4718163e396d4d557bd3d566eeea",
+        "supply": "fc57ce5581ee85d504d92ffff364606b61353cb02df4aa5770073dad083334e4"
+      },
+      "required_caveats": [
+        "SYNTHETIC_DATA",
+        "UNAVAILABLE_LOOKBACK"
+      ],
+      "scan_complete": true,
+      "schema_repair": null,
+      "signals": [
+        "COMPLETE_SUPPORT"
+      ],
+      "stage": "ACCEPTED"
+    },
+    "effective_seed": 104729,
+    "instruction": "You are the internal Report Composer. Return only one strict ReportDecision JSON object, without Markdown: role composer, decision_type report, fact_ids a nonempty ordered unique selection of the trusted fact registry's keys, caveat_codes exactly required_caveats. Prefer observations and support, and first_to_last_price or last_month_yoy when available. Python renders selected facts and caveats using verified values. Never supply numerical claims or outside market explanations. If schema_repair names your role, correct that prior response using its errors.\n\nDecision schema:\n{\"additionalProperties\":false,\"properties\":{\"caveat_codes\":{\"items\":{\"enum\":[\"SYNTHETIC_DATA\",\"SPARSE_SUPPORT\",\"NO_MATCHES\",\"UNAVAILABLE_LOOKBACK\"],\"type\":\"string\"},\"title\":\"Caveat Codes\",\"type\":\"array\"},\"decision_type\":{\"const\":\"report\",\"title\":\"Decision Type\",\"type\":\"string\"},\"fact_ids\":{\"items\":{\"type\":\"string\"},\"maxItems\":8,\"minItems\":1,\"title\":\"Fact Ids\",\"type\":\"array\"},\"role\":{\"const\":\"composer\",\"title\":\"Role\",\"type\":\"string\"}},\"required\":[\"role\",\"decision_type\",\"fact_ids\",\"caveat_codes\"],\"title\":\"ReportDecision\",\"type\":\"object\"}",
+    "message_tool_call_order": [
+      [],
+      []
+    ],
+    "messages": [
+      {
+        "content": [
+          {
+            "text": "Delegate composer with complete support signals. Select facts from registry and required_caveats empty. Generate report decision.",
+            "type": "text"
+          }
+        ],
+        "is_template": false,
+        "role": "user"
+      },
+      {
+        "content": [
+          {
+            "text": "{\"state\":{\"contract_version\":\"1.0\",\"facts\":{\"first_to_last_price\":\"First-to-last median price change: -2.301561% across eleven monthly intervals.\",\"last_month_yoy\":\"Final-month median price year-over-year change: -0.373747%.\",\"observations\":\"576 qualifying monthly observations from 2025-07 through 2026-06.\",\"source\":\"Synthetic Dallas-themed test feed; these are generated observations.\",\"support\":\"All twelve visible months have at least five qualifying observations.\"},\"iteration\":0,\"monthly_counts\":{\"2025-07\":48,\"2025-08\":48,\"2025-09\":48,\"2025-10\":48,\"2025-11\":48,\"2025-12\":48,\"2026-01\":48,\"2026-02\":48,\"2026-03\":48,\"2026-04\":48,\"2026-05\":48,\"2026-06\":48},\"plan\":{\"active_specialists\":[\"price\",\"supply\"],\"canonical_query_sha256\":\"b45f78cc46824539e0309a62232b9da21be7e3ed9dcb4b9130d46916b0cb3009\",\"dataset_view_sha256\":\"b1df685e7994d2ec198c2f239288f7a9294caedf5abd0ed912941372c4490aea\",\"planner_decision_sha256\":\"b3b2d589ee3aaaf8e747bff904181fc1606cce34a5d9cfa0f0f2a90412226a9d\",\"region_purpose\":\"none\",\"required_months\":[\"2024-07\",\"2024-08\",\"2024-09\",\"2024-10\",\"2024-11\",\"2024-12\",\"2025-01\",\"2025-02\",\"2025-03\",\"2025-04\",\"2025-05\",\"2025-06\",\"2025-07\",\"2025-08\",\"2025-09\",\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\"],\"scan_strategy\":\"indexed\",\"version\":0,\"visible_months\":[\"2025-07\",\"2025-08\",\"2025-09\",\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\"]},\"planning_constraints\":null,\"previous_review\":{\"decision\":\"ACCEPT\",\"decision_type\":\"review\",\"requested_action\":null,\"role\":\"reviewer\",\"signals\":[\"COMPLETE_SUPPORT\"]},\"previous_signals\":[\"COMPLETE_SUPPORT\"],\"query\":{\"compare_regions\":false,\"criteria\":{\"bedrooms_max\":4,\"bedrooms_min\":2,\"price_max_cents\":null,\"price_min_cents\":null,\"property_types\":[\"condo\"],\"sqft_max\":null,\"sqft_min\":null,\"zips\":[\"75019\",\"75024\"]},\"dataset_id\":\"dallas-synth-v1\",\"dataset_view_sha256\":\"b1df685e7994d2ec198c2f239288f7a9294caedf5abd0ed912941372c4490aea\",\"window_end\":\"2026-06\"},\"query_sha256\":\"b45f78cc46824539e0309a62232b9da21be7e3ed9dcb4b9130d46916b0cb3009\",\"receipt_hashes\":{\"price\":\"106fcc5db3714b40283607de4fc0490c75ef4718163e396d4d557bd3d566eeea\",\"supply\":\"fc57ce5581ee85d504d92ffff364606b61353cb02df4aa5770073dad083334e4\"},\"required_caveats\":[\"SYNTHETIC_DATA\",\"UNAVAILABLE_LOOKBACK\"],\"scan_complete\":true,\"schema_repair\":null,\"signals\":[\"COMPLETE_SUPPORT\"],\"stage\":\"ACCEPTED\"},\"trusted_role\":\"composer\"}",
+            "type": "text"
+          }
+        ],
+        "is_template": false,
+        "role": "user"
+      }
+    ],
+    "model_profile": "housing-v4-s104729",
+    "normalization_version": "production-semantic-2",
+    "prompt_bundle_sha256": "47c9578424b4c58836d002685bf6173c4687fe4fe48bcda41ddeeb9cecdbc4f6",
+    "requested_seed": 104729,
+    "retry_policy": {
+      "framework_retries": 1,
+      "sdk_retries": 0
+    },
+    "role_schema_sha256": "4b1747c7492008d5c68bd396d97387c993746502ae8a230228d579ac90c24e9a",
+    "tools": {
+      "cache_scope": "private",
+      "result_type": "complete",
+      "tools": [],
+      "ttl_ms": 0
+    }
+  },
+  "origin": "live_captured",
+  "raw_input_sha256": "e7f4c3956069a30ef779134e83aae83efa7cd39508f010ca5e738261a2f434af",
+  "response": {
+    "channels": {
+      "fast-agent-timing": [
+        {
+          "text": "{\"start_time\": 104467.54339775, \"end_time\": 104474.491737708, \"duration_ms\": 78425.488948, \"ttft_ms\": 3031.25, \"time_to_response_ms\": 3031.25}",
+          "type": "text"
+        }
+      ],
+      "fast-agent-usage": [
+        {
+          "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 1478, \"uncached\": null, \"cache_read\": 0, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 82, \"reasoning\": null}, \"tool_calls\": 0, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791091482.827506, \"timing\": {\"duration_ms\": 78425.488948, \"ttft_ms\": 3031.25, \"time_to_response_ms\": 3031.25}, \"raw_usage\": {\"completion_tokens\": 82, \"prompt_tokens\": 1478, \"total_tokens\": 1560, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 0, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 1560}]}",
+          "type": "text"
+        }
+      ]
+    },
+    "content": [
+      {
+        "text": "{\n  \"role\": \"composer\",\n  \"decision_type\": \"report\",\n  \"fact_ids\": [\n    \"first_to_last_price\",\n    \"last_month_yoy\",\n    \"observations\"\n  ],\n  \"caveat_codes\": [\n    \"SYNTHETIC_DATA\",\n    \"UNAVAILABLE_LOOKBACK\"\n  ]\n}",
+        "type": "text"
+      }
+    ],
+    "is_template": false,
+    "role": "assistant",
+    "stop_reason": "endTurn"
+  },
+  "response_sha256": "5c965cc340a6002c00846c00b7f5cd6607c3779968e86b63541d85044ad36b8a",
+  "response_tool_call_order": [],
+  "schema_version": "production-capture-2",
+  "semantic_input_sha256": "e7f4c3956069a30ef779134e83aae83efa7cd39508f010ca5e738261a2f434af",
+  "sequence": 7
+}

@@ -1,0 +1,36 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 109635.725495708, \"end_time\": 109641.879278666, \"duration_ms\": 69457.338785, \"ttft_ms\": 1505.72, \"time_to_response_ms\": 1505.72}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 6362, \"uncached\": null, \"cache_read\": 5933, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 96, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791149807.040514, \"timing\": {\"duration_ms\": 69457.338785, \"ttft_ms\": 1505.72, \"time_to_response_ms\": 1505.72}, \"raw_usage\": {\"completion_tokens\": 96, \"prompt_tokens\": 6362, \"total_tokens\": 6458, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 5933, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 6458}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [
+    {
+      "text": "The reviewer has returned a decision with stage \"ACCEPTED\" and next_action null. Since the reviewer accepted the results, I now need to delegate the composer to finalize the report.",
+      "type": "text"
+    }
+  ],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_p8sdfjwk": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate composer for final report composition. Signals: CONFIRMED_SPARSE. Required caveats should be empty as per query constraints. Use available observations and support facts."
+        },
+        "name": "agent__composer"
+      }
+    }
+  }
+}

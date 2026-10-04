@@ -1,0 +1,176 @@
+{
+  "boundary_sha256": "addc0d8e9008deed14c3ff465f1472ec25635a40b42f48ceda969728d2ceea6a",
+  "input": {
+    "agent": "supply[2]",
+    "boundary_sha256": "addc0d8e9008deed14c3ff465f1472ec25635a40b42f48ceda969728d2ceea6a",
+    "context": {
+      "contract_version": "1.0",
+      "facts": {},
+      "iteration": 0,
+      "monthly_counts": {},
+      "plan": {
+        "active_specialists": [
+          "price",
+          "supply",
+          "region"
+        ],
+        "canonical_query_sha256": "742bb4716486ce1be22f49ca1582e164d959fa9b1c657ca4ab10f365f5611961",
+        "dataset_view_sha256": "53e5f2eddf366734d2f76f4f92b719780d796e5c1741ca08823b95b950890d8f",
+        "planner_decision_sha256": "5b80ce7ff9497f553f97a58db83e40f11fee8b89256a807f0bc94b203cc8c9ea",
+        "region_purpose": "public_comparison",
+        "required_months": [
+          "2024-07",
+          "2024-08",
+          "2024-09",
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01",
+          "2025-02",
+          "2025-03",
+          "2025-04",
+          "2025-05",
+          "2025-06",
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06"
+        ],
+        "scan_strategy": "indexed",
+        "version": 0,
+        "visible_months": [
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06"
+        ]
+      },
+      "planning_constraints": null,
+      "previous_review": null,
+      "previous_signals": [],
+      "query": {
+        "compare_regions": true,
+        "criteria": {
+          "bedrooms_max": 5,
+          "bedrooms_min": 1,
+          "price_max_cents": null,
+          "price_min_cents": null,
+          "property_types": [
+            "single_family"
+          ],
+          "sqft_max": null,
+          "sqft_min": null,
+          "zips": [
+            "75019",
+            "75038",
+            "75093",
+            "75214"
+          ]
+        },
+        "dataset_id": "dallas-synth-v1",
+        "dataset_view_sha256": "53e5f2eddf366734d2f76f4f92b719780d796e5c1741ca08823b95b950890d8f",
+        "window_end": "2026-06"
+      },
+      "query_sha256": "742bb4716486ce1be22f49ca1582e164d959fa9b1c657ca4ab10f365f5611961",
+      "receipt_hashes": {
+        "price": "bcb63e2994340c3e30d7d26831d775a97c7965569391a2881074016e76995bb2"
+      },
+      "required_caveats": [],
+      "scan_complete": true,
+      "schema_repair": null,
+      "signals": [],
+      "stage": "SCANNING"
+    },
+    "effective_seed": 130363,
+    "instruction": "You are the internal Supply specialist. Return only one JSON object matching SupplyDecision, with no Markdown or prose: role supply, decision_type tool_intent, tool supply_stats, partition_order month_asc or zip_asc, purpose statistics. Python binds the immutable selection, counts observations and verifies coverage. Never return counts, filters or invented evidence. If schema_repair names your role, correct that prior response using the recorded errors. Do not call tools yourself.\n\nDecision schema:\n{\"$defs\":{\"PartitionOrder\":{\"enum\":[\"month_asc\",\"zip_asc\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"decision_type\":{\"const\":\"tool_intent\",\"title\":\"Decision Type\",\"type\":\"string\"},\"partition_order\":{\"$ref\":\"#/$defs/PartitionOrder\"},\"purpose\":{\"const\":\"statistics\",\"title\":\"Purpose\",\"type\":\"string\"},\"role\":{\"const\":\"supply\",\"title\":\"Role\",\"type\":\"string\"},\"tool\":{\"const\":\"supply_stats\",\"title\":\"Tool\",\"type\":\"string\"}},\"required\":[\"role\",\"decision_type\",\"tool\",\"partition_order\",\"purpose\"],\"title\":\"SupplyDecision\",\"type\":\"object\"}",
+    "message_tool_call_order": [
+      [],
+      []
+    ],
+    "messages": [
+      {
+        "content": [
+          {
+            "text": "Delegate supply specialist for indexed scan with public_comparison region purpose. Query: bedrooms 1-5, single_family, zips [75019,75038,75093,75214], window_end 2026-06.",
+            "type": "text"
+          }
+        ],
+        "is_template": false,
+        "role": "user"
+      },
+      {
+        "content": [
+          {
+            "text": "{\"state\":{\"contract_version\":\"1.0\",\"facts\":{},\"iteration\":0,\"monthly_counts\":{},\"plan\":{\"active_specialists\":[\"price\",\"supply\",\"region\"],\"canonical_query_sha256\":\"742bb4716486ce1be22f49ca1582e164d959fa9b1c657ca4ab10f365f5611961\",\"dataset_view_sha256\":\"53e5f2eddf366734d2f76f4f92b719780d796e5c1741ca08823b95b950890d8f\",\"planner_decision_sha256\":\"5b80ce7ff9497f553f97a58db83e40f11fee8b89256a807f0bc94b203cc8c9ea\",\"region_purpose\":\"public_comparison\",\"required_months\":[\"2024-07\",\"2024-08\",\"2024-09\",\"2024-10\",\"2024-11\",\"2024-12\",\"2025-01\",\"2025-02\",\"2025-03\",\"2025-04\",\"2025-05\",\"2025-06\",\"2025-07\",\"2025-08\",\"2025-09\",\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\"],\"scan_strategy\":\"indexed\",\"version\":0,\"visible_months\":[\"2025-07\",\"2025-08\",\"2025-09\",\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\"]},\"planning_constraints\":null,\"previous_review\":null,\"previous_signals\":[],\"query\":{\"compare_regions\":true,\"criteria\":{\"bedrooms_max\":5,\"bedrooms_min\":1,\"price_max_cents\":null,\"price_min_cents\":null,\"property_types\":[\"single_family\"],\"sqft_max\":null,\"sqft_min\":null,\"zips\":[\"75019\",\"75038\",\"75093\",\"75214\"]},\"dataset_id\":\"dallas-synth-v1\",\"dataset_view_sha256\":\"53e5f2eddf366734d2f76f4f92b719780d796e5c1741ca08823b95b950890d8f\",\"window_end\":\"2026-06\"},\"query_sha256\":\"742bb4716486ce1be22f49ca1582e164d959fa9b1c657ca4ab10f365f5611961\",\"receipt_hashes\":{\"price\":\"bcb63e2994340c3e30d7d26831d775a97c7965569391a2881074016e76995bb2\"},\"required_caveats\":[],\"scan_complete\":true,\"schema_repair\":null,\"signals\":[],\"stage\":\"SCANNING\"},\"trusted_role\":\"supply\"}",
+            "type": "text"
+          }
+        ],
+        "is_template": false,
+        "role": "user"
+      }
+    ],
+    "model_profile": "housing-v4-s130363",
+    "normalization_version": "production-semantic-2",
+    "prompt_bundle_sha256": "47c9578424b4c58836d002685bf6173c4687fe4fe48bcda41ddeeb9cecdbc4f6",
+    "requested_seed": 130363,
+    "retry_policy": {
+      "framework_retries": 1,
+      "sdk_retries": 0
+    },
+    "role_schema_sha256": "45178168589a8355ccf9eda92f73d7a2d59bba0377d460fffe5f2113df122b7b",
+    "tools": {
+      "cache_scope": "private",
+      "result_type": "complete",
+      "tools": [],
+      "ttl_ms": 0
+    }
+  },
+  "origin": "live_captured",
+  "raw_input_sha256": "50d965e55d96271479c5a6d359a0800e57a04598148cb80709fe71691636f522",
+  "response": {
+    "channels": {
+      "fast-agent-timing": [
+        {
+          "text": "{\"start_time\": 105597.30643275, \"end_time\": 105600.874656041, \"duration_ms\": 40274.281076, \"ttft_ms\": 2254.74, \"time_to_response_ms\": 2254.74}",
+          "type": "text"
+        }
+      ],
+      "fast-agent-usage": [
+        {
+          "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s130363\", \"prompt\": {\"total\": 1195, \"uncached\": null, \"cache_read\": 0, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 27, \"reasoning\": null}, \"tool_calls\": 0, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791104196.306741, \"timing\": {\"duration_ms\": 40274.281076, \"ttft_ms\": 2254.74, \"time_to_response_ms\": 2254.74}, \"raw_usage\": {\"completion_tokens\": 27, \"prompt_tokens\": 1195, \"total_tokens\": 1222, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 0, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 1222}]}",
+          "type": "text"
+        }
+      ]
+    },
+    "content": [
+      {
+        "text": "{\"role\":\"supply\",\"decision_type\":\"tool_intent\",\"tool\":\"supply_stats\",\"partition_order\":\"zip_asc\",\"purpose\":\"statistics\"}",
+        "type": "text"
+      }
+    ],
+    "is_template": false,
+    "role": "assistant",
+    "stop_reason": "endTurn"
+  },
+  "response_sha256": "50e2f5a9278427dfd9acb479a5822594c159944cc57f6d84914023ea245c4ac2",
+  "response_tool_call_order": [],
+  "schema_version": "production-capture-2",
+  "semantic_input_sha256": "50d965e55d96271479c5a6d359a0800e57a04598148cb80709fe71691636f522",
+  "sequence": 3
+}

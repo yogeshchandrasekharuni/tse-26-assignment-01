@@ -1,0 +1,171 @@
+{
+  "agent": "reviewer[1]",
+  "boundary_sha256": "6ea064c2caa88cf151cb55547386bed87d1c317cfac763bf73c2644f28fc4a65",
+  "context": {
+    "contract_version": "1.0",
+    "facts": {},
+    "iteration": 1,
+    "monthly_counts": {
+      "2025-07": 2,
+      "2025-08": 3,
+      "2025-09": 4,
+      "2025-10": 2,
+      "2025-11": 5,
+      "2025-12": 2,
+      "2026-01": 3,
+      "2026-02": 4,
+      "2026-03": 2,
+      "2026-04": 3,
+      "2026-05": 2,
+      "2026-06": 3
+    },
+    "plan": {
+      "active_specialists": [
+        "price",
+        "supply",
+        "region"
+      ],
+      "canonical_query_sha256": "d398a7c87d97a7ec879e73774db48f35bc54914854bab8f067b22baa8024c1fa",
+      "dataset_view_sha256": "6a16f0ea394641a31536d0e9bcc35614ce084d29e40f7e9521c5e063606b62ae",
+      "planner_decision_sha256": "4f4395a5ecb2893035a3e90042cee66430de41feae2b3b09cf168bd8cb5fc90f",
+      "region_purpose": "coverage_diagnostic",
+      "required_months": [
+        "2024-07",
+        "2024-08",
+        "2024-09",
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01",
+        "2025-02",
+        "2025-03",
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06"
+      ],
+      "scan_strategy": "full_csv",
+      "version": 1,
+      "visible_months": [
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06"
+      ]
+    },
+    "planning_constraints": null,
+    "previous_review": {
+      "decision": "REFINE",
+      "decision_type": "review",
+      "requested_action": "EXACT_RESCAN_WITH_REGION",
+      "role": "reviewer",
+      "signals": [
+        "SPARSE_SLICE"
+      ]
+    },
+    "previous_signals": [
+      "SPARSE_SLICE"
+    ],
+    "query": {
+      "compare_regions": false,
+      "criteria": {
+        "bedrooms_max": 4,
+        "bedrooms_min": 2,
+        "price_max_cents": null,
+        "price_min_cents": null,
+        "property_types": [
+          "single_family",
+          "townhouse"
+        ],
+        "sqft_max": 2110,
+        "sqft_min": 2100,
+        "zips": [
+          "75001",
+          "75019",
+          "75034",
+          "75063",
+          "75093",
+          "75204"
+        ]
+      },
+      "dataset_id": "dallas-synth-v1",
+      "dataset_view_sha256": "6a16f0ea394641a31536d0e9bcc35614ce084d29e40f7e9521c5e063606b62ae",
+      "window_end": "2026-06"
+    },
+    "query_sha256": "d398a7c87d97a7ec879e73774db48f35bc54914854bab8f067b22baa8024c1fa",
+    "receipt_hashes": {
+      "price": "2e24dbabe530cb1935c556529ce31418d3372d3e4b463743c942fefc61495ed6",
+      "region": "ffdc65950343bb333b638f0ebb861ab0d8acf85aaee1d553b3b0853433cae302",
+      "supply": "1f5eb1d7e39f367100f32a51e5eb7f4315ef2d61b3e21c7e5c643cc6859885c1"
+    },
+    "required_caveats": [],
+    "scan_complete": true,
+    "schema_repair": null,
+    "signals": [
+      "CONFIRMED_SPARSE"
+    ],
+    "stage": "REVIEW_REQUIRED"
+  },
+  "effective_seed": 155921,
+  "instruction": "You are the internal Coverage Reviewer. Return only one strict ReviewDecision JSON object, without Markdown. role reviewer; decision_type review; signals exactly the trusted evidence signals; requested_action null except for REFINE. Do not calculate or invent evidence.\n\nFor indexed INDEX_COVERAGE_MISMATCH, SPARSE_SLICE or RECEIPT_MISMATCH choose REFINE with EXACT_RESCAN_WITH_REGION. Complete authoritative CONFIRMED_SPARSE requires ACCEPT_LIMITED and null. COMPLETE_SUPPORT requires ACCEPT and null. A NEW RECEIPT_MISMATCH at iteration1, absent from previous_signals, permits REFINE with REBUILD_INDEX_AND_RESCAN. Persistent mismatch or iteration2 mismatch requires FAIL and null. Do not repeat a sparse scan pointlessly or change user criteria. If schema_repair names your role, correct that prior response using its errors.\n\nDecision schema:\n{\"$defs\":{\"Signal\":{\"enum\":[\"INDEX_COVERAGE_MISMATCH\",\"SPARSE_SLICE\",\"RECEIPT_MISMATCH\",\"COMPLETE_SUPPORT\",\"CONFIRMED_SPARSE\",\"UNRECOVERABLE_INTEGRITY\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"decision\":{\"enum\":[\"ACCEPT\",\"REFINE\",\"ACCEPT_LIMITED\",\"FAIL\"],\"title\":\"Decision\",\"type\":\"string\"},\"decision_type\":{\"const\":\"review\",\"title\":\"Decision Type\",\"type\":\"string\"},\"requested_action\":{\"anyOf\":[{\"enum\":[\"EXACT_RESCAN_WITH_REGION\",\"REBUILD_INDEX_AND_RESCAN\"],\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Requested Action\"},\"role\":{\"const\":\"reviewer\",\"title\":\"Role\",\"type\":\"string\"},\"signals\":{\"items\":{\"$ref\":\"#/$defs/Signal\"},\"minItems\":1,\"title\":\"Signals\",\"type\":\"array\"}},\"required\":[\"role\",\"decision_type\",\"decision\",\"signals\",\"requested_action\"],\"title\":\"ReviewDecision\",\"type\":\"object\"}",
+  "message_tool_call_order": [
+    [],
+    []
+  ],
+  "messages": [
+    {
+      "content": [
+        {
+          "text": "Review signals: CONFIRMED_SPARSE. Request ACCEPT_LIMITED with null requested_action.",
+          "type": "text"
+        }
+      ],
+      "is_template": false,
+      "role": "user"
+    },
+    {
+      "content": [
+        {
+          "text": "{\"state\":{\"contract_version\":\"1.0\",\"facts\":{},\"iteration\":1,\"monthly_counts\":{\"2025-07\":2,\"2025-08\":3,\"2025-09\":4,\"2025-10\":2,\"2025-11\":5,\"2025-12\":2,\"2026-01\":3,\"2026-02\":4,\"2026-03\":2,\"2026-04\":3,\"2026-05\":2,\"2026-06\":3},\"plan\":{\"active_specialists\":[\"price\",\"supply\",\"region\"],\"canonical_query_sha256\":\"d398a7c87d97a7ec879e73774db48f35bc54914854bab8f067b22baa8024c1fa\",\"dataset_view_sha256\":\"6a16f0ea394641a31536d0e9bcc35614ce084d29e40f7e9521c5e063606b62ae\",\"planner_decision_sha256\":\"4f4395a5ecb2893035a3e90042cee66430de41feae2b3b09cf168bd8cb5fc90f\",\"region_purpose\":\"coverage_diagnostic\",\"required_months\":[\"2024-07\",\"2024-08\",\"2024-09\",\"2024-10\",\"2024-11\",\"2024-12\",\"2025-01\",\"2025-02\",\"2025-03\",\"2025-04\",\"2025-05\",\"2025-06\",\"2025-07\",\"2025-08\",\"2025-09\",\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\"],\"scan_strategy\":\"full_csv\",\"version\":1,\"visible_months\":[\"2025-07\",\"2025-08\",\"2025-09\",\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\"]},\"planning_constraints\":null,\"previous_review\":{\"decision\":\"REFINE\",\"decision_type\":\"review\",\"requested_action\":\"EXACT_RESCAN_WITH_REGION\",\"role\":\"reviewer\",\"signals\":[\"SPARSE_SLICE\"]},\"previous_signals\":[\"SPARSE_SLICE\"],\"query\":{\"compare_regions\":false,\"criteria\":{\"bedrooms_max\":4,\"bedrooms_min\":2,\"price_max_cents\":null,\"price_min_cents\":null,\"property_types\":[\"single_family\",\"townhouse\"],\"sqft_max\":2110,\"sqft_min\":2100,\"zips\":[\"75001\",\"75019\",\"75034\",\"75063\",\"75093\",\"75204\"]},\"dataset_id\":\"dallas-synth-v1\",\"dataset_view_sha256\":\"6a16f0ea394641a31536d0e9bcc35614ce084d29e40f7e9521c5e063606b62ae\",\"window_end\":\"2026-06\"},\"query_sha256\":\"d398a7c87d97a7ec879e73774db48f35bc54914854bab8f067b22baa8024c1fa\",\"receipt_hashes\":{\"price\":\"2e24dbabe530cb1935c556529ce31418d3372d3e4b463743c942fefc61495ed6\",\"region\":\"ffdc65950343bb333b638f0ebb861ab0d8acf85aaee1d553b3b0853433cae302\",\"supply\":\"1f5eb1d7e39f367100f32a51e5eb7f4315ef2d61b3e21c7e5c643cc6859885c1\"},\"required_caveats\":[],\"scan_complete\":true,\"schema_repair\":null,\"signals\":[\"CONFIRMED_SPARSE\"],\"stage\":\"REVIEW_REQUIRED\"},\"trusted_role\":\"reviewer\"}",
+          "type": "text"
+        }
+      ],
+      "is_template": false,
+      "role": "user"
+    }
+  ],
+  "model_profile": "housing-v4-s155921",
+  "normalization_version": "production-semantic-2",
+  "prompt_bundle_sha256": "47c9578424b4c58836d002685bf6173c4687fe4fe48bcda41ddeeb9cecdbc4f6",
+  "requested_seed": 155921,
+  "retry_policy": {
+    "framework_retries": 1,
+    "sdk_retries": 0
+  },
+  "role_schema_sha256": "bf1e1171610faef09f471e9309ba5896f46dd9b41c324bc0eeb8803b15a57e00",
+  "tools": {
+    "cache_scope": "private",
+    "result_type": "complete",
+    "tools": [],
+    "ttl_ms": 0
+  }
+}

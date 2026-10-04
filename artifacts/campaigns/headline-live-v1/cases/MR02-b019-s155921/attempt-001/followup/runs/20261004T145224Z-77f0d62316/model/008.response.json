@@ -1,0 +1,36 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 107550.674037958, \"end_time\": 107559.3796435, \"duration_ms\": 98259.688046, \"ttft_ms\": 2851.34, \"time_to_response_ms\": 2851.34}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s155921\", \"prompt\": {\"total\": 6067, \"uncached\": null, \"cache_read\": 4607, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 120, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791126301.912085, \"timing\": {\"duration_ms\": 98259.688046, \"ttft_ms\": 2851.34, \"time_to_response_ms\": 2851.34}, \"raw_usage\": {\"completion_tokens\": 120, \"prompt_tokens\": 6067, \"total_tokens\": 6187, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 4607, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 6187}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [
+    {
+      "text": "I see the issue. The reviewer needs to return a proper ReviewDecision JSON object with the correct schema. Based on the context, I have:\n- signals: [\"COMPLETE_SUPPORT\"]\n- Since we have COMPLETE_SUPPORT, the decision should be \"ACCEPT\" and requested_action should be null\n\nLet me submit the correct ReviewDecision:",
+      "type": "text"
+    }
+  ],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_qkhl69ah": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "{\"role\":\"reviewer\",\"decision_type\":\"review\",\"decision\":\"ACCEPT\",\"signals\":[\"COMPLETE_SUPPORT\"],\"requested_action\":null}"
+        },
+        "name": "agent__reviewer"
+      }
+    }
+  }
+}
