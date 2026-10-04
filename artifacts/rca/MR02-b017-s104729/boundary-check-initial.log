@@ -1,0 +1,58 @@
+{
+  "checked_at_utc": "2026-10-04T17:20:48.177945+00:00",
+  "scope": "Preliminary source-leg recurrence of the known schema-echo mechanism; no new live sample, distinct-bug or final-ranking claim.",
+  "case": "artifacts/campaigns/headline-live-v1/cases/MR02-b017-s104729/result.json",
+  "source_reused_from": null,
+  "same_source_execution_key_as_earlier_MR01_case": true,
+  "followup_status": "completed",
+  "responses": [
+    {
+      "ordinal": 6,
+      "raw_response_sha256": "bf1e1171610faef09f471e9309ba5896f46dd9b41c324bc0eeb8803b15a57e00",
+      "exact_instruction_schema_suffix": true,
+      "validation_errors": [
+        {
+          "location": [],
+          "message": "Unable to extract tag using discriminator 'role'",
+          "type": "union_tag_not_found"
+        }
+      ]
+    },
+    {
+      "ordinal": 8,
+      "raw_response_sha256": "bf1e1171610faef09f471e9309ba5896f46dd9b41c324bc0eeb8803b15a57e00",
+      "exact_instruction_schema_suffix": true,
+      "validation_errors": [
+        {
+          "location": [],
+          "message": "Unable to extract tag using discriminator 'role'",
+          "type": "union_tag_not_found"
+        }
+      ]
+    }
+  ],
+  "parent_reviewer_calls": [
+    {
+      "ordinal": 5,
+      "tools": [
+        "agent__reviewer"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "tools": [
+        "agent__reviewer"
+      ]
+    }
+  ],
+  "aggregate_event_sequence": 10,
+  "accepted_review": false,
+  "final_output_published": false,
+  "recomputed_tool_results_match": [
+    "price",
+    "supply",
+    "region"
+  ],
+  "strict_replay_decisions": 9,
+  "network_attempts": []
+}

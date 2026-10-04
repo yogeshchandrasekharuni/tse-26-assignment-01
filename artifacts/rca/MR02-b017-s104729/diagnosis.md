@@ -1,0 +1,13 @@
+# Preliminary schema echo on an untransformed source
+
+This eligible MR02 pair is an output-contract violation: its fresh source fails, while the nominal-ID-relabeled follow-up completes. No numeric pair comparison ran. This is additional evidence for the already observed schema-echo mechanism, not a new bug count, final ranking or live sample.
+
+The failed source consumed the exact frozen, untransformed CSV. Its execution key matches the corresponding earlier MR01 source, which also failed; it was not a reused success. The case explicitly records `source_reused_from: null`. This source failure cannot be presented as evidence that ID relabeling broke arithmetic.
+
+All three trusted statistical tools completed, and event10 records aggregation. Reviewer response006 then emits the JSON Schema for ReviewDecision instead of an instance. It lacks the top-level `role` discriminator. The exact returned text is the schema suffix of its captured instruction, and its byte hash equals the recorded role-schema hash. Event11 rejects it; event12 marks the one explicit repair.
+
+Both parent decisions005 and007 request `agent__reviewer`. On repair, the parent even sends a candidate matching the declared JSON schema: role reviewer, decision ACCEPT, signal COMPLETE_SUPPORT and requested_action null. This is a proposal inside the parent's message, not a Reviewer response or proof of an appropriate evidence decision. Reviewer response008 returns the same schema text again. Event13 rejects it, and event14 ends with AGENT_OUTPUT_INVALID/REVIEW_REQUIRED. No review is accepted and no final output is published.
+
+`PYTHONHASHSEED=0 .venv/bin/python scripts/replay_case_leg.py --case MR02-b017-s104729 --leg source` actually matched this nine-decision failure with zero network attempts. [Comparison](20261004T165129Z/comparison.json) and recomputed Price/Supply/Region tool outputs are retained; all three tool-result JSON objects match their recorded values. The [boundary check](check_schema_echo.py) binds the exact instructions/responses, proper Reviewer tool targets, schema-valid parent proposal, frozen source hash and stopped finalization.
+
+This is a model-output contract failure with a correctly enforced role boundary. It differs from the pending-specialist-repair batch interaction: the parent does request the pending Reviewer again, but the child still produces a schema rather than a decision. The existing minimal-capture Reviewer regression covers that format/repair boundary; no duplicate test or mitigation result is claimed for this additional capture. Any prompt/model/response-format change would require a separately versioned campaign.

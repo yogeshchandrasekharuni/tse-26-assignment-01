@@ -1,0 +1,49 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 107073.154670958, \"end_time\": 107086.933170666, \"duration_ms\": 155517.087458, \"ttft_ms\": 4623.96, \"time_to_response_ms\": 4623.96}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 3382, \"uncached\": null, \"cache_read\": 3170, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 255, \"reasoning\": null}, \"tool_calls\": 3, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791120969.406612, \"timing\": {\"duration_ms\": 155517.087458, \"ttft_ms\": 4623.96, \"time_to_response_ms\": 4623.96}, \"raw_usage\": {\"completion_tokens\": 255, \"prompt_tokens\": 3382, \"total_tokens\": 3637, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3170, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3637}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_8i8amghw": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate region specialist for public_comparison with indexed scan. Query: bedrooms 2-5, property_types condo/townhouse, zips 75001/75024/75063, window_end 2026-07."
+        },
+        "name": "agent__region"
+      }
+    },
+    "call_e58lcvnt": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate supply specialist for indexed scan with public_comparison region_purpose. Query: bedrooms 2-5, property_types condo/townhouse, zips 75001/75024/75063, window_end 2026-07."
+        },
+        "name": "agent__supply"
+      }
+    },
+    "call_rcef1axp": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate price specialist for indexed scan with public_comparison region_purpose. Query: bedrooms 2-5, property_types condo/townhouse, zips 75001/75024/75063, window_end 2026-07."
+        },
+        "name": "agent__price"
+      }
+    }
+  }
+}

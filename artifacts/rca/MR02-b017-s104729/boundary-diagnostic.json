@@ -1,0 +1,90 @@
+{
+  "checked_at_utc": "2026-10-04T17:39:58.648538+00:00",
+  "scope": "Preliminary source-leg recurrence of the known schema-echo mechanism; no new live sample, distinct-bug or final-ranking claim.",
+  "case": "artifacts/campaigns/headline-live-v1/cases/MR02-b017-s104729/result.json",
+  "source_reused_from": null,
+  "same_source_execution_key_as_earlier_MR01_case": true,
+  "source_view_is_frozen_untransformed_csv": true,
+  "followup_status": "completed",
+  "responses": [
+    {
+      "ordinal": 6,
+      "raw_response_sha256": "bf1e1171610faef09f471e9309ba5896f46dd9b41c324bc0eeb8803b15a57e00",
+      "exact_instruction_schema_suffix": true,
+      "validation_errors": [
+        {
+          "location": [],
+          "message": "Unable to extract tag using discriminator 'role'",
+          "type": "union_tag_not_found"
+        }
+      ]
+    },
+    {
+      "ordinal": 8,
+      "raw_response_sha256": "bf1e1171610faef09f471e9309ba5896f46dd9b41c324bc0eeb8803b15a57e00",
+      "exact_instruction_schema_suffix": true,
+      "validation_errors": [
+        {
+          "location": [],
+          "message": "Unable to extract tag using discriminator 'role'",
+          "type": "union_tag_not_found"
+        }
+      ]
+    }
+  ],
+  "parent_reviewer_calls": [
+    {
+      "ordinal": 5,
+      "tools": [
+        "agent__reviewer"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "tools": [
+        "agent__reviewer"
+      ]
+    }
+  ],
+  "aggregate_event_sequence": 10,
+  "repair_parent_candidate": {
+    "role": "reviewer",
+    "decision_type": "review",
+    "decision": "ACCEPT",
+    "signals": [
+      "COMPLETE_SUPPORT"
+    ],
+    "requested_action": null
+  },
+  "repair_parent_candidate_matches_declared_json_schema": true,
+  "candidate_is_an_accepted_reviewer_response": false,
+  "accepted_review": false,
+  "final_output_published": false,
+  "recomputed_tool_results_match": [
+    "price",
+    "supply",
+    "region"
+  ],
+  "strict_replay_decisions": 9,
+  "network_attempts": [],
+  "supporting_artifact_hashes": {
+    "artifacts/campaigns/headline-live-v1/cases/MR02-b017-s104729/result.json": "5d44e598f1d109ab7389b88b02cbf295f53ee20e4cf646f25604d9fb8b1b1b96",
+    "artifacts/campaigns/headline-live-v1/cases/MR01-b017-s104729/result.json": "a3be2ac9cc8f9651e2a996837768391724d2933a483b85acec61efa0f9052230",
+    "artifacts/campaigns/headline-live-v1/cases/MR02-b017-s104729/attempt-001/source/runs/20261004T131810Z-2f5fccf024/terminal.json": "18bc1743e1099711269d231f57a4848ecadf697a55f31b9117e6046130127816",
+    "artifacts/campaigns/headline-live-v1/cases/MR02-b017-s104729/attempt-001/source/runs/20261004T131810Z-2f5fccf024/trace.jsonl": "32f8a456d4243433c588f30eed48f27399d998b829af10dbb825eb7d083aa582",
+    "data/frozen/dallas-synth-v1.csv": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+    "artifacts/campaigns/headline-live-v1/cases/MR02-b017-s104729/attempt-001/source/runs/20261004T131810Z-2f5fccf024/model/006.input.json": "80c9af53e0bd985408ba985660b72049428cae93daa39b0ea2e05d7b39d25c75",
+    "artifacts/campaigns/headline-live-v1/cases/MR02-b017-s104729/attempt-001/source/runs/20261004T131810Z-2f5fccf024/model/006.response.json": "eeacbe1453efda3d7cbc0d47091f3978506a107de56cdd605ee9c133e155d37a",
+    "artifacts/campaigns/headline-live-v1/cases/MR02-b017-s104729/attempt-001/source/runs/20261004T131810Z-2f5fccf024/model/008.input.json": "a3e128c92277d155dbb54151139dd131ec105bdd25fffc2940ed82aa35675432",
+    "artifacts/campaigns/headline-live-v1/cases/MR02-b017-s104729/attempt-001/source/runs/20261004T131810Z-2f5fccf024/model/008.response.json": "0db889b458c6c35037d8f7f973e06dd8d7d2adced9771376f37430f2c9151ecd",
+    "artifacts/campaigns/headline-live-v1/cases/MR02-b017-s104729/attempt-001/source/runs/20261004T131810Z-2f5fccf024/cassettes/005.json": "63bcbdb944474b8984761bec51ea3b092a85bb2c0c192b43e74bbf3d42e93850",
+    "artifacts/campaigns/headline-live-v1/cases/MR02-b017-s104729/attempt-001/source/runs/20261004T131810Z-2f5fccf024/cassettes/007.json": "1d7320a54ebeab93450528672c24fd632788ad6dc464c57b8ff65355d57253a6",
+    "artifacts/campaigns/headline-live-v1/cases/MR02-b017-s104729/attempt-001/source/runs/20261004T131810Z-2f5fccf024/tools/iteration-0/price_stats.result.json": "66a12ea1baeab4b8734ef86442db2e37b4f83bb65d51dbae5d66752ba06bd91e",
+    "artifacts/rca/MR02-b017-s104729/20261004T165129Z/runs/20261004T165129Z-0b949a6c1e/tools/iteration-0/price_stats.result.json": "66a12ea1baeab4b8734ef86442db2e37b4f83bb65d51dbae5d66752ba06bd91e",
+    "artifacts/campaigns/headline-live-v1/cases/MR02-b017-s104729/attempt-001/source/runs/20261004T131810Z-2f5fccf024/tools/iteration-0/supply_stats.result.json": "83e0f0facea6d97a636d60399c90939c37dea49335a0a46043ee71696735c1e0",
+    "artifacts/rca/MR02-b017-s104729/20261004T165129Z/runs/20261004T165129Z-0b949a6c1e/tools/iteration-0/supply_stats.result.json": "83e0f0facea6d97a636d60399c90939c37dea49335a0a46043ee71696735c1e0",
+    "artifacts/campaigns/headline-live-v1/cases/MR02-b017-s104729/attempt-001/source/runs/20261004T131810Z-2f5fccf024/tools/iteration-0/region_stats.result.json": "ce7aac702d54b3f3da5597c34d35909a6589afaf62975534d4071dbaaceb5fc9",
+    "artifacts/rca/MR02-b017-s104729/20261004T165129Z/runs/20261004T165129Z-0b949a6c1e/tools/iteration-0/region_stats.result.json": "ce7aac702d54b3f3da5597c34d35909a6589afaf62975534d4071dbaaceb5fc9",
+    "artifacts/rca/MR02-b017-s104729/20261004T165129Z/comparison.json": "db22c5fe3c24c7cf3318d74d6e14f14eb5e0a88abbd3138269e8e9c5dd5472aa"
+  }
+}
