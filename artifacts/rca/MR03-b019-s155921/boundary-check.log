@@ -1,0 +1,58 @@
+{
+  "checked_at_utc": "2026-10-05T09:55:12.997729+00:00",
+  "scope": "Preliminary MR03 replication and partial-receipt proof. No new live sample, distinct-bug, numeric pair or final-ranking claim.",
+  "case": "artifacts/campaigns/headline-live-v1/cases/MR03-b019-s155921/result.json",
+  "source_status": "failed",
+  "source_error_code": "AGENT_POLICY_ERROR",
+  "source_reused_from": null,
+  "source_raw_rows": 34560,
+  "followup_raw_rows": 69120,
+  "original_rows_retained_exactly": true,
+  "one_collision_free_exact_clone_per_original": true,
+  "all_nonrecord_id_fields_preserved": true,
+  "source_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+  "followup_view_sha256": "4a968398a324260ae41c44afb304d374beae91a34d2612ed0c9a92152f85f00f",
+  "source_visible_observations": 1920,
+  "followup_visible_observations": 3840,
+  "price_decision": {
+    "role": "price",
+    "decision_type": "tool_intent",
+    "tool": "price_stats",
+    "partition_order": "month_asc",
+    "purpose": "statistics"
+  },
+  "supply_decision": {
+    "role": "supply",
+    "decision_type": "tool_intent",
+    "tool": "supply_stats",
+    "partition_order": "month_asc",
+    "purpose": "public_comparison"
+  },
+  "next_region_decision": {
+    "role": "region",
+    "decision_type": "tool_intent",
+    "tool": "region_stats",
+    "partition_order": "zip_asc",
+    "purpose": "public_comparison"
+  },
+  "accepted_tools_before_failure": [
+    "price_stats"
+  ],
+  "price_tool_sequence": 5,
+  "invalid_supply_sequence": 6,
+  "repair_sequence": 7,
+  "terminal_sequence": 8,
+  "aggregate_published": false,
+  "final_output_published": false,
+  "recorded_price_result_matches_recomputed": true,
+  "price_result_sha256": "2779f8eee95e7c6f10e6eb38e61c7d8ef620dc18ce9647872b7ef96b4f893147",
+  "raw_receipt_differences": [
+    "duration_ms",
+    "partition_receipts_path",
+    "receipt_id",
+    "result_path",
+    "run_id"
+  ],
+  "strict_replay_decisions": 5,
+  "network_attempts": []
+}

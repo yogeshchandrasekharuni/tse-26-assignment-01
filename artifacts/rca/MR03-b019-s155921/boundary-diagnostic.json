@@ -1,0 +1,121 @@
+{
+  "checked_at_utc": "2026-10-05T09:55:12.997729+00:00",
+  "scope": "Preliminary MR03 replication and partial-receipt proof. No new live sample, distinct-bug, numeric pair or final-ranking claim.",
+  "case": "artifacts/campaigns/headline-live-v1/cases/MR03-b019-s155921/result.json",
+  "source_status": "failed",
+  "source_error_code": "AGENT_POLICY_ERROR",
+  "source_reused_from": null,
+  "source_raw_rows": 34560,
+  "followup_raw_rows": 69120,
+  "original_rows_retained_exactly": true,
+  "one_collision_free_exact_clone_per_original": true,
+  "all_nonrecord_id_fields_preserved": true,
+  "source_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+  "followup_view_sha256": "4a968398a324260ae41c44afb304d374beae91a34d2612ed0c9a92152f85f00f",
+  "independent_source_visible_counts": {
+    "2025-08": 160,
+    "2025-09": 160,
+    "2025-10": 160,
+    "2025-11": 160,
+    "2025-12": 160,
+    "2026-01": 160,
+    "2026-02": 160,
+    "2026-03": 160,
+    "2026-04": 160,
+    "2026-05": 160,
+    "2026-06": 160,
+    "2026-07": 160
+  },
+  "independent_followup_visible_counts": {
+    "2025-08": 320,
+    "2025-09": 320,
+    "2025-10": 320,
+    "2025-11": 320,
+    "2025-12": 320,
+    "2026-01": 320,
+    "2026-02": 320,
+    "2026-03": 320,
+    "2026-04": 320,
+    "2026-05": 320,
+    "2026-06": 320,
+    "2026-07": 320
+  },
+  "source_visible_observations": 1920,
+  "followup_visible_observations": 3840,
+  "parent_delegations": [
+    {
+      "arguments": {
+        "message": "Execute price statistics for the indexed scan with partition_order month_asc, purpose public_comparison."
+      },
+      "name": "agent__price"
+    },
+    {
+      "arguments": {
+        "message": "Execute supply statistics for the indexed scan with partition_order month_asc, purpose public_comparison."
+      },
+      "name": "agent__supply"
+    },
+    {
+      "arguments": {
+        "message": "Execute region statistics for the indexed scan with partition_order zip_asc, purpose public_comparison."
+      },
+      "name": "agent__region"
+    }
+  ],
+  "price_decision": {
+    "role": "price",
+    "decision_type": "tool_intent",
+    "tool": "price_stats",
+    "partition_order": "month_asc",
+    "purpose": "statistics"
+  },
+  "supply_decision": {
+    "role": "supply",
+    "decision_type": "tool_intent",
+    "tool": "supply_stats",
+    "partition_order": "month_asc",
+    "purpose": "public_comparison"
+  },
+  "next_region_decision": {
+    "role": "region",
+    "decision_type": "tool_intent",
+    "tool": "region_stats",
+    "partition_order": "zip_asc",
+    "purpose": "public_comparison"
+  },
+  "accepted_tools_before_failure": [
+    "price_stats"
+  ],
+  "price_tool_sequence": 5,
+  "invalid_supply_sequence": 6,
+  "repair_sequence": 7,
+  "terminal_sequence": 8,
+  "aggregate_published": false,
+  "final_output_published": false,
+  "recorded_price_result_matches_recomputed": true,
+  "price_result_sha256": "2779f8eee95e7c6f10e6eb38e61c7d8ef620dc18ce9647872b7ef96b4f893147",
+  "raw_receipt_differences": [
+    "duration_ms",
+    "partition_receipts_path",
+    "receipt_id",
+    "result_path",
+    "run_id"
+  ],
+  "strict_replay_decisions": 5,
+  "network_attempts": [],
+  "supporting_artifact_hashes": {
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b019-s155921/result.json": "4ad4dfefbc0592d4be172f85a963784b16be82cc99e24968212c70106a4eea08",
+    "configs/headline-cohort-v1.json": "804806c955bb0d1ab8dbafff592cad65537a1052d8ebbd88d3a2ee34b6c4a158",
+    "data/frozen/dallas-synth-v1.csv": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+    "data/manifests/dallas-synth-v1.json": "a90d7e08d0d734fd235ce9deced5e6313fd083166ef7ee7ddaf472fe893ff068",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b019-s155921/attempt-001/followup/runs/20261005T082852Z-47b4e4a1e7/trace.jsonl": "46612a336c2b54b7867495efabd3371af8aefef72ebf3da0df7d5d8a8a1bc0f3",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b019-s155921/attempt-001/followup/runs/20261005T082852Z-47b4e4a1e7/terminal.json": "7419b700ac1581d56bccd42501d17bae710879e79cb2ed8fa1a2572b3258f8a3",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b019-s155921/attempt-001/followup/runs/20261005T082852Z-47b4e4a1e7/request.json": "ef0902b2eb9133d5e6fe953d047722a4d3c54dc09a9258eabc9460e7783c4291",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b019-s155921/attempt-001/followup/runs/20261005T082852Z-47b4e4a1e7/cassettes/001.json": "42f24d5e63d879cbd28c5ee2730da9cae7a20e89aac5039f0a2b732ea54312f2",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b019-s155921/attempt-001/followup/runs/20261005T082852Z-47b4e4a1e7/tools/iteration-0/price_stats.result.json": "73b04fbf94f6a7130359d76e43a08db7a6191001bd0cb8e54701178a29074b14",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b019-s155921/attempt-001/followup/runs/20261005T082852Z-47b4e4a1e7/tools/iteration-0/price_stats.receipt.json": "8d01e94ad1d39fdb608d850c5ea0ad2f46bd1f5988426a0c2a29a3d9a6fa55ad",
+    "artifacts/rca/MR03-b019-s155921/20261005T094429Z/runs/20261005T094429Z-d30c2e213b/tools/iteration-0/price_stats.result.json": "73b04fbf94f6a7130359d76e43a08db7a6191001bd0cb8e54701178a29074b14",
+    "artifacts/rca/MR03-b019-s155921/20261005T094429Z/runs/20261005T094429Z-d30c2e213b/tools/iteration-0/price_stats.receipt.json": "b3598fd2171c83c3e96ef2705a2eff73449ebfea70606b470e9f2b2760015b05",
+    "artifacts/rca/MR03-b019-s155921/20261005T094429Z/comparison.json": "e970151ec191ca9cb5a26e3ef72a1ca1e935764351882e400b1332c78572d5b8"
+  }
+}
