@@ -18,6 +18,7 @@ from reportlab.pdfgen.canvas import Canvas
 from reportlab.platypus import Paragraph, Table, TableStyle
 
 from housing.identity import ROOT, sha256_bytes, write_json
+from housing.reporting.plan_observability import verify_plan_observability
 from housing.tools.exact import serial
 
 INK = colors.HexColor("#182b45")
@@ -286,6 +287,7 @@ def report(draft: bool) -> Path:
     content = load(ROOT / "reports/content.json")
     sources = load(ROOT / "reports/sources.json")
     campaign, rows, reproduction = completed_reference(draft)
+    plan_observation_inputs = () if draft else verify_plan_observability()
     destination = ROOT / "output/pdf" / ("housing-report-draft.pdf" if draft else "housing-report.pdf")
     destination.parent.mkdir(parents=True, exist_ok=True)
     canvas = Canvas(str(destination), pagesize=A4, pageCompression=1, invariant=1)
@@ -479,6 +481,9 @@ def report(draft: bool) -> Path:
         if len(document) != 12:
             raise ValueError("Report page count differs from twelve")
     inputs = [ROOT / "reports/content.json", ROOT / "reports/sources.json", Path(__file__)]
+    inputs.extend(plan_observation_inputs)
+    if not draft:
+        inputs.append(ROOT / "src/housing/reporting/plan_observability.py")
     inputs.extend(
         ROOT / name
         for name in (
