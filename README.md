@@ -33,6 +33,8 @@ Counts are monthly observation records. Repeated business listing labels are ret
 
 The shared entrypoint is [run_analysis](src/housing/workflow/service.py), used by CLI, API and evaluation. Each run has isolated context, bounded repairs/refinements/retries, conservative pre-inference context checks, raw model decisions, trusted receipts and append-only trace evidence. Output-contract failures stay failures; infrastructure errors leave experiment bases incomplete.
 
+The trace inspector preserves raw iteration tags and identifies any pass label derived from the active plan and preceding invalid decision. Its JSONL export remains byte-identical to the capture. A real [failure after refinement](artifacts/rca/MR05-b010-s104729/diagnosis.md) exercises that annotation and proves that an earlier provisional aggregate cannot become a final answer after the later pass fails.
+
 ## Frozen source and runtime
 
 - Dataset: **34,560** observations, **24** months (October 2024–September 2026), twelve ZIPs, 1,440 repeated listing labels. [Manifest](data/manifests/dallas-synth-v1.json).

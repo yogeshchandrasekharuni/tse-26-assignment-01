@@ -1366,6 +1366,13 @@
         "pattern": "^[A-Za-z0-9_.:-]+$",
         "type": "string"
       },
+      "IterationBasis": {
+        "enum": [
+          "recorded",
+          "plan_and_invalid_decision"
+        ],
+        "type": "string"
+      },
       "Job": {
         "additionalProperties": false,
         "properties": {
@@ -2205,6 +2212,9 @@
           "dataset_view_sha256": {
             "$ref": "#/components/schemas/Sha256"
           },
+          "display_iteration": {
+            "$ref": "#/components/schemas/NonnegativeInt"
+          },
           "event": {
             "title": "Event",
             "type": "string"
@@ -2215,6 +2225,9 @@
           },
           "iteration": {
             "$ref": "#/components/schemas/NonnegativeInt"
+          },
+          "iteration_label_basis": {
+            "$ref": "#/components/schemas/IterationBasis"
           },
           "mode": {
             "$ref": "#/components/schemas/Mode"
@@ -2277,6 +2290,8 @@
           "timestamp_utc",
           "mode",
           "iteration",
+          "display_iteration",
+          "iteration_label_basis",
           "event",
           "actor",
           "parent_event_sequence",

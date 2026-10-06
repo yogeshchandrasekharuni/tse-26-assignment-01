@@ -336,6 +336,11 @@ export type Response = {
 export type Actor = string
 export type Event = string
 export type IllustrativeFixture = boolean
+/**
+ * This interface was referenced by `ClientContracts`'s JSON-Schema
+ * via the `definition` "IterationBasis".
+ */
+export type IterationBasis = 'recorded' | 'plan_and_invalid_decision'
 export type ParentEventSequence = number | null
 export type RunId1 = string
 export type SchemaVersion3 = '1.0'
@@ -894,9 +899,11 @@ export interface WorkflowView {
 export interface TraceEvent {
   actor: Actor
   dataset_view_sha256: Sha256
+  display_iteration: NonnegativeInt
   event: Event
   illustrative_fixture: IllustrativeFixture
   iteration: NonnegativeInt
+  iteration_label_basis: IterationBasis
   mode: Mode
   parent_event_sequence: ParentEventSequence
   payload: Payload

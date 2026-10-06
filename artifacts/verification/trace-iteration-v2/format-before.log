@@ -1,0 +1,41 @@
+unformatted: File would be reformatted
+   --> scripts/export_langfuse.py:154:54
+    |
+153 |                 "schema_version": EXPORT_VERSION,
+    -                 "projection_revision": EXPORT_VERSION
+    -                 if args.projection == "legacy"
+    -                 else PROJECTION_REVISION,
+154 +                 "projection_revision": EXPORT_VERSION if args.projection == "legacy" else PROJECTION_REVISION,
+155 |                 "status": status,
+    |
+
+unformatted: File would be reformatted
+  --> src/housing/observability/langfuse_plan.py:56:84
+   |
+55 |             or generation.attributes.get("langfuse.observation.metadata.role") != event["actor"]
+   -             or generation.attributes.get("langfuse.observation.metadata.iteration")
+   -             != label.display_iteration
+56 +             or generation.attributes.get("langfuse.observation.metadata.iteration") != label.display_iteration
+57 |         ):
+--------------------------------------------------------------------------------
+70 |     for span in projection.spans:
+   -         if span.key.startswith("event-") and span.parent_key is not None and span.parent_key != "orchestrator":
+71 +         if (
+72 +             span.key.startswith("event-")
+73 +             and span.parent_key is not None
+74 +             and span.parent_key != "orchestrator"
+75 +         ):
+76 |             parent = by_key[span.parent_key]
+   |
+
+unformatted: File would be reformatted
+  --> tests/integration/test_langfuse_plan_projection.py:50:72
+   |
+49 |     assert all(
+   -         span.attributes["langfuse.observation.metadata.export_version"]
+   -         == langfuse_plan.PROJECTION_REVISION
+50 +         span.attributes["langfuse.observation.metadata.export_version"] == langfuse_plan.PROJECTION_REVISION
+51 |         for span in corrected.spans
+   |
+
+3 files would be reformatted

@@ -1,5 +1,6 @@
 """Actual ASGI requests and strict schema validation, including production offline replay."""
 
+import json
 import time
 from pathlib import Path
 
@@ -9,7 +10,7 @@ from jsonschema import Draft202012Validator
 from housing.api.app import create_app
 from housing.api.models import ClientContracts
 from housing.api.registry import CAPTURES
-from housing.identity import semantic_hash
+from housing.identity import ROOT, semantic_hash
 
 
 def validate(name: str, value: object) -> None:
@@ -95,3 +96,32 @@ def test_web_job_reenters_the_shared_production_service_and_rejects_changed_repl
         workflow = client.get("/api/analyses/job/" + job_id + "/workflow").json()
         assert len([event for event in workflow["events"] if event["event"] == "TOOL_COMPLETED"]) == 2
         assert list(tmp_path.glob(job_id + "/runs/*/terminal.json"))
+
+
+def test_refined_repair_pass_is_annotated_without_rewriting_the_raw_trace(tmp_path: Path) -> None:
+    case = ROOT / "artifacts/campaigns/headline-live-v1/cases/MR05-b010-s104729/result.json"
+    record = json.loads(case.read_bytes())
+    raw_trace = (ROOT / record["followup"]["run_path"] / "trace.jsonl").read_bytes()
+    base = "/api/experiments/headline-live-v1/cases/MR05-b010-s104729/followup"
+    with TestClient(create_app(tmp_path)) as client:
+        response = client.get(base + "/workflow")
+        assert response.status_code == 200
+        workflow = response.json()
+        validate("WorkflowView", workflow)
+        assert workflow["status"] == "failed" and workflow["refinements"] == 1
+        repair = next(event for event in workflow["events"] if event["event"] == "AGENT_REPAIR")
+        assert repair["iteration"] == 0
+        assert repair["display_iteration"] == 1
+        assert repair["iteration_label_basis"] == "plan_and_invalid_decision"
+        for event in workflow["events"]:
+            if event["event"] != "AGENT_REPAIR":
+                assert event["display_iteration"] == event["iteration"]
+                assert event["iteration_label_basis"] == "recorded"
+        exported = client.get(base + "/trace")
+        assert exported.status_code == 200 and exported.content == raw_trace
+        raw_repair = next(
+            json.loads(line)
+            for line in exported.content.splitlines()
+            if json.loads(line)["event"] == "AGENT_REPAIR"
+        )
+        assert raw_repair["iteration"] == 0 and "display_iteration" not in raw_repair

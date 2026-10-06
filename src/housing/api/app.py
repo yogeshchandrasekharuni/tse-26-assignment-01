@@ -15,6 +15,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi import Path as PathParam
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, Response
+from pydantic import JsonValue
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from housing.api.formatting import analysis_view, rounded
@@ -47,6 +48,7 @@ from housing.data.generate import MANIFEST_PATH
 from housing.data.models import DatasetManifest
 from housing.evaluation.models import CaseResult, Cohort
 from housing.identity import ROOT
+from housing.observability.iterations import iteration_labels
 from housing.tools.aggregate import present
 
 type Money = Literal["USD", "USD_THOUSANDS"]
@@ -160,7 +162,18 @@ def create_app(runtime_root: Path | None = None) -> FastAPI:
     ) -> WorkflowView:
         text = (directory / "trace.jsonl").read_text() if (directory / "trace.jsonl").exists() else ""
         lines = text.splitlines() if text.endswith("\n") else text.splitlines()[:-1]
-        events = tuple(TraceEvent.model_validate_json(line) for line in lines)
+        raw_events: list[dict[str, JsonValue]] = [json.loads(line) for line in lines]
+        labels = iteration_labels(raw_events)
+        events = tuple(
+            TraceEvent.model_validate(
+                {
+                    **event,
+                    "display_iteration": label.display_iteration,
+                    "iteration_label_basis": label.basis,
+                }
+            )
+            for event, label in zip(raw_events, labels, strict=True)
+        )
         terminal = (
             json.loads((directory / "terminal.json").read_bytes())
             if (directory / "terminal.json").exists()

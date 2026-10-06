@@ -18,6 +18,8 @@ from housing.observability.langfuse import (
     project_capture,
     send_projection,
 )
+from housing.observability.langfuse_plan import PROJECTION_REVISION
+from housing.observability.langfuse_plan import project_capture as plan_projection
 
 
 def main() -> None:
@@ -32,6 +34,12 @@ def main() -> None:
         "--watch", action="store_true", help="Poll finished physical campaign runs every15seconds"
     )
     parser.add_argument("--verify", action="store_true", help="Read back every exported observation ID")
+    parser.add_argument(
+        "--projection",
+        choices=("plan-aware", "legacy"),
+        default="plan-aware",
+        help="Versioned plan-aware labels by default; legacy reproduces the original projection",
+    )
     args = parser.parse_args()
     if args.watch and not (args.campaign or args.web):
         parser.error("--watch requires --campaign or --web")
@@ -67,7 +75,9 @@ def main() -> None:
                 print(f"Skipped historical replay capture: {directory.name}", flush=True)
                 completed.add(relative)
                 continue
-            projection = project_capture(directory)
+            projection = (
+                project_capture(directory) if args.projection == "legacy" else plan_projection(directory)
+            )
             destination = ROOT / "artifacts/observability/langfuse" / projection.trace_id
             receipt_path = destination / "receipt.json"
             digest = semantic_hash(projection)
@@ -141,6 +151,7 @@ def main() -> None:
                     raise
             receipt = {
                 "schema_version": EXPORT_VERSION,
+                "projection_revision": EXPORT_VERSION if args.projection == "legacy" else PROJECTION_REVISION,
                 "status": status,
                 "run_path": projection.run_path,
                 "trace_id": projection.trace_id,

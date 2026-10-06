@@ -296,6 +296,8 @@ The cobalt line, open stations, calendar controls, selected-month panel and tabl
 
 The navy map shows the public parent boundary, internal roles and exact aggregation with disciplined connectors. Active feedback uses an explicitly labeled amber return path; inactive paths remain dashed. Selecting a role opens its actual trace evidence. The two-column trace inspector pairs a scrollable event list with a payload detail; the selected event stays in its filtered list. On mobile the diagram becomes named role buttons and a visible feedback sentence, followed by a stacked trace inspector. Event type sits in labeled metadata below the detail heading.
 
+Pass filters use the API's explicit display iteration. If the active plan and preceding invalid role decision prove that a raw default-zero repair belongs to a later pass, the row says “plan-derived” and the detail explains the original tag in a14px/21px surface note. The raw JSONL remains unchanged. A topology role without its own recorded event says “No role event recorded”; planned activation alone does not establish execution. These extensions use existing surfaces, colors and type roles, verified against the actual failed-refinement case at desktop1512 and mobile390 in `artifacts/verification/trace-iteration-v2`.
+
 ### Tables and Paired Evidence
 
 Use aligned, tabular values; right-align numeric columns and left-align the identifying column. Headers have a faint cool ground; each row ends with a thin divider. Selected rows use cobalt wash and a cobalt identity. Source and follow-up comparison columns remain explicitly labeled. Scope and mode metadata appear below their heading. Long payloads are contained in scrollable code regions.

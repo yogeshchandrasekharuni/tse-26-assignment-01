@@ -115,7 +115,7 @@ function AgentMap({
               className={`agent-node ${active ? 'visited' : 'inactive'} ${selectedRole === node.id ? 'selected' : ''}`}
               role="button"
               tabIndex={0}
-              aria-label={`Inspect ${node.label} evidence${active ? '' : ', not active in this run'}`}
+              aria-label={`Inspect ${node.label} evidence${active ? '' : ', no role event recorded'}`}
               onClick={() => pickRole(node.id)}
               onKeyDown={(event) => {
                 if (event.key === 'Enter' || event.key === ' ') {
@@ -139,7 +139,7 @@ function AgentMap({
                 {node.label}
               </text>
               <text x={node.x} y={node.y + 59} textAnchor="middle" className="node-subtitle">
-                {active ? node.subtitle : 'Not active in this run'}
+                {active ? node.subtitle : 'No role event recorded'}
               </text>
             </g>
           )
@@ -163,7 +163,7 @@ function AgentMap({
             >
               <span className={present.has(node.id) ? 'route-dot active' : 'route-dot'} />
               {node.label}
-              <small>{present.has(node.id) ? 'Evidence recorded' : 'Not active'}</small>
+              <small>{present.has(node.id) ? 'Evidence recorded' : 'No role event recorded'}</small>
             </button>
           ))}
         </div>
@@ -199,7 +199,7 @@ export function Workflow({
     ? []
     : iteration === 'all'
       ? workflow.events
-      : workflow.events.filter((event) => event.iteration === Number(iteration))
+      : workflow.events.filter((event) => event.display_iteration === Number(iteration))
   const selected =
     events.find((event) => event.sequence === eventSequence) ??
     events.find((event) => event.event === 'REVIEW_DECIDED') ??
@@ -394,7 +394,8 @@ export function Workflow({
                       <span>
                         <strong>{label(event)}</strong>
                         <small>
-                          {event.actor} · pass {event.iteration + 1}
+                          {event.actor} · pass {event.display_iteration + 1}
+                          {event.iteration_label_basis !== 'recorded' && ' · plan-derived'}
                         </small>
                       </span>
                     </button>
@@ -418,7 +419,7 @@ export function Workflow({
                   </div>
                   <div>
                     <dt>Pass</dt>
-                    <dd>{selected.iteration + 1}</dd>
+                    <dd>{selected.display_iteration + 1}</dd>
                   </div>
                   <div>
                     <dt>Query hash</dt>
@@ -431,6 +432,12 @@ export function Workflow({
                     <dd>{selected.parent_event_sequence ?? 'None recorded'}</dd>
                   </div>
                 </dl>
+                {selected.iteration_label_basis !== 'recorded' && (
+                  <p className="trace-iteration-note">
+                    Pass {selected.display_iteration + 1} follows the active plan and the preceding
+                    invalid decision. The raw trace records pass {selected.iteration + 1}.
+                  </p>
+                )}
                 <h4>Recorded payload</h4>
                 <pre>{JSON.stringify(selected.payload, null, 2)}</pre>
                 <p className="trace-hash">

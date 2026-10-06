@@ -136,7 +136,9 @@ def test_offline_cli_keeps_a_previously_verified_delivery_receipt(
     namespace = runpy.run_path(str(ROOT / "scripts/export_langfuse.py"), run_name="offline_cli_test")
     monkeypatch.setitem(namespace["main"].__globals__, "ROOT", tmp_path)
     monkeypatch.setattr(
-        sys, "argv", ["export_langfuse.py", "--run", "artifacts/traces/test-copy", "--dry-run"]
+        sys,
+        "argv",
+        ["export_langfuse.py", "--run", "artifacts/traces/test-copy", "--dry-run", "--projection", "legacy"],
     )
     namespace["main"]()
     assert receipt_path.read_bytes() == before
@@ -183,7 +185,9 @@ def test_watcher_resumes_after_a_dashboard_outage_without_new_inference(
     )
     namespace = runpy.run_path(str(ROOT / "scripts/export_langfuse.py"), run_name="watch_cli_test")
     monkeypatch.setitem(namespace["main"].__globals__, "ROOT", tmp_path)
-    monkeypatch.setattr(sys, "argv", ["export_langfuse.py", "--web", "--watch", "--verify"])
+    monkeypatch.setattr(
+        sys, "argv", ["export_langfuse.py", "--web", "--watch", "--verify", "--projection", "legacy"]
+    )
     polls = 0
 
     class EndTest(RuntimeError):

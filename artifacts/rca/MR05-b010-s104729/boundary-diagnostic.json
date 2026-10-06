@@ -1,0 +1,109 @@
+{
+  "checked_at_utc": "2026-10-06T22:10:54.751916+00:00",
+  "scope": "Preliminary natural refinement-failure diagnostic; no new live sample, numerical pair, distinct-bug or final-ranking claim. The corrected dashboard projection is prepared offline only.",
+  "case": "artifacts/campaigns/headline-live-v1/cases/MR05-b010-s104729/result.json",
+  "source_status": "completed",
+  "followup_status": "failed",
+  "source_reused_from": null,
+  "independent_source_visible_counts": {
+    "2025-07": 2,
+    "2025-08": 3,
+    "2025-09": 3,
+    "2025-10": 2,
+    "2025-11": 3,
+    "2025-12": 1,
+    "2026-01": 2,
+    "2026-02": 4,
+    "2026-03": 2,
+    "2026-04": 2,
+    "2026-05": 1,
+    "2026-06": 2
+  },
+  "independent_followup_visible_counts": {
+    "2025-07": 2,
+    "2025-08": 3,
+    "2025-09": 4,
+    "2025-10": 2,
+    "2025-11": 5,
+    "2025-12": 2,
+    "2026-01": 3,
+    "2026-02": 4,
+    "2026-03": 2,
+    "2026-04": 3,
+    "2026-05": 2,
+    "2026-06": 3
+  },
+  "source_visible_observations": 27,
+  "followup_visible_observations": 35,
+  "all_source_ids_retained_per_month": true,
+  "nonvacuous_expansion": true,
+  "criteria_unchanged_on_refinement": "ab81ddac9b19e16571cd3958f4af75be275b8bbf1e07bb79f02725439e1deeea",
+  "parent_delegations": [
+    {
+      "arguments": {
+        "message": "Delegate price specialist for full_csv scan with region activation and coverage_diagnostic purpose"
+      },
+      "name": "agent__price"
+    },
+    {
+      "arguments": {
+        "message": "Delegate supply specialist for full_csv scan with region activation and coverage_diagnostic purpose"
+      },
+      "name": "agent__supply"
+    },
+    {
+      "arguments": {
+        "message": "Delegate region specialist for full_csv scan with coverage_diagnostic purpose"
+      },
+      "name": "agent__region"
+    }
+  ],
+  "invalid_price_decision": {
+    "role": "price",
+    "decision_type": "tool_intent",
+    "tool": "price_stats",
+    "partition_order": "month_asc",
+    "purpose": "coverage_diagnostic"
+  },
+  "initial_price_and_supply_recomputed_exactly": true,
+  "raw_receipt_differences": {
+    "price_stats": [
+      "duration_ms",
+      "partition_receipts_path",
+      "receipt_id",
+      "result_path",
+      "run_id"
+    ],
+    "supply_stats": [
+      "duration_ms",
+      "partition_receipts_path",
+      "receipt_id",
+      "result_path",
+      "run_id"
+    ]
+  },
+  "second_pass_accepted_tools": [],
+  "second_aggregate_published": false,
+  "final_output_published": false,
+  "strict_replay_decisions": 10,
+  "network_attempts": [],
+  "repair_recorded_iteration": 0,
+  "repair_display_iteration": 1,
+  "legacy_projection_trace_id": "5db33bcaba0c773bbbe37231717dde40",
+  "plan_projection_trace_id": "1877b386ea1b608f5306e0e54ad1c1cb",
+  "plan_projection_sha256": "e4b6a2996f96bbda79d14f58e005235869c2a987433aadcca21180dbcc37a6e0",
+  "plan_projection_delivered": false,
+  "supporting_artifact_hashes": {
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b010-s104729/result.json": "6f48542f5a8ad09981c579c9e8af2361302841895ffac7d86cbe33d94f00a410",
+    "configs/headline-cohort-v1.json": "804806c955bb0d1ab8dbafff592cad65537a1052d8ebbd88d3a2ee34b6c4a158",
+    "data/frozen/dallas-synth-v1.csv": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+    "artifacts/rca/MR05-b010-s104729/20261006T180443Z/comparison.json": "8035042b2f7928c0985ebd4618a1e4bd916f5a13aaa65a1c89485a77344e07db",
+    "artifacts/rca/MR05-b010-s104729/plan-projection.json": "6be8540ccf6c65c6ad9de5a9ca05d6e2d191550fe6628320fa1a89dbd56519e0",
+    "artifacts/rca/MR05-b010-s104729/check_refinement_boundary.py": "5aa92a1bf0aeac0c6a1074d21a4aab448e1760da7171e361e3a4ae271ce6878f",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b010-s104729/attempt-001/source/runs/20261006T171333Z-3e27c1b284/trace.jsonl": "95b3129057e09fe5a9cbe326256b3e7aea16d40f40b9b1a1242f9033236e7bcb",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b010-s104729/attempt-001/followup/runs/20261006T173448Z-9bb7b33a7f/trace.jsonl": "e6e0b3f330ec5c1e6de1cd5e0396d10666e2e1fdb703276ccff69a82c29dd5ea",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b010-s104729/attempt-001/followup/runs/20261006T173448Z-9bb7b33a7f/terminal.json": "3baede3f860c1ed19ba4c80d852b867cf2c39d68f6ce95676e3dcbf09be2d09a",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b010-s104729/attempt-001/followup/runs/20261006T173448Z-9bb7b33a7f/cassettes/007.json": "4d7de732d6208bb8c9ab4976d657eb5747451db575dd41d4d757bd92b8da3c8b",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b010-s104729/attempt-001/followup/runs/20261006T173448Z-9bb7b33a7f/model/008.response.json": "5609d00afdced7f7bd7ebac583d51732e0b3ecddafd3ec07cf0afee7efa8847b"
+  }
+}

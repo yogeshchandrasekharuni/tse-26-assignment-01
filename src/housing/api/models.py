@@ -7,6 +7,7 @@ from housing.contracts.output import AnalysisOutput
 from housing.contracts.request import AnalysisRequest
 from housing.data.models import DatasetManifest
 from housing.evaluation.models import CaseResult, HeadlineRow, MRId
+from housing.observability.iterations import IterationBasis
 
 type CaptureId = Literal["normal", "feedback", "empty"]
 type EvidenceScope = Literal["analysis", "development_smoke", "auxiliary_index_omission", "pilot", "headline"]
@@ -128,6 +129,8 @@ class TraceEvent(FrozenModel):
     timestamp_utc: str
     mode: Mode
     iteration: NonnegativeInt
+    display_iteration: NonnegativeInt
+    iteration_label_basis: IterationBasis
     event: str
     actor: str
     parent_event_sequence: int | None
