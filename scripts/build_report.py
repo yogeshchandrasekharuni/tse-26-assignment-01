@@ -322,16 +322,16 @@ def report(draft: bool) -> Path:
             page.table(
                 [
                     ["Recorded step", "Actual action / evidence"],
-                    ["Indexed scan", "Price + Supply; 2 visible qualifying observations"],
-                    ["Reviewer / pass 1", "REFINE: INDEX_COVERAGE_MISMATCH + SPARSE_SLICE"],
-                    ["Parent replan", "full_csv; Price + Supply + Region; criteria unchanged"],
-                    ["Fresh scans / review", "3 observations; ACCEPT_LIMITED / CONFIRMED_SPARSE"],
-                    ["Compose / parent return", "Grounded facts and sparse caveat; 16 model decisions"],
+                    ["Indexed scan", "Price + Supply; 35 visible / 63 with available lookbacks"],
+                    ["Reviewer / pass 1", "REFINE: SPARSE_SLICE; no index mismatch recorded"],
+                    ["Parent replan", "full_csv; Price + Supply + diagnostic Region; same criteria"],
+                    ["Fresh scans / review", "Same counts; ACCEPT_LIMITED / CONFIRMED_SPARSE"],
+                    ["Compose / parent return", "Sparse and missing-history caveats; 16 model decisions"],
                 ],
                 [120, WIDTH - 120],
             )
             page.text(
-                "Trace: artifacts/traces/20261001T144318Z-82736e984f/trace.jsonl. Auxiliary injected index omission; excluded from headline results.",
+                "Natural source trace: artifacts/campaigns/headline-live-v1/cases/MR01-b010-s104729/attempt-001/source/runs/20261002T144019Z-78c6924bf7/trace.jsonl. Auxiliary control: artifacts/traces/20261001T144318Z-82736e984f/trace.jsonl.",
                 SMALL,
             )
         if number == 7:
@@ -499,6 +499,23 @@ def report(draft: bool) -> Path:
             "artifacts/observability/qa/inspection.json",
             "observability/langfuse/compose.yaml",
             "observability/langfuse/images.lock.json",
+        )
+    )
+    natural_loop = (
+        ROOT
+        / "artifacts/campaigns/headline-live-v1/cases/MR01-b010-s104729/attempt-001/source/runs"
+        / "20261002T144019Z-78c6924bf7"
+    )
+    inputs.extend(
+        natural_loop / name
+        for name in (
+            "run-manifest.json",
+            "request.json",
+            "plan-0.json",
+            "plan-1.json",
+            "trace.jsonl",
+            "terminal.json",
+            "output.json",
         )
     )
     if rows:
