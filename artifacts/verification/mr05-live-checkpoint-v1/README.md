@@ -1,0 +1,9 @@
+# MR05 preservation checkpoints
+
+The first predetermined 20 bases, b001–b020, have been preserved with all three fixed seeds. This is an explicitly partial checkpoint of 60 logical comparisons; the official relation still requires 30 completed bases/90 comparisons. No rate, interval or ranking is published here.
+
+`.venv/bin/python artifacts/verification/mr05-live-checkpoint-v1/check_partial.py` exited0 at 02:38:36 UTC on 6 October 2026. [Actual output](partial-check.log) and [packet](partial-checkpoint.json) bind eligibility/cohort/request/view identities, successful output hashes, failed terminal codes/stages, all 60 attempts and 1,164 verified cassettes across 120 fresh physical captures. No successful source was reused. The [artifact index](partial-artifact-hashes.json) binds 7,514 files. Legacy observation projections were validated offline; no model replay or dashboard delivery is claimed by this check.
+
+[Console prefix](console-prefix-partial.log) and [metadata](console-prefix-partial.json) preserve 16,208 bytes, SHA-256 `a073268ab6d635c7cdd1e1b1ce08b8a70f3e95883e1544a8deb3678bfe92c9c7`, copied at 02:39:32 UTC while progress showed 421/900. The actual local secret-value scan passed. This remains a prefix; the complete final console must still be preserved when the main run ends.
+
+Frozen execution/evaluation/configuration/lock/data files still have no diff from 8a50f75. [check.py](check.py) is prepared for the later full MR05 checkpoint and deliberately requires all 90 cases; it has not been executed for a complete relation yet. The remaining ten MR05 bases and later relations continue in the original runner. [The natural Composer diagnostic](../../rca/MR05-b020-s130363/diagnosis.md) and [scoped UI/check proof](../composer-caveat-v1/README.md) are preserved separately. Full900 clean-checkout playback, final diagnosis/report and dashboard catch-up remain pending.

@@ -5,7 +5,7 @@ import { shortHash, useResource } from '../api'
 
 const eventNames: Record<string, string> = {
   RUN_STARTED: 'Request bound',
-  AGENT_DECISION: 'Model decision validated',
+  AGENT_DECISION: 'Decision schema validated',
   AGENT_REPAIR: 'Schema repair requested',
   PLAN_APPLIED: 'Scan plan applied',
   PLAN_CREATED: 'Scan plan created',

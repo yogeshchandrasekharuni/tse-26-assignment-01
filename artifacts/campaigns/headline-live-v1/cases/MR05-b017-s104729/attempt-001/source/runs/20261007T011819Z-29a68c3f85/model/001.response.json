@@ -1,0 +1,49 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 126133.750476708, \"end_time\": 126148.51447375, \"duration_ms\": 166640.365731, \"ttft_ms\": 5254.23, \"time_to_response_ms\": 5254.23}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 3388, \"uncached\": null, \"cache_read\": 3176, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 288, \"reasoning\": null}, \"tool_calls\": 3, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791336117.348948, \"timing\": {\"duration_ms\": 166640.365731, \"ttft_ms\": 5254.23, \"time_to_response_ms\": 5254.23}, \"raw_usage\": {\"completion_tokens\": 288, \"prompt_tokens\": 3388, \"total_tokens\": 3676, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3176, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3676}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_9dcyh6cc": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate supply specialist for indexed scan with public_comparison region_purpose. Query: bedrooms 2-5, price $200k-$450k, types condo/townhouse, zips 75001/75024/75063, window_end 2026-07."
+        },
+        "name": "agent__supply"
+      }
+    },
+    "call_qt44l8bi": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate region specialist for public_comparison with indexed scan. Query: bedrooms 2-5, price $200k-$450k, types condo/townhouse, zips 75001/75024/75063, window_end 2026-07."
+        },
+        "name": "agent__region"
+      }
+    },
+    "call_wykb8m3b": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate price specialist for indexed scan with public_comparison region_purpose. Query: bedrooms 2-5, price $200k-$450k, types condo/townhouse, zips 75001/75024/75063, window_end 2026-07."
+        },
+        "name": "agent__price"
+      }
+    }
+  }
+}

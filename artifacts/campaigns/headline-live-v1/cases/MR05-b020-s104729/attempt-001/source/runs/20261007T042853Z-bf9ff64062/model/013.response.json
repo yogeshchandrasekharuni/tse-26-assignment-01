@@ -1,0 +1,36 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 127230.290837333, \"end_time\": 127236.610733958, \"duration_ms\": 71332.325073, \"ttft_ms\": 1915.05, \"time_to_response_ms\": 1915.05}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 6187, \"uncached\": null, \"cache_read\": 5752, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 89, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791348398.690154, \"timing\": {\"duration_ms\": 71332.325073, \"ttft_ms\": 1915.05, \"time_to_response_ms\": 1915.05}, \"raw_usage\": {\"completion_tokens\": 89, \"prompt_tokens\": 6187, \"total_tokens\": 6276, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 5752, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 6276}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [
+    {
+      "text": "The reviewer returned with stage \"ACCEPTED\" and next_action null. Now I need to delegate the composer to finalize the report:",
+      "type": "text"
+    }
+  ],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_o4qmrww6": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate composer for final report composition with confirmed sparse support. Include observations and support, first_to_last_price or last_month_yoy when available. Required caveats: SPARSE_SUPPORT."
+        },
+        "name": "agent__composer"
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 125571.585369833, \"end_time\": 125584.716935875, \"duration_ms\": 148215.228083, \"ttft_ms\": 4732.14, \"time_to_response_ms\": 4732.14}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s130363\", \"prompt\": {\"total\": 3407, \"uncached\": null, \"cache_read\": 3180, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 260, \"reasoning\": null}, \"tool_calls\": 3, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791329753.777284, \"timing\": {\"duration_ms\": 148215.228083, \"ttft_ms\": 4732.14, \"time_to_response_ms\": 4732.14}, \"raw_usage\": {\"completion_tokens\": 260, \"prompt_tokens\": 3407, \"total_tokens\": 3667, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3180, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3667}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_o27ueio3": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Execute supply_stats with partition_order month_asc for the indexed scan. Query criteria: bedrooms 2-5, price $20M-$45M, types condo/single_family/townhouse, zips 75093/75201. Return validated supply statistics receipt."
+        },
+        "name": "agent__supply"
+      }
+    },
+    "call_qvzods9p": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Execute region_stats with partition_order month_asc for public_comparison. Query criteria: bedrooms 2-5, price $20M-$45M, types condo/single_family/townhouse, zips 75093/75201. Return validated regional comparison receipt."
+        },
+        "name": "agent__region"
+      }
+    },
+    "call_w8uwszm2": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Execute price_stats with partition_order month_asc for the indexed scan. Query criteria: bedrooms 2-5, price $20M-$45M, types condo/single_family/townhouse, zips 75093/75201. Return validated price statistics receipt."
+        },
+        "name": "agent__price"
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "decision": {
+    "caveat_codes": [
+      "SYNTHETIC_DATA",
+      "UNAVAILABLE_LOOKBACK"
+    ],
+    "decision_type": "report",
+    "fact_ids": [
+      "observations",
+      "first_to_last_price",
+      "last_month_yoy"
+    ],
+    "role": "composer"
+  },
+  "fact_registry": {
+    "first_to_last_price": "First-to-last median price change: 5.493106% across eleven monthly intervals.",
+    "last_month_yoy": "Final-month median price year-over-year change: 1.725168%.",
+    "observations": "436 qualifying monthly observations from 2025-08 through 2026-07.",
+    "source": "Synthetic Dallas-themed test feed; these are generated observations.",
+    "support": "All twelve visible months have at least five qualifying observations."
+  },
+  "narrative": {
+    "caveat_codes": [
+      "SYNTHETIC_DATA",
+      "UNAVAILABLE_LOOKBACK"
+    ],
+    "fact_ids": [
+      "observations",
+      "first_to_last_price",
+      "last_month_yoy"
+    ],
+    "text": "436 qualifying monthly observations from 2025-08 through 2026-07. First-to-last median price change: 5.493106% across eleven monthly intervals. Final-month median price year-over-year change: 1.725168%. Synthetic Dallas-themed test feed; these are generated observations. Some comparison months are outside the source snapshot."
+  }
+}

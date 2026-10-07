@@ -1,0 +1,49 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 123869.832944541, \"end_time\": 123875.853213041, \"duration_ms\": 67950.419575, \"ttft_ms\": 2268.97, \"time_to_response_ms\": 2268.97}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s130363\", \"prompt\": {\"total\": 4526, \"uncached\": null, \"cache_read\": 4290, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 112, \"reasoning\": null}, \"tool_calls\": 3, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791310465.82535, \"timing\": {\"duration_ms\": 67950.419575, \"ttft_ms\": 2268.97, \"time_to_response_ms\": 2268.97}, \"raw_usage\": {\"completion_tokens\": 112, \"prompt_tokens\": 4526, \"total_tokens\": 4638, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 4290, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 4638}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_b44i0yhw": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate price specialist for full_csv scan with region activation."
+        },
+        "name": "agent__price"
+      }
+    },
+    "call_e6ha3q0a": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate region specialist for coverage_diagnostic with full_csv scan."
+        },
+        "name": "agent__region"
+      }
+    },
+    "call_qfjcy7qa": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate supply specialist for full_csv scan with region activation."
+        },
+        "name": "agent__supply"
+      }
+    }
+  }
+}

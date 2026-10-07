@@ -1,0 +1,463 @@
+{
+  "boundary_sha256": "0c76cd86f97b3e938b292e14728b67012fd96b39731bf05af8a743f238bd55d8",
+  "input": {
+    "agent": "orchestrator",
+    "boundary_sha256": "0c76cd86f97b3e938b292e14728b67012fd96b39731bf05af8a743f238bd55d8",
+    "context": {
+      "contract_version": "1.0",
+      "facts": {
+        "first_to_last_price": "First-to-last median price change: 2.220955% across eleven monthly intervals.",
+        "last_month_yoy": "Final-month median price year-over-year change: 0.945564%.",
+        "observations": "2304 qualifying monthly observations from 2025-07 through 2026-06.",
+        "source": "Synthetic Dallas-themed test feed; these are generated observations.",
+        "support": "All twelve visible months have at least five qualifying observations."
+      },
+      "iteration": 0,
+      "monthly_counts": {
+        "2025-07": 192,
+        "2025-08": 192,
+        "2025-09": 192,
+        "2025-10": 192,
+        "2025-11": 192,
+        "2025-12": 192,
+        "2026-01": 192,
+        "2026-02": 192,
+        "2026-03": 192,
+        "2026-04": 192,
+        "2026-05": 192,
+        "2026-06": 192
+      },
+      "plan": {
+        "active_specialists": [
+          "price",
+          "supply"
+        ],
+        "canonical_query_sha256": "9a5f9c7e5f995e5ae6910a3abf88269bf51c0d9285da2396e84ab7b16564ce13",
+        "dataset_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+        "planner_decision_sha256": "b3b2d589ee3aaaf8e747bff904181fc1606cce34a5d9cfa0f0f2a90412226a9d",
+        "region_purpose": "none",
+        "required_months": [
+          "2024-07",
+          "2024-08",
+          "2024-09",
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01",
+          "2025-02",
+          "2025-03",
+          "2025-04",
+          "2025-05",
+          "2025-06",
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06"
+        ],
+        "scan_strategy": "indexed",
+        "version": 0,
+        "visible_months": [
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06"
+        ]
+      },
+      "planning_constraints": null,
+      "previous_review": {
+        "decision": "ACCEPT",
+        "decision_type": "review",
+        "requested_action": null,
+        "role": "reviewer",
+        "signals": [
+          "COMPLETE_SUPPORT"
+        ]
+      },
+      "previous_signals": [
+        "COMPLETE_SUPPORT"
+      ],
+      "query": {
+        "compare_regions": false,
+        "criteria": {
+          "bedrooms_max": 4,
+          "bedrooms_min": 3,
+          "price_max_cents": 75000000,
+          "price_min_cents": 10000000,
+          "property_types": [
+            "condo",
+            "single_family",
+            "townhouse"
+          ],
+          "sqft_max": null,
+          "sqft_min": null,
+          "zips": [
+            "75006",
+            "75034",
+            "75080",
+            "75204"
+          ]
+        },
+        "dataset_id": "dallas-synth-v1",
+        "dataset_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+        "window_end": "2026-06"
+      },
+      "query_sha256": "9a5f9c7e5f995e5ae6910a3abf88269bf51c0d9285da2396e84ab7b16564ce13",
+      "receipt_hashes": {
+        "price": "431068e015c632fcf41b36c414e618fc296ad5a6a9d8a5e5b4d994b913ba33c2",
+        "supply": "8c31a181e6f13ada759f4478b93f2e9a69860031a412cea7f235cdf412203555"
+      },
+      "required_caveats": [
+        "SYNTHETIC_DATA",
+        "UNAVAILABLE_LOOKBACK"
+      ],
+      "scan_complete": true,
+      "schema_repair": null,
+      "signals": [
+        "COMPLETE_SUPPORT"
+      ],
+      "stage": "COMPOSED"
+    },
+    "effective_seed": 104729,
+    "instruction": "You are the sole public Orchestrator of a synthetic housing analysis system. Only you receive the application request and return its final acknowledgement. Five internal agents are available as tools: price, supply, region, reviewer and composer. Never impersonate a child or calculate statistics.\n\nA trusted controller context is supplied at the beginning. Use its planning_constraints to submit a strict PlanDecision through plan_scan(decision_json). All fields must match the current constraints: action, scan_strategy, specialists, region_purpose and reason_codes. Initial plans use indexed scanning with price and supply, adding region only for requested public comparison. A real REFINE review changes the next plan to full_csv and activates region for diagnosis. A further new receipt mismatch can request rebuilt_index; there are at most two refinements and no repeated plans. Never change the query.\n\nDelegate each active specialist once. Children receive authoritative context automatically and return validated decisions plus execution receipts. Only after all active specialists finish delegate reviewer. REFINE requires a new plan and fresh scans; ACCEPT or ACCEPT_LIMITED requires composer. Region is forbidden unless the current plan activates it. If repair_required is returned, delegate that same role once more or correct your own plan once, using the supplied validation feedback. A second invalid response or policy failure ends the run.\n\nAfter composition return only this final JSON decision: {\"role\":\"orchestrator\",\"decision_type\":\"finalize\",\"action\":\"return_verified_report\"}. Native tools are disabled for this terminal turn. The trusted finalizer validates your decision and returns the verified report acknowledgement through you. To inspect earlier state call inspect_context with section=\"current\". Never fabricate receipts, omit a mandatory role or complete early.\n\nDecision schema:\n{\"$defs\":{\"Action\":{\"enum\":[\"INITIAL\",\"EXACT_RESCAN_WITH_REGION\",\"REBUILD_INDEX_AND_RESCAN\"],\"type\":\"string\"},\"RegionPurpose\":{\"enum\":[\"none\",\"public_comparison\",\"coverage_diagnostic\"],\"type\":\"string\"},\"Signal\":{\"enum\":[\"INDEX_COVERAGE_MISMATCH\",\"SPARSE_SLICE\",\"RECEIPT_MISMATCH\",\"COMPLETE_SUPPORT\",\"CONFIRMED_SPARSE\",\"UNRECOVERABLE_INTEGRITY\"],\"type\":\"string\"},\"Specialist\":{\"enum\":[\"price\",\"supply\",\"region\"],\"type\":\"string\"},\"Strategy\":{\"enum\":[\"indexed\",\"full_csv\",\"rebuilt_index\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"action\":{\"$ref\":\"#/$defs/Action\"},\"decision_type\":{\"const\":\"plan\",\"title\":\"Decision Type\",\"type\":\"string\"},\"reason_codes\":{\"items\":{\"$ref\":\"#/$defs/Signal\"},\"title\":\"Reason Codes\",\"type\":\"array\"},\"region_purpose\":{\"$ref\":\"#/$defs/RegionPurpose\"},\"role\":{\"const\":\"orchestrator\",\"title\":\"Role\",\"type\":\"string\"},\"scan_strategy\":{\"$ref\":\"#/$defs/Strategy\"},\"specialists\":{\"items\":{\"$ref\":\"#/$defs/Specialist\"},\"maxItems\":3,\"minItems\":2,\"title\":\"Specialists\",\"type\":\"array\"}},\"required\":[\"role\",\"decision_type\",\"action\",\"scan_strategy\",\"specialists\",\"region_purpose\",\"reason_codes\"],\"title\":\"PlanDecision\",\"type\":\"object\"}\nFinalization schema:\n{\"additionalProperties\":false,\"properties\":{\"action\":{\"const\":\"return_verified_report\",\"title\":\"Action\",\"type\":\"string\"},\"decision_type\":{\"const\":\"finalize\",\"title\":\"Decision Type\",\"type\":\"string\"},\"role\":{\"const\":\"orchestrator\",\"title\":\"Role\",\"type\":\"string\"}},\"required\":[\"role\",\"decision_type\",\"action\"],\"title\":\"FinalizeDecision\",\"type\":\"object\"}",
+    "message_tool_call_order": [
+      [],
+      [],
+      [
+        "call_s4v408u7"
+      ],
+      [],
+      [
+        "call_edomor7c",
+        "call_pe761r8x"
+      ],
+      [],
+      [
+        "call_6i8oukw8"
+      ],
+      [],
+      [
+        "call_qiuguw3x"
+      ],
+      [],
+      []
+    ],
+    "messages": [
+      {
+        "content": [
+          {
+            "text": "Analyze the trusted controller-bound request through your internal agents. Submit the current constrained plan, delegate the active specialists, then reviewer. Follow genuine feedback. After acceptance delegate composer, finalize, and return the exact acknowledgement.",
+            "type": "text"
+          }
+        ],
+        "is_template": false,
+        "role": "user"
+      },
+      {
+        "content": [
+          {
+            "text": "{\"state\":{\"contract_version\":\"1.0\",\"facts\":{},\"iteration\":0,\"monthly_counts\":{},\"plan\":null,\"planning_constraints\":{\"required_action\":\"INITIAL\",\"required_reason_codes\":[],\"required_region_purpose\":\"none\",\"required_scan_strategy\":\"indexed\",\"required_specialists\":[\"price\",\"supply\"]},\"previous_review\":null,\"previous_signals\":[],\"query\":{\"compare_regions\":false,\"criteria\":{\"bedrooms_max\":4,\"bedrooms_min\":3,\"price_max_cents\":75000000,\"price_min_cents\":10000000,\"property_types\":[\"condo\",\"single_family\",\"townhouse\"],\"sqft_max\":null,\"sqft_min\":null,\"zips\":[\"75006\",\"75034\",\"75080\",\"75204\"]},\"dataset_id\":\"dallas-synth-v1\",\"dataset_view_sha256\":\"bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b\",\"window_end\":\"2026-06\"},\"query_sha256\":\"9a5f9c7e5f995e5ae6910a3abf88269bf51c0d9285da2396e84ab7b16564ce13\",\"receipt_hashes\":{},\"required_caveats\":[],\"scan_complete\":null,\"schema_repair\":null,\"signals\":[],\"stage\":\"PLAN_REQUIRED\"},\"trusted_role\":\"orchestrator\"}",
+            "type": "text"
+          }
+        ],
+        "is_template": false,
+        "role": "user"
+      },
+      {
+        "channels": {
+          "fast-agent-timing": [
+            {
+              "text": "{\"start_time\": 122971.377840291, \"end_time\": 122975.88501075, \"duration_ms\": 50872.152344, \"ttft_ms\": 4454.66, \"time_to_response_ms\": 4454.66}",
+              "type": "text"
+            }
+          ],
+          "fast-agent-usage": [
+            {
+              "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 3189, \"uncached\": null, \"cache_read\": 2861, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 66, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791300307.908723, \"timing\": {\"duration_ms\": 50872.152344, \"ttft_ms\": 4454.66, \"time_to_response_ms\": 4454.66}, \"raw_usage\": {\"completion_tokens\": 66, \"prompt_tokens\": 3189, \"total_tokens\": 3255, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 2861, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3255}]}",
+              "type": "text"
+            }
+          ]
+        },
+        "content": [],
+        "is_template": false,
+        "role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_calls": {
+          "call_s4v408u7": {
+            "method": "tools/call",
+            "params": {
+              "arguments": {
+                "decision_json": "{\"role\":\"orchestrator\",\"decision_type\":\"plan\",\"action\":\"INITIAL\",\"scan_strategy\":\"indexed\",\"specialists\":[\"price\",\"supply\"],\"region_purpose\":\"none\",\"reason_codes\":[]}"
+              },
+              "name": "plan_scan"
+            }
+          }
+        }
+      },
+      {
+        "channels": {
+          "fast-agent-tool-timing": [
+            {
+              "text": "{\"call_s4v408u7\": {\"timing_ms\": 17.43, \"transport_channel\": null}}",
+              "type": "text"
+            }
+          ]
+        },
+        "content": [],
+        "is_template": false,
+        "role": "user",
+        "timestamp": "2026-10-06T15:25:08.186731Z",
+        "tool_results": {
+          "call_s4v408u7": {
+            "content": [
+              {
+                "text": "{\"status\":\"decision_applied\",\"role\":\"orchestrator\",\"decision_sha256\":\"b3b2d589ee3aaaf8e747bff904181fc1606cce34a5d9cfa0f0f2a90412226a9d\",\"stage\":\"SCANNING\",\"iteration\":0,\"scan_strategy\":\"indexed\",\"active_specialists\":[\"price\",\"supply\"],\"completed_specialists\":[],\"semantic_receipt_hashes\":{},\"signals\":[],\"next_action\":null,\"planning_constraints\":null}",
+                "type": "text"
+              }
+            ],
+            "is_error": false,
+            "result_type": "complete"
+          }
+        }
+      },
+      {
+        "channels": {
+          "fast-agent-timing": [
+            {
+              "text": "{\"start_time\": 122975.911922541, \"end_time\": 122985.67795925, \"duration_ms\": 110228.69665, \"ttft_ms\": 5052.34, \"time_to_response_ms\": 5052.34}",
+              "type": "text"
+            }
+          ],
+          "fast-agent-usage": [
+            {
+              "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 3391, \"uncached\": null, \"cache_read\": 3185, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 192, \"reasoning\": null}, \"tool_calls\": 2, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791300418.437065, \"timing\": {\"duration_ms\": 110228.69665, \"ttft_ms\": 5052.34, \"time_to_response_ms\": 5052.34}, \"raw_usage\": {\"completion_tokens\": 192, \"prompt_tokens\": 3391, \"total_tokens\": 3583, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3185, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3583}]}",
+              "type": "text"
+            }
+          ]
+        },
+        "content": [],
+        "is_template": false,
+        "role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_calls": {
+          "call_edomor7c": {
+            "method": "tools/call",
+            "params": {
+              "arguments": {
+                "message": "Delegate price specialist for indexed scan with query constraints: bedrooms 3-4, zips 75006/75034/75080/75204, price range 10M-75M, property types condo/single_family/townhouse. Partition order month_asc for statistics."
+              },
+              "name": "agent__price"
+            }
+          },
+          "call_pe761r8x": {
+            "method": "tools/call",
+            "params": {
+              "arguments": {
+                "message": "Delegate supply specialist for indexed scan with query constraints: bedrooms 3-4, zips 75006/75034/75080/75204, price range 10M-75M, property types condo/single_family/townhouse. Partition order month_asc for statistics."
+              },
+              "name": "agent__supply"
+            }
+          }
+        }
+      },
+      {
+        "content": [],
+        "is_template": false,
+        "role": "user",
+        "timestamp": "2026-10-06T15:28:58.238271Z",
+        "tool_results": {
+          "call_edomor7c": {
+            "content": [
+              {
+                "text": "{\"active_specialists\":[\"price\",\"supply\"],\"completed_specialists\":[\"price\"],\"decision_sha256\":\"e21ad0bd656fe99187f52bc568d37989abf68bc3488b8ac5ba94892eb249992f\",\"iteration\":0,\"next_action\":null,\"planning_constraints\":null,\"role\":\"price\",\"scan_strategy\":\"indexed\",\"semantic_receipt_hashes\":{\"price\":\"431068e015c632fcf41b36c414e618fc296ad5a6a9d8a5e5b4d994b913ba33c2\"},\"signals\":[],\"stage\":\"SCANNING\",\"status\":\"decision_applied\"}",
+                "type": "text"
+              }
+            ],
+            "is_error": false,
+            "result_type": "complete"
+          },
+          "call_pe761r8x": {
+            "content": [
+              {
+                "text": "{\"active_specialists\":[\"price\",\"supply\"],\"completed_specialists\":[\"price\",\"supply\"],\"decision_sha256\":\"eef637eaa8fe9902ae7a972a29e7c2acfa60bb0393270a370a666134ead22bf8\",\"iteration\":0,\"next_action\":null,\"planning_constraints\":null,\"role\":\"supply\",\"scan_strategy\":\"indexed\",\"semantic_receipt_hashes\":{\"price\":\"431068e015c632fcf41b36c414e618fc296ad5a6a9d8a5e5b4d994b913ba33c2\",\"supply\":\"8c31a181e6f13ada759f4478b93f2e9a69860031a412cea7f235cdf412203555\"},\"signals\":[\"COMPLETE_SUPPORT\"],\"stage\":\"REVIEW_REQUIRED\",\"status\":\"decision_applied\"}",
+                "type": "text"
+              }
+            ],
+            "is_error": false,
+            "result_type": "complete"
+          }
+        }
+      },
+      {
+        "channels": {
+          "fast-agent-timing": [
+            {
+              "text": "{\"start_time\": 122996.294010541, \"end_time\": 123000.727027166, \"duration_ms\": 50035.225826, \"ttft_ms\": 4382.8, \"time_to_response_ms\": 4382.8}",
+              "type": "text"
+            }
+          ],
+          "fast-agent-usage": [
+            {
+              "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 4031, \"uncached\": null, \"cache_read\": 3387, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 44, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791300588.299231, \"timing\": {\"duration_ms\": 50035.225826, \"ttft_ms\": 4382.8, \"time_to_response_ms\": 4382.8}, \"raw_usage\": {\"completion_tokens\": 44, \"prompt_tokens\": 4031, \"total_tokens\": 4075, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3387, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 4075}]}",
+              "type": "text"
+            }
+          ]
+        },
+        "content": [],
+        "is_template": false,
+        "role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_calls": {
+          "call_6i8oukw8": {
+            "method": "tools/call",
+            "params": {
+              "arguments": {
+                "message": "Delegate reviewer with signals: COMPLETE_SUPPORT. Decision: ACCEPT, requested_action: null."
+              },
+              "name": "agent__reviewer"
+            }
+          }
+        }
+      },
+      {
+        "content": [],
+        "is_template": false,
+        "role": "user",
+        "timestamp": "2026-10-06T15:30:39.743654Z",
+        "tool_results": {
+          "call_6i8oukw8": {
+            "content": [
+              {
+                "text": "{\"active_specialists\":[\"price\",\"supply\"],\"completed_specialists\":[\"price\",\"supply\"],\"decision_sha256\":\"49829a69c347238c53eb56006a0a1d8c7b3953f0fb1671c3483a38a418006d00\",\"iteration\":0,\"next_action\":null,\"planning_constraints\":null,\"role\":\"reviewer\",\"scan_strategy\":\"indexed\",\"semantic_receipt_hashes\":{\"price\":\"431068e015c632fcf41b36c414e618fc296ad5a6a9d8a5e5b4d994b913ba33c2\",\"supply\":\"8c31a181e6f13ada759f4478b93f2e9a69860031a412cea7f235cdf412203555\"},\"signals\":[\"COMPLETE_SUPPORT\"],\"stage\":\"ACCEPTED\",\"status\":\"decision_applied\"}",
+                "type": "text"
+              }
+            ],
+            "is_error": false,
+            "result_type": "complete"
+          }
+        }
+      },
+      {
+        "channels": {
+          "fast-agent-timing": [
+            {
+              "text": "{\"start_time\": 123005.28953, \"end_time\": 123009.258775916, \"duration_ms\": 44800.682178, \"ttft_ms\": 3918.07, \"time_to_response_ms\": 3918.07}",
+              "type": "text"
+            }
+          ],
+          "fast-agent-usage": [
+            {
+              "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 4343, \"uncached\": null, \"cache_read\": 4027, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 52, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791300684.598637, \"timing\": {\"duration_ms\": 44800.682178, \"ttft_ms\": 3918.07, \"time_to_response_ms\": 3918.07}, \"raw_usage\": {\"completion_tokens\": 52, \"prompt_tokens\": 4343, \"total_tokens\": 4395, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 4027, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 4395}]}",
+              "type": "text"
+            }
+          ]
+        },
+        "content": [],
+        "is_template": false,
+        "role": "assistant",
+        "stop_reason": "toolUse",
+        "tool_calls": {
+          "call_qiuguw3x": {
+            "method": "tools/call",
+            "params": {
+              "arguments": {
+                "message": "Delegate composer with accepted signals: COMPLETE_SUPPORT. Select facts from registry, apply required_caveats (none), and finalize report."
+              },
+              "name": "agent__composer"
+            }
+          }
+        }
+      },
+      {
+        "content": [],
+        "is_template": false,
+        "role": "user",
+        "timestamp": "2026-10-06T15:32:53.563305Z",
+        "tool_results": {
+          "call_qiuguw3x": {
+            "content": [
+              {
+                "text": "{\"active_specialists\":[\"price\",\"supply\"],\"completed_specialists\":[\"price\",\"supply\"],\"decision_sha256\":\"6318afb9ae8d7daa59dec22c5cd8ab133367b7a795d50683ca2c97555da1698e\",\"iteration\":0,\"next_action\":null,\"planning_constraints\":null,\"role\":\"composer\",\"scan_strategy\":\"indexed\",\"semantic_receipt_hashes\":{\"price\":\"431068e015c632fcf41b36c414e618fc296ad5a6a9d8a5e5b4d994b913ba33c2\",\"supply\":\"8c31a181e6f13ada759f4478b93f2e9a69860031a412cea7f235cdf412203555\"},\"signals\":[\"COMPLETE_SUPPORT\"],\"stage\":\"COMPOSED\",\"status\":\"decision_applied\"}",
+                "type": "text"
+              }
+            ],
+            "is_error": false,
+            "result_type": "complete"
+          }
+        }
+      },
+      {
+        "content": [
+          {
+            "text": "{\"schema\":{\"additionalProperties\":false,\"properties\":{\"action\":{\"const\":\"return_verified_report\",\"title\":\"Action\",\"type\":\"string\"},\"decision_type\":{\"const\":\"finalize\",\"title\":\"Decision Type\",\"type\":\"string\"},\"role\":{\"const\":\"orchestrator\",\"title\":\"Role\",\"type\":\"string\"}},\"required\":[\"role\",\"decision_type\",\"action\"],\"title\":\"FinalizeDecision\",\"type\":\"object\"},\"state\":{\"contract_version\":\"1.0\",\"facts\":{\"first_to_last_price\":\"First-to-last median price change: 2.220955% across eleven monthly intervals.\",\"last_month_yoy\":\"Final-month median price year-over-year change: 0.945564%.\",\"observations\":\"2304 qualifying monthly observations from 2025-07 through 2026-06.\",\"source\":\"Synthetic Dallas-themed test feed; these are generated observations.\",\"support\":\"All twelve visible months have at least five qualifying observations.\"},\"iteration\":0,\"monthly_counts\":{\"2025-07\":192,\"2025-08\":192,\"2025-09\":192,\"2025-10\":192,\"2025-11\":192,\"2025-12\":192,\"2026-01\":192,\"2026-02\":192,\"2026-03\":192,\"2026-04\":192,\"2026-05\":192,\"2026-06\":192},\"plan\":{\"active_specialists\":[\"price\",\"supply\"],\"canonical_query_sha256\":\"9a5f9c7e5f995e5ae6910a3abf88269bf51c0d9285da2396e84ab7b16564ce13\",\"dataset_view_sha256\":\"bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b\",\"planner_decision_sha256\":\"b3b2d589ee3aaaf8e747bff904181fc1606cce34a5d9cfa0f0f2a90412226a9d\",\"region_purpose\":\"none\",\"required_months\":[\"2024-07\",\"2024-08\",\"2024-09\",\"2024-10\",\"2024-11\",\"2024-12\",\"2025-01\",\"2025-02\",\"2025-03\",\"2025-04\",\"2025-05\",\"2025-06\",\"2025-07\",\"2025-08\",\"2025-09\",\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\"],\"scan_strategy\":\"indexed\",\"version\":0,\"visible_months\":[\"2025-07\",\"2025-08\",\"2025-09\",\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\"]},\"planning_constraints\":null,\"previous_review\":{\"decision\":\"ACCEPT\",\"decision_type\":\"review\",\"requested_action\":null,\"role\":\"reviewer\",\"signals\":[\"COMPLETE_SUPPORT\"]},\"previous_signals\":[\"COMPLETE_SUPPORT\"],\"query\":{\"compare_regions\":false,\"criteria\":{\"bedrooms_max\":4,\"bedrooms_min\":3,\"price_max_cents\":75000000,\"price_min_cents\":10000000,\"property_types\":[\"condo\",\"single_family\",\"townhouse\"],\"sqft_max\":null,\"sqft_min\":null,\"zips\":[\"75006\",\"75034\",\"75080\",\"75204\"]},\"dataset_id\":\"dallas-synth-v1\",\"dataset_view_sha256\":\"bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b\",\"window_end\":\"2026-06\"},\"query_sha256\":\"9a5f9c7e5f995e5ae6910a3abf88269bf51c0d9285da2396e84ab7b16564ce13\",\"receipt_hashes\":{\"price\":\"431068e015c632fcf41b36c414e618fc296ad5a6a9d8a5e5b4d994b913ba33c2\",\"supply\":\"8c31a181e6f13ada759f4478b93f2e9a69860031a412cea7f235cdf412203555\"},\"required_caveats\":[\"SYNTHETIC_DATA\",\"UNAVAILABLE_LOOKBACK\"],\"scan_complete\":true,\"schema_repair\":null,\"signals\":[\"COMPLETE_SUPPORT\"],\"stage\":\"COMPOSED\"},\"task\":\"Return FinalizeDecision only; no native tool calls\"}",
+            "type": "text"
+          }
+        ],
+        "is_template": false,
+        "role": "user"
+      }
+    ],
+    "model_profile": "housing-v4-s104729",
+    "normalization_version": "production-semantic-2",
+    "prompt_bundle_sha256": "47c9578424b4c58836d002685bf6173c4687fe4fe48bcda41ddeeb9cecdbc4f6",
+    "requested_seed": 104729,
+    "retry_policy": {
+      "framework_retries": 1,
+      "sdk_retries": 0
+    },
+    "role_schema_sha256": "89e3431627dc46019043bcd55349f28f1d0112f07b34750a9145b9e41026b122",
+    "tools": {
+      "cache_scope": "private",
+      "result_type": "complete",
+      "tools": [],
+      "ttl_ms": 0
+    }
+  },
+  "origin": "live_captured",
+  "raw_input_sha256": "61a4a32295047ab12f818619e2cb59e4139127c6be22e0f5c89bdee846a141ce",
+  "response": {
+    "channels": {
+      "fast-agent-timing": [
+        {
+          "text": "{\"start_time\": 123017.149154125, \"end_time\": 123025.60908225, \"duration_ms\": 95486.7129, \"ttft_ms\": 7449.45, \"time_to_response_ms\": 7449.45}",
+          "type": "text"
+        }
+      ],
+      "fast-agent-usage": [
+        {
+          "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 3939, \"uncached\": null, \"cache_read\": 0, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 19, \"reasoning\": null}, \"tool_calls\": 0, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791300869.145833, \"timing\": {\"duration_ms\": 95486.7129, \"ttft_ms\": 7449.45, \"time_to_response_ms\": 7449.45}, \"raw_usage\": {\"completion_tokens\": 19, \"prompt_tokens\": 3939, \"total_tokens\": 3958, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 0, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3958}]}",
+          "type": "text"
+        }
+      ]
+    },
+    "content": [
+      {
+        "text": "{\"role\":\"orchestrator\",\"decision_type\":\"finalize\",\"action\":\"return_verified_report\"}",
+        "type": "text"
+      }
+    ],
+    "is_template": false,
+    "role": "assistant",
+    "stop_reason": "endTurn"
+  },
+  "response_sha256": "ac8956fd0db645a75829e9561ae98096a48c26668043a41e2f7f6231bf36081c",
+  "response_tool_call_order": [],
+  "schema_version": "production-capture-2",
+  "semantic_input_sha256": "ba4b7e02375ad87386b0194cf3198f5be50aad465bdb3bb23e1237358d7dd4ee",
+  "sequence": 8
+}

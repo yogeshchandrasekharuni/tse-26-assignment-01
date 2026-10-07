@@ -217,3 +217,58 @@ async def test_failed_refinement_never_publishes_the_initial_provisional_aggrega
     assert invalid["sequence"] > refinement["sequence"]
     assert json.loads(invalid["payload"]["raw"])["purpose"] == "coverage_diagnostic"
     assert not (run / "tools" / "iteration-1").exists()
+
+
+@pytest.mark.asyncio
+async def test_natural_composer_caveat_omission_cannot_publish_an_accepted_aggregate(tmp_path: Path) -> None:
+    capture = ROOT / (
+        "artifacts/campaigns/headline-live-v1/cases/MR05-b020-s130363/attempt-001/"
+        "source/runs/20261007T051413Z-2c0918b1e0"
+    )
+    minimal = tmp_path / "minimal-capture"
+    minimal.mkdir()
+    for name in ("run-manifest.json", "terminal.json"):
+        shutil.copyfile(capture / name, minimal / name)
+    shutil.copytree(capture / "cassettes", minimal / "cassettes")
+    assert {path.name for path in minimal.iterdir()} == {"run-manifest.json", "terminal.json", "cassettes"}
+    cohort = Cohort.model_validate_json((ROOT / "configs/headline-cohort-v1.json").read_bytes())
+    spec = next(case for case in cohort.cases if case.mr == "MR05" and case.base_id == "b020")
+    with pytest.raises(HousingError, match="grounded facts and all applicable caveats") as failure:
+        await run_analysis(
+            updated_request(spec.source_request, seed=130363),
+            load_snapshot(CSV_PATH, MANIFEST_PATH),
+            mode="replay",
+            capture=minimal,
+            artifact_root=tmp_path / "replay",
+        )
+    assert failure.value.code == "AGENT_POLICY_ERROR" and failure.value.stage == "ACCEPTED"
+    run = next((tmp_path / "replay").iterdir())
+    terminal = json.loads((run / "terminal.json").read_bytes())
+    assert terminal["status"] == "failed" and terminal["model_decisions"] == 15
+    assert terminal["network_attempts"] == []
+    assert not (run / "output.json").exists() and not (run / "composition.json").exists()
+    events = [json.loads(line) for line in (run / "trace.jsonl").read_text().splitlines()]
+    tools = [event for event in events if event["event"] == "TOOL_COMPLETED"]
+    assert [(event["actor"], event["iteration"]) for event in tools] == [
+        ("price", 0),
+        ("supply", 0),
+        ("price", 1),
+        ("supply", 1),
+        ("region", 1),
+    ]
+    for event in tools:
+        path = run / "tools" / f"iteration-{event['iteration']}" / f"{event['actor']}_stats.result.json"
+        assert path.is_file()
+    assert len([event for event in events if event["event"] == "REFINEMENT_APPLIED"]) == 1
+    aggregates = [event for event in events if event["event"] == "AGGREGATE_COMPLETED"]
+    assert len(aggregates) == 2 and aggregates[-1]["payload"]["provisional"] is False
+    reviews = [event for event in events if event["event"] == "REVIEW_DECIDED"]
+    assert reviews[-1]["payload"]["decision"]["decision"] == "ACCEPT_LIMITED"
+    composer = next(event for event in events if event["actor"] == "composer")
+    assert composer["event"] == "AGENT_DECISION" and composer["payload"]["valid"] is True
+    context = json.loads((run / "model/014.input.json").read_bytes())["context"]
+    decision = composer["payload"]["decision"]
+    assert set(decision["fact_ids"]) <= set(context["facts"])
+    assert set(context["required_caveats"]) - set(decision["caveat_codes"]) == {"UNAVAILABLE_LOOKBACK"}
+    assert set(decision["caveat_codes"]) - set(context["required_caveats"]) == set()
+    assert not any(event["event"] in {"AGENT_REPAIR", "RUN_COMPLETED"} for event in events)

@@ -1,0 +1,43 @@
+{
+  "scope": "Constructed boundary-only reduction using the captured trusted context. Not a new live sample, observed model repair, full-system data minimization or successful mitigation campaign.",
+  "original_context_sha256": "861f938307516e8808b7113c0919e2bc51586494d53dc0035190d9457c85403c",
+  "available_fact_ids": [
+    "first_to_last_price",
+    "last_month_yoy",
+    "observations",
+    "source",
+    "support"
+  ],
+  "required_caveats": [
+    "SYNTHETIC_DATA",
+    "SPARSE_SUPPORT",
+    "UNAVAILABLE_LOOKBACK"
+  ],
+  "schema_valid_minimal_omission": {
+    "role": "composer",
+    "decision_type": "report",
+    "fact_ids": [
+      "observations"
+    ],
+    "caveat_codes": [
+      "SYNTHETIC_DATA",
+      "SPARSE_SUPPORT"
+    ]
+  },
+  "missing_caveats": [
+    "UNAVAILABLE_LOOKBACK"
+  ],
+  "constructed_complete_caveat_control": {
+    "role": "composer",
+    "decision_type": "report",
+    "fact_ids": [
+      "observations"
+    ],
+    "caveat_codes": [
+      "SYNTHETIC_DATA",
+      "SPARSE_SUPPORT",
+      "UNAVAILABLE_LOOKBACK"
+    ]
+  },
+  "minimality_limit": "Four fields are required by ReportDecision; one selected fact meets its minimum. The full captured workflow/data have not been minimized."
+}
