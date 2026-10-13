@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any
 
 from housing.identity import ROOT, sha256_bytes
+from housing.reporting.interruptions import validated_interruption
 
 TOKEN_FIELDS = {
     "prompt_total": ("prompt", "total"),
@@ -70,6 +71,7 @@ def campaign_usage(directory: Path) -> dict[str, Any]:
     runs: list[dict[str, Any]] = []
     response_count = usage_records = reported_attempts = unknown_attempt_responses = retries = 0
     inputs_without_response = 0
+    interruptions = []
     by_role: Counter[str] = Counter()
     totals: dict[str, dict[str, int | None]] = {
         label: {"sum_reported": None, "records_with_value": 0, "records_without_value": 0}
@@ -80,9 +82,28 @@ def campaign_usage(directory: Path) -> dict[str, Any]:
             continue
         terminal_path = run / "terminal.json"
         if not terminal_path.is_file():
-            raise ValueError(f"Physical run is still active: {run.relative_to(ROOT)}")
-        hashes[str(terminal_path.relative_to(ROOT))] = sha256_bytes(terminal_path.read_bytes())
-        terminal = json.loads(terminal_path.read_bytes())
+            interrupted = validated_interruption(run, ROOT)
+            if interrupted is None:
+                raise ValueError(
+                    f"Physical run is still active or lacks an interruption declaration: {run.relative_to(ROOT)}"
+                )
+            note, annotation = interrupted
+            hashes[str(annotation.relative_to(ROOT))] = sha256_bytes(annotation.read_bytes())
+            hashes.update(note.source_hashes)
+            terminal = {"status": "interrupted", "model_decisions": None}
+            interruptions.append(
+                {
+                    "run_path": note.run_path,
+                    "annotation": str(annotation.relative_to(ROOT)),
+                    "reason": note.reason,
+                    "recorded_model_responses": note.recorded_model_responses,
+                    "recorded_model_inputs": note.recorded_model_inputs,
+                    "unanswered_input_provider_usage": None,
+                }
+            )
+        else:
+            hashes[str(terminal_path.relative_to(ROOT))] = sha256_bytes(terminal_path.read_bytes())
+            terminal = json.loads(terminal_path.read_bytes())
         input_paths = sorted((run / "model").glob("*.input.json"))
         input_sequences = {p.name.removesuffix(".input.json") for p in input_paths}
         for path in input_paths:
@@ -126,7 +147,7 @@ def campaign_usage(directory: Path) -> dict[str, Any]:
                     total[field] = (total[field] or 0) + subtotal[field]
         runs.append(row)
     return {
-        "schema_version": "report-provider-usage-2",
+        "schema_version": "report-provider-usage-3",
         "campaign_id": directory.name,
         "mode": "live_telemetry_audit",
         "physical_runs": len(runs),
@@ -136,6 +157,8 @@ def campaign_usage(directory: Path) -> dict[str, Any]:
         "reported_provider_attempts": reported_attempts,
         "responses_without_attempt_telemetry": unknown_attempt_responses,
         "recorded_inputs_without_response": inputs_without_response,
+        "interrupted_runs_without_terminal": len(interruptions),
+        "interruptions": interruptions,
         "reported_retries": retries,
         "tokens": totals,
         "cost": "Local inference; monetary cost not assigned",
@@ -145,6 +168,7 @@ def campaign_usage(directory: Path) -> dict[str, Any]:
             "are not an independent network-traffic measurement. Token sums include repeated prompts; "
             "cache-read tokens are a subset, not additional prompt tokens. Replay is not new inference."
             " An input without a response does not establish whether a provider request began; its usage is unknown."
+            " Explicitly declared interrupted captures retain all recorded response telemetry; their in-flight usage remains unknown and no native terminal event is invented."
         ),
         "runs": runs,
         "source_hashes": hashes,

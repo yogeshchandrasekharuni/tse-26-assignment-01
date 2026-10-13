@@ -1,0 +1,189 @@
+{
+  "boundary_sha256": "3494ff4ba31f31dc43e560415c3a411b81fffdc2ae689f71a75094f979a828d2",
+  "input": {
+    "agent": "reviewer[1]",
+    "boundary_sha256": "3494ff4ba31f31dc43e560415c3a411b81fffdc2ae689f71a75094f979a828d2",
+    "context": {
+      "contract_version": "1.0",
+      "facts": {},
+      "iteration": 0,
+      "monthly_counts": {
+        "2025-08": 48,
+        "2025-09": 48,
+        "2025-10": 48,
+        "2025-11": 48,
+        "2025-12": 48,
+        "2026-01": 48,
+        "2026-02": 48,
+        "2026-03": 48,
+        "2026-04": 48,
+        "2026-05": 48,
+        "2026-06": 48,
+        "2026-07": 48
+      },
+      "plan": {
+        "active_specialists": [
+          "price",
+          "supply"
+        ],
+        "canonical_query_sha256": "37093d091bd95b620f3bf8fcae1e6427b6962394a1ca5d8e175cc12856623cda",
+        "dataset_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+        "planner_decision_sha256": "b3b2d589ee3aaaf8e747bff904181fc1606cce34a5d9cfa0f0f2a90412226a9d",
+        "region_purpose": "none",
+        "required_months": [
+          "2024-08",
+          "2024-09",
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01",
+          "2025-02",
+          "2025-03",
+          "2025-04",
+          "2025-05",
+          "2025-06",
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06",
+          "2026-07"
+        ],
+        "scan_strategy": "indexed",
+        "version": 0,
+        "visible_months": [
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06",
+          "2026-07"
+        ]
+      },
+      "planning_constraints": null,
+      "previous_review": null,
+      "previous_signals": [],
+      "query": {
+        "compare_regions": false,
+        "criteria": {
+          "bedrooms_max": 4,
+          "bedrooms_min": 2,
+          "price_max_cents": null,
+          "price_min_cents": null,
+          "property_types": [
+            "condo"
+          ],
+          "sqft_max": null,
+          "sqft_min": null,
+          "zips": [
+            "75019",
+            "75024"
+          ]
+        },
+        "dataset_id": "dallas-synth-v1",
+        "dataset_view_sha256": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+        "window_end": "2026-07"
+      },
+      "query_sha256": "37093d091bd95b620f3bf8fcae1e6427b6962394a1ca5d8e175cc12856623cda",
+      "receipt_hashes": {
+        "price": "e9a9ad7c04e86942f8ea5cb0739b83f685ba80bc89abc69a1839b2dc0697f243",
+        "supply": "fb09d52d5e348e413f3017fbe197aed6beecb41dcf7b769523fedb59d9f09d97"
+      },
+      "required_caveats": [],
+      "scan_complete": true,
+      "schema_repair": null,
+      "signals": [
+        "COMPLETE_SUPPORT"
+      ],
+      "stage": "REVIEW_REQUIRED"
+    },
+    "effective_seed": 130363,
+    "instruction": "You are the internal Coverage Reviewer. Return only one strict ReviewDecision JSON object, without Markdown. role reviewer; decision_type review; signals exactly the trusted evidence signals; requested_action null except for REFINE. Do not calculate or invent evidence.\n\nFor indexed INDEX_COVERAGE_MISMATCH, SPARSE_SLICE or RECEIPT_MISMATCH choose REFINE with EXACT_RESCAN_WITH_REGION. Complete authoritative CONFIRMED_SPARSE requires ACCEPT_LIMITED and null. COMPLETE_SUPPORT requires ACCEPT and null. A NEW RECEIPT_MISMATCH at iteration1, absent from previous_signals, permits REFINE with REBUILD_INDEX_AND_RESCAN. Persistent mismatch or iteration2 mismatch requires FAIL and null. Do not repeat a sparse scan pointlessly or change user criteria. If schema_repair names your role, correct that prior response using its errors.\n\nDecision schema:\n{\"$defs\":{\"Signal\":{\"enum\":[\"INDEX_COVERAGE_MISMATCH\",\"SPARSE_SLICE\",\"RECEIPT_MISMATCH\",\"COMPLETE_SUPPORT\",\"CONFIRMED_SPARSE\",\"UNRECOVERABLE_INTEGRITY\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"decision\":{\"enum\":[\"ACCEPT\",\"REFINE\",\"ACCEPT_LIMITED\",\"FAIL\"],\"title\":\"Decision\",\"type\":\"string\"},\"decision_type\":{\"const\":\"review\",\"title\":\"Decision Type\",\"type\":\"string\"},\"requested_action\":{\"anyOf\":[{\"enum\":[\"EXACT_RESCAN_WITH_REGION\",\"REBUILD_INDEX_AND_RESCAN\"],\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Requested Action\"},\"role\":{\"const\":\"reviewer\",\"title\":\"Role\",\"type\":\"string\"},\"signals\":{\"items\":{\"$ref\":\"#/$defs/Signal\"},\"minItems\":1,\"title\":\"Signals\",\"type\":\"array\"}},\"required\":[\"role\",\"decision_type\",\"decision\",\"signals\",\"requested_action\"],\"title\":\"ReviewDecision\",\"type\":\"object\"}",
+    "message_tool_call_order": [
+      [],
+      []
+    ],
+    "messages": [
+      {
+        "content": [
+          {
+            "text": "Delegate reviewer with signals: COMPLETE_SUPPORT. Requested action null for ACCEPT decision.",
+            "type": "text"
+          }
+        ],
+        "is_template": false,
+        "role": "user"
+      },
+      {
+        "content": [
+          {
+            "text": "{\"state\":{\"contract_version\":\"1.0\",\"facts\":{},\"iteration\":0,\"monthly_counts\":{\"2025-08\":48,\"2025-09\":48,\"2025-10\":48,\"2025-11\":48,\"2025-12\":48,\"2026-01\":48,\"2026-02\":48,\"2026-03\":48,\"2026-04\":48,\"2026-05\":48,\"2026-06\":48,\"2026-07\":48},\"plan\":{\"active_specialists\":[\"price\",\"supply\"],\"canonical_query_sha256\":\"37093d091bd95b620f3bf8fcae1e6427b6962394a1ca5d8e175cc12856623cda\",\"dataset_view_sha256\":\"bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b\",\"planner_decision_sha256\":\"b3b2d589ee3aaaf8e747bff904181fc1606cce34a5d9cfa0f0f2a90412226a9d\",\"region_purpose\":\"none\",\"required_months\":[\"2024-08\",\"2024-09\",\"2024-10\",\"2024-11\",\"2024-12\",\"2025-01\",\"2025-02\",\"2025-03\",\"2025-04\",\"2025-05\",\"2025-06\",\"2025-07\",\"2025-08\",\"2025-09\",\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\",\"2026-07\"],\"scan_strategy\":\"indexed\",\"version\":0,\"visible_months\":[\"2025-08\",\"2025-09\",\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\",\"2026-07\"]},\"planning_constraints\":null,\"previous_review\":null,\"previous_signals\":[],\"query\":{\"compare_regions\":false,\"criteria\":{\"bedrooms_max\":4,\"bedrooms_min\":2,\"price_max_cents\":null,\"price_min_cents\":null,\"property_types\":[\"condo\"],\"sqft_max\":null,\"sqft_min\":null,\"zips\":[\"75019\",\"75024\"]},\"dataset_id\":\"dallas-synth-v1\",\"dataset_view_sha256\":\"bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b\",\"window_end\":\"2026-07\"},\"query_sha256\":\"37093d091bd95b620f3bf8fcae1e6427b6962394a1ca5d8e175cc12856623cda\",\"receipt_hashes\":{\"price\":\"e9a9ad7c04e86942f8ea5cb0739b83f685ba80bc89abc69a1839b2dc0697f243\",\"supply\":\"fb09d52d5e348e413f3017fbe197aed6beecb41dcf7b769523fedb59d9f09d97\"},\"required_caveats\":[],\"scan_complete\":true,\"schema_repair\":null,\"signals\":[\"COMPLETE_SUPPORT\"],\"stage\":\"REVIEW_REQUIRED\"},\"trusted_role\":\"reviewer\"}",
+            "type": "text"
+          }
+        ],
+        "is_template": false,
+        "role": "user"
+      }
+    ],
+    "model_profile": "housing-v4-s130363",
+    "normalization_version": "production-semantic-2",
+    "prompt_bundle_sha256": "47c9578424b4c58836d002685bf6173c4687fe4fe48bcda41ddeeb9cecdbc4f6",
+    "requested_seed": 130363,
+    "retry_policy": {
+      "framework_retries": 1,
+      "sdk_retries": 0
+    },
+    "role_schema_sha256": "bf1e1171610faef09f471e9309ba5896f46dd9b41c324bc0eeb8803b15a57e00",
+    "tools": {
+      "cache_scope": "private",
+      "result_type": "complete",
+      "tools": [],
+      "ttl_ms": 0
+    }
+  },
+  "origin": "live_captured",
+  "raw_input_sha256": "c48bec4eee238229ea801cdd2f1acc09b6f25d5b69911b402723968b59129fd1",
+  "response": {
+    "channels": {
+      "fast-agent-timing": [
+        {
+          "text": "{\"start_time\": 140931.039634125, \"end_time\": 140976.545046416, \"duration_ms\": 513616.781708, \"ttft_ms\": 43595.41, \"time_to_response_ms\": 43595.41}",
+          "type": "text"
+        }
+      ],
+      "fast-agent-usage": [
+        {
+          "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s130363\", \"prompt\": {\"total\": 1452, \"uncached\": null, \"cache_read\": 0, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 26, \"reasoning\": null}, \"tool_calls\": 0, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791503479.8501048, \"timing\": {\"duration_ms\": 513616.781708, \"ttft_ms\": 43595.41, \"time_to_response_ms\": 43595.41}, \"raw_usage\": {\"completion_tokens\": 26, \"prompt_tokens\": 1452, \"total_tokens\": 1478, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 0, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 1478}]}",
+          "type": "text"
+        }
+      ]
+    },
+    "content": [
+      {
+        "text": "{\"role\":\"reviewer\",\"decision_type\":\"review\",\"decision\":\"ACCEPT\",\"signals\":[\"COMPLETE_SUPPORT\"],\"requested_action\":null}",
+        "type": "text"
+      }
+    ],
+    "is_template": false,
+    "role": "assistant",
+    "stop_reason": "endTurn"
+  },
+  "response_sha256": "4a1fcef4af1306b9990b7a3a6d5a20039a2ea25d2b275e04d61b4e8233a89f05",
+  "response_tool_call_order": [],
+  "schema_version": "production-capture-2",
+  "semantic_input_sha256": "c48bec4eee238229ea801cdd2f1acc09b6f25d5b69911b402723968b59129fd1",
+  "sequence": 5
+}

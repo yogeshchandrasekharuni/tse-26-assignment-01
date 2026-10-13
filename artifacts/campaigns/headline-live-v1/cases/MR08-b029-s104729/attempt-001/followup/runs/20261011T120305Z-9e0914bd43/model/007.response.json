@@ -1,0 +1,31 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 160238.420774708, \"end_time\": 160244.540870083, \"duration_ms\": 69077.194684, \"ttft_ms\": 6076.37, \"time_to_response_ms\": 6076.37}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 4673, \"uncached\": null, \"cache_read\": 4290, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 56, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791720959.138598, \"timing\": {\"duration_ms\": 69077.194684, \"ttft_ms\": 6076.37, \"time_to_response_ms\": 6076.37}, \"raw_usage\": {\"completion_tokens\": 56, \"prompt_tokens\": 4673, \"total_tokens\": 4729, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 4290, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 4729}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_x7sjma97": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Compose final report using completed specialist facts. Include required_caveats as empty array. Return ReportDecision with fact_ids from trusted registry and caveat_codes []."
+        },
+        "name": "agent__composer"
+      }
+    }
+  }
+}

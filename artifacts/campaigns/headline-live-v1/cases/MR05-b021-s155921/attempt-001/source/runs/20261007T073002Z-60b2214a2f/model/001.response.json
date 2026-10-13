@@ -1,0 +1,49 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 128111.809828583, \"end_time\": 128118.33886525, \"duration_ms\": 73692.875472, \"ttft_ms\": 2427.65, \"time_to_response_ms\": 2427.65}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s155921\", \"prompt\": {\"total\": 3398, \"uncached\": null, \"cache_read\": 3171, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 124, \"reasoning\": null}, \"tool_calls\": 3, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791358350.744519, \"timing\": {\"duration_ms\": 73692.875472, \"ttft_ms\": 2427.65, \"time_to_response_ms\": 2427.65}, \"raw_usage\": {\"completion_tokens\": 124, \"prompt_tokens\": 3398, \"total_tokens\": 3522, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3171, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3522}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_d815huuj": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Execute price_stats with partition_order month_asc for the current query constraints."
+        },
+        "name": "agent__price"
+      }
+    },
+    "call_gzek384h": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Execute supply_stats with partition_order month_asc for the current query constraints."
+        },
+        "name": "agent__supply"
+      }
+    },
+    "call_s0mb47mi": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Execute region_stats with partition_order zip_asc and purpose public_comparison for the current query constraints."
+        },
+        "name": "agent__region"
+      }
+    }
+  }
+}

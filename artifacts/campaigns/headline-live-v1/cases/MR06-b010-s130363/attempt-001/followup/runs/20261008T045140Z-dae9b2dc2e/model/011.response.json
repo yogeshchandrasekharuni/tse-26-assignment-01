@@ -1,0 +1,36 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 135009.723405375, \"end_time\": 135020.348610583, \"duration_ms\": 119926.095934, \"ttft_ms\": 3546.5, \"time_to_response_ms\": 3546.5}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s130363\", \"prompt\": {\"total\": 5877, \"uncached\": null, \"cache_read\": 4761, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 124, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791436253.646592, \"timing\": {\"duration_ms\": 119926.095934, \"ttft_ms\": 3546.5, \"time_to_response_ms\": 3546.5}, \"raw_usage\": {\"completion_tokens\": 124, \"prompt_tokens\": 5877, \"total_tokens\": 6001, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 4761, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 6001}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [
+    {
+      "text": "The region specialist returned a signal: \"CONFIRMED_SPARSE\". All specialists have now completed. I need to delegate the reviewer with this new signal.\n\nAccording to the instructions, for CONFIRMED_SPARSE, the decision should be ACCEPT_LIMITED with null requested_action.",
+      "type": "text"
+    }
+  ],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_jt9kp25m": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate reviewer with signals: CONFIRMED_SPARSE. Previous iteration had SPARSE_SLICE which was resolved. Requested action should be ACCEPT_LIMITED with null for CONFIRMED_SPARSE signal."
+        },
+        "name": "agent__reviewer"
+      }
+    }
+  }
+}

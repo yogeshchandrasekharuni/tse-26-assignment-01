@@ -1,0 +1,36 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 147122.124418583, \"end_time\": 147148.065987416, \"duration_ms\": 292800.915229, \"ttft_ms\": 16515.23, \"time_to_response_ms\": 16515.23}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s130363\", \"prompt\": {\"total\": 4907, \"uncached\": null, \"cache_read\": 4421, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 126, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791573138.719194, \"timing\": {\"duration_ms\": 292800.915229, \"ttft_ms\": 16515.23, \"time_to_response_ms\": 16515.23}, \"raw_usage\": {\"completion_tokens\": 126, \"prompt_tokens\": 4907, \"total_tokens\": 5033, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 4421, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 5033}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [
+    {
+      "text": "The reviewer has accepted the results with COMPLETE_SUPPORT signal. Now I need to delegate the composer agent to create the final report, then finalize and return the verified report acknowledgement.",
+      "type": "text"
+    }
+  ],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_eyiv521p": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate composer for report generation. All specialists completed with COMPLETE_SUPPORT signal. Query: compare_regions=true, bedrooms 2-5, property_types condo/townhouse, zips 75001/75024/75063, window_end 2026-09."
+        },
+        "name": "agent__composer"
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 128726.967589708, \"end_time\": 128739.122055666, \"duration_ms\": 137186.760097, \"ttft_ms\": 2572.18, \"time_to_response_ms\": 2572.18}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s130363\", \"prompt\": {\"total\": 4431, \"uncached\": null, \"cache_read\": 3395, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 162, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791365356.9556333, \"timing\": {\"duration_ms\": 137186.760097, \"ttft_ms\": 2572.18, \"time_to_response_ms\": 2572.18}, \"raw_usage\": {\"completion_tokens\": 162, \"prompt_tokens\": 4431, \"total_tokens\": 4593, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3395, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 4593}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [
+    {
+      "text": "All three specialists (price, supply, region) have completed their indexed scans. The region specialist returned a signal of \"COMPLETE_SUPPORT\". Now I need to delegate the reviewer agent to review the results and determine the next action.",
+      "type": "text"
+    }
+  ],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_bs9676l6": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate reviewer for iteration 0. All specialists (price, supply, region) completed with indexed scan. Region returned COMPLETE_SUPPORT signal. No signals from price or supply. Query: bedrooms 3-5, zips 75034/75038, single_family, price 20-45M cents. Window end 2026-08. Dataset dallas-synth-v1."
+        },
+        "name": "agent__reviewer"
+      }
+    }
+  }
+}

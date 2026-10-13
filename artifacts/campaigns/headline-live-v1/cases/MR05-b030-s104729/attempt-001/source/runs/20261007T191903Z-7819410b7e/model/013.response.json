@@ -1,0 +1,36 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 132058.618619833, \"end_time\": 132074.68802675, \"duration_ms\": 181374.448624, \"ttft_ms\": 2825.06, \"time_to_response_ms\": 2825.06}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 6171, \"uncached\": null, \"cache_read\": 5983, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 233, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791403006.0080226, \"timing\": {\"duration_ms\": 181374.448624, \"ttft_ms\": 2825.06, \"time_to_response_ms\": 2825.06}, \"raw_usage\": {\"completion_tokens\": 233, \"prompt_tokens\": 6171, \"total_tokens\": 6404, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 5983, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 6404}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [
+    {
+      "text": "I see there was an error with the reviewer decision. The error message indicates \"Unable to extract tag using discriminator 'role'\" and \"union_tag_not_found\". This suggests I need to correct my response format for the reviewer.\n\nLooking at the ReviewDecision schema, it requires:\n- role: \"reviewer\" (const)\n- decision_type: \"review\" (const)\n- decision: one of [\"ACCEPT\", \"REFINE\", \"ACCEPT_LIMITED\", \"FAIL\"]\n- signals: array of Signal enum values\n- requested_action: either null or one of [\"EXACT_RESCAN_WITH_REGION\", \"REBUILD_INDEX_AND_RESCAN\"]\n\nFor CONFIRMED_SPARSE, the instructions say \"Complete authoritative CONFIRMED_SPARSE requires ACCEPT_LIMITED and null.\"\n\nLet me try again with the correct format:",
+      "type": "text"
+    }
+  ],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_ppx6c0lk": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "{\"role\":\"reviewer\",\"decision_type\":\"review\",\"decision\":\"ACCEPT_LIMITED\",\"signals\":[\"SPARSE_SLICE\",\"CONFIRMED_SPARSE\"],\"requested_action\":null}"
+        },
+        "name": "agent__reviewer"
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 128918.002195416, \"end_time\": 128937.442031416, \"duration_ms\": 219416.286058, \"ttft_ms\": 11952.91, \"time_to_response_ms\": 11952.91}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s130363\", \"prompt\": {\"total\": 4861, \"uncached\": null, \"cache_read\": 4427, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 109, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791367595.680174, \"timing\": {\"duration_ms\": 219416.286058, \"ttft_ms\": 11952.91, \"time_to_response_ms\": 11952.91}, \"raw_usage\": {\"completion_tokens\": 109, \"prompt_tokens\": 4861, \"total_tokens\": 4970, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 4427, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 4970}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [
+    {
+      "text": "The reviewer has accepted the results with COMPLETE_SUPPORT signal. Now I need to delegate the composer to create the final report, then finalize and return the verified report acknowledgement.",
+      "type": "text"
+    }
+  ],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_u76qswx1": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate composer with fact registry keys from completed scans. Use observations and support from price, supply, and region specialists. Include first_to_last_price or last_month_yoy when available. Required caveats: none (required_caveats is empty)."
+        },
+        "name": "agent__composer"
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 138486.933061166, \"end_time\": 138497.76592525, \"duration_ms\": 122269.828794, \"ttft_ms\": 4177.62, \"time_to_response_ms\": 4177.62}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 6000, \"uncached\": null, \"cache_read\": 4571, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 114, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791475503.3075856, \"timing\": {\"duration_ms\": 122269.828794, \"ttft_ms\": 4177.62, \"time_to_response_ms\": 4177.62}, \"raw_usage\": {\"completion_tokens\": 114, \"prompt_tokens\": 6000, \"total_tokens\": 6114, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 4571, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 6114}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [
+    {
+      "text": "I see the issue. The reviewer needs to return a proper ReviewDecision JSON object with the correct schema. Based on the context:\n- signals: [\"COMPLETE_SUPPORT\"]\n- Since we have COMPLETE_SUPPORT, the decision should be \"ACCEPT\" \n- requested_action should be null for ACCEPT\n\nLet me submit the correct reviewer response:",
+      "type": "text"
+    }
+  ],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_qpd7aebp": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Review iteration 0 with COMPLETE_SUPPORT signal. Decision: ACCEPT. Requested action: null."
+        },
+        "name": "agent__reviewer"
+      }
+    }
+  }
+}

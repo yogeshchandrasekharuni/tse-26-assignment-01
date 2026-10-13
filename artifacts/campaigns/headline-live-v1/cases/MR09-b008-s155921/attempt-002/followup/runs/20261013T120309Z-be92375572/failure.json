@@ -1,0 +1,6 @@
+{
+  "code": "MODEL_UNAVAILABLE",
+  "message": "Local model digest/defaults differ from the frozen profile",
+  "stage": "model_profile",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/yogesh/Developer/Personal/iiith/tse-assignment/src/housing/workflow/service.py\", line 106, in run_analysis\n    await verify_live_model(identity)\n  File \"/Users/yogesh/Developer/Personal/iiith/tse-assignment/src/housing/workflow/boundary.py\", line 97, in verify_live_model\n    raise HousingError(\n    ...<3 lines>...\n    )\nhousing.contracts.errors.HousingError: MODEL_UNAVAILABLE: Local model digest/defaults differ from the frozen profile\n"
+}

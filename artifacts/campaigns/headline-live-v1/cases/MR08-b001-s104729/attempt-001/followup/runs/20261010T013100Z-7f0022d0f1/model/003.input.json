@@ -1,0 +1,141 @@
+{
+  "agent": "supply[2]",
+  "boundary_sha256": "4c467fe7e39a49b06bcf6fe1931f3115563fcacd74bcad23aced705e55aa308a",
+  "context": {
+    "contract_version": "1.0",
+    "facts": {},
+    "iteration": 0,
+    "monthly_counts": {},
+    "plan": {
+      "active_specialists": [
+        "price",
+        "supply",
+        "region"
+      ],
+      "canonical_query_sha256": "c261d1fc675e302928a9d857ce837b2fb6b3f32b19acc0671f84cb2873976668",
+      "dataset_view_sha256": "0a11b34903144216e4e7824e8c0395f55aad6d76727b5425728d41abe0b89420",
+      "planner_decision_sha256": "5b80ce7ff9497f553f97a58db83e40f11fee8b89256a807f0bc94b203cc8c9ea",
+      "region_purpose": "public_comparison",
+      "required_months": [
+        "2024-07",
+        "2024-08",
+        "2024-09",
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01",
+        "2025-02",
+        "2025-03",
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06"
+      ],
+      "scan_strategy": "indexed",
+      "version": 0,
+      "visible_months": [
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06"
+      ]
+    },
+    "planning_constraints": null,
+    "previous_review": null,
+    "previous_signals": [],
+    "query": {
+      "compare_regions": true,
+      "criteria": {
+        "bedrooms_max": 5,
+        "bedrooms_min": 1,
+        "price_max_cents": 56250000,
+        "price_min_cents": 25000000,
+        "property_types": [
+          "condo",
+          "single_family",
+          "townhouse"
+        ],
+        "sqft_max": null,
+        "sqft_min": null,
+        "zips": [
+          "75001",
+          "75006"
+        ]
+      },
+      "dataset_id": "dallas-synth-v1",
+      "dataset_view_sha256": "0a11b34903144216e4e7824e8c0395f55aad6d76727b5425728d41abe0b89420",
+      "window_end": "2026-06"
+    },
+    "query_sha256": "c261d1fc675e302928a9d857ce837b2fb6b3f32b19acc0671f84cb2873976668",
+    "receipt_hashes": {
+      "price": "0f56b0e6a0e7ed44a6d472229fe71cf21d0dcb409bfc57770daee375bd8b2a0a"
+    },
+    "required_caveats": [],
+    "scan_complete": true,
+    "schema_repair": null,
+    "signals": [],
+    "stage": "SCANNING"
+  },
+  "effective_seed": 104729,
+  "instruction": "You are the internal Supply specialist. Return only one JSON object matching SupplyDecision, with no Markdown or prose: role supply, decision_type tool_intent, tool supply_stats, partition_order month_asc or zip_asc, purpose statistics. Python binds the immutable selection, counts observations and verifies coverage. Never return counts, filters or invented evidence. If schema_repair names your role, correct that prior response using the recorded errors. Do not call tools yourself.\n\nDecision schema:\n{\"$defs\":{\"PartitionOrder\":{\"enum\":[\"month_asc\",\"zip_asc\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"decision_type\":{\"const\":\"tool_intent\",\"title\":\"Decision Type\",\"type\":\"string\"},\"partition_order\":{\"$ref\":\"#/$defs/PartitionOrder\"},\"purpose\":{\"const\":\"statistics\",\"title\":\"Purpose\",\"type\":\"string\"},\"role\":{\"const\":\"supply\",\"title\":\"Role\",\"type\":\"string\"},\"tool\":{\"const\":\"supply_stats\",\"title\":\"Tool\",\"type\":\"string\"}},\"required\":[\"role\",\"decision_type\",\"tool\",\"partition_order\",\"purpose\"],\"title\":\"SupplyDecision\",\"type\":\"object\"}",
+  "message_tool_call_order": [
+    [],
+    []
+  ],
+  "messages": [
+    {
+      "content": [
+        {
+          "text": "Execute supply_stats with partition_order month_asc for the indexed scan of dallas-synth-v1 dataset, filtering by bedrooms 1-5, price 25000000-56250000 cents, property types condo/single_family/townhouse, zips 75001/75006, window_end 2026-06",
+          "type": "text"
+        }
+      ],
+      "is_template": false,
+      "role": "user"
+    },
+    {
+      "content": [
+        {
+          "text": "{\"state\":{\"contract_version\":\"1.0\",\"facts\":{},\"iteration\":0,\"monthly_counts\":{},\"plan\":{\"active_specialists\":[\"price\",\"supply\",\"region\"],\"canonical_query_sha256\":\"c261d1fc675e302928a9d857ce837b2fb6b3f32b19acc0671f84cb2873976668\",\"dataset_view_sha256\":\"0a11b34903144216e4e7824e8c0395f55aad6d76727b5425728d41abe0b89420\",\"planner_decision_sha256\":\"5b80ce7ff9497f553f97a58db83e40f11fee8b89256a807f0bc94b203cc8c9ea\",\"region_purpose\":\"public_comparison\",\"required_months\":[\"2024-07\",\"2024-08\",\"2024-09\",\"2024-10\",\"2024-11\",\"2024-12\",\"2025-01\",\"2025-02\",\"2025-03\",\"2025-04\",\"2025-05\",\"2025-06\",\"2025-07\",\"2025-08\",\"2025-09\",\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\"],\"scan_strategy\":\"indexed\",\"version\":0,\"visible_months\":[\"2025-07\",\"2025-08\",\"2025-09\",\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\"]},\"planning_constraints\":null,\"previous_review\":null,\"previous_signals\":[],\"query\":{\"compare_regions\":true,\"criteria\":{\"bedrooms_max\":5,\"bedrooms_min\":1,\"price_max_cents\":56250000,\"price_min_cents\":25000000,\"property_types\":[\"condo\",\"single_family\",\"townhouse\"],\"sqft_max\":null,\"sqft_min\":null,\"zips\":[\"75001\",\"75006\"]},\"dataset_id\":\"dallas-synth-v1\",\"dataset_view_sha256\":\"0a11b34903144216e4e7824e8c0395f55aad6d76727b5425728d41abe0b89420\",\"window_end\":\"2026-06\"},\"query_sha256\":\"c261d1fc675e302928a9d857ce837b2fb6b3f32b19acc0671f84cb2873976668\",\"receipt_hashes\":{\"price\":\"0f56b0e6a0e7ed44a6d472229fe71cf21d0dcb409bfc57770daee375bd8b2a0a\"},\"required_caveats\":[],\"scan_complete\":true,\"schema_repair\":null,\"signals\":[],\"stage\":\"SCANNING\"},\"trusted_role\":\"supply\"}",
+          "type": "text"
+        }
+      ],
+      "is_template": false,
+      "role": "user"
+    }
+  ],
+  "model_profile": "housing-v4-s104729",
+  "normalization_version": "production-semantic-2",
+  "prompt_bundle_sha256": "47c9578424b4c58836d002685bf6173c4687fe4fe48bcda41ddeeb9cecdbc4f6",
+  "requested_seed": 104729,
+  "retry_policy": {
+    "framework_retries": 1,
+    "sdk_retries": 0
+  },
+  "role_schema_sha256": "45178168589a8355ccf9eda92f73d7a2d59bba0377d460fffe5f2113df122b7b",
+  "tools": {
+    "cache_scope": "private",
+    "result_type": "complete",
+    "tools": [],
+    "ttl_ms": 0
+  }
+}

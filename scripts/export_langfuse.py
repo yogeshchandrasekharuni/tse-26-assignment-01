@@ -10,7 +10,7 @@ from pathlib import Path
 
 from httpx import HTTPError
 
-from housing.identity import ROOT, semantic_hash, write_json
+from housing.identity import ROOT, semantic_hash, sha256_bytes, write_json
 from housing.observability.langfuse import (
     EXPORT_VERSION,
     LocalLangfuse,
@@ -20,6 +20,7 @@ from housing.observability.langfuse import (
 )
 from housing.observability.langfuse_plan import PROJECTION_REVISION
 from housing.observability.langfuse_plan import project_capture as plan_projection
+from housing.reporting.interruptions import validated_interruption
 
 
 def main() -> None:
@@ -54,6 +55,7 @@ def main() -> None:
         else None
     )
     completed: set[str] = set()
+    interrupted_captures: dict[str, dict[str, object]] = {}
     while True:
         directories = (
             [ROOT / args.run]
@@ -66,6 +68,32 @@ def main() -> None:
             directories.extend(sorted((ROOT / "artifacts/runtime/web").glob("*/runs/*")))
         for directory in directories:
             if not (directory / "terminal.json").is_file():
+                interrupted = validated_interruption(directory, ROOT)
+                if interrupted is not None:
+                    note, annotation = interrupted
+                    if note.run_path not in interrupted_captures:
+                        interrupted_captures[note.run_path] = {
+                            "run_path": note.run_path,
+                            "annotation": str(annotation.relative_to(ROOT)),
+                            "annotation_sha256": sha256_bytes(annotation.read_bytes()),
+                            "recorded_model_responses": note.recorded_model_responses,
+                            "recorded_model_inputs": note.recorded_model_inputs,
+                            "status": "interrupted_without_native_terminal_not_exported",
+                        }
+                        write_json(
+                            ROOT
+                            / "artifacts/observability"
+                            / f"interrupted-{args.campaign or 'explicit'}.json",
+                            {
+                                "schema_version": "interrupted-export-inventory-1",
+                                "captures": list(interrupted_captures.values()),
+                                "interpretation": "Raw partial captures are preserved. Completed-trajectory export does not invent terminal events for them.",
+                            },
+                        )
+                        print(
+                            f"Retained interrupted capture without exporting a fabricated terminal: {note.run_path}",
+                            flush=True,
+                        )
                 continue
             relative = str(directory.relative_to(ROOT))
             if relative in completed:

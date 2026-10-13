@@ -1,0 +1,37 @@
+{
+  "active_specialists": [
+    "price",
+    "supply"
+  ],
+  "completed_specialists": [
+    "price",
+    "supply"
+  ],
+  "decision_sha256": "357ddf7c9735d3cf71e9851b4f6bb85152cb7166a4b4dc962293e5d26048d806",
+  "iteration": 0,
+  "next_action": "EXACT_RESCAN_WITH_REGION",
+  "planning_constraints": {
+    "required_action": "EXACT_RESCAN_WITH_REGION",
+    "required_reason_codes": [
+      "SPARSE_SLICE"
+    ],
+    "required_region_purpose": "coverage_diagnostic",
+    "required_scan_strategy": "full_csv",
+    "required_specialists": [
+      "price",
+      "supply",
+      "region"
+    ]
+  },
+  "role": "reviewer",
+  "scan_strategy": "indexed",
+  "semantic_receipt_hashes": {
+    "price": "caa6ea5a583181b8a2486cc1d49b1fa1c8de36ec4131edd8ad27267f1d2bf536",
+    "supply": "a64c40010d0b4838792b9f65665a2feea6a838a700912554e54a82e03dbc8a72"
+  },
+  "signals": [
+    "SPARSE_SLICE"
+  ],
+  "stage": "PLAN_REQUIRED",
+  "status": "decision_applied"
+}

@@ -1,0 +1,36 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 131744.009764833, \"end_time\": 131752.108316958, \"duration_ms\": 91407.838925, \"ttft_ms\": 3020.07, \"time_to_response_ms\": 3020.07}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s155921\", \"prompt\": {\"total\": 4437, \"uncached\": null, \"cache_read\": 3404, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 103, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791399365.082783, \"timing\": {\"duration_ms\": 91407.838925, \"ttft_ms\": 3020.07, \"time_to_response_ms\": 3020.07}, \"raw_usage\": {\"completion_tokens\": 103, \"prompt_tokens\": 4437, \"total_tokens\": 4540, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3404, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 4540}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [
+    {
+      "text": "All three specialists (price, supply, region) have completed their indexed scans. The region specialist returned a signal of \"COMPLETE_SUPPORT\". Now I need to delegate the reviewer agent to review the results.",
+      "type": "text"
+    }
+  ],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_ja0uylwd": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate reviewer for iteration 0. All specialists completed with COMPLETE_SUPPORT signal from region. No mismatches or sparse slices detected. Requested action: ACCEPT with null requested_action."
+        },
+        "name": "agent__reviewer"
+      }
+    }
+  }
+}

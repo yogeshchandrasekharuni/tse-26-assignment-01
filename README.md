@@ -46,6 +46,8 @@ The trace inspector preserves raw iteration tags and identifies any pass label d
 
 Live commands require those existing local profiles. Offline reproduction requires completed setup and captured evidence, and never downloads or starts a model. Historical profile manifests and failed probes are retained separately.
 
+After the 6 October 2026 reboot, the campaign was recovered from743 saved comparisons using the pinned0.40.4 binary and a strict metadata-order adapter at the same endpoint. See [runtime recovery](RUNTIME_RECOVERY.md) for commands, preserved interruptions, the durable progress log and the disclosed temporary-console loss. Frozen production/evaluation inputs remain unchanged.
+
 Offline setup may reuse completed caches with `UV_CACHE_DIR` and `UV_PYTHON_INSTALL_DIR`; Makefile defaults stay inside the checkout and honor explicit environment overrides. The clean-checkout verifier also sets uv/npm offline mode. Font/icon/runtime dependency notices ship under frontend/public/licenses; see [third-party notices](THIRD_PARTY_NOTICES.md).
 
 ## Experiments and reproduction

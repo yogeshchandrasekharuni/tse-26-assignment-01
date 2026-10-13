@@ -1,0 +1,49 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 152659.31354, \"end_time\": 152679.311720375, \"duration_ms\": 225718.235516, \"ttft_ms\": 6985.25, \"time_to_response_ms\": 6985.25}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s155921\", \"prompt\": {\"total\": 3416, \"uncached\": null, \"cache_read\": 3189, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 268, \"reasoning\": null}, \"tool_calls\": 3, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791635570.156214, \"timing\": {\"duration_ms\": 225718.235516, \"ttft_ms\": 6985.25, \"time_to_response_ms\": 6985.25}, \"raw_usage\": {\"completion_tokens\": 268, \"prompt_tokens\": 3416, \"total_tokens\": 3684, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3189, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3684}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_8i8t3xkg": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate price specialist for indexed scan with public_comparison region purpose. Query: bedrooms 1-5, zips 75019/75038/75093/75214, price $250k-$562.5k, single_family."
+        },
+        "name": "agent__price"
+      }
+    },
+    "call_mcvzpbo8": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate supply specialist for indexed scan with public_comparison region purpose. Query: bedrooms 1-5, zips 75019/75038/75093/75214, price $250k-$562.5k, single_family."
+        },
+        "name": "agent__supply"
+      }
+    },
+    "call_wp5qdjvv": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate region specialist for public_comparison with indexed scan. Query: bedrooms 1-5, zips 75019/75038/75093/75214, price $250k-$562.5k, single_family."
+        },
+        "name": "agent__region"
+      }
+    }
+  }
+}
