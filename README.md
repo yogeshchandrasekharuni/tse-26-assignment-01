@@ -19,9 +19,11 @@ Open http://127.0.0.1:5173. The initial screen displays a labeled genuine live c
 
 The recorded-example selector also includes “No matching observations”: a genuine auxiliary live run whose price bound exceeds every frozen observation. It preserves all twelve empty months, unavailable statistics and the actual review/rescan trace. Its capture and strict offline playback are excluded from headline experiment counts.
 
+A short [professor demonstration](DEMONSTRATION.md) follows the numbers, the real feedback loop and a preserved natural failure.
+
 Explore links monthly chart selection to a tabular record, with backend unit conversion and CSV/JSON export. Workflow exposes parent/child topology, the actual feedback cycle, causal events, exact model inputs/responses and dispatcher results. Experiments exposes recorded campaign progress, base-level summaries, paired cases, witnesses and failure evidence. Provenance explains the frozen source and statistical contract.
 
-An optional [local Langfuse dashboard](observability/langfuse/README.md) imports the real recorded trajectories through OTLP. `make langfuse-up` starts its isolated Docker project on localhost19300; `make langfuse-watch` observes completed campaign and interactive live runs. It preserves failed calls and feedback links, verifies observation readback, and keeps the running experiment's frozen inputs unchanged. Langfuse is not needed for offline analysis reproduction or `make check`.
+The required [local Langfuse demonstration dashboard](observability/langfuse/README.md) imports the real recorded trajectories through OTLP. `make langfuse-up` starts its isolated Docker project on localhost19300; `make langfuse-watch` observes completed campaign and interactive live runs. It preserves failed calls and feedback links, verifies observation readback, and keeps the running experiment's frozen inputs unchanged. Langfuse is not needed for offline analysis reproduction or `make check`.
 
 ## Agent boundary and statistics
 

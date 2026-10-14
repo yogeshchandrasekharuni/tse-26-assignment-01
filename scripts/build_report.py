@@ -378,7 +378,7 @@ def report(draft: bool) -> Path:
                 )
                 runtime = load(campaign / "runtime.json")
                 page.text(
-                    f"Measured execution: {runtime['logical_comparisons']} logical comparisons; {runtime['physical_analysis_attempts']} physical attempts; {sum(runtime['model_calls_by_role'].values())} model decisions; {runtime['refinements']} refinements; {runtime['schema_repairs']} repairs. Sum of physical analysis durations: {serial(Fraction(runtime['sum_analysis_duration_ns'], 1_000_000_000), digits=2)} seconds.",
+                    f"Leg-record accounting: {runtime['logical_comparisons']} logical comparisons; {runtime['physical_analysis_attempts']} recorded analysis attempts; {sum(runtime['model_calls_by_role'].values())} model inputs; {runtime['refinements']} refinements; {runtime['schema_repairs']} repairs. Sum of recorded analysis durations: {serial(Fraction(runtime['sum_analysis_duration_ns'], 1_000_000_000), digits=2)} seconds. These totals exclude interrupted prefixes without leg records; inclusive response telemetry appears on page 10.",
                     SMALL,
                 )
             else:
@@ -460,6 +460,9 @@ def report(draft: bool) -> Path:
                     f"{usage['tokens']['prompt_total']['sum_reported']} prompt tokens; "
                     f"{usage['tokens']['completion_total']['sum_reported']} completion tokens. "
                     f"{usage['responses_without_attempt_telemetry']} responses lack attempt telemetry. "
+                    f"Includes {usage['recorded_responses']} saved responses across {usage['physical_runs']} physical runs, "
+                    f"including {usage['interrupted_runs_without_terminal']} declared interrupted captures. "
+                    f"Usage for {usage['recorded_inputs_without_response']} unanswered inputs is unknown. "
                     "No monetary cost assigned. Raw audit: reports/data/headline-provider-usage.json.",
                     SMALL,
                 )
@@ -499,6 +502,18 @@ def report(draft: bool) -> Path:
             "artifacts/observability/qa/inspection.json",
             "observability/langfuse/compose.yaml",
             "observability/langfuse/images.lock.json",
+            "RUNTIME_RECOVERY.md",
+            "src/housing/runtime_compat.py",
+            "scripts/serve_frozen_ollama.py",
+            "src/housing/reporting/interruptions.py",
+            "src/housing/reporting/usage.py",
+            "artifacts/verification/restart-recovery-v2/audit.json",
+            "artifacts/verification/restart-recovery-v2/pre-resume-artifact-hashes.json",
+            "artifacts/verification/restart-recovery-v2/official-runtime.json",
+            "artifacts/verification/restart-recovery-v2/parameter-order-evidence.json",
+            "artifacts/verification/restart-recovery-v2/restored-provider.json",
+            "artifacts/verification/restart-recovery-v2/recovery-errors.json",
+            "artifacts/verification/restart-recovery-v2/integrity.json",
         )
     )
     natural_loop = (

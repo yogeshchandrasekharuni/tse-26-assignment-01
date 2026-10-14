@@ -1,0 +1,34 @@
+HOUSING EVIDENCE / TSE
+Synthetic observations | Due 16 October 2026
+WORKING DRAFT - headline evidence pending
+10 / 12
+Reproduction executes the system again
+Live captures sample model behavior. Offline playback reuses those recorded decisions while
+rerunning the current tools, state transitions, comparisons and uncertainty calculations.
+Exact semantic matching
+Each turn matches prompt text, strict schema, tools, model profile, seed, iteration, dataset view and upstream
+receipts. Declared volatile message timestamps and framework timing/usage channels are excluded from
+semantic matching; raw bytes remain hashed. A miss raises REPLAY_MISS, with no approximate lookup or
+network fallback.
+Playback is not a saved-answer shortcut
+Fast Agent PlaybackLLM supplies captured decisions; the current dispatcher reruns numeric tools and receipt
+checks. Changed receipts invalidate the next model boundary. Integration tests replay with saved final outputs,
+numeric results and source traces removed. Playback blocks network connections.
+Two integration mistakes caught by evidence
+Sorted JSON keys reordered native tool-call identifiers; explicit ordered identifiers now preserve execution
+order. Repeated detached names such as reviewer[1] also replayed the first review twice. Exact second-pass
+playback exposed this; each child now receives its one-decision packet. Failed attempts remain preserved.
+Environment and observability
+Python 3.15.0 and Fast Agent 0.10.45 are locked. Three Qwen3.5 profile defaults, digests and seeds are
+checked; hardware repeatability remains best effort. Offline playback needs no model server. Live inference
+uses a local compatible endpoint and dummy key. [6] Local Docker Langfuse 4.63.0 displays delegation,
+receipts, repairs and feedback through OTLP. Exact readback and browser inspection bind the dashboard to
+raw captures. Its versioned projection explains later-pass repairs while preserving raw tags. [7]
+Local inference configuration
+Frozen values
+Model
+Qwen3.5:9b; resolved 9.7B, Q4_K_M; Ollama 0.40.4
+Sampling defaults
+temperature 0.2; top_p 0.95; top_k 20; presence_penalty 1.5
+Context / completion
+65,536 / 1,024; reasoning_effort none; three seeded v4 profiles

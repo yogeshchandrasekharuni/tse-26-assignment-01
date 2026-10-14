@@ -1,6 +1,6 @@
 # Local trajectory dashboard
 
-Langfuse is an optional observation sink. The analysis service, metamorphic comparisons and strict offline replay do not depend on it. The current live campaign keeps its original frozen Python, Fast Agent, prompts, model configuration and evaluation inputs.
+Langfuse is a required demonstration deliverable under the updated goal. It remains decoupled from the analysis service, metamorphic comparisons and strict offline replay so dashboard availability cannot change their results. The current live campaign keeps its original frozen Python, Fast Agent, prompts, model configuration and evaluation inputs.
 
 Run `make langfuse-up` once Docker is available, then open <http://localhost:19300>. The isolated Compose project is `housing-tse-langfuse`; its database, ClickHouse, Redis and object storage use dedicated volumes. It does not modify another local Langfuse installation. `make langfuse-down` stops these services and retains their data.
 

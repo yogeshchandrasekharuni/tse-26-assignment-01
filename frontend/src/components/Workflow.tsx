@@ -170,7 +170,7 @@ function AgentMap({
         <p className={refined ? 'loop-label fired' : 'loop-label'}>
           <GitBranch size={16} />
           {refined
-            ? `${workflow.refinements} feedback loop fired: Reviewer → Orchestrator → fresh scans`
+            ? `${workflow.refinements} feedback loop${workflow.refinements === 1 ? '' : 's'} fired: Reviewer → Orchestrator → fresh scans`
             : 'Reviewer may return work to Orchestrator for fresh scans'}
         </p>
       </div>
@@ -255,11 +255,15 @@ export function Workflow({
         <span className="status-badge">
           {workflow.mode === 'replay' ? 'Offline replay' : 'Captured live'}
         </span>
-        <span>{workflow.model_decisions} model decisions</span>
+        <span>
+          {workflow.model_decisions} model decision{workflow.model_decisions === 1 ? '' : 's'}
+        </span>
         <span>
           {workflow.refinements} refinement{workflow.refinements === 1 ? '' : 's'}
         </span>
-        <span>{workflow.schema_repairs} repairs</span>
+        <span>
+          {workflow.schema_repairs} repair{workflow.schema_repairs === 1 ? '' : 's'}
+        </span>
         <span className="status-right">
           <ShieldCheck size={15} />
           {workflow.query_unchanged ? 'Criteria unchanged' : 'Inspect query lineage'}
