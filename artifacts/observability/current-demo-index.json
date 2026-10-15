@@ -1,0 +1,64 @@
+{
+  "created_at_utc": "2026-10-15T09:19:34.149734+00:00",
+  "entries": [
+    {
+      "dashboard_url": "http://localhost:19300/project/housing-trajectories/traces/96924b076442bad393724f6825f63ba9",
+      "focus_url": "http://localhost:19300/project/housing-trajectories/traces/96924b076442bad393724f6825f63ba9?observation=f9b1e595f7f31b4d",
+      "name": "normal",
+      "observations": 29,
+      "projection_sha256": "d9deb47314aff8acdcfe7e0d5e54794a17bf383f0a406dbe6876f2fe9527a0aa",
+      "receipt": "artifacts/observability/current-demo/normal/receipt.json",
+      "receipt_sha256": "782b82a98594267d63792eb5e357d908e21828fe1fc2bb248ef2349427c65a61",
+      "run_path": "artifacts/traces/20261001T150456Z-6c0cbee2b9",
+      "scope": "auxiliary development",
+      "status": "readback_verified",
+      "title": "Ordinary recorded live analysis",
+      "trace_id": "96924b076442bad393724f6825f63ba9"
+    },
+    {
+      "dashboard_url": "http://localhost:19300/project/housing-trajectories/traces/58743248c48e16e7d7cdd59f2bba5b2a",
+      "focus_url": "http://localhost:19300/project/housing-trajectories/traces/58743248c48e16e7d7cdd59f2bba5b2a?observation=919af6c965fd41fa",
+      "name": "natural-feedback",
+      "observations": 53,
+      "projection_sha256": "0f12d26d9698f520887e12b8f2cc0038a3e0aa9db691329c54bdbfec6d5eca25",
+      "receipt": "artifacts/observability/current-demo/natural-feedback/receipt.json",
+      "receipt_sha256": "b6f22ae939b9bcd2cd8f599994b5c805c87d80d47b9805553624b6a82c684f7b",
+      "run_path": "artifacts/campaigns/headline-live-v1/cases/MR01-b010-s104729/attempt-001/source/runs/20261002T144019Z-78c6924bf7",
+      "scope": "headline example",
+      "status": "readback_verified",
+      "title": "Natural sparse feedback, unchanged criteria",
+      "trace_id": "58743248c48e16e7d7cdd59f2bba5b2a"
+    },
+    {
+      "dashboard_url": "http://localhost:19300/project/housing-trajectories/traces/1c2251496736d8922db059a55c848eb4",
+      "focus_url": "http://localhost:19300/project/housing-trajectories/traces/1c2251496736d8922db059a55c848eb4?observation=dcb6e0d7eb47d5ac",
+      "name": "repair-failure",
+      "observations": 34,
+      "projection_sha256": "786dec89f7b5b520d5b470461d76053cafeef2fa9791a5140aaf2e4b906f0453",
+      "receipt": "artifacts/observability/current-demo/repair-failure/receipt.json",
+      "receipt_sha256": "a794d7204f2abf7d72c22429592756f5c9a29f63b5122fa4d0496cb2316c7cae",
+      "run_path": "artifacts/campaigns/headline-live-v1/cases/MR05-b010-s104729/attempt-001/followup/runs/20261006T173448Z-9bb7b33a7f",
+      "scope": "headline example",
+      "status": "readback_verified",
+      "title": "Natural second-pass repair and failure",
+      "trace_id": "1c2251496736d8922db059a55c848eb4"
+    },
+    {
+      "dashboard_url": "http://localhost:19300/project/housing-trajectories/traces/23a965b6a4e0edad6035baa4c7e9c1fb",
+      "focus_url": "http://localhost:19300/project/housing-trajectories/traces/23a965b6a4e0edad6035baa4c7e9c1fb?observation=2f14dfb26d7778a4",
+      "name": "injected-control",
+      "observations": 53,
+      "projection_sha256": "e798d5afaa7d8b2c7912aab0c33dd1478569e2810de2aeb2b88f69a1b96b9414",
+      "receipt": "artifacts/observability/current-demo/injected-control/receipt.json",
+      "receipt_sha256": "bcb25e2497cc85f30edcba466bf7075eceadcfc303648857dca160eb4caf2ac0",
+      "run_path": "artifacts/traces/20261001T144318Z-82736e984f",
+      "scope": "auxiliary injected control",
+      "status": "readback_verified",
+      "title": "Injected index omission, explicitly auxiliary",
+      "trace_id": "23a965b6a4e0edad6035baa4c7e9c1fb"
+    }
+  ],
+  "interpretation": "Four explanatory actual readback examples; auxiliary captures are excluded from headline denominators. Legacy demo-index and payloads remain preserved.",
+  "projection_revision": "housing-langfuse-plan-2",
+  "schema_version": "current-langfuse-demo-1"
+}

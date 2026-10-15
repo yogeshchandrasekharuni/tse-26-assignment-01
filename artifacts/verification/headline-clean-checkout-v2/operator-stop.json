@@ -1,0 +1,7 @@
+{
+  "action": "SIGTERM operator-stopped auxiliary replay; not a natural model/infrastructure finding",
+  "checked_at_utc": "2026-10-15T12:31:35.839658+00:00",
+  "observed": "1596 .venv/bin/python scripts/reproduce_campaign.py",
+  "pid": 1597,
+  "reason": "Explicit full GC after every leg causes increasing overhead and did not prevent heap growth:4,125,472KB RSS observed. Preserve this partial auxiliary replay and replace its resource-only policy with bounded spawned processes. Original live900 outcomes stay unchanged."
+}

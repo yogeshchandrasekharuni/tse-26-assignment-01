@@ -1,0 +1,44 @@
+{
+  "checked_at_utc": "2026-10-15T00:58:55.912291+00:00",
+  "compose_sha256": "5f2c22b136b6a6ba1361142f8735495909b831a20b8cde423e30ddf34350bf74",
+  "health_body": {
+    "status": "OK",
+    "version": "4.63.0"
+  },
+  "http_status": 200,
+  "images_lock_sha256": "56c78ad380350b45ae7ed03f38f0ec39b7e4b7453b3a9c1b0f55066c4b40f884",
+  "scope": "Existing isolated project restored after live inference; no dashboard-delivery claim yet",
+  "services": [
+    {
+      "image": "langfuse/langfuse:4.63.0",
+      "name": "housing-tse-langfuse-web-1",
+      "state": "running"
+    },
+    {
+      "image": "langfuse/langfuse-worker:4.63.0",
+      "name": "housing-tse-langfuse-worker-1",
+      "state": "running"
+    },
+    {
+      "image": "postgres:17",
+      "name": "housing-tse-langfuse-postgres-1",
+      "state": "running"
+    },
+    {
+      "image": "clickhouse/clickhouse-server:25.12",
+      "name": "housing-tse-langfuse-clickhouse-1",
+      "state": "running"
+    },
+    {
+      "image": "redis:7",
+      "name": "housing-tse-langfuse-redis-1",
+      "state": "running"
+    },
+    {
+      "image": "cgr.dev/chainguard/minio:latest",
+      "name": "housing-tse-langfuse-minio-1",
+      "state": "running"
+    }
+  ],
+  "status": "verified_running_local_stack"
+}
