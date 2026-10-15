@@ -2,7 +2,7 @@
 
 An exact, inspectable multi-agent housing-trends application for the IIIT Hyderabad TSE assignment. The data is **synthetic**, generated locally and frozen; it does not measure the Dallas housing market.
 
-Current verified milestone: the production MAS, strict offline playback, local API, independent ten-MR workload, and a **three-base MR01 live/replay pilot** work. All nine paired pilot comparisons passed and reproduced, including from a clean committed checkout with offline setup; that is pilot evidence, not the thirty-base headline evaluation. Desktop/mobile browser verification and the independent design fix review are complete. The full 900-comparison live campaign is running. Its first natural output-contract failure has been diagnosed and strictly replayed; no final rate is claimed. The twelve-page report is a marked draft. Full campaign completion, final diagnosis/report and full clean-checkout reproduction remain outstanding.
+Current verified milestone: the complete live campaign is captured and audited: **10 relations × 30 bases × 3 paired seeds = 900 comparisons**. All **690 pairs with both canonical outputs** satisfy their declared numerical projections; **210 pairs have eligible output-contract violations**, which remain genuine findings. Each MR has thirty completed bases and no unresolved infrastructure errors. The corpus retains historical startup failures and two interrupted captures. Full clean-checkout playback, reviewed final diagnosis, current Langfuse proof and the final twelve-page report remain pending.
 
 ## Run locally
 
@@ -59,7 +59,7 @@ The ten relations and their subdomains/projections are in the preserved [MR cata
 [The frozen headline cohort](configs/headline-cohort-v1.json) has thirty distinct eligible bases per MR and all three paired seeds 104729/130363/155921. All 300 MR/base inputs passed independent preflight before headline outcomes. It includes empty/sparse/dense months and odd/even cardinalities. The workload is deliberately designed, overlapping and synthetic; it is not a random sample of cities or users.
 
 ```sh
-make evaluate-live       # full frozen live campaign; resumes already recorded cases
+make evaluate-live       # run/resume frozen live work; verify a completed capture without changing it
 make reproduce-pilot     # verify pilot artifact hashes and rerun all 9 comparisons offline
 make reproduce           # same workflow for all 900 headline comparisons once capture is complete
 make report-draft        # marked twelve-page working PDF, no invented headline numbers
@@ -67,6 +67,8 @@ make clean-checkout      # after commit/completion: offline setup/checks/full re
 make report              # final PDF; requires complete results, diagnosis and clean-checkout evidence
 make submission-check    # checks plus strict evidence/PDF consistency gates
 ```
+
+`make evaluate-live` now verifies all identities and artifact bytes when the campaign is already complete, then returns without new inference or finish-metadata changes. Only run a resume command after checking that the original runner has stopped. The historical direct module command in RUNTIME_RECOVERY.md records the actual recovery invocation; use the guarded Make target for ordinary entry.
 
 The primary outcome is **a base with any violation among its three paired seeds**. Wilson intervals use completed bases, never 90 correlated seed runs. A model parse/policy/output-contract fault on an eligible input is a violation; model/tool/process infrastructure failures remain execution errors. Every attempt, invalid candidate, failure and source reuse is visible. Each follow-up executes afresh.
 

@@ -11,7 +11,15 @@ from housing.reporting import plan_observability as gate
 
 
 @pytest.mark.parametrize(
-    "fault", ["complete", "accepted_only", "wrong_ids", "wrong_derivation", "changed_screenshot"]
+    "fault",
+    [
+        "complete",
+        "refreshed_mutable_receipt",
+        "accepted_only",
+        "wrong_ids",
+        "wrong_derivation",
+        "changed_screenshot",
+    ],
 )
 def test_gate_requires_complete_unchanged_observation_proof(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, fault: str
@@ -27,8 +35,7 @@ def test_gate_requires_complete_unchanged_observation_proof(
         data = ("synthetic-test-image:" + name).encode()
         (qa_path.parent / name).write_bytes(data)
         screenshots[name] = sha256_bytes(data)
-    destination = tmp_path / "artifacts/observability/langfuse" / projection.trace_id
-    destination.mkdir(parents=True)
+    destination = qa_path.parent
     (destination / "projection.json").write_text(projection.model_dump_json())
     receipt = {
         "status": "accepted" if fault == "accepted_only" else "readback_verified",
@@ -58,7 +65,11 @@ def test_gate_requires_complete_unchanged_observation_proof(
     qa_path.write_text(json.dumps(qa))
     if fault == "changed_screenshot":
         (qa_path.parent / "repair-detail.jpg").write_bytes(b"changed")
-    if fault == "complete":
+    if fault == "refreshed_mutable_receipt":
+        mutable = tmp_path / "artifacts/observability/langfuse" / projection.trace_id / "receipt.json"
+        mutable.parent.mkdir(parents=True)
+        mutable.write_text('{"status": "accepted", "interpretation": "later test-only delivery"}')
+    if fault in {"complete", "refreshed_mutable_receipt"}:
         assert len(gate.verify_plan_observability()) == 5
     else:
         with pytest.raises(ValueError, match="readback|derivation|screenshot"):

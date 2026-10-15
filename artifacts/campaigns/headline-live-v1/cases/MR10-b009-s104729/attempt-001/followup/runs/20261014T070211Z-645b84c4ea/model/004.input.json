@@ -1,0 +1,142 @@
+{
+  "agent": "region[3]",
+  "boundary_sha256": "121e4d0e50634a4ba46a207464fab720f528ad5ac0bce452b33172966e33b4f0",
+  "context": {
+    "contract_version": "1.0",
+    "facts": {},
+    "iteration": 0,
+    "monthly_counts": {},
+    "plan": {
+      "active_specialists": [
+        "price",
+        "supply",
+        "region"
+      ],
+      "canonical_query_sha256": "a91798145afe5d08237f11a0bc181746c9041d53e3c5ee4ea6a16785d9d25eae",
+      "dataset_view_sha256": "60991f05e6b55e9c170b0e120a277392b3d358dcc2b5e29f50d25dabc173f2d3",
+      "planner_decision_sha256": "5b80ce7ff9497f553f97a58db83e40f11fee8b89256a807f0bc94b203cc8c9ea",
+      "region_purpose": "public_comparison",
+      "required_months": [
+        "2024-07",
+        "2024-08",
+        "2024-09",
+        "2024-10",
+        "2024-11",
+        "2024-12",
+        "2025-01",
+        "2025-02",
+        "2025-03",
+        "2025-04",
+        "2025-05",
+        "2025-06",
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06"
+      ],
+      "scan_strategy": "indexed",
+      "version": 0,
+      "visible_months": [
+        "2025-07",
+        "2025-08",
+        "2025-09",
+        "2025-10",
+        "2025-11",
+        "2025-12",
+        "2026-01",
+        "2026-02",
+        "2026-03",
+        "2026-04",
+        "2026-05",
+        "2026-06"
+      ]
+    },
+    "planning_constraints": null,
+    "previous_review": null,
+    "previous_signals": [],
+    "query": {
+      "compare_regions": true,
+      "criteria": {
+        "bedrooms_max": 5,
+        "bedrooms_min": 1,
+        "price_max_cents": null,
+        "price_min_cents": null,
+        "property_types": [
+          "single_family"
+        ],
+        "sqft_max": null,
+        "sqft_min": null,
+        "zips": [
+          "75019",
+          "75038",
+          "75093",
+          "75214"
+        ]
+      },
+      "dataset_id": "dallas-synth-v1",
+      "dataset_view_sha256": "60991f05e6b55e9c170b0e120a277392b3d358dcc2b5e29f50d25dabc173f2d3",
+      "window_end": "2026-06"
+    },
+    "query_sha256": "a91798145afe5d08237f11a0bc181746c9041d53e3c5ee4ea6a16785d9d25eae",
+    "receipt_hashes": {
+      "price": "09076afb3d67e50b21b871dc9aa7904e46215ce1fa0396426fafde20f07f4255",
+      "supply": "92ef0f00a8d3699d63e3de213f1ad099cc93b8207e93ac18072cb165d2830294"
+    },
+    "required_caveats": [],
+    "scan_complete": true,
+    "schema_repair": null,
+    "signals": [],
+    "stage": "SCANNING"
+  },
+  "effective_seed": 104729,
+  "instruction": "You are the conditional internal Region specialist. Return only one JSON object matching RegionDecision, without Markdown: role region, decision_type tool_intent, tool region_stats, partition_order month_asc or zip_asc. Set purpose exactly to the current plan's region_purpose: public_comparison or coverage_diagnostic. Python binds the requested ZIPs and executes the exact pooled comparison or diagnosis. Never broaden criteria or invent numbers. If schema_repair names your role, correct that prior response using its errors. Do not call tools yourself.\n\nDecision schema:\n{\"$defs\":{\"PartitionOrder\":{\"enum\":[\"month_asc\",\"zip_asc\"],\"type\":\"string\"}},\"additionalProperties\":false,\"properties\":{\"decision_type\":{\"const\":\"tool_intent\",\"title\":\"Decision Type\",\"type\":\"string\"},\"partition_order\":{\"$ref\":\"#/$defs/PartitionOrder\"},\"purpose\":{\"enum\":[\"public_comparison\",\"coverage_diagnostic\"],\"title\":\"Purpose\",\"type\":\"string\"},\"role\":{\"const\":\"region\",\"title\":\"Role\",\"type\":\"string\"},\"tool\":{\"const\":\"region_stats\",\"title\":\"Tool\",\"type\":\"string\"}},\"required\":[\"role\",\"decision_type\",\"tool\",\"partition_order\",\"purpose\"],\"title\":\"RegionDecision\",\"type\":\"object\"}",
+  "message_tool_call_order": [
+    [],
+    []
+  ],
+  "messages": [
+    {
+      "content": [
+        {
+          "text": "Execute region_stats with partition_order zip_asc and purpose public_comparison for the immutable query selection. Return validated region comparison decision.",
+          "type": "text"
+        }
+      ],
+      "is_template": false,
+      "role": "user"
+    },
+    {
+      "content": [
+        {
+          "text": "{\"state\":{\"contract_version\":\"1.0\",\"facts\":{},\"iteration\":0,\"monthly_counts\":{},\"plan\":{\"active_specialists\":[\"price\",\"supply\",\"region\"],\"canonical_query_sha256\":\"a91798145afe5d08237f11a0bc181746c9041d53e3c5ee4ea6a16785d9d25eae\",\"dataset_view_sha256\":\"60991f05e6b55e9c170b0e120a277392b3d358dcc2b5e29f50d25dabc173f2d3\",\"planner_decision_sha256\":\"5b80ce7ff9497f553f97a58db83e40f11fee8b89256a807f0bc94b203cc8c9ea\",\"region_purpose\":\"public_comparison\",\"required_months\":[\"2024-07\",\"2024-08\",\"2024-09\",\"2024-10\",\"2024-11\",\"2024-12\",\"2025-01\",\"2025-02\",\"2025-03\",\"2025-04\",\"2025-05\",\"2025-06\",\"2025-07\",\"2025-08\",\"2025-09\",\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\"],\"scan_strategy\":\"indexed\",\"version\":0,\"visible_months\":[\"2025-07\",\"2025-08\",\"2025-09\",\"2025-10\",\"2025-11\",\"2025-12\",\"2026-01\",\"2026-02\",\"2026-03\",\"2026-04\",\"2026-05\",\"2026-06\"]},\"planning_constraints\":null,\"previous_review\":null,\"previous_signals\":[],\"query\":{\"compare_regions\":true,\"criteria\":{\"bedrooms_max\":5,\"bedrooms_min\":1,\"price_max_cents\":null,\"price_min_cents\":null,\"property_types\":[\"single_family\"],\"sqft_max\":null,\"sqft_min\":null,\"zips\":[\"75019\",\"75038\",\"75093\",\"75214\"]},\"dataset_id\":\"dallas-synth-v1\",\"dataset_view_sha256\":\"60991f05e6b55e9c170b0e120a277392b3d358dcc2b5e29f50d25dabc173f2d3\",\"window_end\":\"2026-06\"},\"query_sha256\":\"a91798145afe5d08237f11a0bc181746c9041d53e3c5ee4ea6a16785d9d25eae\",\"receipt_hashes\":{\"price\":\"09076afb3d67e50b21b871dc9aa7904e46215ce1fa0396426fafde20f07f4255\",\"supply\":\"92ef0f00a8d3699d63e3de213f1ad099cc93b8207e93ac18072cb165d2830294\"},\"required_caveats\":[],\"scan_complete\":true,\"schema_repair\":null,\"signals\":[],\"stage\":\"SCANNING\"},\"trusted_role\":\"region\"}",
+          "type": "text"
+        }
+      ],
+      "is_template": false,
+      "role": "user"
+    }
+  ],
+  "model_profile": "housing-v4-s104729",
+  "normalization_version": "production-semantic-2",
+  "prompt_bundle_sha256": "47c9578424b4c58836d002685bf6173c4687fe4fe48bcda41ddeeb9cecdbc4f6",
+  "requested_seed": 104729,
+  "retry_policy": {
+    "framework_retries": 1,
+    "sdk_retries": 0
+  },
+  "role_schema_sha256": "910ad71ad426348418110aaac3b2016f20294d33a785a7957f70789504274496",
+  "tools": {
+    "cache_scope": "private",
+    "result_type": "complete",
+    "tools": [],
+    "ttl_ms": 0
+  }
+}

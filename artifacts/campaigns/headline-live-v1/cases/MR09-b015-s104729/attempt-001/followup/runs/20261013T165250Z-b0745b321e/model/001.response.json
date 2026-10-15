@@ -1,0 +1,49 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 2277.561437291, \"end_time\": 2291.862398875, \"duration_ms\": 161414.061549, \"ttft_ms\": 5213.82, \"time_to_response_ms\": 5213.82}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 3390, \"uncached\": null, \"cache_read\": 3163, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 265, \"reasoning\": null}, \"tool_calls\": 3, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791910603.3911247, \"timing\": {\"duration_ms\": 161414.061549, \"ttft_ms\": 5213.82, \"time_to_response_ms\": 5213.82}, \"raw_usage\": {\"completion_tokens\": 265, \"prompt_tokens\": 3390, \"total_tokens\": 3655, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3163, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3655}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_2nsxjng5": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate price specialist for indexed scan with public_comparison region purpose. Query: zips 75093,75201; bedrooms 2-5; types condo,single_family,townhouse. Window end 2026-07. Dataset dallas-synth-v1."
+        },
+        "name": "agent__price"
+      }
+    },
+    "call_9k8dpzk4": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate supply specialist for indexed scan with public_comparison region purpose. Query: zips 75093,75201; bedrooms 2-5; types condo,single_family,townhouse. Window end 2026-07. Dataset dallas-synth-v1."
+        },
+        "name": "agent__supply"
+      }
+    },
+    "call_nb5jd6ve": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate region specialist for public_comparison with indexed scan. Query: zips 75093,75201; bedrooms 2-5; types condo,single_family,townhouse. Window end 2026-07. Dataset dallas-synth-v1."
+        },
+        "name": "agent__region"
+      }
+    }
+  }
+}

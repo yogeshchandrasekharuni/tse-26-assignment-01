@@ -54,8 +54,9 @@ def verify_plan_observability() -> tuple[Path, ...]:
     current = project_capture(ROOT / CAPTURE_PATH)
     if qa.trace_id != current.trace_id or qa.projection_sha256 != semantic_hash(current):
         raise ValueError("Plan-aware browser proof belongs to a different capture or derivation")
-    destination = ROOT / "artifacts/observability/langfuse" / current.trace_id
-    receipt_path, projection_path = destination / "receipt.json", destination / "projection.json"
+    # Preserve actual acknowledgements beside the inspection, as the legacy demo
+    # does. A later idempotent import may refresh the mutable delivery timestamp.
+    receipt_path, projection_path = qa_path.parent / "receipt.json", qa_path.parent / "projection.json"
     if not receipt_path.is_file() or not projection_path.is_file():
         raise ValueError("Plan-aware delivery acknowledgement or stored projection is missing")
     receipt = json.loads(receipt_path.read_bytes())

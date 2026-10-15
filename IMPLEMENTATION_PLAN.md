@@ -1,6 +1,6 @@
 # Implementation, experiments and reporting plan
 
-Status: G0–G6 implemented and verified: exact data/tools, production MAS, strict normal/feedback/failure playback, paired live/replay MR01 pilot, 300-case independent preflight, API and responsive React interface. Independent finish review scored its three fixes resolved; design documentation exists. G7 full live campaign is running. G8 preliminary natural-failure diagnosis and strict replay exist. G9 twelve-page report draft and completion gates exist. Full campaign completion, final diagnosis/report and clean-checkout reproduction remain outstanding. Updated 25 September 2026. The original assignment governs coursework requirements.
+Status: G0–G7 are implemented and verified. The full live capture has900 eligible comparisons across300 MR/base panels and all three seeds; the independent integrity audit passed. G8 final ranked diagnosis and full clean-checkout playback, plus G9 final report/UI/dashboard/submission proofs remain in progress. The marked report is still a draft. The original assignment governs coursework requirements.
 
 ## Agreed shape
 

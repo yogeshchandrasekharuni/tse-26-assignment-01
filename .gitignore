@@ -14,3 +14,7 @@ artifacts/runtime/
 observability/langfuse/.env
 observability/langfuse/.env.*
 !observability/langfuse/.env.example
+# Rebuildable wire payloads; actual readback snapshots and raw captures are committed.
+artifacts/observability/langfuse/**/traces.otlp.json
+artifacts/observability/langfuse/**/projection.json
+artifacts/verification/restart-recovery-v2/provider-adapter.log

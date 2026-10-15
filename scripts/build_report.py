@@ -18,6 +18,7 @@ from reportlab.pdfgen.canvas import Canvas
 from reportlab.platypus import Paragraph, Table, TableStyle
 
 from housing.identity import ROOT, sha256_bytes, write_json
+from housing.reporting.campaign_observability import verify_campaign_observability
 from housing.reporting.plan_observability import verify_plan_observability
 from housing.tools.exact import serial
 
@@ -66,7 +67,7 @@ class Page:
         canvas.drawString(
             MARGIN,
             30,
-            "WORKING DRAFT - headline evidence pending"
+            "WORKING DRAFT - final verification pending"
             if draft
             else "Frozen workload | nominal base-level uncertainty",
         )
@@ -288,6 +289,7 @@ def report(draft: bool) -> Path:
     sources = load(ROOT / "reports/sources.json")
     campaign, rows, reproduction = completed_reference(draft)
     plan_observation_inputs = () if draft else verify_plan_observability()
+    campaign_observation_inputs = () if draft else verify_campaign_observability()
     destination = ROOT / "output/pdf" / ("housing-report-draft.pdf" if draft else "housing-report.pdf")
     destination.parent.mkdir(parents=True, exist_ok=True)
     canvas = Canvas(str(destination), pagesize=A4, pageCompression=1, invariant=1)
@@ -299,7 +301,14 @@ def report(draft: bool) -> Path:
         if number == 1:
             page.text(content["title"], ParagraphStyle("cover", parent=TITLE, fontSize=36, leading=40), gap=6)
             page.text(content["subtitle"], INTRO, gap=21)
-        page.text(section["intro"], INTRO, gap=17)
+        intro = section["intro"]
+        if draft and number == 8 and rows and reproduction is None:
+            intro = (
+                "The full live workload is captured. This working table reports its recorded outcomes; "
+                "full offline playback and final verification are pending. The unit is a base with "
+                "any violation across the three fixed paired seeds."
+            )
+        page.text(intro, INTRO, gap=17)
         if number == 1:
             page.table(
                 [
@@ -373,7 +382,7 @@ def report(draft: bool) -> Path:
                     )
                 page.table(table, [65, 22, 34, 46, 119, 57, 54, 54, WIDTH - 451])
                 page.text(
-                    "I=invariance; M=monotonic; D=directional. *Violating/completed seed pairs. C-faults=eligible output-contract pairs. Source: headline-live-v1/headline.json; all rows use seeds 104729, 130363, 155921.",
+                    "I=invariance; M=monotonic; D=directional. Pairs*=violating/completed seed pairs; C-faults=output-contract subset. All rows: seeds 104729, 130363, 155921. Source: headline-live-v1/headline.json.",
                     SMALL,
                 )
                 runtime = load(campaign / "runtime.json")
@@ -456,13 +465,15 @@ def report(draft: bool) -> Path:
             if rows and usage_path.exists():
                 usage = load(usage_path)
                 page.text(
-                    f"Live telemetry: {usage['reported_provider_attempts']} reported provider attempts; "
+                    f"Live telemetry: {usage['reported_provider_attempts']} reported provider attempts across "
+                    f"{usage['usage_records']} usage records; "
                     f"{usage['tokens']['prompt_total']['sum_reported']} prompt tokens; "
                     f"{usage['tokens']['completion_total']['sum_reported']} completion tokens. "
                     f"{usage['responses_without_attempt_telemetry']} responses lack attempt telemetry. "
                     f"Includes {usage['recorded_responses']} saved responses across {usage['physical_runs']} physical runs, "
                     f"including {usage['interrupted_runs_without_terminal']} declared interrupted captures. "
                     f"Usage for {usage['recorded_inputs_without_response']} unanswered inputs is unknown. "
+                    "Token figures sum reported values; unrecorded retry/in-flight usage remains unknown. "
                     "No monetary cost assigned. Raw audit: reports/data/headline-provider-usage.json.",
                     SMALL,
                 )
@@ -485,8 +496,10 @@ def report(draft: bool) -> Path:
             raise ValueError("Report page count differs from twelve")
     inputs = [ROOT / "reports/content.json", ROOT / "reports/sources.json", Path(__file__)]
     inputs.extend(plan_observation_inputs)
+    inputs.extend(campaign_observation_inputs)
     if not draft:
         inputs.append(ROOT / "src/housing/reporting/plan_observability.py")
+        inputs.append(ROOT / "src/housing/reporting/campaign_observability.py")
     inputs.extend(
         ROOT / name
         for name in (

@@ -1,0 +1,31 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 6621.903852416, \"end_time\": 6624.785272166, \"duration_ms\": 32522.411448, \"ttft_ms\": 2837.74, \"time_to_response_ms\": 2837.74}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s155921\", \"prompt\": {\"total\": 4661, \"uncached\": null, \"cache_read\": 4286, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 44, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791959509.071347, \"timing\": {\"duration_ms\": 32522.411448, \"ttft_ms\": 2837.74, \"time_to_response_ms\": 2837.74}, \"raw_usage\": {\"completion_tokens\": 44, \"prompt_tokens\": 4661, \"total_tokens\": 4705, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 4286, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 4705}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_rnt87sef": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Compose report with fact_ids from trusted registry and required_caveats. Return ReportDecision."
+        },
+        "name": "agent__composer"
+      }
+    }
+  }
+}

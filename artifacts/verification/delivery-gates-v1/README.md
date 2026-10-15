@@ -1,0 +1,7 @@
+# Complete-delivery and preservation guards
+
+The expanded goal requires actual readback for every completed campaign trajectory. The new reporting verifier checks typed immutable acknowledgement snapshots, exact current projection/span identities, one dashboard destination and full physical-capture coverage, with interrupted prefixes accounted for separately. Both final report and submission gates use it. Guard fixtures are explicitly synthetic and prove no live delivery. Eight new receipt tests passed; the full check then passed101 Python tests plus frontend/delivery lint, types, schemas and build.
+
+A subsequent acknowledgement-path improvement follows the existing legacy demo pattern: snapshots beside QA remain immutable when a later import refreshes a working receipt timestamp. Fifteen focused receipt/QA tests passed, including a new refreshed-working-receipt regression. The next full clean-checkout suite includes102 tests. Actual current dashboard delivery/browser proof is still pending.
+
+The new live entrypoint wrapper delegates unfinished work to the frozen runner, and verifies a completed capture without overwriting finish metadata. Its [actual full-corpus preservation test](../live-complete-preservation-v1/verification.json) exercises make evaluate-live and separately blocks all socket/subprocess fallback while running the entrypoint. It verifies all69,980 campaign bytes/mtimes unchanged. Frozen production, evaluation, prompts, configuration, locks and data remain unchanged.

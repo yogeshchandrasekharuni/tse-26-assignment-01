@@ -2,7 +2,7 @@ PYTHON := .venv/bin/python
 UV := $(if $(wildcard .cache/uv-bootstrap/bin/uv),.cache/uv-bootstrap/bin/uv,uv)
 UV_CACHE_DIR ?= .cache/uv
 UV_PYTHON_INSTALL_DIR ?= .python
-DELIVERY_SCRIPTS := scripts/build_report.py scripts/audit_provider_usage.py scripts/replay_case_leg.py scripts/clean_checkout.py scripts/submission_check.py scripts/prepare_diagnosis.py scripts/init_langfuse.py scripts/export_langfuse.py scripts/serve_frozen_ollama.py
+DELIVERY_SCRIPTS := scripts/build_report.py scripts/audit_provider_usage.py scripts/replay_case_leg.py scripts/clean_checkout.py scripts/submission_check.py scripts/prepare_diagnosis.py scripts/init_langfuse.py scripts/export_langfuse.py scripts/serve_frozen_ollama.py scripts/evaluate_live.py
 
 .PHONY: setup data check core-check contracts dev evaluate-live reproduce reproduce-pilot report report-draft clean-checkout submission-check probe-setup probe-check probe-live probe-seeds probe-tool-playback probe-replay
 
@@ -27,7 +27,7 @@ dev:
 	$(PYTHON) scripts/dev.py
 
 evaluate-live:
-	PYTHONHASHSEED=0 $(PYTHON) -u -m housing.evaluation run --cohort configs/headline-cohort-v1.json --directory artifacts/campaigns/headline-live-v1
+	PYTHONHASHSEED=0 $(PYTHON) -u scripts/evaluate_live.py
 
 reproduce:
 	PYTHONHASHSEED=0 $(PYTHON) scripts/reproduce_campaign.py

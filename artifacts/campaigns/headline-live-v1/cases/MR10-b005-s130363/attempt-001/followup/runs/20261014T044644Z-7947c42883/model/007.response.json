@@ -1,0 +1,36 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 6126.00356925, \"end_time\": 6133.748450833, \"duration_ms\": 87415.987249, \"ttft_ms\": 1651.8, \"time_to_response_ms\": 1651.8}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s130363\", \"prompt\": {\"total\": 4842, \"uncached\": null, \"cache_read\": 4410, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 107, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791953966.7284301, \"timing\": {\"duration_ms\": 87415.987249, \"ttft_ms\": 1651.8, \"time_to_response_ms\": 1651.8}, \"raw_usage\": {\"completion_tokens\": 107, \"prompt_tokens\": 4842, \"total_tokens\": 4949, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 4410, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 4949}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [
+    {
+      "text": "The reviewer has accepted the results with COMPLETE_SUPPORT signal. Now I need to delegate the composer to create the final report, then finalize and return the verified report acknowledgement.",
+      "type": "text"
+    }
+  ],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_tz16a2ko": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate composer with fact registry keys from completed scans. Use observations and support from price, supply, and region specialists. Include first_to_last_price or last_month_yoy when available. Required caveats: none since we have complete support."
+        },
+        "name": "agent__composer"
+      }
+    }
+  }
+}
