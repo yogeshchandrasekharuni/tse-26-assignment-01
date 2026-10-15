@@ -10,6 +10,12 @@ from housing.identity import ROOT, sha256_bytes
 from housing.reporting.campaign_observability import verify_campaign_observability
 from housing.reporting.observability import verify_observability
 from housing.reporting.plan_observability import verify_plan_observability
+from housing.reporting.study_readback import (
+    PROOF_PATH,
+    verify_study_examples,
+    verify_study_plan_observability,
+    verify_study_readback,
+)
 from housing.reporting.usage import campaign_usage
 
 
@@ -18,9 +24,14 @@ def load(path: Path) -> object:
 
 
 def check() -> None:
-    verify_observability()
-    verify_plan_observability()
-    verify_campaign_observability()
+    if (ROOT / PROOF_PATH).is_file():
+        verify_study_examples()
+        verify_study_plan_observability()
+        verify_study_readback()
+    else:
+        verify_observability()
+        verify_plan_observability()
+        verify_campaign_observability()
     campaign = ROOT / "artifacts/campaigns/headline-live-v1"
     headline_path = campaign / "headline.json"
     if not headline_path.exists():

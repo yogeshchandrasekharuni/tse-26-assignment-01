@@ -1,6 +1,14 @@
 # AI assistance disclosure
 
-Current completion: the full 900 live corpus and its strict clean-checkout offline reproduction, reviewed diagnosis, local Langfuse exact readback/browser proof, desktop/mobile checks and twelve-page final report/all-page visual inspection are verified. The final submission target passed 106 Python tests and frontend/evidence checks. The following is a chronological execution history: earlier statements about pending work retain their scope at that time. Actual final proof is indexed in EVIDENCE_INDEX.md; authored material and test fixtures remain distinct from observed model evidence.
+## Contributions
+
+The user designed the agent architecture and software with AI assistance. Codex and a local model used through Pi Harness authored almost all of the code. Claude Code was used sparingly for independent code reviews. The detailed entries below record specific contributions and mistakes; they are not an exhaustive attribution of every development task.
+
+For the synthetic dataset, the user directed Codex to examine actual sample datasets available online for context. Codex then authored the Python script that generated the frozen synthetic Dallas-themed snapshot. The snapshot is synthetic, not a collection of actual listings.
+
+The source-revision evidence records the full 900-comparison corpus, clean-checkout offline reproduction, reviewed diagnosis, Langfuse readback/browser proof, desktop/mobile checks and a twelve-page report. The current repository has separately reproduced all 900 comparisons offline and passed 108 Python tests. A separate local dashboard readback verified 1,196 captured trajectories and 35,356 observations, and the repair trajectory was inspected in that dashboard. A fresh clean-checkout certification remains to be completed. The following is a chronological execution history: earlier statements about pending work retain their scope at that time. Authored material and test fixtures remain distinct from observed model evidence.
+
+The current dashboard verification was recorded as a separate evidence version after the earlier acknowledgements no longer matched the current projection IDs. An isolated local Langfuse project read back every observation without new model calls; the earlier receipts and screenshots were preserved. A regression test checks that changed observation IDs or a different dashboard destination are rejected. Its first run exposed an incorrect expected error-message pattern in the test itself; the corrected test passed.
 
 The supplied housing-tse-codex-handoff package was AI generated, as confirmed by the user. Its architecture, contracts, MR catalog, fixtures and implementation directive are substantial AI assistance, not execution evidence.
 

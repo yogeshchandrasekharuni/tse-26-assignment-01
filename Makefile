@@ -3,6 +3,7 @@ UV := $(if $(wildcard .cache/uv-bootstrap/bin/uv),.cache/uv-bootstrap/bin/uv,uv)
 UV_CACHE_DIR ?= .cache/uv
 UV_PYTHON_INSTALL_DIR ?= .python
 DELIVERY_SCRIPTS := scripts/build_report.py scripts/audit_provider_usage.py scripts/replay_case_leg.py scripts/clean_checkout.py scripts/submission_check.py scripts/prepare_diagnosis.py scripts/init_langfuse.py scripts/export_langfuse.py scripts/serve_frozen_ollama.py scripts/evaluate_live.py
+DELIVERY_SCRIPTS += scripts/init_study_langfuse.py scripts/export_study_langfuse.py scripts/verify_study_readback.py
 
 .PHONY: setup data check core-check contracts dev evaluate-live reproduce reproduce-pilot report report-draft clean-checkout submission-check probe-setup probe-check probe-live probe-seeds probe-tool-playback probe-replay
 
@@ -93,3 +94,21 @@ langfuse-export:
 
 langfuse-watch:
 	$(PYTHON) -u scripts/export_langfuse.py --campaign headline-live-v1 --include-web --watch --verify
+
+LANGFUSE_STUDY_COMPOSE := docker compose -f observability/langfuse/compose.study.yaml --env-file observability/langfuse/.env.study
+
+.PHONY: langfuse-study-init langfuse-study-up langfuse-study-stop langfuse-study-export langfuse-study-verify
+langfuse-study-init:
+	$(PYTHON) scripts/init_study_langfuse.py
+
+langfuse-study-up: langfuse-study-init
+	$(LANGFUSE_STUDY_COMPOSE) up -d
+
+langfuse-study-stop:
+	$(LANGFUSE_STUDY_COMPOSE) stop
+
+langfuse-study-export:
+	$(PYTHON) scripts/export_study_langfuse.py
+
+langfuse-study-verify:
+	$(PYTHON) scripts/verify_study_readback.py

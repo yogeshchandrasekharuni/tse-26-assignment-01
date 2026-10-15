@@ -1,5 +1,13 @@
 # Local trajectory dashboard
 
+## Separate readback verification
+
+The independently verified dashboard uses its own Docker project and volumes at <http://localhost:19310>. Run `make langfuse-study-up` to start it, `make langfuse-study-export` to import the recorded campaign and example trajectories with exact observation readback, and `make langfuse-study-verify` to verify the committed campaign receipts offline. `make langfuse-study-stop` stops only this dashboard and retains its volumes. Exporting makes no model calls and does not overwrite the committed verification or earlier dashboard evidence.
+
+The local login is `housing-review@example.invalid`; its password is `LANGFUSE_ADMIN_PASSWORD` in the ignored, mode-0600 `observability/langfuse/.env.study`. Initialization preserves existing credentials. The isolated Compose network defaults to `10.239.173.0/24`; set `LANGFUSE_STUDY_SUBNET` if that subnet conflicts with another local network. The original dashboard on port 19300 remains a separate project.
+
+The current readback binds all 1,196 closed campaign captures and 35,356 observations to their regenerated projections, with two interruptions retained separately. The versioned proof and the inspected repair trajectory are in `artifacts/observability/study-readback-v2/`. Fresh readbacks use their actual verification timestamps and do not change recorded experiment outcomes.
+
 Langfuse is a required demonstration deliverable under the updated goal. It remains decoupled from the analysis service, metamorphic comparisons and strict offline replay so dashboard availability cannot change their results. The current live campaign keeps its original frozen Python, Fast Agent, prompts, model configuration and evaluation inputs.
 
 Run `make langfuse-up` once Docker is available, then open <http://localhost:19300>. The isolated Compose project is `housing-tse-langfuse`; its database, ClickHouse, Redis and object storage use dedicated volumes. It does not modify another local Langfuse installation. `make langfuse-down` stops these services and retains their data.
