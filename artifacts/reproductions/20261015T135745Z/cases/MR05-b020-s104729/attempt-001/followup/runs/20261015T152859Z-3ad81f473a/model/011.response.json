@@ -1,0 +1,36 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 127339.510007291, \"end_time\": 127352.793397041, \"duration_ms\": 149928.811145, \"ttft_ms\": 2943.22, \"time_to_response_ms\": 2943.22}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 5936, \"uncached\": null, \"cache_read\": 4804, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 209, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791349710.037031, \"timing\": {\"duration_ms\": 149928.811145, \"ttft_ms\": 2943.22, \"time_to_response_ms\": 2943.22}, \"raw_usage\": {\"completion_tokens\": 209, \"prompt_tokens\": 5936, \"total_tokens\": 6145, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 4804, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 6145}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [
+    {
+      "text": "The region specialist returned a signal: \"CONFIRMED_SPARSE\". This is a new signal that wasn't present before. According to the instructions, for a NEW RECEIPT_MISMATCH at iteration1 (but this is CONFIRMED_SPARSE, not RECEIPT_MISMATCH), I need to check what action to take.\n\nLooking at the reviewer decision schema:\n- For indexed INDEX_COVERAGE_MISMATCH, SPARSE_SLICE or RECEIPT_MISMATCH choose REFINE with EXACT_RESCAN_WITH_REGION\n- Complete authoritative CONFIRMED_SPARSE requires ACCEPT_LIMITED and null\n\nSince we have CONFIRMED_SPARSE, I should delegate the reviewer with decision ACCEPT_LIMITED and requested_action null.",
+      "type": "text"
+    }
+  ],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_8rlfwt28": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate reviewer with signal CONFIRMED_SPARSE from region specialist. Current iteration 1, full_csv scan strategy. For CONFIRMED_SPARSE, choose ACCEPT_LIMITED with null requested_action."
+        },
+        "name": "agent__reviewer"
+      }
+    }
+  }
+}

@@ -23,8 +23,8 @@ Use the guide's current verified professor-demo links for ordinary completion, n
 
 - [Design note](DESIGN_NOTE.md): parent boundary, cycles and why feedback changes work.
 - [MR catalog](housing-tse-codex-handoff/MR_CATALOG.md): hypotheses, subdomains, exact/toleranced projections and witnesses.
-- [Evidence index](EVIDENCE_INDEX.md): proof scope and current remaining work.
+- [Evidence index](EVIDENCE_INDEX.md): complete final proof and preserved historical scopes.
 - [Runtime recovery](RUNTIME_RECOVERY.md): reboot, pinned runtime, retained mistakes and accounting.
 - [Report sources](reports/README.md): editable manuscript, final evidence gates and PDF verification.
 
-Do not call the assignment complete from a progress counter, a prepared dashboard payload or the marked working PDF. Final delivery requires the reviewed diagnosis, full clean-checkout playback, current dashboard readback/browser proof, complete UI/PDF inspection and submission checks.
+The [submission inventory](SUBMISSION.md) links the verified final deliverables: reviewed diagnosis, full 900 clean-checkout playback, current dashboard readback/browser proof, complete UI/PDF inspection and successful submission checks. The final report and raw/recomputed evidence can be shown alongside the walkthrough.

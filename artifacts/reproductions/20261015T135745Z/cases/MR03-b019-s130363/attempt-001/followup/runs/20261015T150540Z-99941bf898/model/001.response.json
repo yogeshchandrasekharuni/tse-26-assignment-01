@@ -1,0 +1,49 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 113029.326891666, \"end_time\": 113042.703125625, \"duration_ms\": 150976.690552, \"ttft_ms\": 4621.13, \"time_to_response_ms\": 4621.13}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s130363\", \"prompt\": {\"total\": 3396, \"uncached\": null, \"cache_read\": 3169, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 259, \"reasoning\": null}, \"tool_calls\": 3, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791188192.126965, \"timing\": {\"duration_ms\": 150976.690552, \"ttft_ms\": 4621.13, \"time_to_response_ms\": 4621.13}, \"raw_usage\": {\"completion_tokens\": 259, \"prompt_tokens\": 3396, \"total_tokens\": 3655, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3169, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3655}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_2kaytgdl": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate region specialist for public_comparison with indexed scan. Query: bedrooms 1-5, single_family, zips [75019,75038,75093,75214], window_end 2026-07."
+        },
+        "name": "agent__region"
+      }
+    },
+    "call_5h8k6eq1": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate price specialist for indexed scan with public_comparison region purpose. Query: bedrooms 1-5, single_family, zips [75019,75038,75093,75214], window_end 2026-07."
+        },
+        "name": "agent__price"
+      }
+    },
+    "call_v7vlmlyx": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate supply specialist for indexed scan with public_comparison region purpose. Query: bedrooms 1-5, single_family, zips [75019,75038,75093,75214], window_end 2026-07."
+        },
+        "name": "agent__supply"
+      }
+    }
+  }
+}

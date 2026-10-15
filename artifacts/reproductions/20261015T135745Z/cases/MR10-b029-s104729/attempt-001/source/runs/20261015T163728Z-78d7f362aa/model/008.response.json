@@ -1,0 +1,36 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 11061.341489791, \"end_time\": 11072.558398791, \"duration_ms\": 126604.577674, \"ttft_ms\": 3572.01, \"time_to_response_ms\": 3572.01}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 6037, \"uncached\": null, \"cache_read\": 4571, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 128, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1792009711.073264, \"timing\": {\"duration_ms\": 126604.577674, \"ttft_ms\": 3572.01, \"time_to_response_ms\": 3572.01}, \"raw_usage\": {\"completion_tokens\": 128, \"prompt_tokens\": 6037, \"total_tokens\": 6165, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 4571, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 6165}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [
+    {
+      "text": "I see the issue. The reviewer needs to return a proper ReviewDecision JSON object with the correct schema. Based on the context:\n- Signals: [\"COMPLETE_SUPPORT\"]\n- Since we have COMPLETE_SUPPORT, the decision should be \"ACCEPT\" \n- requested_action should be null for ACCEPT\n- role must be \"reviewer\"\n\nLet me delegate the reviewer correctly:",
+      "type": "text"
+    }
+  ],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_mmdbwo2j": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "{\"role\":\"reviewer\",\"decision_type\":\"review\",\"decision\":\"ACCEPT\",\"signals\":[\"COMPLETE_SUPPORT\"],\"requested_action\":null}"
+        },
+        "name": "agent__reviewer"
+      }
+    }
+  }
+}

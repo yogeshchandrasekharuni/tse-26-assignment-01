@@ -2,7 +2,9 @@
 
 An exact, inspectable multi-agent housing-trends application for the IIIT Hyderabad TSE assignment. The data is **synthetic**, generated locally and frozen; it does not measure the Dallas housing market.
 
-Current verified milestone: the complete live campaign is captured and audited: **10 relations × 30 bases × 3 paired seeds = 900 comparisons**. All **690 pairs with both canonical outputs** satisfy their declared numerical projections; **210 pairs have eligible output-contract violations**, which remain genuine findings. Each MR has thirty completed bases and no unresolved infrastructure errors. The corpus retains historical startup failures and two interrupted captures. Ranked diagnosis, complete-result desktop/mobile checks and current plan-aware Langfuse browser proof are verified. Full corrected clean-checkout playback, whole-corpus dashboard readback and the final twelve-page report remain pending.
+Verified delivery: **10 relations × 30 bases × 3 paired seeds = 900 comparisons**, with all 900 strictly reproduced offline from an initially clean checkout. All **690 pairs with both canonical outputs** satisfy their numerical projections; **210 pairs have eligible output-contract violations**, which remain genuine findings. Each MR has thirty completed bases and no unresolved infrastructure errors. Ranked diagnosis, desktop/mobile checks, whole-corpus local Langfuse readback and current browser proof are verified. The final twelve-page report has been visually inspected on every page; `make submission-check` passed, including 106 Python tests and frontend checks. Historical startup failures and both interrupted captures remain preserved.
+
+Open the [final report](output/pdf/housing-report.pdf), [submission inventory](SUBMISSION.md), or [professor walkthrough](DEMONSTRATION.md).
 
 ## Run locally
 
@@ -74,9 +76,9 @@ The primary outcome is **a base with any violation among its three paired seeds*
 
 Replay reads captured model responses, restores native call order, matches exact prompt/schema/tool/data/model/seed/upstream receipt identities, and re-enters the current Fast Agent workflow. It never loads saved final outputs to execute an analysis. Integration tests replay with source outputs/receipts/results/trace removed; a changed current receipt fails before the next captured response. A reproduced natural violation is successful reproduction; completion does not require zero violations.
 
-The first full clean-checkout run executed all900 but correctly rejected failed-leg seed bookkeeping. A [versioned replay-only attribution adapter](REPLAY_METADATA.md) repairs that metadata only after complete exact playback, preserves the uncorrected record, and leaves frozen live/evaluation code unchanged. The current replay driver bounds interpreter lifetime to sixteen physical analyses per local process; the earlier costly per-leg-GC rehearsal is preserved too. The failed full run is preserved; a successful corrected full run is still required.
+The first full clean-checkout run executed all 900 but correctly rejected failed-leg seed bookkeeping. A [versioned replay-only attribution adapter](REPLAY_METADATA.md) repairs that metadata only after complete exact playback, preserves the uncorrected record, and leaves frozen live/evaluation code unchanged. The current driver bounds interpreter lifetime to sixteen physical analyses per local process. A fresh initially clean checkout of revision `8eb6727d` passed offline setup/data/check/framework playback and all 900 comparisons: [actual command evidence](reports/data/clean-checkout.json). The failed full run and stopped 210-case resource rehearsal remain preserved.
 
-Full reproduction, final report, clean-checkout and submission checks intentionally reject incomplete headline evidence. Their completion guards have been exercised; a full successful run still depends on the executing campaign. Editable report prose and primary references are in [reports](reports/README.md). No draft is a submission-ready claim.
+Full reproduction, final report, clean-checkout and submission checks reject incomplete or changed evidence. Their positive final results and historical rejections are retained in the [evidence index](EVIDENCE_INDEX.md). Editable report prose and primary references are in [reports](reports/README.md); [PDF QA](reports/data/pdf-qa.json) binds all twelve inspected pages to the final bytes.
 
 CLI examples:
 

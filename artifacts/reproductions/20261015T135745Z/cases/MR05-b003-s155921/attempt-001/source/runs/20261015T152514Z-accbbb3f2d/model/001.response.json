@@ -1,0 +1,49 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 121528.39241325, \"end_time\": 121535.679354708, \"duration_ms\": 82247.246455, \"ttft_ms\": 2775.92, \"time_to_response_ms\": 2775.92}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s155921\", \"prompt\": {\"total\": 3393, \"uncached\": null, \"cache_read\": 3166, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 135, \"reasoning\": null}, \"tool_calls\": 3, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791284052.306851, \"timing\": {\"duration_ms\": 82247.246455, \"ttft_ms\": 2775.92, \"time_to_response_ms\": 2775.92}, \"raw_usage\": {\"completion_tokens\": 135, \"prompt_tokens\": 3393, \"total_tokens\": 3528, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3166, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3528}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_6vngow7g": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Execute price_stats with partition_order month_asc for the indexed scan under public_comparison region_purpose."
+        },
+        "name": "agent__price"
+      }
+    },
+    "call_s06shpwl": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Execute supply_stats with partition_order month_asc for the indexed scan under public_comparison region_purpose."
+        },
+        "name": "agent__supply"
+      }
+    },
+    "call_xqj0lzzo": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Execute region_stats with partition_order zip_asc for the indexed scan under public_comparison region_purpose."
+        },
+        "name": "agent__region"
+      }
+    }
+  }
+}

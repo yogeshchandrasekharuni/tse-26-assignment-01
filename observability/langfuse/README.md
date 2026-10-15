@@ -15,6 +15,15 @@ make langfuse-export
 make langfuse-watch
 ```
 
+For a fresh dashboard, import the four professor examples directly before importing the whole corpus. They use recorded responses and require no inference:
+
+```sh
+.venv/bin/python scripts/export_langfuse.py --run artifacts/traces/20261001T150456Z-6c0cbee2b9 --verify
+.venv/bin/python scripts/export_langfuse.py --run artifacts/campaigns/headline-live-v1/cases/MR01-b010-s104729/attempt-001/source/runs/20261002T144019Z-78c6924bf7 --verify
+.venv/bin/python scripts/export_langfuse.py --run artifacts/campaigns/headline-live-v1/cases/MR05-b010-s104729/attempt-001/followup/runs/20261006T173448Z-9bb7b33a7f --verify
+.venv/bin/python scripts/export_langfuse.py --run artifacts/traces/20261001T144318Z-82736e984f --verify
+```
+
 The first example is an ordinary live development capture. The second is the explicitly auxiliary injected index-omission demonstration: genuine live model calls, with an injected tool defect that causes a real review/refinement cycle. It is excluded from headline empirical results. Campaign commands import finished physical live runs, including failures, as they become available. The watcher also observes completed local API live runs; replay jobs are explicitly skipped. Dashboard outages are retried every15seconds and failed delivery attempts are preserved. An active campaign remains partial. Reused sources are exported once at their actual capture location; they are not duplicated into new physical calls for other MR cases.
 
 Use `--dry-run` instead of `--verify` to prepare an OTLP payload entirely offline. Offline preparation uses preparation.json and preserves prior delivery acknowledgements. Exports and delivery receipts live under `artifacts/observability/langfuse/<trace-id>/`. The receipt contains the actual dashboard deep link. Offline preparation, HTTP acceptance and observation readback verification have distinct statuses. Stable trace/span IDs make delivery retries idempotent in the local project. An accepted export whose projection changes is refused; version the exporter before changing a delivered mapping. Earlier offline development drafts remain archived separately.

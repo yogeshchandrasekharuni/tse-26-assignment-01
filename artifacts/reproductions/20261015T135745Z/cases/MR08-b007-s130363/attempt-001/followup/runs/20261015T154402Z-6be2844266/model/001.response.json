@@ -1,0 +1,49 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 151628.028021916, \"end_time\": 151649.470359958, \"duration_ms\": 242018.381179, \"ttft_ms\": 7499.31, \"time_to_response_ms\": 7499.31}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s130363\", \"prompt\": {\"total\": 3411, \"uncached\": null, \"cache_read\": 3184, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 316, \"reasoning\": null}, \"tool_calls\": 3, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791623946.270688, \"timing\": {\"duration_ms\": 242018.381179, \"ttft_ms\": 7499.31, \"time_to_response_ms\": 7499.31}, \"raw_usage\": {\"completion_tokens\": 316, \"prompt_tokens\": 3411, \"total_tokens\": 3727, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3184, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3727}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_17b932o4": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate region specialist for public_comparison with indexed scan. Query: bedrooms 2-5, zips 75001/75024/75063, property types condo/townhouse, price range 25M-56.25M. Dataset dallas-synth-v1 window_end 2026-06."
+        },
+        "name": "agent__region"
+      }
+    },
+    "call_3fokgzki": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate supply specialist for indexed scan with public_comparison region purpose. Query: bedrooms 2-5, zips 75001/75024/75063, property types condo/townhouse, price range 25M-56.25M. Dataset dallas-synth-v1 window_end 2026-06."
+        },
+        "name": "agent__supply"
+      }
+    },
+    "call_o64grlfh": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate price specialist for indexed scan with public_comparison region purpose. Query: bedrooms 2-5, zips 75001/75024/75063, property types condo/townhouse, price range 25M-56.25M. Dataset dallas-synth-v1 window_end 2026-06."
+        },
+        "name": "agent__price"
+      }
+    }
+  }
+}

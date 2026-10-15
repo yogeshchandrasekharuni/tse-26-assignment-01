@@ -1,0 +1,36 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 119781.148402875, \"end_time\": 119789.124547375, \"duration_ms\": 90026.204736, \"ttft_ms\": 1379.78, \"time_to_response_ms\": 1379.78}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 4904, \"uncached\": null, \"cache_read\": 4426, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 135, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791264338.9561705, \"timing\": {\"duration_ms\": 90026.204736, \"ttft_ms\": 1379.78, \"time_to_response_ms\": 1379.78}, \"raw_usage\": {\"completion_tokens\": 135, \"prompt_tokens\": 4904, \"total_tokens\": 5039, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 4426, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 5039}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [
+    {
+      "text": "The reviewer has accepted the results with COMPLETE_SUPPORT signal. Now I need to delegate the composer agent to create the final report, then finalize and return the verified report acknowledgement.",
+      "type": "text"
+    }
+  ],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_6ck1v6rz": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate composer for final report. All specialists completed successfully with COMPLETE_SUPPORT signal. Query: compare_regions=true, criteria bedrooms 2-5, property_types condo/townhouse, zips 75001/75024/75063, dataset dallas-synth-v1, window_end 2026-08"
+        },
+        "name": "agent__composer"
+      }
+    }
+  }
+}

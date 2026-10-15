@@ -1,0 +1,36 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 128083.56320425, \"end_time\": 128089.939307666, \"duration_ms\": 71966.651039, \"ttft_ms\": 1905.87, \"time_to_response_ms\": 1905.87}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s130363\", \"prompt\": {\"total\": 4900, \"uncached\": null, \"cache_read\": 4480, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 92, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791358030.201966, \"timing\": {\"duration_ms\": 71966.651039, \"ttft_ms\": 1905.87, \"time_to_response_ms\": 1905.87}, \"raw_usage\": {\"completion_tokens\": 92, \"prompt_tokens\": 4900, \"total_tokens\": 4992, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 4480, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 4992}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [
+    {
+      "text": "The reviewer has accepted the results with COMPLETE_SUPPORT signal. Now I need to delegate the composer to finalize the report.",
+      "type": "text"
+    }
+  ],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_0yc1zfrv": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Compose final report using facts from all completed specialists. Include observations and support data. Use first_to_last_price or last_month_yoy when available. Required caveats: none (required_caveats is empty)."
+        },
+        "name": "agent__composer"
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 154808.803671458, \"end_time\": 154826.379820333, \"duration_ms\": 198380.930923, \"ttft_ms\": 6588.15, \"time_to_response_ms\": 6588.15}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s130363\", \"prompt\": {\"total\": 3383, \"uncached\": null, \"cache_read\": 3156, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 262, \"reasoning\": null}, \"tool_calls\": 3, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791659804.309729, \"timing\": {\"duration_ms\": 198380.930923, \"ttft_ms\": 6588.15, \"time_to_response_ms\": 6588.15}, \"raw_usage\": {\"completion_tokens\": 262, \"prompt_tokens\": 3383, \"total_tokens\": 3645, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3156, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3645}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_fljrc7vs": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate supply specialist for indexed scan with public_comparison region purpose. Query: compare_regions=true, criteria bedrooms 3-5, single_family, zips 75034/75038, window_end 2026-07. Dataset dallas-synth-v1."
+        },
+        "name": "agent__supply"
+      }
+    },
+    "call_jgj0vhsu": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate region specialist for public_comparison with indexed scan. Query: compare_regions=true, criteria bedrooms 3-5, single_family, zips 75034/75038, window_end 2026-07. Dataset dallas-synth-v1."
+        },
+        "name": "agent__region"
+      }
+    },
+    "call_k5uinls9": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate price specialist for indexed scan with public_comparison region purpose. Query: compare_regions=true, criteria bedrooms 3-5, single_family, zips 75034/75038, window_end 2026-07. Dataset dallas-synth-v1."
+        },
+        "name": "agent__price"
+      }
+    }
+  }
+}

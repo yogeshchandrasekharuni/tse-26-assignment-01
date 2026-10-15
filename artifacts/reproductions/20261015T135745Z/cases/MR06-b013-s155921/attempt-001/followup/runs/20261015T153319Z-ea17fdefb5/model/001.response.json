@@ -1,0 +1,49 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 135768.875754833, \"end_time\": 135776.457551708, \"duration_ms\": 85575.313255, \"ttft_ms\": 2993.92, \"time_to_response_ms\": 2993.92}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s155921\", \"prompt\": {\"total\": 3375, \"uncached\": null, \"cache_read\": 3148, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 129, \"reasoning\": null}, \"tool_calls\": 3, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791444787.915729, \"timing\": {\"duration_ms\": 85575.313255, \"ttft_ms\": 2993.92, \"time_to_response_ms\": 2993.92}, \"raw_usage\": {\"completion_tokens\": 129, \"prompt_tokens\": 3375, \"total_tokens\": 3504, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3148, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3504}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_gsihsk6l": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Execute price statistics for the indexed scan with partition_order month_asc, purpose public_comparison."
+        },
+        "name": "agent__price"
+      }
+    },
+    "call_orcu9hb6": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Execute region statistics for the indexed scan with partition_order zip_asc, purpose public_comparison."
+        },
+        "name": "agent__region"
+      }
+    },
+    "call_wg9edsbh": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Execute supply statistics for the indexed scan with partition_order month_asc, purpose public_comparison."
+        },
+        "name": "agent__supply"
+      }
+    }
+  }
+}

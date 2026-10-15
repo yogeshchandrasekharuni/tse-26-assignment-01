@@ -1,0 +1,40 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 152064.82242525, \"end_time\": 152077.855545166, \"duration_ms\": 147104.02895, \"ttft_ms\": 7250.94, \"time_to_response_ms\": 7250.94}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s130363\", \"prompt\": {\"total\": 3407, \"uncached\": null, \"cache_read\": 3187, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 182, \"reasoning\": null}, \"tool_calls\": 2, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791628781.768324, \"timing\": {\"duration_ms\": 147104.02895, \"ttft_ms\": 7250.94, \"time_to_response_ms\": 7250.94}, \"raw_usage\": {\"completion_tokens\": 182, \"prompt_tokens\": 3407, \"total_tokens\": 3589, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3187, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3589}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_iws294iw": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate supply specialist for indexed scan with query constraints: bedrooms 3-4, zips [75006,75034,75080,75204], price range $25M-$56.25M, property types condo/single_family/townhouse"
+        },
+        "name": "agent__supply"
+      }
+    },
+    "call_mbpa5lyi": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate price specialist for indexed scan with query constraints: bedrooms 3-4, zips [75006,75034,75080,75204], price range $25M-$56.25M, property types condo/single_family/townhouse"
+        },
+        "name": "agent__price"
+      }
+    }
+  }
+}

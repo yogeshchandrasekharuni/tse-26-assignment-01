@@ -1,0 +1,36 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 160510.784259208, \"end_time\": 160520.898088208, \"duration_ms\": 114154.181126, \"ttft_ms\": 3678.48, \"time_to_response_ms\": 3678.48}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s155921\", \"prompt\": {\"total\": 4892, \"uncached\": null, \"cache_read\": 4451, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 104, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791724078.349003, \"timing\": {\"duration_ms\": 114154.181126, \"ttft_ms\": 3678.48, \"time_to_response_ms\": 3678.48}, \"raw_usage\": {\"completion_tokens\": 104, \"prompt_tokens\": 4892, \"total_tokens\": 4996, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 4451, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 4996}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [
+    {
+      "text": "The reviewer has accepted the results with COMPLETE_SUPPORT signal. Now I need to delegate the composer agent to create the final report, then finalize and return the verified report acknowledgement.",
+      "type": "text"
+    }
+  ],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_i22kg0ft": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Compose the final report using observations from price, supply, and region specialists. Include fact_ids from the trusted fact registry and required_caveats as specified in the plan. Generate the ReportDecision with appropriate caveat_codes."
+        },
+        "name": "agent__composer"
+      }
+    }
+  }
+}

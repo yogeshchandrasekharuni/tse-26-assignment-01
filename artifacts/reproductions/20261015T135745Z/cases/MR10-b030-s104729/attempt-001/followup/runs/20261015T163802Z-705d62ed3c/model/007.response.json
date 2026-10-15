@@ -1,0 +1,49 @@
+{
+  "channels": {
+    "fast-agent-timing": [
+      {
+        "text": "{\"start_time\": 11444.564123041, \"end_time\": 11466.913039791, \"duration_ms\": 252250.894236, \"ttft_ms\": 8313.98, \"time_to_response_ms\": 8313.98}",
+        "type": "text"
+      }
+    ],
+    "fast-agent-usage": [
+      {
+        "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s104729\", \"prompt\": {\"total\": 4625, \"uncached\": null, \"cache_read\": 4404, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 349, \"reasoning\": null}, \"tool_calls\": 3, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1792014162.089759, \"timing\": {\"duration_ms\": 252250.894236, \"ttft_ms\": 8313.98, \"time_to_response_ms\": 8313.98}, \"raw_usage\": {\"completion_tokens\": 349, \"prompt_tokens\": 4625, \"total_tokens\": 4974, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 4404, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 4974}]}",
+        "type": "text"
+      }
+    ]
+  },
+  "content": [],
+  "is_template": false,
+  "role": "assistant",
+  "stop_reason": "toolUse",
+  "tool_calls": {
+    "call_iasgb6l8": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate supply specialist for full_csv scan with region activation, query criteria: bedrooms 2-4, sqft 2100-2110, property_types single_family/townhouse, zips 75001/75019/75034/75063/75093/75204, window_end 2026-08"
+        },
+        "name": "agent__supply"
+      }
+    },
+    "call_ifpt1xfy": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate price specialist for full_csv scan with region activation, query criteria: bedrooms 2-4, sqft 2100-2110, property_types single_family/townhouse, zips 75001/75019/75034/75063/75093/75204, window_end 2026-08"
+        },
+        "name": "agent__price"
+      }
+    },
+    "call_vwc8bdz8": {
+      "method": "tools/call",
+      "params": {
+        "arguments": {
+          "message": "Delegate region specialist for coverage_diagnostic with full_csv scan, query criteria: bedrooms 2-4, sqft 2100-2110, property_types single_family/townhouse, zips 75001/75019/75034/75063/75093/75204, window_end 2026-08"
+        },
+        "name": "agent__region"
+      }
+    }
+  }
+}

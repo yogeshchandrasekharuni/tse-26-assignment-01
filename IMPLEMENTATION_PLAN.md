@@ -1,6 +1,6 @@
 # Implementation, experiments and reporting plan
 
-Status: G0–G7 are implemented and verified. The full live capture has900 eligible comparisons across300 MR/base panels and all three seeds; the independent integrity audit passed. G8 final ranked diagnosis and full clean-checkout playback, plus G9 final report/UI/dashboard/submission proofs remain in progress. The marked report is still a draft. The original assignment governs coursework requirements.
+Status: G0–G9 are implemented and verified. The full live capture has900 eligible comparisons across300 MR/base panels and all three seeds; the independent integrity audit passed. Ranked diagnosis, all 900 comparisons in a fresh clean-checkout offline run, current local Langfuse readback/browser proof, desktop/mobile verification, the twelve-page final PDF/all-page inspection and actual submission checks are complete. See EVIDENCE_INDEX.md for proof and historical failures. The original assignment governs coursework requirements.
 
 ## Agreed shape
 
@@ -54,6 +54,6 @@ Maintain NOTEBOOK.md and AI_USE.md with actual commands, failures, corrections a
 
 Use the handoff's 12-page allocation including title/references: system/topology and actual loop; data/output semantics; ten MRs/subdomains/tolerances; evaluation design; results/CIs; actual RCA or honest zero/fewer-failure discussion; threats and half-page AI reflection; reproduction/evidence references. Names of the two authors remain user-supplied submission metadata and do not block implementation.
 
-## Immediate next work
+## Completion record
 
-The frozen full campaign launched from commit 8a50f75 at 15:17:57 UTC on 25 September 2026. Continue it without changing production/evaluation inputs. Preserve and diagnose observed failures, then summarize all 900 outcomes, audit provider telemetry, strictly reproduce the full campaign, complete actual ranked diagnoses, commit required evidence and run the clean-checkout command. Populate the final report from those artifacts, inspect every final rendered page and complete submission checks. The pilot's 210 model decisions and six refinements are pilot evidence only.
+The frozen full campaign launched from commit 8a50f75 at 15:17:57 UTC on 25 September 2026 and completed all 900 at 18:54:06 UTC on 6 October 2026 after the documented reboot recovery. Frozen production/evaluation inputs remain unchanged. All 690 numeric pairs satisfy their projections;210 pairs retain eligible output-contract violations. The initially clean revision 8eb6727d completed full offline reproduction at 20:29:30 UTC, followed by the final report, all-page visual inspection and successful submission target. Actual command times/hashes are in reports/data/clean-checkout.json and artifacts/verification/final-delivery-v1. The pilot's210 model decisions and six refinements remain pilot evidence only; no evaluated behavioral mitigation or extra model sample is claimed.

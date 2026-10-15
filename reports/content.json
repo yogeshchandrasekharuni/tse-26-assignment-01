@@ -198,11 +198,11 @@
         ],
         [
           "Three replay mistakes caught by evidence",
-          "Sorted JSON keys reordered native tool-call identifiers; explicit ordered identifiers now preserve execution order. Repeated detached names such as reviewer[1] also replayed the first review twice; exact second-pass playback required one-decision packets. The full clean-checkout run then rejected failed-leg seed metadata: the old runner inferred it from newly written cassettes, which playback does not create. A versioned replay-only adapter now attributes the historical seed only after complete exact playback, preserving the uncorrected record. Every failed attempt remains visible."
+          "Exact playback caught three coordination/bookkeeping mistakes: sorted JSON keys reordered native tool-call identifiers; repeated clone names reused the first review; failed legs lost seed metadata because playback writes no new cassettes. Explicit tool ordering, one-decision clone packets and verified historical-seed attribution now preserve the correct execution. All unsuccessful attempts and each uncorrected leg record remain visible."
         ],
         [
           "Environment and observability",
-          "Python 3.15.0 and Fast Agent 0.10.45 are locked. Three Qwen3.5 profile defaults, digests and seeds are checked; hardware repeatability remains best effort. Offline playback needs no model server. Live inference uses a local compatible endpoint and dummy key. [6] Local Docker Langfuse 4.63.0 displays delegation, receipts, repairs and feedback through OTLP. Exact readback and browser inspection bind the dashboard to raw captures. Its versioned projection explains later-pass repairs while preserving raw tags. [7] Readback verified all 1,196 terminal trajectories and 35,356 observations; two partial prefixes remain inventoried separately."
+          "Python 3.15.0 and Fast Agent 0.10.45 are locked. Qwen3.5 profile defaults, digests and three seeds are checked; hardware repeatability remains best effort. Offline playback needs no model server; live inference uses a local compatible endpoint. [6] Local Docker Langfuse 4.63.0 projects immutable captures through OTLP. [7] Actual readback verified 1,196 terminal trajectories and 35,356 observations; two partial prefixes remain separately inventoried. Browser inspection confirmed real feedback, repair/failure and explained later-pass labels with raw tags retained."
         ]
       ]
     },
