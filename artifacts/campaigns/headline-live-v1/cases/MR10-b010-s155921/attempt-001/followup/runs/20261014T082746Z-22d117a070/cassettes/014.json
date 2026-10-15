@@ -1,8 +1,8 @@
 {
-  "boundary_sha256": "fdc9c4c882d5f208a09dcb0af150f232a1649242f61751b8497d6169cd1b6200",
+  "boundary_sha256": "0a8ef504f0406d332cccebe440f74f5a65f1d221a8394d0765ab70c2b6caec2c",
   "input": {
     "agent": "composer[1]",
-    "boundary_sha256": "fdc9c4c882d5f208a09dcb0af150f232a1649242f61751b8497d6169cd1b6200",
+    "boundary_sha256": "0a8ef504f0406d332cccebe440f74f5a65f1d221a8394d0765ab70c2b6caec2c",
     "context": {
       "contract_version": "1.0",
       "facts": {
@@ -183,18 +183,18 @@
     }
   },
   "origin": "live_captured",
-  "raw_input_sha256": "2e21ba619631f34ef345a094235e1fece0a4b19b55737d57e0cb66ec3e3b3286",
+  "raw_input_sha256": "7182f3d0732f39c902ea7d4e68dad1c51498f23ae00b23b4fecf5aafeaa67160",
   "response": {
     "channels": {
       "fast-agent-timing": [
         {
-          "text": "{\"start_time\": 7311.316289916, \"end_time\": 7319.400760375, \"duration_ms\": 91248.918826, \"ttft_ms\": 4020.34, \"time_to_response_ms\": 4020.34}",
+          "text": "{\"start_time\": 82522.380149491, \"end_time\": 82613.629073498, \"duration_ms\": 91248.918826, \"ttft_ms\": 45377.331886, \"time_to_response_ms\": 45377.331886}",
           "type": "text"
         }
       ],
       "fast-agent-usage": [
         {
-          "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s155921\", \"prompt\": {\"total\": 1576, \"uncached\": null, \"cache_read\": 0, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 89, \"reasoning\": null}, \"tool_calls\": 0, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791967349.19206, \"timing\": {\"duration_ms\": 91248.918826, \"ttft_ms\": 4020.34, \"time_to_response_ms\": 4020.34}, \"raw_usage\": {\"completion_tokens\": 89, \"prompt_tokens\": 1576, \"total_tokens\": 1665, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 0, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 1665}]}",
+          "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s155921\", \"prompt\": {\"total\": 1576, \"uncached\": null, \"cache_read\": 0, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 89, \"reasoning\": null}, \"tool_calls\": 0, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791967349.19206, \"timing\": {\"duration_ms\": 91248.918826, \"ttft_ms\": 45377.331886, \"time_to_response_ms\": 45377.331886}, \"raw_usage\": {\"completion_tokens\": 89, \"prompt_tokens\": 1576, \"total_tokens\": 1665, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 0, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 1665}]}",
           "type": "text"
         }
       ]
@@ -209,9 +209,9 @@
     "role": "assistant",
     "stop_reason": "endTurn"
   },
-  "response_sha256": "e06666c083a9e11a85087537552654dcfcb3fb2f50680c650a0a38913691ce4f",
+  "response_sha256": "82c4d98a2676b2ddf05cf82cd950157c64d56105491730c5dd00f5789caa69cd",
   "response_tool_call_order": [],
   "schema_version": "production-capture-2",
-  "semantic_input_sha256": "2e21ba619631f34ef345a094235e1fece0a4b19b55737d57e0cb66ec3e3b3286",
+  "semantic_input_sha256": "7182f3d0732f39c902ea7d4e68dad1c51498f23ae00b23b4fecf5aafeaa67160",
   "sequence": 14
 }

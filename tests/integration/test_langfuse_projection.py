@@ -26,8 +26,8 @@ def test_real_feedback_capture_preserves_children_receipts_and_causal_loop() -> 
     assert [span.name for span in projection.spans if span.parent_key is None] == ["Orchestrator"]
     generations = [span for span in projection.spans if span.kind == "generation"]
     assert len(generations) == 16
-    assert generations[0].end_ns == 1792161184836303000
-    assert generations[0].start_ns == 1792161179795253000
+    assert generations[0].end_ns == 1790865864445970000
+    assert generations[0].start_ns == 1790865807547946723
     agents = {span.key: span for span in projection.spans if span.kind == "agent"}
     assert [span.name for span in agents.values()] == [
         "Orchestrator",

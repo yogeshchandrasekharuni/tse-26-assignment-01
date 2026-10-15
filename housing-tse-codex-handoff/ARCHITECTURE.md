@@ -59,7 +59,7 @@ Use immutable state updates with `run_id`, `request`, `request_hash`, `dataset_v
 | COMPOSING | grounded fact selection validates | COMPLETED |
 | any active | deadline/model/tool error | FAILED with typed error; never incomplete success |
 
-Model schema parse repair: at most one additional invocation with parse error and original payload; never a hidden loop. Semantic refinement: at most two after initial. Default model-decision deadline60s, whole-analysis deadline300s, numeric tool deadline10s. Record environment-specific overrides; they are not statistical seed parameters. Infrastructure retry once for a transient transport failure, with identical prompt/profile/seed; save every attempt. Exhaustion is an execution error, not a pass. Reject cyclic identical plan hashes.
+Model schema parse repair: at most one additional invocation with parse error and original payload; never a hidden loop. Semantic refinement: at most two after initial. Default model-decision deadline677.22 s, whole-analysis deadline3386.08 s, numeric tool deadline112.87 s. Record environment-specific overrides; they are not statistical seed parameters. Infrastructure retry once for a transient transport failure, with identical prompt/profile/seed; save every attempt. Exhaustion is an execution error, not a pass. Reject cyclic identical plan hashes.
 
 ## Why the loop is necessary
 

@@ -1,8 +1,8 @@
 {
-  "boundary_sha256": "07cf0c09defeee015d5539ef48725950f38c94ef10a7f08a9896f5e7b79a9f97",
+  "boundary_sha256": "589b04e1bbfc3a5af4491289764f8182aca749f899ab23d1e02363c0e3d3fa56",
   "input": {
     "agent": "orchestrator",
-    "boundary_sha256": "07cf0c09defeee015d5539ef48725950f38c94ef10a7f08a9896f5e7b79a9f97",
+    "boundary_sha256": "589b04e1bbfc3a5af4491289764f8182aca749f899ab23d1e02363c0e3d3fa56",
     "context": {
       "contract_version": "1.0",
       "facts": {},
@@ -130,13 +130,13 @@
         "channels": {
           "fast-agent-timing": [
             {
-              "text": "{\"start_time\": 2346.198464875, \"end_time\": 2352.351442541, \"duration_ms\": 69448.309234, \"ttft_ms\": 6096.08, \"time_to_response_ms\": 6096.08}",
+              "text": "{\"start_time\": 26481.398690357, \"end_time\": 26550.846973248, \"duration_ms\": 69448.309234, \"ttft_ms\": 68806.082412, \"time_to_response_ms\": 68806.082412}",
               "type": "text"
             }
           ],
           "fast-agent-usage": [
             {
-              "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s130363\", \"prompt\": {\"total\": 3163, \"uncached\": null, \"cache_read\": 2680, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 84, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791911286.1288355, \"timing\": {\"duration_ms\": 69448.309234, \"ttft_ms\": 6096.08, \"time_to_response_ms\": 6096.08}, \"raw_usage\": {\"completion_tokens\": 84, \"prompt_tokens\": 3163, \"total_tokens\": 3247, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 2680, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3247}]}",
+              "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s130363\", \"prompt\": {\"total\": 3163, \"uncached\": null, \"cache_read\": 2680, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 84, \"reasoning\": null}, \"tool_calls\": 1, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791911286.1288355, \"timing\": {\"duration_ms\": 69448.309234, \"ttft_ms\": 68806.082412, \"time_to_response_ms\": 68806.082412}, \"raw_usage\": {\"completion_tokens\": 84, \"prompt_tokens\": 3163, \"total_tokens\": 3247, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 2680, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3247}]}",
               "type": "text"
             }
           ]
@@ -315,18 +315,18 @@
     }
   },
   "origin": "live_captured",
-  "raw_input_sha256": "776b99024dbbb332ab0681ff0ddd671a8cc0d60f45276bb4575afb72e8cf749f",
+  "raw_input_sha256": "3c0758afcbefca8ca394958164420d4a77bdb25d52f7e3da1dca59f34e0916ee",
   "response": {
     "channels": {
       "fast-agent-timing": [
         {
-          "text": "{\"start_time\": 2352.363352375, \"end_time\": 2359.948946625, \"duration_ms\": 85618.090754, \"ttft_ms\": 2665.37, \"time_to_response_ms\": 2665.37}",
+          "text": "{\"start_time\": 26550.981398816, \"end_time\": 26636.599537539, \"duration_ms\": 85618.090754, \"ttft_ms\": 30083.868302, \"time_to_response_ms\": 30083.868302}",
           "type": "text"
         }
       ],
       "fast-agent-usage": [
         {
-          "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s130363\", \"prompt\": {\"total\": 3386, \"uncached\": null, \"cache_read\": 3159, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 123, \"reasoning\": null}, \"tool_calls\": 3, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791911371.8829801, \"timing\": {\"duration_ms\": 85618.090754, \"ttft_ms\": 2665.37, \"time_to_response_ms\": 2665.37}, \"raw_usage\": {\"completion_tokens\": 123, \"prompt_tokens\": 3386, \"total_tokens\": 3509, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3159, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3509}]}",
+          "text": "{\"schema\": \"fast-agent.usage/v2\", \"provider_attempts\": [{\"provider\": \"generic\", \"upstream_provider\": null, \"usage_schema\": \"openai-chat\", \"model\": \"housing-qwen-v4-s130363\", \"prompt\": {\"total\": 3386, \"uncached\": null, \"cache_read\": 3159, \"cache_write\": null, \"tool_use\": null}, \"completion\": {\"total\": 123, \"reasoning\": null}, \"tool_calls\": 3, \"reasoning_effort\": \"none\", \"requested_service_tier\": null, \"service_tier\": null, \"cost_usd\": null, \"timestamp\": 1791911371.8829801, \"timing\": {\"duration_ms\": 85618.090754, \"ttft_ms\": 30083.868302, \"time_to_response_ms\": 30083.868302}, \"raw_usage\": {\"completion_tokens\": 123, \"prompt_tokens\": 3386, \"total_tokens\": 3509, \"completion_tokens_details\": null, \"prompt_tokens_details\": {\"audio_tokens\": null, \"cache_write_tokens\": null, \"cached_tokens\": 3159, \"image_tokens\": null, \"text_tokens\": null}}, \"context_tokens\": null, \"total\": 3509}]}",
           "type": "text"
         }
       ]
@@ -365,13 +365,13 @@
       }
     }
   },
-  "response_sha256": "39de2347cf59eb9a42f99e24d3190db437f06ce802b4ea7bfcc329361e3d6c47",
+  "response_sha256": "a0f3da71d21db277fae78df696542e59733cf31665552f115eec913f6d705d2c",
   "response_tool_call_order": [
     "call_mzpfz0hr",
     "call_0ajnhndw",
     "call_6bn4h7ey"
   ],
   "schema_version": "production-capture-2",
-  "semantic_input_sha256": "a5a67ae307bd1329fe49d6d6f02030cc7cd382857fc51cdccdb9e8a23afd03ec",
+  "semantic_input_sha256": "3114e3f9c5dd7242732eddf25c701b8db7e72e97cec55e9797c267323f4ef15a",
   "sequence": 1
 }

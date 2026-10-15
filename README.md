@@ -104,4 +104,6 @@ The index-omission command is an explicitly labeled auxiliary control. It preser
 - `make contracts`: regenerate JSON Schema, OpenAPI and TypeScript from strict Python boundary models. `make check` rejects stale generated contracts.
 - Original assignment, source diagrams and AI handoff are preserved in housing-tse-codex-handoff/. The assignment governs coursework requirements; explicit user overrides supersede handoff defaults.
 
-The assignment lists **25 September 2026**, teams of **two**. No submission hour or author identities are inferred. No paid API, personal listing data, scraping, public deployment or external messaging is used.
+The assignment deadline is **16 October 2026**, teams of **two**. No submission hour or author identities are inferred. No paid API, personal listing data, scraping, public deployment or external messaging is used.
+
+Recorded validation refers to the source revision named in each evidence packet. [Revision correspondence](reports/data/revision-map.json) resolves those references in this repository; it does not certify later working-tree changes.

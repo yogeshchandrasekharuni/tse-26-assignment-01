@@ -1,6 +1,6 @@
 # Housing Evidence: architecture and evaluation design
 
-Version 1, recorded 16 October 2026. This is the repository design note; no earlier submission is claimed. The assignment specifies a team of two and deadline 16 October 2026. Author names have not been supplied.
+Version 1, recorded 25 September 2026. This is the repository design note; no earlier submission is claimed. The assignment specifies a team of two and deadline 16 October 2026. Author names have not been supplied.
 
 The application analyzes a frozen, explicitly synthetic Dallas-themed observation feed. It uses Fast Agent 0.10.45 agents as tools. The parent Orchestrator is the only agent invoked by the application service and the only agent returning to it. This pattern is distinct from the native `@fast.orchestrator` planning workflow; the installed-source probe and failed/successful attempts are preserved in [FRAMEWORK_FINDINGS.md](FRAMEWORK_FINDINGS.md).
 

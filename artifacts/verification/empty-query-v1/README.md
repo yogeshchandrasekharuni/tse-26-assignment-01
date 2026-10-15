@@ -6,7 +6,7 @@ The actual live run completed with16 model decisions and one refinement. The Rev
 
 `axis-before.log` preserves the failing regression: twelve missing price levels incorrectly generated five dollar ticks. The API formatter now returns no ticks or plot points for that input. The frontend reads the canonical zero count and shows an explicit no-match status and recovery instructions. Twelve monthly table records remain zero/unavailable. No statistical calculation moved to the frontend.
 
-`axis-after.log` records two passing formatting tests; `targeted-check.log` records four passing formatting/API tests. `check.log` is the actual successful full `make check`:74 Python tests in175.50seconds, three frontend parser tests, Python/frontend lint and types, generated-contract freshness and frontend build. Runtime overlaps other local work and is descriptive.
+`axis-after.log` records two passing formatting tests; `targeted-check.log` records four passing formatting/API tests. `check.log` is the actual successful full `make check`:74 Python tests in1980.86 seconds, three frontend parser tests, Python/frontend lint and types, generated-contract freshness and frontend build. Runtime overlaps other local work and is descriptive.
 
 `desktop.jpg` and `mobile.jpg` are unedited actual browser captures, opened by root and the scoped reviewer. Their DOM records show no page overflow, all twelve table rows and16px mobile explanation text. The independent [review](../../../../.impeccable/review/empty-review.md) returned `ship` only for this extension. The skill documenter compared current source/captures with the incumbent system and preserved DESIGN.md and its sidecar: no system change was needed.
 

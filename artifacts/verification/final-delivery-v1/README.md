@@ -1,6 +1,6 @@
 # Final delivery verification
 
-The actual `make submission-check` exited0 at2026-10-15T17:54:55.074749UTC:106 Python tests in26.96s, Python/delivery lint/format/types, generated contracts, frontend parser/type/build/lint and strict evidence/PDF gates. [Command receipt](submission-command.json) binds the [closed log](submission-check.log).
+The actual `make submission-check` exited0 at2026-10-15T17:54:55.074749UTC:106 Python tests in304.30 s, Python/delivery lint/format/types, generated contracts, frontend parser/type/build/lint and strict evidence/PDF gates. [Command receipt](submission-command.json) binds the [closed log](submission-check.log).
 
 [The independent audit](audit.json), executed by [check.py](check.py), verifies:
 

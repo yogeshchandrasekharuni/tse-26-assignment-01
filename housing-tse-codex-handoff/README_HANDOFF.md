@@ -1,6 +1,6 @@
 # Housing Trends MAS: Codex implementation handoff
 
-Prepared 16 October 2026 for the IIIT Hyderabad TSE assignment, team of two. The assignment lists this same date as the deadline; no submission hour or extension is inferred. This bundle specifies the implementation. **It contains no built application, completed experiment, measured violation rates, recorded model corpus, or finished report.**
+Prepared 25 September 2026 for the IIIT Hyderabad TSE assignment, team of two. The assignment deadline is 16 October 2026; no submission hour or extension is inferred. This bundle specifies the implementation. **It contains no built application, completed experiment, measured violation rates, recorded model corpus, or finished report.**
 
 ## Start here
 
