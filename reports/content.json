@@ -197,8 +197,8 @@
           "Fast Agent PlaybackLLM supplies captured decisions; the current dispatcher reruns numeric tools and receipt checks. Changed receipts invalidate the next model boundary. Integration tests replay with saved final outputs, numeric results and source traces removed. Playback blocks network connections."
         ],
         [
-          "Two integration mistakes caught by evidence",
-          "Sorted JSON keys reordered native tool-call identifiers; explicit ordered identifiers now preserve execution order. Repeated detached names such as reviewer[1] also replayed the first review twice. Exact second-pass playback exposed this; each child now receives its one-decision packet. Failed attempts remain preserved."
+          "Three replay mistakes caught by evidence",
+          "Sorted JSON keys reordered native tool-call identifiers; explicit ordered identifiers now preserve execution order. Repeated detached names such as reviewer[1] also replayed the first review twice; exact second-pass playback required one-decision packets. The full clean-checkout run then rejected failed-leg seed metadata: the old runner inferred it from newly written cassettes, which playback does not create. A versioned replay-only adapter now attributes the historical seed only after complete exact playback, preserving the uncorrected record. Every failed attempt remains visible."
         ],
         [
           "Environment and observability",

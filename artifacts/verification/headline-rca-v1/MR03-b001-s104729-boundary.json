@@ -1,0 +1,60 @@
+{
+  "auxiliary_schema_control": {
+    "decision": {
+      "decision_type": "tool_intent",
+      "partition_order": "month_asc",
+      "purpose": "statistics",
+      "role": "price",
+      "tool": "price_stats"
+    },
+    "interpretation": "Constructed Price intent with only purpose corrected; not a new model response, deployed fix or empirical rerun"
+  },
+  "case": "MR03-b001-s104729",
+  "empirical_parent_messages": {
+    "agent__price": "Execute price_stats for indexed scan with partition_order month_asc, purpose public_comparison",
+    "agent__region": "Execute region_stats for indexed scan with partition_order zip_asc, purpose public_comparison",
+    "agent__supply": "Execute supply_stats for indexed scan with partition_order month_asc, purpose public_comparison"
+  },
+  "empirical_price_response": {
+    "decision_type": "tool_intent",
+    "partition_order": "month_asc",
+    "purpose": "public_comparison",
+    "role": "price",
+    "tool": "price_stats"
+  },
+  "empirical_supply_response": {
+    "decision_type": "tool_intent",
+    "partition_order": "month_asc",
+    "purpose": "statistics",
+    "role": "supply",
+    "tool": "supply_stats"
+  },
+  "leg": "followup",
+  "minimal_replay": "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996",
+  "model_decisions": 4,
+  "network_attempts": [],
+  "numeric_comparison": "unavailable because an eligible leg has no final output",
+  "observed_guard": "Schema repair must finish in the role that produced invalid JSON",
+  "pending_repair_role_in_supply_context": "price",
+  "price_schema_errors": [
+    {
+      "ctx": {
+        "expected": "'statistics'"
+      },
+      "loc": [
+        "purpose"
+      ],
+      "msg": "Input should be 'statistics'",
+      "type": "literal_error"
+    }
+  ],
+  "raw_witness": {
+    "followup_selected": 5760,
+    "identity_safe_exact_twofold_multiset": true,
+    "raw_rows": 34560,
+    "source_selected": 2880,
+    "transformed_rows": 69120
+  },
+  "run_path": "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2",
+  "source_reused_from": "artifacts/campaigns/headline-live-v1/cases/MR01-b001-s104729/attempt-001/source/record.json"
+}

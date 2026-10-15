@@ -1,0 +1,58 @@
+.venv/bin/ruff check src tests --exclude test_probe_guards.py
+All checks passed!
+.venv/bin/ruff format --check src tests --exclude test_probe_guards.py
+78 files already formatted
+.venv/bin/mypy src/housing tests --exclude test_probe_guards.py
+Success: no issues found in 78 source files
+.venv/bin/python -m pytest -q tests
+........................................................................ [ 70%]
+..............................                                           [100%]
+102 passed in 250.57 s
+.venv/bin/ruff check scripts/build_report.py scripts/audit_provider_usage.py scripts/replay_case_leg.py scripts/clean_checkout.py scripts/submission_check.py scripts/prepare_diagnosis.py scripts/init_langfuse.py scripts/export_langfuse.py scripts/serve_frozen_ollama.py scripts/evaluate_live.py
+All checks passed!
+.venv/bin/ruff format --check scripts/build_report.py scripts/audit_provider_usage.py scripts/replay_case_leg.py scripts/clean_checkout.py scripts/submission_check.py scripts/prepare_diagnosis.py scripts/init_langfuse.py scripts/export_langfuse.py scripts/serve_frozen_ollama.py scripts/evaluate_live.py
+10 files already formatted
+.venv/bin/mypy scripts/build_report.py scripts/audit_provider_usage.py scripts/replay_case_leg.py scripts/clean_checkout.py scripts/submission_check.py scripts/prepare_diagnosis.py scripts/init_langfuse.py scripts/export_langfuse.py scripts/serve_frozen_ollama.py scripts/evaluate_live.py
+Success: no issues found in 10 source files
+.venv/bin/python scripts/export_contracts.py --check
+Strict backend/client schemas verified
+cd frontend && node scripts/generate-contracts.mjs --check
+npm --prefix frontend test
+
+> frontend@0.0.0 test
+> node --test --experimental-strip-types tests/*.test.mjs
+
+✔ USD bounds retain cents, including typed partial decimals and the safe integer boundary (8.353746 ms)
+✔ malformed or excessive-precision USD is rejected instead of truncated (0.949976 ms)
+✔ whole-area bounds reject fractional and exponent input instead of changing its meaning (0.972088 ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 72.8815
+npm --prefix frontend run build
+
+> frontend@0.0.0 build
+> tsc -b && vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 1931 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                  0.65 kB │ gzip:  0.39 kB
+dist/assets/public-sans-vietnamese-wght-normal-CtlIRbEm.woff2    7.71 kB
+dist/assets/public-sans-latin-ext-wght-normal-MQgHevqp.woff2    18.47 kB
+dist/assets/public-sans-latin-wght-normal-DdeTHZLK.woff2        26.83 kB
+dist/assets/index-DmxIYDPL.css                                  30.85 kB │ gzip:  7.37 kB
+dist/assets/index-1sZpy73u.js                                  286.33 kB │ gzip: 87.78 kB
+
+✓ built in 2708.87 ms
+npm --prefix frontend run lint
+
+> frontend@0.0.0 lint
+> oxlint
+

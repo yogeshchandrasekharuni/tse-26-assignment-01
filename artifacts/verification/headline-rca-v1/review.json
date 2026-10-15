@@ -1,0 +1,353 @@
+{
+  "campaign_id": "headline-live-v1",
+  "checked_at_utc": "2026-10-15T06:03:06.407348+00:00",
+  "common_mechanism": "Regional purpose propagated to Price; valid queued Supply reply rejected while Price repair is pending",
+  "headline_sha256": "4194daea57d82be5e3e826658f7eae676f514e373f71137c4ad12ce7ccee5b48",
+  "interpretation": "Three ranked relations share one demonstrated representative mechanism, not three independent bugs or evidence that these transformations caused it. Other natural mechanisms remain separately documented.",
+  "ranked_relations": [
+    "MR03",
+    "MR05",
+    "MR07",
+    "MR08",
+    "MR09",
+    "MR01",
+    "MR02",
+    "MR06",
+    "MR10",
+    "MR04"
+  ],
+  "selected": [
+    {
+      "auxiliary_schema_control": {
+        "decision": {
+          "decision_type": "tool_intent",
+          "partition_order": "month_asc",
+          "purpose": "statistics",
+          "role": "price",
+          "tool": "price_stats"
+        },
+        "interpretation": "Constructed Price intent with only purpose corrected; not a new model response, deployed fix or empirical rerun"
+      },
+      "case": "MR03-b001-s104729",
+      "empirical_parent_messages": {
+        "agent__price": "Execute price_stats for indexed scan with partition_order month_asc, purpose public_comparison",
+        "agent__region": "Execute region_stats for indexed scan with partition_order zip_asc, purpose public_comparison",
+        "agent__supply": "Execute supply_stats for indexed scan with partition_order month_asc, purpose public_comparison"
+      },
+      "empirical_price_response": {
+        "decision_type": "tool_intent",
+        "partition_order": "month_asc",
+        "purpose": "public_comparison",
+        "role": "price",
+        "tool": "price_stats"
+      },
+      "empirical_supply_response": {
+        "decision_type": "tool_intent",
+        "partition_order": "month_asc",
+        "purpose": "statistics",
+        "role": "supply",
+        "tool": "supply_stats"
+      },
+      "leg": "followup",
+      "minimal_replay": "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996",
+      "model_decisions": 4,
+      "network_attempts": [],
+      "numeric_comparison": "unavailable because an eligible leg has no final output",
+      "observed_guard": "Schema repair must finish in the role that produced invalid JSON",
+      "pending_repair_role_in_supply_context": "price",
+      "price_schema_errors": [
+        {
+          "ctx": {
+            "expected": "'statistics'"
+          },
+          "loc": [
+            "purpose"
+          ],
+          "msg": "Input should be 'statistics'",
+          "type": "literal_error"
+        }
+      ],
+      "raw_witness": {
+        "followup_selected": 5760,
+        "identity_safe_exact_twofold_multiset": true,
+        "raw_rows": 34560,
+        "source_selected": 2880,
+        "transformed_rows": 69120
+      },
+      "run_path": "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2",
+      "source_reused_from": "artifacts/campaigns/headline-live-v1/cases/MR01-b001-s104729/attempt-001/source/record.json"
+    },
+    {
+      "auxiliary_schema_control": {
+        "decision": {
+          "decision_type": "tool_intent",
+          "partition_order": "month_asc",
+          "purpose": "statistics",
+          "role": "price",
+          "tool": "price_stats"
+        },
+        "interpretation": "Constructed Price intent with only purpose corrected; not a new model response, deployed fix or empirical rerun"
+      },
+      "case": "MR05-b001-s104729",
+      "empirical_parent_messages": {
+        "agent__price": "Execute price_stats for indexed scan with partition_order month_asc, purpose public_comparison",
+        "agent__region": "Execute region_stats for indexed scan with partition_order zip_asc, purpose public_comparison",
+        "agent__supply": "Execute supply_stats for indexed scan with partition_order month_asc, purpose public_comparison"
+      },
+      "empirical_price_response": {
+        "decision_type": "tool_intent",
+        "partition_order": "month_asc",
+        "purpose": "public_comparison",
+        "role": "price",
+        "tool": "price_stats"
+      },
+      "empirical_supply_response": {
+        "decision_type": "tool_intent",
+        "partition_order": "month_asc",
+        "purpose": "statistics",
+        "role": "supply",
+        "tool": "supply_stats"
+      },
+      "leg": "source",
+      "minimal_replay": "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90",
+      "model_decisions": 4,
+      "network_attempts": [],
+      "numeric_comparison": "unavailable because an eligible leg has no final output",
+      "observed_guard": "Schema repair must finish in the role that produced invalid JSON",
+      "pending_repair_role_in_supply_context": "price",
+      "price_schema_errors": [
+        {
+          "ctx": {
+            "expected": "'statistics'"
+          },
+          "loc": [
+            "purpose"
+          ],
+          "msg": "Input should be 'statistics'",
+          "type": "literal_error"
+        }
+      ],
+      "raw_witness": {
+        "added_selected_observations": 731,
+        "data_unchanged": true,
+        "failed_leg_precedes_transformation": true,
+        "followup_selected": 2880,
+        "source_selected": 2149
+      },
+      "run_path": "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca",
+      "source_reused_from": null
+    },
+    {
+      "auxiliary_schema_control": {
+        "decision": {
+          "decision_type": "tool_intent",
+          "partition_order": "month_asc",
+          "purpose": "statistics",
+          "role": "price",
+          "tool": "price_stats"
+        },
+        "interpretation": "Constructed Price intent with only purpose corrected; not a new model response, deployed fix or empirical rerun"
+      },
+      "case": "MR07-b001-s130363",
+      "empirical_parent_messages": {
+        "agent__price": "Execute price_stats for indexed scan with partition_order month_asc, purpose public_comparison",
+        "agent__region": "Execute region_stats for indexed scan with partition_order zip_asc, purpose public_comparison",
+        "agent__supply": "Execute supply_stats for indexed scan with partition_order month_asc, purpose public_comparison"
+      },
+      "empirical_price_response": {
+        "decision_type": "tool_intent",
+        "partition_order": "month_asc",
+        "purpose": "public_comparison",
+        "role": "price",
+        "tool": "price_stats"
+      },
+      "empirical_supply_response": {
+        "decision_type": "tool_intent",
+        "partition_order": "month_asc",
+        "purpose": "statistics",
+        "role": "supply",
+        "tool": "supply_stats"
+      },
+      "leg": "followup",
+      "minimal_replay": "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce",
+      "model_decisions": 4,
+      "network_attempts": [],
+      "numeric_comparison": "unavailable because an eligible leg has no final output",
+      "observed_guard": "Schema repair must finish in the role that produced invalid JSON",
+      "pending_repair_role_in_supply_context": "price",
+      "price_schema_errors": [
+        {
+          "ctx": {
+            "expected": "'statistics'"
+          },
+          "loc": [
+            "purpose"
+          ],
+          "msg": "Input should be 'statistics'",
+          "type": "literal_error"
+        }
+      ],
+      "raw_witness": {
+        "entering_records": 240,
+        "followup_selected": 2880,
+        "leaving_records": 240,
+        "overlap_months": [
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06"
+        ],
+        "same_raw_multiset_in_each_overlap": true,
+        "source_selected": 2880
+      },
+      "run_path": "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751",
+      "source_reused_from": "artifacts/campaigns/headline-live-v1/cases/MR01-b001-s130363/attempt-001/source/record.json"
+    }
+  ],
+  "source_hashes": {
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/cassettes/000.json": "33591ea86faa332973a2b837a600716c09c9de3999a2d5e9b7ca3530c03ec830",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/cassettes/001.json": "156ee1e986b1c776b1b9906b85e3d08c52599001174634059d0e909d3760e8ea",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/cassettes/002.json": "d397063eb7aa35d7cfd011198f6b80c783fdb5b3fd7de7301039daf9dc6ddea1",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/cassettes/003.json": "f7b45759383f013c498feb4f1e94a0cb5d640755299c1f5e1e4376db9bf33d5f",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/failure.json": "c78e3dbcfe0b11ffcd4820f3546f94d7fd509009891d06835b4b59fbcf4cee1f",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/model/000.budget.json": "e7dd43975c953c263f206c6cf592d765c926189b9e2daa77e365d8280a2bb37f",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/model/000.input.json": "23d56a53a19e4585931ac6e3c9026f0afc25d1e108f4c62cc578683da7b1b8bc",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/model/000.response.json": "00c988377932b9f4bae657d0b9891be95b536f93047101bbcacac3d6342c3ec8",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/model/001.budget.json": "0b6a7986827b7fb9f488ec28e4612cd4a0c45baafffb827876c5bea27a8209d5",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/model/001.input.json": "e5b25347794f307badc6abfa12bf9cdd670c7430bfdd1581ca29c904f6f7af68",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/model/001.response.json": "46bad69f70072a1b4b2b2dc445974ebf41f671dab9ad5852df4ee5e1da05a91d",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/model/002.budget.json": "6b10324664a67b5ae06ca71f32ef2f03e40a779a64dffea005b0afc264a7cce9",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/model/002.dispatched.json": "287293f73d115e13eea807937d4f849d19daad15f16451b9e8e09178ee068ed0",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/model/002.input.json": "5a041af87682e157838045496ae4f64f56ca64d2f06eb0a86c6fd7a017bebe23",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/model/002.response.json": "04641a11658c06748f76ae383d0b5ee112be33712ae45274de2d1177d1ed4bc5",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/model/003.budget.json": "5c3a8bdbdc22b7451ec7c3188e6bb25ae88b65c250f39b43225f08f63b962b72",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/model/003.input.json": "9a04fdb1e46bf079bd5c496238029c7a0bd23739bc39d6d20db8e17932e6b909",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/model/003.response.json": "e455be6d2280e5836938776538d51c52485876d8d9ceb17cb83ee2bfffd87061",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/plan-0.json": "347f1076721752e5da9dcb06381ce4e1bc137eb170eca7f3e534aff7afea037b",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/request.json": "8383821b035cbc8f2f2ae7ef1151673f09523a5dd76c808493f905ce6b407862",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/run-manifest.json": "9adbe228ee112ff1613c91aa93a538feac43e3711b69ce3fc91fdd7e0cf81773",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/terminal.json": "9f95bd0dab8a7674d6e68bc41a964fd51b6117c7a4622a64c978884f156e1016",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/attempt-001/followup/runs/20261004T222211Z-846bf4d0e2/trace.jsonl": "3e28f3567fe9423c2fd30d8e05592382f121086b52d06878d9ec06075378b979",
+    "artifacts/campaigns/headline-live-v1/cases/MR03-b001-s104729/result.json": "0020bfc91c663f82df540115213be21ee4563e912495e17551dcb13bb5e170bb",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/cassettes/000.json": "bd43d52e685dc188d8da4d1d8001d05c0dee876ee75a3929e5fd2d9a6c1ebdef",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/cassettes/001.json": "a078b14f7fe9bda0476b669a26b5699df18c81f0773f20a6c7632c798abe9093",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/cassettes/002.json": "837f908c9a1779de67172ec05a2ecd70b3b6d449f844cf95fbfd728ac044bc75",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/cassettes/003.json": "2fa0412be6196aed8dca10529476dc527b11b5236f40cf9045cb85075c87b118",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/failure.json": "c78e3dbcfe0b11ffcd4820f3546f94d7fd509009891d06835b4b59fbcf4cee1f",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/model/000.budget.json": "19a0de8aced2d09ee42d3f655866c6761afb3ca99c86ceade5bce17e02fe5c9c",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/model/000.input.json": "028da1bdbe2ad8039c4edef294c32a87efdfd8a63d8736f0be4d1fde8c7970fc",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/model/000.response.json": "d282e6f925a1198fb18aa6c0e4bb5c3171cf58702a57cc5c75fb692b2fa4d77a",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/model/001.budget.json": "c7e517d59bdbf0a9772a02805de3be134a77cdb96bdfa3afb14a92d059d10c45",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/model/001.input.json": "65840e2dd1b3f8558f67b72d92f2039ec9cfcfd3e88bfe9ee312f23166e2f90c",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/model/001.response.json": "1a4361ee53eaaf3c6cc889e39fb3b5157f25ce3660389b21895871609bfa0bfb",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/model/002.budget.json": "5ce98bd76731bf980417e7ac7dc9a7c1b44b9629c85ff93e20d3aa5a91e21921",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/model/002.dispatched.json": "287293f73d115e13eea807937d4f849d19daad15f16451b9e8e09178ee068ed0",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/model/002.input.json": "d9801712ac4771bef31262a3c881d2d9cbe762be5e5653a0e33b0015a442e0aa",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/model/002.response.json": "51ccb76ba8f2566c943beeb281021e7c38afbe4394f88ae82ab3370fb2e6f95b",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/model/003.budget.json": "778a1a9ba3ca79ff490c65abc16ee4c9a50d1fb0d95fea333f55db9941b9b397",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/model/003.input.json": "ddc007035094257eeb7c4919acb7aeef9f3ffc4d8a2f1a30efc1ea08e34fb1d0",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/model/003.response.json": "89946e64a8a84ec93088464d3ed66ca36ae6ef632ab520eb59122efeff1d555a",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/plan-0.json": "589fcb1ff9e4d9540113fa5d170d4324a7e7e420d491b39defdc5b56006d3aac",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/request.json": "7b9981148e4fd965cb6a9f897d5315af60829a557054c3621d90827b778f4238",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/run-manifest.json": "a269b112bf0aebd7a7192ae8b61786007a458e1e5645bf7cfaea571fd00beea6",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/terminal.json": "5d5aa054c64c7b7bcf7e104ebc243aabc85b7c47cea763ce01f1e1c183dfcb7b",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/attempt-001/source/runs/20261006T075933Z-6c6dbc2dca/trace.jsonl": "b33b6a4f259d5fadda8a893edfd78ac363f3c4ec45af6f0ca7fc736899d04035",
+    "artifacts/campaigns/headline-live-v1/cases/MR05-b001-s104729/result.json": "1ffcfaf5d20de1248b7e27f92fbf732f6f2c6661a4717c90cf1e7d156ab568f4",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/cassettes/000.json": "0d268fbc33619c89357c18cdb2e3924584d406d7875a2a7d8c50aa9d8b192bb8",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/cassettes/001.json": "5ec7ad4e1932f6ea61184f194d966744543d8e295e85e65c133f85e1c5203e21",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/cassettes/002.json": "d0d4ecff2c6eaf9288fd486992ad98c070912c5abae28832f125775b24f956cd",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/cassettes/003.json": "c4bda540b4efc5c5cba0344b26b2b4c2ee1f3bc2e0bc8d1e1551b7211a764c18",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/failure.json": "c78e3dbcfe0b11ffcd4820f3546f94d7fd509009891d06835b4b59fbcf4cee1f",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/model/000.budget.json": "e7dd43975c953c263f206c6cf592d765c926189b9e2daa77e365d8280a2bb37f",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/model/000.input.json": "f23de506754a97e22eff73cdcab4367a9e8f5d0e02b38f2099bb8c44bd15dec6",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/model/000.response.json": "e1793804bd91ac6f5e7e4cab5c37f1f9f0ac681ad9a735be521d5374002ee38a",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/model/001.budget.json": "0b6a7986827b7fb9f488ec28e4612cd4a0c45baafffb827876c5bea27a8209d5",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/model/001.input.json": "21668a1779726f0e921d2cfcbb064cc67bcab648e4581e072a6395883cae3777",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/model/001.response.json": "f985f06a387abcfb960cce5f40fe0e20458b09bb4bbef674d31d1317c553167a",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/model/002.budget.json": "6b10324664a67b5ae06ca71f32ef2f03e40a779a64dffea005b0afc264a7cce9",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/model/002.dispatched.json": "287293f73d115e13eea807937d4f849d19daad15f16451b9e8e09178ee068ed0",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/model/002.input.json": "c9754e14d6fd99e5f902c831688bc89638dc6dcf717d4903790120ff06f333ca",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/model/002.response.json": "0105dd54bdaadeb34955b85d7916aca6a757764c0ec1d3ea0b436ab9f8b0e4b5",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/model/003.budget.json": "5c3a8bdbdc22b7451ec7c3188e6bb25ae88b65c250f39b43225f08f63b962b72",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/model/003.input.json": "e7b3647494581ad54d6a23fd638771a3e31cb527b3910e7d698f1fb50be98ff0",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/model/003.response.json": "9cdb2ca265264139cc24d4f2ea2c147ab601b52f0e56558846fea118ebd68a2d",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/plan-0.json": "86919350ae283e2ab6b8afc0fe829173c7f28465eaf9b15e05a65e8df71ab834",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/request.json": "d1a4cef054102082e08a79e4202b84f5e98305f7bd70922e2efdd38203152f7f",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/run-manifest.json": "6e13585af12df08be1f65bb75b6e87eab13a92172746c9a4a215463995795186",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/terminal.json": "bbc85f65116f0d46e2015275b34248396edfcc364fedc2a5e513b1c153fd8298",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751/trace.jsonl": "b3f0c94579ec31f73ac85aeb7739b7caf1652051f1b8ceb99f82f1c2784cf2e2",
+    "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/result.json": "a06c56ed402e41ff2979c9968bf84526b3c481f787c0627dada0bef8f868bc3d",
+    "artifacts/verification/headline-rca-v1/check.py": "74f0207c3b241245807c75dcff4227369bd8fb1ca437af6975d162f3c5cffb38",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996/failure.json": "c78e3dbcfe0b11ffcd4820f3546f94d7fd509009891d06835b4b59fbcf4cee1f",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996/model/000.budget.json": "e7dd43975c953c263f206c6cf592d765c926189b9e2daa77e365d8280a2bb37f",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996/model/000.input.json": "23d56a53a19e4585931ac6e3c9026f0afc25d1e108f4c62cc578683da7b1b8bc",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996/model/000.response.json": "00c988377932b9f4bae657d0b9891be95b536f93047101bbcacac3d6342c3ec8",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996/model/001.budget.json": "0b6a7986827b7fb9f488ec28e4612cd4a0c45baafffb827876c5bea27a8209d5",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996/model/001.input.json": "674e0a0f900a9a213580b05149ee7ed8e0255747ca1830268b1b6d323de1d63a",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996/model/001.response.json": "46bad69f70072a1b4b2b2dc445974ebf41f671dab9ad5852df4ee5e1da05a91d",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996/model/002.budget.json": "6b10324664a67b5ae06ca71f32ef2f03e40a779a64dffea005b0afc264a7cce9",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996/model/002.dispatched.json": "287293f73d115e13eea807937d4f849d19daad15f16451b9e8e09178ee068ed0",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996/model/002.input.json": "5a041af87682e157838045496ae4f64f56ca64d2f06eb0a86c6fd7a017bebe23",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996/model/002.response.json": "04641a11658c06748f76ae383d0b5ee112be33712ae45274de2d1177d1ed4bc5",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996/model/003.budget.json": "5c3a8bdbdc22b7451ec7c3188e6bb25ae88b65c250f39b43225f08f63b962b72",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996/model/003.input.json": "9a04fdb1e46bf079bd5c496238029c7a0bd23739bc39d6d20db8e17932e6b909",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996/model/003.response.json": "e455be6d2280e5836938776538d51c52485876d8d9ceb17cb83ee2bfffd87061",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996/plan-0.json": "347f1076721752e5da9dcb06381ce4e1bc137eb170eca7f3e534aff7afea037b",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996/request.json": "8383821b035cbc8f2f2ae7ef1151673f09523a5dd76c808493f905ce6b407862",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996/run-manifest.json": "a43100fd6234961951a6a1fbc9fd889452dab049c186c5b069c3e507bcaf2d7a",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996/terminal.json": "ab4661e5f30c3b8dd0ba81bf26fb4b2a7d2549573f1d11d03eb39a78c0bed164",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR03-b001-s104729/20261015T060257Z-9b1a999996/trace.jsonl": "62f1e92a5ad458fa3124338548f1cb1158ff0f9cfbbf4e9fcd323dc362af49a9",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90/failure.json": "c78e3dbcfe0b11ffcd4820f3546f94d7fd509009891d06835b4b59fbcf4cee1f",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90/model/000.budget.json": "19a0de8aced2d09ee42d3f655866c6761afb3ca99c86ceade5bce17e02fe5c9c",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90/model/000.input.json": "028da1bdbe2ad8039c4edef294c32a87efdfd8a63d8736f0be4d1fde8c7970fc",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90/model/000.response.json": "d282e6f925a1198fb18aa6c0e4bb5c3171cf58702a57cc5c75fb692b2fa4d77a",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90/model/001.budget.json": "c7e517d59bdbf0a9772a02805de3be134a77cdb96bdfa3afb14a92d059d10c45",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90/model/001.input.json": "f3759195585d3279768241c3502b9679b47120106ca71b0148882c5cfada3389",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90/model/001.response.json": "1a4361ee53eaaf3c6cc889e39fb3b5157f25ce3660389b21895871609bfa0bfb",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90/model/002.budget.json": "5ce98bd76731bf980417e7ac7dc9a7c1b44b9629c85ff93e20d3aa5a91e21921",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90/model/002.dispatched.json": "287293f73d115e13eea807937d4f849d19daad15f16451b9e8e09178ee068ed0",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90/model/002.input.json": "d9801712ac4771bef31262a3c881d2d9cbe762be5e5653a0e33b0015a442e0aa",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90/model/002.response.json": "51ccb76ba8f2566c943beeb281021e7c38afbe4394f88ae82ab3370fb2e6f95b",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90/model/003.budget.json": "778a1a9ba3ca79ff490c65abc16ee4c9a50d1fb0d95fea333f55db9941b9b397",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90/model/003.input.json": "ddc007035094257eeb7c4919acb7aeef9f3ffc4d8a2f1a30efc1ea08e34fb1d0",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90/model/003.response.json": "89946e64a8a84ec93088464d3ed66ca36ae6ef632ab520eb59122efeff1d555a",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90/plan-0.json": "589fcb1ff9e4d9540113fa5d170d4324a7e7e420d491b39defdc5b56006d3aac",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90/request.json": "7b9981148e4fd965cb6a9f897d5315af60829a557054c3621d90827b778f4238",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90/run-manifest.json": "86823034c3e84c1835fb9e9e7da336951e8ec1f5b935f01a41ada497193b4fe2",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90/terminal.json": "ab4661e5f30c3b8dd0ba81bf26fb4b2a7d2549573f1d11d03eb39a78c0bed164",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR05-b001-s104729/20261015T060257Z-a95746ce90/trace.jsonl": "4d62cca3ca4b999fb2b35fc93236fa43d07e22c13c2e80dc383d9aa876d277a4",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce/failure.json": "c78e3dbcfe0b11ffcd4820f3546f94d7fd509009891d06835b4b59fbcf4cee1f",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce/model/000.budget.json": "e7dd43975c953c263f206c6cf592d765c926189b9e2daa77e365d8280a2bb37f",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce/model/000.input.json": "f23de506754a97e22eff73cdcab4367a9e8f5d0e02b38f2099bb8c44bd15dec6",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce/model/000.response.json": "e1793804bd91ac6f5e7e4cab5c37f1f9f0ac681ad9a735be521d5374002ee38a",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce/model/001.budget.json": "0b6a7986827b7fb9f488ec28e4612cd4a0c45baafffb827876c5bea27a8209d5",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce/model/001.input.json": "1418239972500128887479015a5cd38ab924c57b7f3c6c89c31b248774e489a0",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce/model/001.response.json": "f985f06a387abcfb960cce5f40fe0e20458b09bb4bbef674d31d1317c553167a",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce/model/002.budget.json": "6b10324664a67b5ae06ca71f32ef2f03e40a779a64dffea005b0afc264a7cce9",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce/model/002.dispatched.json": "287293f73d115e13eea807937d4f849d19daad15f16451b9e8e09178ee068ed0",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce/model/002.input.json": "c9754e14d6fd99e5f902c831688bc89638dc6dcf717d4903790120ff06f333ca",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce/model/002.response.json": "0105dd54bdaadeb34955b85d7916aca6a757764c0ec1d3ea0b436ab9f8b0e4b5",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce/model/003.budget.json": "5c3a8bdbdc22b7451ec7c3188e6bb25ae88b65c250f39b43225f08f63b962b72",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce/model/003.input.json": "e7b3647494581ad54d6a23fd638771a3e31cb527b3910e7d698f1fb50be98ff0",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce/model/003.response.json": "9cdb2ca265264139cc24d4f2ea2c147ab601b52f0e56558846fea118ebd68a2d",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce/plan-0.json": "86919350ae283e2ab6b8afc0fe829173c7f28465eaf9b15e05a65e8df71ab834",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce/request.json": "d1a4cef054102082e08a79e4202b84f5e98305f7bd70922e2efdd38203152f7f",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce/run-manifest.json": "8032a17f0df31e0144a4e7d81f6fe4c43938e766e7130b106e29a377bf104964",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce/terminal.json": "ab4661e5f30c3b8dd0ba81bf26fb4b2a7d2549573f1d11d03eb39a78c0bed164",
+    "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce/trace.jsonl": "8e9ce567807256f2514a73a32329cb0b27756d558c17dbba0255f76251be9410",
+    "configs/headline-cohort-v1.json": "804806c955bb0d1ab8dbafff592cad65537a1052d8ebbd88d3a2ee34b6c4a158",
+    "data/frozen/dallas-synth-v1.csv": "bb0e9f3ed47a65eabbaab4e0a4de192ca7918a61eee111e273a70e145f87692b",
+    "data/manifests/dallas-synth-v1.json": "a90d7e08d0d734fd235ce9deced5e6313fd083166ef7ee7ddaf472fe893ff068",
+    "reports/data/headline-live-v1-diagnosis-candidates.json": "bf7d4c8021231c0ab286a6c5c7fa94f1c915b8c2d26a59561119d445aec8c7c8",
+    "src/housing/contracts/decisions.py": "69eb37ccf8ba156a1efa0a61e769819d34469dac63ec3c134f4b0e566b778b5d",
+    "src/housing/workflow/controller.py": "eaf87dae7327e49df50bd8a8b72fcd5c7d70afd740db152d89d9d01841d91ba0"
+  },
+  "status": "verified_fixed_top_three_representatives"
+}

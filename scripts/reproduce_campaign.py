@@ -6,8 +6,8 @@ import json
 from datetime import UTC, datetime
 
 from housing.evaluation.aggregate import aggregate
-from housing.evaluation.runner import CampaignRunner
 from housing.identity import ROOT, sha256_bytes
+from housing.reporting.replay_metadata import ReplayMetadataRunner
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--reference", default="artifacts/campaigns/headline-live-v1")
@@ -35,7 +35,9 @@ for name, expected_hash in hashes.items():
     ):
         raise SystemExit(f"Live artifact integrity rejected: {name}")
 destination = ROOT / "artifacts/reproductions" / datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
-runner = CampaignRunner(destination, ROOT / manifest["cohort_path"], mode="replay", live_reference=reference)
+runner = ReplayMetadataRunner(
+    destination, ROOT / manifest["cohort_path"], mode="replay", live_reference=reference
+)
 asyncio.run(runner.run())
 aggregate(destination, minimum_bases=3 if args.pilot else 30)
 print(f"Matched {expected} recomputed comparisons. Evidence: {destination.relative_to(ROOT)}")

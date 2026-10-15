@@ -1,0 +1,63 @@
+{
+  "checkout_preserved": "/var/folders/w0/q9j5b5yn2p3_16nhb0s4gdd40000gp/T/housing-clean-0s3tn2z5/repository",
+  "commands": [
+    {
+      "command": [
+        "make",
+        "setup",
+        "UV=/Users/yogesh/Developer/Personal/iiith/tse-assignment/.cache/uv-bootstrap/bin/uv"
+      ],
+      "ended_at_utc": "2026-10-15T04:58:01.904129+00:00",
+      "exit_code": 0,
+      "log": "artifacts/verification/clean-20261015T045621Z/01-setup.log",
+      "log_sha256": "f8e1746f453f8e175a8980aa1ee860a274522c8ec6a27c93f43dddf9d53b13b6",
+      "started_at_utc": "2026-10-15T04:57:41.975797+00:00"
+    },
+    {
+      "command": [
+        "make",
+        "data"
+      ],
+      "ended_at_utc": "2026-10-15T04:59:15.631339+00:00",
+      "exit_code": 0,
+      "log": "artifacts/verification/clean-20261015T045621Z/02-data.log",
+      "log_sha256": "9306b1ba66a536ff53cba918c1a77b3481304cada5ce5546fcf1ecc3f1eaee0c",
+      "started_at_utc": "2026-10-15T04:58:01.906792+00:00"
+    },
+    {
+      "command": [
+        "make",
+        "check"
+      ],
+      "ended_at_utc": "2026-10-15T05:13:12.358056+00:00",
+      "exit_code": 0,
+      "log": "artifacts/verification/clean-20261015T045621Z/03-check.log",
+      "log_sha256": "2a90b2c310e6953451f0784f95bcb8b8e6655cba4122b7a09c04c41bc7497e6d",
+      "started_at_utc": "2026-10-15T04:59:15.633800+00:00"
+    },
+    {
+      "command": [
+        "make",
+        "probe-replay"
+      ],
+      "ended_at_utc": "2026-10-15T05:13:28.501302+00:00",
+      "exit_code": 0,
+      "log": "artifacts/verification/clean-20261015T045621Z/04-probe-replay.log",
+      "log_sha256": "4d624414ad7c122fa0482be9e7692a9387bb15cc720d9491db66f315977fc983",
+      "started_at_utc": "2026-10-15T05:13:12.362842+00:00"
+    },
+    {
+      "command": [
+        "make",
+        "reproduce"
+      ],
+      "ended_at_utc": "2026-10-15T08:07:01.851989+00:00",
+      "exit_code": 2,
+      "log": "artifacts/verification/clean-20261015T045621Z/05-reproduce.log",
+      "log_sha256": "b8476d9f02c4d38bc2b3d2e37e2ae581faee36b53fda4aaa56fe1a0f82db32af",
+      "started_at_utc": "2026-10-15T05:13:28.504113+00:00"
+    }
+  ],
+  "revision": "90d27b7a4ad2aee29059611e00ee8583bd811e76",
+  "status": "failed"
+}

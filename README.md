@@ -2,7 +2,7 @@
 
 An exact, inspectable multi-agent housing-trends application for the IIIT Hyderabad TSE assignment. The data is **synthetic**, generated locally and frozen; it does not measure the Dallas housing market.
 
-Current verified milestone: the complete live campaign is captured and audited: **10 relations × 30 bases × 3 paired seeds = 900 comparisons**. All **690 pairs with both canonical outputs** satisfy their declared numerical projections; **210 pairs have eligible output-contract violations**, which remain genuine findings. Each MR has thirty completed bases and no unresolved infrastructure errors. The corpus retains historical startup failures and two interrupted captures. Full clean-checkout playback, reviewed final diagnosis, current Langfuse proof and the final twelve-page report remain pending.
+Current verified milestone: the complete live campaign is captured and audited: **10 relations × 30 bases × 3 paired seeds = 900 comparisons**. All **690 pairs with both canonical outputs** satisfy their declared numerical projections; **210 pairs have eligible output-contract violations**, which remain genuine findings. Each MR has thirty completed bases and no unresolved infrastructure errors. The corpus retains historical startup failures and two interrupted captures. Ranked diagnosis, complete-result desktop/mobile checks and current plan-aware Langfuse browser proof are verified. Full corrected clean-checkout playback, whole-corpus dashboard readback and the final twelve-page report remain pending.
 
 ## Run locally
 
@@ -73,6 +73,8 @@ make submission-check    # checks plus strict evidence/PDF consistency gates
 The primary outcome is **a base with any violation among its three paired seeds**. Wilson intervals use completed bases, never 90 correlated seed runs. A model parse/policy/output-contract fault on an eligible input is a violation; model/tool/process infrastructure failures remain execution errors. Every attempt, invalid candidate, failure and source reuse is visible. Each follow-up executes afresh.
 
 Replay reads captured model responses, restores native call order, matches exact prompt/schema/tool/data/model/seed/upstream receipt identities, and re-enters the current Fast Agent workflow. It never loads saved final outputs to execute an analysis. Integration tests replay with source outputs/receipts/results/trace removed; a changed current receipt fails before the next captured response. A reproduced natural violation is successful reproduction; completion does not require zero violations.
+
+The first full clean-checkout run executed all900 but correctly rejected failed-leg seed bookkeeping. A [versioned replay-only attribution adapter](REPLAY_METADATA.md) repairs that metadata only after complete exact playback, preserves the uncorrected record, and leaves frozen live/evaluation code unchanged. Its explicit per-leg garbage collection also avoids retaining a large unreachable heap until Python shutdown. The failed full run is preserved; a successful corrected full run is still required.
 
 Full reproduction, final report, clean-checkout and submission checks intentionally reject incomplete headline evidence. Their completion guards have been exercised; a full successful run still depends on the executing campaign. Editable report prose and primary references are in [reports](reports/README.md). No draft is a submission-ready claim.
 

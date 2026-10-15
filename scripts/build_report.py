@@ -10,7 +10,7 @@ from xml.sax.saxutils import escape
 
 import pymupdf
 from reportlab.graphics import renderPDF, renderSVG
-from reportlab.graphics.shapes import Circle, Drawing, Line, String
+from reportlab.graphics.shapes import Circle, Drawing, Line, Rect, String
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle
@@ -237,6 +237,51 @@ class Page:
             SMALL,
         )
 
+    def failure_chain(self) -> None:
+        """Author an evidence-specific vector diagram, not an inferred corpus-wide cause."""
+        height = 77
+        drawing = Drawing(WIDTH, height)
+        labels = [
+            ("Parent queues", "three specialists"),
+            ("Price purpose", "fails its schema"),
+            ("Price repair", "is now pending"),
+            ("Supply replies", "schema-valid"),
+            ("Guard stops", "no final output"),
+        ]
+        gap = 13
+        box = (WIDTH - 4 * gap) / 5
+        for index, lines in enumerate(labels):
+            x = index * (box + gap)
+            drawing.add(Rect(x, 18, box, 43, rx=4, ry=4, fillColor=PALE, strokeColor=LINE))
+            for offset, label in enumerate(lines):
+                drawing.add(
+                    String(
+                        x + box / 2,
+                        44 - offset * 12,
+                        label,
+                        textAnchor="middle",
+                        fontName="Helvetica-Bold" if offset == 0 else "Helvetica",
+                        fontSize=8,
+                        fillColor=AMBER if index == 4 else INK,
+                    )
+                )
+            if index < 4:
+                right = x + box + gap - 3
+                drawing.add(Line(x + box + 2, 39, right, 39, strokeColor=MUTED))
+                drawing.add(Line(right - 3, 42, right, 39, strokeColor=MUTED))
+                drawing.add(Line(right - 3, 36, right, 39, strokeColor=MUTED))
+        if self.y - height < 61:
+            raise ValueError("Failure chain exceeds its page")
+        renderPDF.draw(drawing, self.canvas, MARGIN, self.y - height)
+        self.y -= height
+        figures = ROOT / "reports/figures"
+        figures.mkdir(parents=True, exist_ok=True)
+        renderSVG.drawToFile(drawing, str(figures / "representative-failure.svg"))
+        self.text(
+            "Figure 3. Observed in the three selected representatives. Supply made a real model call; the pending Price repair blocks acceptance of its valid reply.",
+            SMALL,
+        )
+
 
 def completed_reference(draft: bool) -> tuple[Path, list[dict[str, Any]] | None, Path | None]:
     campaign = ROOT / "artifacts/campaigns/headline-live-v1"
@@ -387,7 +432,7 @@ def report(draft: bool) -> Path:
                 )
                 runtime = load(campaign / "runtime.json")
                 page.text(
-                    f"Leg-record accounting: {runtime['logical_comparisons']} logical comparisons; {runtime['physical_analysis_attempts']} recorded analysis attempts; {sum(runtime['model_calls_by_role'].values())} model inputs; {runtime['refinements']} refinements; {runtime['schema_repairs']} repairs. Sum of recorded analysis durations: {serial(Fraction(runtime['sum_analysis_duration_ns'], 1_000_000_000), digits=2)} seconds. These totals exclude interrupted prefixes without leg records; inclusive response telemetry appears on page 10.",
+                    f"Leg-record accounting: {runtime['logical_comparisons']:,} logical comparisons; {runtime['physical_analysis_attempts']:,} recorded analysis attempts; {sum(runtime['model_calls_by_role'].values()):,} model inputs; {runtime['refinements']} refinements; {runtime['schema_repairs']} repair requests. Sum of recorded analysis durations: {serial(Fraction(runtime['sum_analysis_duration_ns'], 1_000_000_000), digits=2)} seconds. These totals exclude interrupted prefixes without leg records; inclusive response telemetry appears on page 10.",
                     SMALL,
                 )
             else:
@@ -409,6 +454,7 @@ def report(draft: bool) -> Path:
             if diagnosis_path.exists():
                 diagnosis = load(diagnosis_path)
                 page.block("Observed diagnosis", diagnosis["summary"])
+                page.failure_chain()
                 blocks = diagnosis["report_blocks"]
             else:
                 page.block(

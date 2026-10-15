@@ -1,0 +1,73 @@
+{
+  "auxiliary_schema_control": {
+    "decision": {
+      "decision_type": "tool_intent",
+      "partition_order": "month_asc",
+      "purpose": "statistics",
+      "role": "price",
+      "tool": "price_stats"
+    },
+    "interpretation": "Constructed Price intent with only purpose corrected; not a new model response, deployed fix or empirical rerun"
+  },
+  "case": "MR07-b001-s130363",
+  "empirical_parent_messages": {
+    "agent__price": "Execute price_stats for indexed scan with partition_order month_asc, purpose public_comparison",
+    "agent__region": "Execute region_stats for indexed scan with partition_order zip_asc, purpose public_comparison",
+    "agent__supply": "Execute supply_stats for indexed scan with partition_order month_asc, purpose public_comparison"
+  },
+  "empirical_price_response": {
+    "decision_type": "tool_intent",
+    "partition_order": "month_asc",
+    "purpose": "public_comparison",
+    "role": "price",
+    "tool": "price_stats"
+  },
+  "empirical_supply_response": {
+    "decision_type": "tool_intent",
+    "partition_order": "month_asc",
+    "purpose": "statistics",
+    "role": "supply",
+    "tool": "supply_stats"
+  },
+  "leg": "followup",
+  "minimal_replay": "artifacts/verification/headline-rca-v1/minimal-playback/MR07-b001-s130363/20261015T060257Z-06983966ce",
+  "model_decisions": 4,
+  "network_attempts": [],
+  "numeric_comparison": "unavailable because an eligible leg has no final output",
+  "observed_guard": "Schema repair must finish in the role that produced invalid JSON",
+  "pending_repair_role_in_supply_context": "price",
+  "price_schema_errors": [
+    {
+      "ctx": {
+        "expected": "'statistics'"
+      },
+      "loc": [
+        "purpose"
+      ],
+      "msg": "Input should be 'statistics'",
+      "type": "literal_error"
+    }
+  ],
+  "raw_witness": {
+    "entering_records": 240,
+    "followup_selected": 2880,
+    "leaving_records": 240,
+    "overlap_months": [
+      "2025-08",
+      "2025-09",
+      "2025-10",
+      "2025-11",
+      "2025-12",
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04",
+      "2026-05",
+      "2026-06"
+    ],
+    "same_raw_multiset_in_each_overlap": true,
+    "source_selected": 2880
+  },
+  "run_path": "artifacts/campaigns/headline-live-v1/cases/MR07-b001-s130363/attempt-001/followup/runs/20261008T222013Z-179bb8f751",
+  "source_reused_from": "artifacts/campaigns/headline-live-v1/cases/MR01-b001-s130363/attempt-001/source/record.json"
+}

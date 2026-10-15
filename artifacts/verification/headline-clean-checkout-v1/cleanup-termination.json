@@ -1,0 +1,7 @@
+{
+  "action": "SIGTERM verified project-owned failed replay child during module finalization",
+  "checked_at_utc": "2026-10-15T08:06:52.502679+00:00",
+  "observed": "86245 .venv/bin/python scripts/reproduce_campaign.py",
+  "pid": 86246,
+  "reason": "All900 playback cases completed, then semantic comparison rejected failed-leg effective_seed metadata. One-second sample shows Python _Py_Finalize/finalize_modules/gc_collect_main only, with30.9GB heap. Preserve every file and terminate only this failed child to release cleanup memory."
+}

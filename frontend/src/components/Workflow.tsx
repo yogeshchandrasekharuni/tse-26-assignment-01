@@ -262,7 +262,7 @@ export function Workflow({
           {workflow.refinements} refinement{workflow.refinements === 1 ? '' : 's'}
         </span>
         <span>
-          {workflow.schema_repairs} repair{workflow.schema_repairs === 1 ? '' : 's'}
+          {workflow.schema_repairs} repair request{workflow.schema_repairs === 1 ? '' : 's'}
         </span>
         <span className="status-right">
           <ShieldCheck size={15} />
